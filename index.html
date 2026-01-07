@@ -3,217 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BUNY TUBE PRO MAX</title>
+    <title>BUNY TUBE - ULTIMATE v10</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --red: #ff0000; --dark: #0f0f0f; --card: #1e1e1e; }
+        :root { --red: #ff0000; --dark: #0f0f0f; }
         * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
-        body { background: var(--dark); color: white; padding-bottom: 80px; overflow-x: hidden; }
+        body { background: var(--dark); color: white; padding-bottom: 80px; }
 
-        /* ERİŞİM ENGELİ EKRANI */
-        #access-denied-screen { position: fixed; inset: 0; background: #000; z-index: 999999; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-        .lock-icon { font-size: 80px; color: var(--red); margin-bottom: 20px; text-shadow: 0 0 20px rgba(255,0,0,0.5); }
-        #access-denied-screen h2 { color: var(--red); font-size: 2rem; letter-spacing: 3px; }
+        /* DUYURU BANNER */
+        #announcement-banner {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white; padding: 8px 0; font-size: 14px; font-weight: bold; overflow: hidden; white-space: nowrap; position: sticky; top: 0; z-index: 1001;
+        }
+        .marquee { display: inline-block; padding-left: 100%; animation: marquee 15s linear infinite; }
+        @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* HEADER */
-        header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--dark); z-index: 1000; border-bottom: 1px solid #222; }
+        /* HEADER & FEED */
+        header { padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; }
         header h1 { font-weight: 900; letter-spacing: -1.5px; font-size: 1.7rem; cursor: pointer; }
         header h1 span { color: var(--red); }
-
-        /* ARAMA VE KATEGORİLER */
-        .search-area { padding: 10px 15px; }
-        .search-box { background: #222; border-radius: 25px; display: flex; align-items: center; padding: 12px 20px; }
-        .search-box input { background: none; border: none; color: white; flex: 1; outline: none; font-size: 16px; }
-        
-        #category-bar { display: flex; gap: 8px; overflow-x: auto; padding: 10px 15px; scrollbar-width: none; }
-        #category-bar button { background: #2a2a2a; border: none; color: white; padding: 8px 16px; border-radius: 10px; white-space: nowrap; cursor: pointer; }
-
-        /* VİDEO AKIŞI */
         .feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 15px; padding: 10px; }
-        .v-card { cursor: pointer; margin-bottom: 10px; }
-        .v-card img { width: 100%; aspect-ratio: 16/9; border-radius: 12px; object-fit: cover; background: #222; }
-        .v-info { padding: 10px 5px; display: flex; gap: 12px; }
-        .channel-pfp { width: 36px; height: 36px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0; }
-        .v-text p { font-size: 1rem; font-weight: 600; line-height: 1.3; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .v-text small { color: #aaa; font-size: 0.85rem; margin-top: 4px; display: block; }
+        .v-card { cursor: pointer; background: #1a1a1a; border-radius: 12px; overflow: hidden; }
+        .v-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
 
-        /* ALT NAVİGASYON */
+        /* PUANLAMA MODALI */
+        #rating-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 50000; display: none; align-items: center; justify-content: center; }
+        .rating-content { background: #1a1a1a; padding: 30px; border-radius: 20px; text-align: center; width: 90%; max-width: 400px; border: 1px solid gold; }
+        .stars { margin: 20px 0; font-size: 30px; color: #444; }
+        .stars i { cursor: pointer; transition: 0.3s; }
+        .stars i.active { color: gold; text-shadow: 0 0 10px gold; }
+        #rating-comment { width: 100%; background: #000; color: white; border: 1px solid #333; padding: 10px; border-radius: 8px; margin-top: 10px; }
+
+        /* ADMIN & NAV */
         .bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; height: 70px; background: #0f0f0f; border-top: 1px solid #222; display: flex; justify-content: space-around; align-items: center; z-index: 2000; }
-        .nav-item { text-align: center; color: white; cursor: pointer; font-size: 11px; flex: 1; opacity: 0.7; }
-        .nav-item i { font-size: 22px; display: block; margin-bottom: 4px; }
-        .nav-item.active { opacity: 1; color: var(--red); }
-
-        /* PLAYER */
-        #player { position: fixed; inset: 0; background: #000; z-index: 3000; display: none; overflow-y: auto; }
-        #player-box { width: 100%; aspect-ratio: 16/9; }
-        .player-actions { padding: 15px; border-bottom: 1px solid #222; display: flex; justify-content: space-between; align-items: center; }
-        .sub-btn { background: white; color: black; padding: 8px 18px; border-radius: 20px; font-weight: bold; border: none; cursor: pointer; }
-
-        /* ADMİN MODAL & PANEL */
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 10000; }
-        .modal-content { background: #111; padding: 30px; border-radius: 20px; border: 1px solid var(--red); text-align: center; width: 85%; max-width: 400px; }
-        .modal-content input { width: 100%; padding: 12px; margin: 20px 0; background: #000; color: white; border: 1px solid #333; text-align: center; border-radius: 10px; }
+        .nav-item { text-align: center; color: white; cursor: pointer; font-size: 11px; flex: 1; }
+        #admin-dashboard { position: fixed; inset: 0; background: #000; z-index: 11000; display: none; padding: 25px; overflow-y: auto; }
+        .admin-btn { background: var(--red); color: white; border: none; padding: 12px; border-radius: 8px; width: 100%; margin-top: 10px; font-weight: bold; }
         
-        #admin-dashboard { position: fixed; inset: 0; background: var(--dark); z-index: 11000; display: none; padding: 20px; }
-        .stat-card { background: #1a1a1a; padding: 20px; border-radius: 15px; margin-bottom: 15px; border-left: 4px solid var(--red); }
+        #player { position: fixed; inset: 0; background: #000; z-index: 3000; display: none; }
+        #player-box { width: 100%; aspect-ratio: 16/9; }
+        .sub-btn { background: white; color: black; padding: 8px 15px; border-radius: 20px; border: none; font-weight: bold; margin: 10px; }
     </style>
 </head>
 <body>
 
-    <div id="access-denied-screen">
-        <div class="lock-icon"><i class="fas fa-user-lock"></i></div>
-        <h2>ERİŞİM ENGELLENDİ</h2>
-        <p style="margin-top:15px; color:#666;">Kurtulmak için <b>BUNYTUBE</b> logosuna tıkla!</p>
-    </div>
+    <div id="announcement-banner"><div class="marquee" id="marquee-text">Duyuru: Şimdilik bir konu yok olduğunda haber vereceğiz.</div></div>
 
-    <header>
-        <h1 onclick="app.unlockSystem()">BUNY<span>TUBE</span></h1>
-        <i class="fas fa-cog" onclick="app.openAdmin()" style="font-size: 1.4rem; color: #444;"></i>
-    </header>
+    <header><h1 onclick="location.reload()">BUNY<span>TUBE</span></h1><i class="fas fa-crown" onclick="app.openAdminModal()" style="color:gold"></i></header>
 
-    <div class="search-area">
-        <div class="search-box">
-            <input type="text" id="search-input" placeholder="Ara..." onkeyup="if(event.key === 'Enter') app.search()">
-            <i class="fas fa-search" onclick="app.search()"></i>
-        </div>
-    </div>
-
-    <nav id="category-bar"></nav>
     <main id="main-feed" class="feed"></main>
 
-    <div class="bottom-nav">
-        <div class="nav-item active" onclick="app.unlockSystem()"><i class="fas fa-home"></i>Ana Sayfa</div>
-        <div class="nav-item" onclick="app.blockShorts()"><i class="fas fa-bolt"></i>Shorts</div>
-        <div class="nav-item" onclick="app.showSubs()"><i class="fas fa-layer-group"></i>Abonelikler</div>
-        <div class="nav-item" onclick="app.showHistory()"><i class="fas fa-history"></i>Geçmiş</div>
-    </div>
-
-    <div id="player">
-        <div style="padding: 10px;"><i class="fas fa-times" onclick="app.closePlayer()" style="font-size: 24px;"></i></div>
-        <div id="player-box"></div>
-        <div class="player-actions">
-            <div>
-                <h3 id="p-title" style="font-size: 1rem;">Video</h3>
-                <small id="p-stats" style="color: gray;"></small>
+    <div id="rating-modal">
+        <div class="rating-content">
+            <i class="fas fa-star" style="font-size: 40px; color: gold;"></i>
+            <h2 style="margin-top:15px">Bizi Puanla!</h2>
+            <p style="font-size: 13px; color: gray; margin-top: 5px;">Uygulamamızı beğendin mi? Fikrin bizim için önemli.</p>
+            <div class="stars" id="star-container">
+                <i class="fas fa-star" data-v="1"></i><i class="fas fa-star" data-v="2"></i><i class="fas fa-star" data-v="3"></i><i class="fas fa-star" data-v="4"></i><i class="fas fa-star" data-v="5"></i>
             </div>
-            <button id="sub-btn" class="sub-btn" onclick="app.toggleSub()">Abone Ol</button>
+            <textarea id="rating-comment" rows="3" placeholder="Yorumun (isteğe bağlı)..."></textarea>
+            <button onclick="app.submitRating()" class="admin-btn" style="background: gold; color: black;">GÖNDER</button>
         </div>
     </div>
 
-    <div id="admin-modal" class="modal">
-        <div class="modal-content">
-            <i class="fas fa-user-shield" style="font-size: 3rem; color: var(--red);"></i>
-            <h3 style="margin-top:15px;">ADMİN GİRİŞİ</h3>
-            <input type="password" id="admin-pass" placeholder="Sabit Şifreyi Girin">
-            <button onclick="app.checkAdmin()" style="background:var(--red); color:white; width:100%; padding:12px; border:none; border-radius:10px; font-weight:bold;">SİSTEME GİRİŞ YAP</button>
-            <button onclick="app.closeAdmin()" style="background:none; color:gray; border:none; margin-top:15px;">İptal</button>
-        </div>
+    <div class="bottom-nav">
+        <div class="nav-item" onclick="location.reload()"><i class="fas fa-home"></i>Ana Sayfa</div>
+        <div class="nav-item" onclick="app.showSubs()"><i class="fas fa-heart"></i>Abonelikler</div>
+        <div class="nav-item" onclick="app.openAdminModal()"><i class="fas fa-user-shield"></i>Admin</div>
     </div>
 
     <div id="admin-dashboard">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
-            <h2>Buny Kontrol Paneli</h2>
-            <button onclick="document.getElementById('admin-dashboard').style.display='none'" style="background:var(--red); border:none; color:white; padding:8px 15px; border-radius:8px;">Kapat</button>
+        <div style="display:flex; justify-content:space-between"><h2>ADMİN MERKEZİ</h2><i class="fas fa-times" onclick="app.closeAdminPanel()"></i></div>
+        <div style="margin-top:20px; background:#111; padding:15px; border-radius:10px;">
+            <h4>Duyuru Yaz</h4>
+            <input type="text" id="ann-input" style="width:100%; padding:10px; margin:10px 0; background:#000; color:white; border:1px solid #333;">
+            <button onclick="app.updateAnn()" class="admin-btn">YAYINLA</button>
         </div>
-        <div class="stat-card"><h3>Toplam İzlenme: <span id="total-views">0</span></h3></div>
-        <div class="stat-card"><h3>Abone Olunan Kanallar: <span id="total-subs">0</span></h3></div>
-        <div class="stat-card"><h3>Geçmişteki Video Sayısı: <span id="total-history">0</span></h3></div>
-        <p style="color:gray; font-size:0.8rem; text-align:center; margin-top:50px;">Muhiy.1905 Yetkisiyle Bağlanıldı.</p>
+        <div style="margin-top:20px; background:#111; padding:15px; border-radius:10px;">
+            <h3 style="color:gold">Gelen Puanlar & Yorumlar</h3>
+            <div id="admin-ratings-list" style="margin-top:10px; font-size:12px; color:#aaa;">Henüz puanlama yok.</div>
+        </div>
+    </div>
+
+    <div id="player">
+        <div style="padding:15px;"><i class="fas fa-chevron-down" onclick="app.closePlayer()" style="font-size:25px"></i></div>
+        <div id="player-box"></div>
+        <div id="p-detail" style="padding:15px;">
+            <h3 id="p-title">Başlık</h3>
+            <button id="sub-btn" class="sub-btn" onclick="app.toggleSub()">Abone Ol</button>
+        </div>
     </div>
 
     <script>
     const app = {
         KEY: 'AIzaSyAJmuNSyU1AOn0z_jKZIpJNz-nUAZkt388',
         subs: JSON.parse(localStorage.getItem('b_subs')) || [],
-        history: JSON.parse(localStorage.getItem('b_hist')) || [],
-        viewCount: parseInt(localStorage.getItem('b_views')) || 0,
-        currentChannel: '',
+        selectedStars: 0,
 
         init() {
-            this.renderCats();
-            this.fetchVideos("trend videolar");
+            const saved = localStorage.getItem('buny_note');
+            if(saved) document.getElementById('marquee-text').innerText = saved;
+            this.fetchVideos("trend");
+            this.setupStars();
+            this.startRatingTimer();
         },
 
-        renderCats() {
-            const cats = ["Trend", "Clash Royale", "Müzik", "Oyun", "Canlı", "Mix"];
-            document.getElementById('category-bar').innerHTML = cats.map(c => `<button onclick="app.fetchVideos('${c}')">${c}</button>`).join('');
+        // 30 Dakika Sayacı (Test için 30 saniye yapmak istersen 1800000 yerine 30000 yazabilirsin)
+        startRatingTimer() {
+            if(!localStorage.getItem('voted')) {
+                setTimeout(() => {
+                    document.getElementById('rating-modal').style.display = 'flex';
+                }, 1800000); // 30 dakika
+            }
         },
 
-        async fetchVideos(q) {
+        setupStars() {
+            const stars = document.querySelectorAll('#star-container i');
+            stars.forEach(s => {
+                s.onclick = () => {
+                    this.selectedStars = s.dataset.v;
+                    stars.forEach(x => x.classList.remove('active'));
+                    for(let i=0; i<this.selectedStars; i++) stars[i].classList.add('active');
+                };
+            });
+        },
+
+        submitRating() {
+            if(this.selectedStars === 0) return alert("Lütfen bir yıldız seçin!");
+            const comment = document.getElementById('rating-comment').value;
+            const data = { stars: this.selectedStars, comment: comment, date: new Date().toLocaleString() };
+            let ratings = JSON.parse(localStorage.getItem('all_ratings')) || [];
+            ratings.push(data);
+            localStorage.setItem('all_ratings', JSON.stringify(ratings));
+            localStorage.setItem('voted', 'true');
+            alert("Puanın başarıyla gönderildi, teşekkürler!");
+            document.getElementById('rating-modal').style.display = 'none';
+        },
+
+        async fetchVideos(q, limit=20) {
             const feed = document.getElementById('main-feed');
-            feed.innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:50px;">Yükleniyor...</p>';
+            feed.innerHTML = '<p style="text-align:center; padding:50px;">Yükleniyor...</p>';
             try {
-                // Rastgelelik eklemek için sayfayı bazen karıştırıyoruz
-                const randomPage = Math.floor(Math.random() * 5);
-                const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${encodeURIComponent(q)}&type=video&key=${this.KEY}`);
+                const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=${limit}&q=${encodeURIComponent(q)}&type=video&key=${this.KEY}`);
                 const data = await res.json();
-                
                 feed.innerHTML = data.items.map(v => `
                     <div class="v-card" onclick="app.play('${v.id.videoId}', '${v.snippet.title.replace(/'/g,"")}', '${v.snippet.channelTitle}')">
                         <img src="${v.snippet.thumbnails.high.url}">
-                        <div class="v-info">
-                            <div class="channel-pfp">${v.snippet.channelTitle[0]}</div>
-                            <div class="v-text"><p>${v.snippet.title}</p><small>${v.snippet.channelTitle} • ${Math.floor(Math.random()*900)+100}B izlenme</small></div>
-                        </div>
+                        <div style="padding:10px"><p style="font-size:14px; font-weight:bold;">${v.snippet.title}</p><small style="color:gray;">${v.snippet.channelTitle}</small></div>
                     </div>`).join('');
-                window.scrollTo(0,0);
-            } catch (e) { feed.innerHTML = '<p style="text-align:center; padding:50px;">API Hatası!</p>'; }
+            } catch (e) { feed.innerHTML = '<p>Limit Doldu!</p>'; }
         },
 
         play(id, title, channel) {
-            this.currentChannel = channel;
-            this.viewCount++;
-            localStorage.setItem('b_views', this.viewCount);
-            if(!this.history.find(x => x.id === id)) {
-                this.history.push({id, title, channel});
-                localStorage.setItem('b_hist', JSON.stringify(this.history));
-            }
+            this.activeChannel = channel;
             document.getElementById('player').style.display = 'block';
             document.getElementById('p-title').innerText = title;
-            document.getElementById('p-stats').innerText = channel;
             document.getElementById('sub-btn').innerText = this.subs.includes(channel) ? "Abone Olundu" : "Abone Ol";
             document.getElementById('player-box').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
         },
 
         toggleSub() {
-            if(this.subs.includes(this.currentChannel)) {
-                this.subs = this.subs.filter(c => c !== this.currentChannel);
-            } else { this.subs.push(this.currentChannel); }
+            if(this.subs.includes(this.activeChannel)) {
+                this.subs = this.subs.filter(c => c !== this.activeChannel);
+            } else { this.subs.push(this.activeChannel); }
             localStorage.setItem('b_subs', JSON.stringify(this.subs));
-            document.getElementById('sub-btn').innerText = this.subs.includes(this.currentChannel) ? "Abone Olundu" : "Abone Ol";
+            document.getElementById('sub-btn').innerText = this.subs.includes(this.activeChannel) ? "Abone Olundu" : "Abone Ol";
         },
 
         showSubs() {
-            if(this.subs.length === 0) return alert("Abone olduğun kanal yok.");
-            this.fetchVideos(this.subs.join(" | "));
+            if(this.subs.length === 0) return alert("Kimseye abone değilsin.");
+            // SADECE ABONE OLUNAN KANALLARIN EN YENİ VİDEOLARI (Filtreli)
+            this.fetchVideos(this.subs.join("|"), 10);
         },
 
-        showHistory() {
-            const feed = document.getElementById('main-feed');
-            if(this.history.length === 0) return alert("Geçmiş boş.");
-            feed.innerHTML = this.history.reverse().map(v => `
-                <div class="v-card" onclick="app.play('${v.id}', '${v.title}', '${v.channel}')">
-                    <img src="https://img.youtube.com/vi/${v.id}/mqdefault.jpg">
-                    <div class="v-info"><div class="channel-pfp">${v.channel[0]}</div><div class="v-text"><p>${v.title}</p><small>${v.channel}</small></div></div>
-                </div>`).join('');
-        },
-
-        search() { const v = document.getElementById('search-input').value; if(v) this.fetchVideos(v); },
-        blockShorts() { document.getElementById('access-denied-screen').style.display = 'flex'; },
-        unlockSystem() { document.getElementById('access-denied-screen').style.display = 'none'; this.fetchVideos("trend"); },
-        closePlayer() { document.getElementById('player').style.display = 'none'; document.getElementById('player-box').innerHTML = ''; },
-        
-        openAdmin() { document.getElementById('admin-modal').style.display = 'flex'; },
-        closeAdmin() { document.getElementById('admin-modal').style.display = 'none'; },
-        checkAdmin() {
-            if(document.getElementById('admin-pass').value === "Muhiy.1905") {
-                this.closeAdmin();
+        openAdminModal() {
+            const p = prompt("Admin Şifresi:");
+            if(p === "Muhiy.1905") {
                 document.getElementById('admin-dashboard').style.display = 'block';
-                document.getElementById('total-views').innerText = this.viewCount;
-                document.getElementById('total-subs').innerText = this.subs.length;
-                document.getElementById('total-history').innerText = this.history.length;
-            } else { alert("Şifre Yanlış!"); }
-        }
+                const r = JSON.parse(localStorage.getItem('all_ratings')) || [];
+                document.getElementById('admin-ratings-list').innerHTML = r.map(x => `<div>⭐ ${x.stars} - ${x.comment} <br><small>${x.date}</small><hr style="border:#222"></div>`).join('');
+            }
+        },
+
+        updateAnn() {
+            const val = document.getElementById('ann-input').value;
+            if(val) { localStorage.setItem('buny_note', val); document.getElementById('marquee-text').innerText = val; alert("Yayınlandı!"); }
+        },
+        closePlayer() { document.getElementById('player').style.display = 'none'; document.getElementById('player-box').innerHTML = ''; },
+        closeAdminPanel() { document.getElementById('admin-dashboard').style.display = 'none'; }
     };
     window.onload = () => app.init();
     </script>
