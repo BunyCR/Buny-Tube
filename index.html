@@ -3,33 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUNY-Tube Unfiltered</title>
-    <link rel="stylesheet" href="style.css">
+    <title>BUNY Tube</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1 style="font-size: 20px;">BUNY <span style="color:red">Tube</span></h1>
-        <div class="search-box">
-            <i class="fas fa-search" style="color:#666"></i>
-            <input type="text" id="search-input" placeholder="Her şeyi ara...">
-        </div>
+        <h1 id="display-logo">BUNY</h1>
+        <i class="fas fa-crown" style="color:gold" onclick="app.openAdmin()"></i>
     </header>
 
-    <main class="video-grid" id="video-container"></main>
-
-    <div id="video-overlay">
-        <div style="padding: 15px; background: #111; display: flex; align-items: center;" onclick="app.closeVideo()">
-            <i class="fas fa-chevron-down"></i> <span style="margin-left: 10px">Kapat</span>
-        </div>
-        <div id="player-box" style="width: 100%; aspect-ratio: 16/9;"></div>
+    <div id="admin-panel">
+        <h2 style="margin-bottom:20px">AYARLAR</h2>
+        <input type="text" id="edit-logo" class="admin-input" placeholder="Logo İsmi">
+        <input type="password" id="edit-pass" class="admin-input" placeholder="Yeni Şifre">
+        <input type="text" id="edit-key" class="admin-input" placeholder="API Key">
+        <button class="admin-btn" onclick="app.saveSettings()">KAYDET</button>
+        <button class="admin-btn" style="background:#333; margin-top:10px;" onclick="app.closeAdmin()">İPTAL</button>
     </div>
 
+    <main class="feed" id="main-feed"></main>
+
     <nav>
-        <div class="nav-btn active"><i class="fas fa-home"></i><br>Ana Sayfa</div>
-        <div class="nav-btn"><i class="fas fa-compass"></i><br>Keşfet</div>
-        <div class="nav-btn"><i class="fas fa-user"></i><br>Profil</div>
+        <i class="fas fa-home" onclick="location.reload()"></i>
+        <i class="fas fa-bolt" onclick="alert('Shorts Engellendi!')"></i>
+        <i class="fas fa-search" onclick="const q = prompt('Ara:'); if(q) app.fetchVideos(q)"></i>
     </nav>
 
     <script src="script.js"></script>
