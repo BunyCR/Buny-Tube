@@ -1,36 +1,12 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUNY Tube</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <header>
-        <h1 id="display-logo">BUNY</h1>
-        <i class="fas fa-crown" style="color:gold" onclick="app.openAdmin()"></i>
-    </header>
-
-    <div id="admin-panel">
-        <h2 style="margin-bottom:20px">AYARLAR</h2>
-        <input type="text" id="edit-logo" class="admin-input" placeholder="Logo İsmi">
-        <input type="password" id="edit-pass" class="admin-input" placeholder="Yeni Şifre">
-        <input type="text" id="edit-key" class="admin-input" placeholder="API Key">
-        <button class="admin-btn" onclick="app.saveSettings()">KAYDET</button>
-        <button class="admin-btn" style="background:#333; margin-top:10px;" onclick="app.closeAdmin()">İPTAL</button>
+<div id="player" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:200000; overflow-y:auto;">
+    
+    <div class="player-controls" style="display:flex; justify-content:space-between; padding:15px; background:#0a0a0a;">
+        <i class="fas fa-chevron-down" onclick="app.minimize()" style="font-size:1.5rem; color:white; cursor:pointer;"></i>
+        <span style="font-size:0.8rem; color:gray;">BUNY PLAYER</span>
+        <i class="fas fa-times" onclick="app.closePlayer()" style="font-size:1.5rem; color:red; cursor:pointer;"></i>
     </div>
 
-    <main class="feed" id="main-feed"></main>
+    <div id="player-box" style="width:100%; aspect-ratio:16/9; background:#000; position:sticky; top:0; z-index:10;"></div>
 
-    <nav>
-        <i class="fas fa-home" onclick="location.reload()"></i>
-        <i class="fas fa-bolt" onclick="alert('Shorts Engellendi!')"></i>
-        <i class="fas fa-search" onclick="const q = prompt('Ara:'); if(q) app.fetchVideos(q)"></i>
-    </nav>
-
-    <script src="script.js"></script>
-</body>
-</html>
+    <div id="suggestion-list"></div>
+</div>
