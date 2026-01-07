@@ -1,213 +1,90 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BunyTube</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BunyTube | Global Control</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --red: #ff0000; --black: #000; --neon: #00f2ff; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
+        body { background: var(--black); color: white; overflow-x: hidden; }
 
-<style>
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:#0d0d0d;
-  color:white;
-  font-family:Arial,sans-serif;
-  overflow:hidden;
-}
+        /* MERKEZİ BAKIM EKRANI */
+        #bakim-ekran { 
+            position: fixed; inset: 0; background: #000; z-index: 1000000; 
+            display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
+        }
+        .neon-text { font-size: 30px; font-weight: 900; color: var(--neon); text-shadow: 0 0 20px var(--neon); animation: float 3s infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-/* HEADER */
-header{
-  height:60px;
-  background:#111;
-  display:flex;
-  align-items:center;
-  padding:0 10px;
-  border-bottom:1px solid #222;
-}
-.logo{
-  color:#ff2b2b;
-  font-size:22px;
-  font-weight:bold;
-}
-.search{
-  flex:1;
-  margin-left:10px;
-}
-.search input{
-  width:100%;
-  padding:8px;
-  background:#000;
-  border:1px solid #333;
-  color:white;
-}
+        /* HEADER & MARQUEE */
+        header { background: #111; padding: 15px; border-bottom: 1px solid #222; }
+        #duyuru-bar { background: var(--red); padding: 5px; font-size: 14px; overflow: hidden; white-space: nowrap; }
+        .marquee { display: inline-block; animation: scroll 12s linear infinite; }
+        @keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
-/* SAYFALAR */
-.page{
-  height:calc(100vh - 120px);
-  overflow:auto;
-  padding:12px;
-}
-.video-card{
-  background:#111;
-  padding:15px;
-  margin-bottom:10px;
-  border-radius:8px;
-}
-
-/* SHORTS */
-#shorts{
-  padding:0;
-  overflow:hidden;
-}
-.shorts-container{
-  height:100%;
-  position:relative;
-}
-.short{
-  height:100%;
-  width:100%;
-  position:absolute;
-  top:0;
-  left:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:30px;
-  transition:transform 0.3s ease;
-}
-
-/* ALT MENÜ */
-.bottom-nav{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  height:60px;
-  background:#111;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  border-top:1px solid #222;
-}
-.bottom-nav button{
-  background:none;
-  border:none;
-  color:white;
-  font-size:12px;
-}
-
-/* BAKIM */
-#maintenance{
-  display:none;
-  height:100vh;
-  background:#0d0d0d;
-  color:white;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:20px;
-}
-</style>
+        /* VİDEO ALANI */
+        #main-content { padding: 20px; text-align: center; }
+        .v-card { width: 100%; max-width: 500px; margin: 20px auto; background: #111; border-radius: 15px; overflow: hidden; border: 1px solid #222; }
+        iframe { width: 100%; aspect-ratio: 16/9; border: none; }
+        .v-info { padding: 15px; font-weight: bold; color: var(--neon); }
+    </style>
 </head>
-
 <body>
 
-<!-- BAKIM EKRANI -->
-<div id="maintenance">
-  <h1>BunyTube Bakımda</h1>
-  <p id="maintenanceText"></p>
-</div>
+    <div id="bakim-ekran">
+        <div class="neon-text">MERKEZİ BAKIM AKTİF</div>
+        <p style="color:#555; margin-top:20px;">Patron Muhammed Ali tüm sistemi kilitledi.</p>
+    </div>
 
-<header>
-  <div class="logo">BunyTube</div>
-  <div class="search">
-    <input placeholder="Video ara">
-  </div>
-</header>
+    <div id="duyuru-bar">
+        <div class="marquee" id="duyuru-txt">Sunucudan veri bekleniyor...</div>
+    </div>
 
-<!-- ANA SAYFA -->
-<div id="home" class="page">
-  <h3>Trendler</h3>
-  <div class="video-card">Video 1</div>
-  <div class="video-card">Video 2</div>
-  <div class="video-card">Video 3</div>
-</div>
+    <header>
+        <h2 style="color:white;"><span style="color:var(--red);">▶</span> BunyTube</h2>
+    </header>
 
-<!-- SHORTS -->
-<div id="shorts" class="page" style="display:none">
-  <div class="shorts-container" id="shortsContainer">
-    <div class="short" style="background:#111">Short 1</div>
-    <div class="short" style="background:#222">Short 2</div>
-    <div class="short" style="background:#333">Short 3</div>
-  </div>
-</div>
+    <div id="main-content">
+        <h3>Öne Çıkan Video</h3>
+        <div class="v-card" id="video-container">
+            </div>
+        <p style="margin-top:20px; color:#444;">BunyTube v4.0 Global Edition</p>
+    </div>
 
-<!-- ADMIN -->
-<div id="admin" class="page" style="display:none">
-  <h3>Admin Panel</h3>
-  <input placeholder="Video başlığı"><br><br>
-  <input placeholder="Video linki"><br><br>
-  <button>Yükle</button>
-</div>
+    <script>
+        async function sistemiGuncelle() {
+            try {
+                // Kendi GitHub kullanıcı adını ve repo adını buraya yazmalısın patron
+                // Örnek: 'https://raw.githubusercontent.com/KULLANICI_ADIN/REPO_ADIN/main/config.json'
+                const response = await fetch('config.json?t=' + new Date().getTime());
+                const data = await response.json();
 
-<!-- ALT MENÜ -->
-<div class="bottom-nav">
-  <button onclick="showPage('home')">🏠<br>Ana</button>
-  <button onclick="showPage('shorts')">▶️<br>Shorts</button>
-  <button onclick="openAdmin()">⚙️<br>Admin</button>
-</div>
+                // 1. Bakım Modu Kontrolü
+                if(data.bakim_modu) {
+                    document.getElementById('bakim-ekran').style.display = 'flex';
+                } else {
+                    document.getElementById('bakim-ekran').style.display = 'none';
+                }
 
-<script>
-/* CONFIG.JSON OKUMA */
-fetch("config.json")
-.then(r=>r.json())
-.then(cfg=>{
-  if(cfg.maintenance){
-    document.getElementById("maintenanceText").innerText = cfg.maintenanceText;
-    document.body.innerHTML = document.getElementById("maintenance").outerHTML;
-  }
-});
+                // 2. Duyuru Güncelleme
+                document.getElementById('duyuru-txt').innerText = data.duyuru_metni;
 
-/* SAYFA GEÇİŞ */
-function showPage(id){
-  home.style.display="none";
-  shorts.style.display="none";
-  admin.style.display="none";
-  document.getElementById(id).style.display="block";
-}
+                // 3. Video Güncelleme
+                document.getElementById('video-container').innerHTML = `
+                    <iframe src="https://www.youtube-nocookie.com/embed/${data.one_cikan_video}" allowfullscreen></iframe>
+                    <div class="v-info">Haftanın Videosu Seçildi ✅</div>
+                `;
 
-/* ADMIN */
-function openAdmin(){
-  let p = prompt("Admin şifresi");
-  if(p==="1234") showPage("admin");
-  else alert("Yetkisiz");
-}
+            } catch (error) {
+                console.log("Sunucu bağlantı hatası patron!");
+            }
+        }
 
-/* SHORTS KAYDIRMA */
-let current = 0;
-const shortEls = document.querySelectorAll(".short");
-let startY = 0;
-
-function updateShorts(){
-  shortEls.forEach((s,i)=>{
-    s.style.transform = `translateY(${(i-current)*100}%)`;
-  });
-}
-updateShorts();
-
-const container = document.getElementById("shortsContainer");
-container.addEventListener("touchstart",e=>{
-  startY = e.touches[0].clientY;
-});
-container.addEventListener("touchend",e=>{
-  let endY = e.changedTouches[0].clientY;
-  if(startY - endY > 50 && current < shortEls.length-1) current++;
-  if(endY - startY > 50 && current > 0) current--;
-  updateShorts();
-});
-</script>
-
+        // Sayfa açıldığında ve her 30 saniyede bir kontrol et
+        sistemiGuncelle();
+        setInterval(sistemiGuncelle, 30000);
+    </script>
 </body>
 </html>
