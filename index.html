@@ -1,109 +1,248 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BunyTube</title>
-    <style>
-        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding-bottom: 80px; }
-        
-        /* HAREKETLİ BAKIM EKRANI */
-        #bakim { position: fixed; inset: 0; background: #000; z-index: 9999; display: none; flex-direction: column; justify-content: center; align-items: center; }
-        .ani { font-size: 30px; color: #00f2ff; text-shadow: 0 0 15px #00f2ff; animation: fly 2s infinite ease-in-out; }
-        @keyframes fly { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
-        .key { margin-top: 100px; opacity: 0.1; cursor: pointer; font-size: 30px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BunyTube</title>
 
-        /* ARAYÜZ */
-        header { padding: 15px; background: #111; display: flex; gap: 10px; sticky; top: 0; z-index: 100; }
-        input { flex: 1; padding: 10px; border-radius: 5px; border: none; background: #222; color: #fff; }
-        button { padding: 10px; background: #ff0000; color: #fff; border: none; border-radius: 5px; font-weight: bold; }
-        
-        #results { padding: 10px; display: grid; gap: 20px; }
-        .v-card { cursor: pointer; }
-        .v-card img { width: 100%; border-radius: 10px; aspect-ratio: 16/9; object-fit: cover; }
-        
-        #player { position: fixed; inset: 0; background: #000; display: none; z-index: 10000; }
-        .close { padding: 20px; color: #00f2ff; font-size: 20px; cursor: pointer; }
-    </style>
+<style>
+:root{
+  --bg:#000;
+  --red:#ff0033;
+  --blue:#00f2ff;
+  --txt:#fff;
+}
+
+*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+body{margin:0;background:var(--bg);color:var(--txt);overflow-x:hidden}
+
+/* NEON */
+.neon{ text-shadow:0 0 8px var(--blue),0 0 16px var(--blue) }
+
+/* HEADER */
+header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:10px;
+  border-bottom:1px solid #111;
+}
+.logo{color:var(--red);font-size:22px;font-weight:bold}
+.search{
+  flex:1;
+}
+.search input{
+  width:100%;
+  padding:10px;
+  background:#050505;
+  border:1px solid var(--blue);
+  color:#fff;
+  box-shadow:0 0 10px var(--blue);
+}
+.profile{
+  width:36px;height:36px;border-radius:50%;
+  background:var(--blue);color:#000;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:bold;cursor:pointer;
+}
+
+/* ANNOUNCEMENT */
+#announcement{
+  display:none;
+  padding:8px;
+  background:#050505;
+  border-bottom:1px solid var(--red);
+  text-align:center;
+}
+
+/* GRID */
+#videos{
+  padding:10px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:10px;
+}
+.card{
+  background:#050505;
+  border:1px solid #111;
+  padding:8px;
+  cursor:pointer;
+}
+.card:hover{border-color:var(--blue)}
+.card img{width:100%}
+.card h4{font-size:13px}
+
+/* PLAYER */
+#player{
+  position:fixed;
+  inset:0;
+  background:#000;
+  display:none;
+  flex-direction:column;
+}
+#player iframe{flex:1;width:100%;border:none}
+#back{
+  padding:10px;
+  background:#000;
+  color:var(--red);
+  border:none;
+  text-align:left;
+}
+
+/* MINI PLAYER */
+#mini{
+  position:fixed;
+  bottom:0;right:0;
+  width:160px;height:90px;
+  display:none;
+  border:2px solid var(--blue);
+}
+
+/* LOGIN */
+#login{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.9);
+  display:none;align-items:center;justify-content:center;
+}
+.login-box{
+  background:#050505;
+  padding:20px;
+  border:1px solid var(--blue);
+}
+.login-box input{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  background:#000;
+  border:1px solid var(--blue);
+  color:#fff;
+}
+
+/* MAINTENANCE */
+#maintenance{
+  position:fixed;inset:0;
+  background:#000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+}
+#maintenance h1{
+  animation:float 2s ease-in-out infinite;
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+}
+</style>
 </head>
 <body>
 
-<div id="bakim">
-    <div class="ani">BUNYTUBE BAKIMDA</div>
-    <div class="key" onclick="unlock()">🔑</div>
+<div id="maintenance">
+  <h1 class="neon">BUNYTUBE BAKIMDA</h1>
 </div>
 
+<div id="announcement" class="neon"></div>
+
 <header>
-    <div style="color:red; font-weight:900; font-size:20px;">BunyTube</div>
-    <input type="text" id="q" placeholder="Video adı yaz...">
-    <button onclick="search()">ARA</button>
+  <div class="logo neon">BunyTube</div>
+  <div class="search">
+    <input id="q" placeholder="Ara...">
+  </div>
+  <div class="profile" id="profile">?</div>
 </header>
 
-<div id="results"></div>
+<div id="videos"></div>
 
 <div id="player">
-    <div class="close" onclick="closePlayer()">✖ KAPAT</div>
-    <div id="video-area"></div>
+  <button id="back">← Geri</button>
+  <iframe id="frame" allowfullscreen></iframe>
+</div>
+
+<iframe id="mini"></iframe>
+
+<div id="login">
+  <div class="login-box">
+    <h3 class="neon">Giriş</h3>
+    <input id="name" placeholder="İsmin">
+    <button onclick="login()">Tamam</button>
+  </div>
 </div>
 
 <script>
-    // Bakım kontrolü
-    if(localStorage.getItem('buny_mod') === 'true') document.getElementById('bakim').style.display = 'flex';
+/* CONFIG */
+fetch("config.json")
+.then(r=>r.json())
+.then(cfg=>{
+  if(cfg.maintenance){
+    maintenance.style.display="flex"
+  }
+  if(cfg.announcement){
+    announcement.style.display="block"
+    announcement.textContent=cfg.announcement
+  }
+})
 
-    function unlock() {
-        if(prompt("Şifre:") === "Muhiy.1905") {
-            localStorage.setItem('buny_mod', 'false');
-            location.reload();
-        }
-    }
+/* LOGIN */
+profile.onclick=()=>login.style.display="flex"
+function login(){
+  if(!name.value)return
+  profile.textContent=name.value[0].toUpperCase()
+  login.style.display="none"
+}
 
-    // YENİ YÖNTEM: YouTube'un açık arama motoru köprüsü (Google Script bypass)
-    async function search() {
-        const query = document.getElementById('q').value;
-        const resDiv = document.getElementById('results');
-        resDiv.innerHTML = "Aranıyor...";
+/* SEARCH (INVIDIOUS) */
+const instances=[
+ "https://yewtu.be",
+ "https://vid.puffyan.us",
+ "https://invidious.fdn.fr"
+]
 
-        try {
-            // Bu link, YouTube'un video sonuçlarını engel takılmadan JSON formatında getiren bir köprüdür
-            const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://www.youtube.com/results?search_query=' + query + '&pbj=1')}`, {
-                headers: { 'x-requested-with': 'XMLHttpRequest' }
-            });
-            const data = await res.json();
-            
-            // Veri içinden Video ID'lerini temiz bir şekilde ayıklama (Regex)
-            const ids = [...data.contents.matchAll(/"videoId":"([^"]+)"/g)].map(m => m[1]);
-            const titles = [...data.contents.matchAll(/"title":\{"runs":\[\{"text":"([^"]+)"/g)].map(m => m[1]);
+q.addEventListener("keydown",e=>{
+  if(e.key==="Enter") search(q.value)
+})
 
-            if(ids.length > 0) {
-                resDiv.innerHTML = "";
-                const unique = [...new Set(ids)].slice(0, 10);
-                unique.forEach((id, i) => {
-                    resDiv.innerHTML += `
-                        <div class="v-card" onclick="play('${id}')">
-                            <img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg">
-                            <div style="margin-top:8px;">${titles[i] || 'Video ' + (i+1)}</div>
-                        </div>`;
-                });
-            } else {
-                resDiv.innerHTML = "Sonuç yok. Başka bir şey dene patron.";
-            }
-        } catch (e) {
-            resDiv.innerHTML = "Bağlantı hatası!";
-        }
-    }
+function search(term){
+  videos.innerHTML=""
+  tryFetch(0,term)
+}
 
-    function play(id) {
-        document.getElementById('player').style.display = 'block';
-        // Reddedilme hatasını aşmak için YouTube-NoCookie kullanımı
-        document.getElementById('video-area').innerHTML = `
-            <iframe width="100%" height="300" src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
-    }
+function tryFetch(i,term){
+  if(!instances[i]) return
+  fetch(`${instances[i]}/api/v1/search?q=${encodeURIComponent(term)}&type=video`)
+  .then(r=>r.json())
+  .then(d=>{
+    d.slice(0,12).forEach(v=>{
+      const c=document.createElement("div")
+      c.className="card"
+      c.innerHTML=`
+        <img src="${v.videoThumbnails[2].url}">
+        <h4>${v.title}</h4>
+        <small>${v.viewCount} görüntülenme</small>
+      `
+      c.onclick=()=>play(v.videoId)
+      videos.appendChild(c)
+    })
+  })
+  .catch(()=>tryFetch(i+1,term))
+}
 
-    function closePlayer() {
-        document.getElementById('player').style.display = 'none';
-        document.getElementById('video-area').innerHTML = "";
-    }
+/* PLAYER */
+function play(id){
+  frame.src=`https://www.youtube-nocookie.com/embed/${id}`
+  player.style.display="flex"
+  mini.style.display="none"
+}
+back.onclick=()=>{
+  player.style.display="none"
+  mini.src=frame.src
+  mini.style.display="block"
+}
+mini.onclick=()=>{
+  frame.src=mini.src
+  mini.style.display="none"
+  player.style.display="flex"
+}
 </script>
-
 </body>
 </html>
