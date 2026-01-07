@@ -225,6 +225,16 @@ border-radius: 8px;
         closeAdminPanel() { document.getElementById('admin-dashboard').style.display = 'none'; }
     };
     window.onload = () => app.init();
-    </script>
+    function updateApiKey() {
+    const key = document.getElementById('new-api-key').value;
+    if(key.length > 10) {
+        localStorage.setItem('youtube_api_key', key);
+        alert("Sistem Güncellendi! limitler sıfırlandı. Uygulamayı kapatıp açabilirsin.");
+        location.reload(); 
+    } else {
+        alert("Lütfen geçerli bir API Key gir patron!");
+    }
+}
+</script>
 </body>
 </html>
