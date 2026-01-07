@@ -45,7 +45,7 @@
         #shorts-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: #000; z-index: 4500; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px; }
         .block-card { border: 2px solid var(--red); padding: 30px; border-radius: 25px; background: rgba(255,0,0,0.05); }
 
-        /* PROFIL PANELI (HAKKIMIZDA & NO COPYRIGHT) */
+        /* PROFIL PANELI */
         .profile-modal { position: fixed; top: 0; right: -100%; width: 85%; height: 100%; background: #0a0a0a; z-index: 6000; transition: 0.4s; padding: 30px 20px; }
         .profile-modal.active { right: 0; }
         .about-section { background: #1a1a1a; padding: 20px; border-radius: 15px; margin-top: 25px; text-align: left; }
@@ -53,7 +53,7 @@
 
         /* ALT MENÜ */
         .nav-bar { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 4000; }
-        .nav-item { color: #888; text-align: center; font-size: 0.7rem; }
+        .nav-item { color: #888; text-align: center; font-size: 0.7rem; cursor: pointer; }
         .nav-item.active { color: white; }
         .nav-item i { font-size: 1.4rem; display: block; margin-bottom: 4px; }
     </style>
@@ -88,7 +88,7 @@
             </p>
             <p style="margin-top: 25px; color: var(--red); font-weight: bold; letter-spacing: 1px;">ZİHNİNİZİ KORUYUN, ODAKLANMAYA DEVAM EDİN.</p>
         </div>
-        <button onclick="closeShorts()" style="margin-top: 40px; background: white; color: black; border: none; padding: 15px 40px; border-radius: 30px; font-weight: 900; cursor: pointer;">ANA SAYFAYA DÖN</button>
+        <button onclick="loadHome()" style="margin-top: 40px; background: white; color: black; border: none; padding: 15px 40px; border-radius: 30px; font-weight: 900; cursor: pointer;">ANA SAYFAYA DÖN</button>
     </div>
 
     <div id="profile-modal" class="profile-modal">
@@ -97,17 +97,14 @@
                 <i class="fas fa-user fa-3x"></i>
             </div>
             <h3 id="p-name">Misafir Kullanıcı</h3>
-            
             <div class="about-section">
                 <h4 style="color:red; margin-bottom:10px;"><i class="fas fa-info-circle"></i> Hakkımızda</h4>
-                <p style="color:#ccc; font-size:0.85rem; line-height:1.5;">Bu platform, Muhammed Ali tarafından dijital bağımlılığa karşı bir duruş olarak tasarlanmıştır. Reklamsız izleme, video indirme ve yüksek odaklanma deneyimi sunar.</p>
+                <p style="color:#ccc; font-size:0.85rem; line-height:1.5;">Bu platform, Muhammed Ali tarafından dijital bağımlılığa karşı bir duruş olarak tasarlanmıştır.</p>
             </div>
-
             <div class="copy-tag">
                 <i class="fas fa-copyright"></i> NO COPYRIGHT - 2024<br>
                 <span style="color:#555; font-weight:normal;">ALL RIGHTS RESERVED BY MUHAMMED ALI</span>
             </div>
-
             <button onclick="toggleProfile()" style="width:100%; margin-top:40px; background:none; border:1px solid #333; color:white; padding:15px; border-radius:15px;">Geri Dön</button>
         </div>
     </div>
@@ -132,12 +129,16 @@
         let currentVideo = null;
         let likedVideos = JSON.parse(localStorage.getItem('b_liked')) || [];
 
+        // ANA SAYFAYI YENİLEYEN FONKSİYON
         async function loadHome() {
-            closeShorts();
-            const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=TR&maxResults=10&key=${API_KEY}`);
+            document.getElementById('shorts-screen').style.display = 'none';
+            document.getElementById('video-grid').style.display = 'grid';
+            document.getElementById('search-input').value = "";
+            const res = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&regionCode=TR&maxResults=12&key=${API_KEY}&t=${new Date().getTime()}`);
             const data = await res.json();
             renderGrid(data.items);
             updateNav(0);
+            window.scrollTo(0,0);
         }
 
         function renderGrid(items) {
@@ -157,17 +158,14 @@
         }
 
         function openShortsBlock() {
+            document.getElementById('video-grid').style.display = 'none';
             document.getElementById('shorts-screen').style.display = 'flex';
             updateNav(1);
         }
 
-        function closeShorts() {
-            document.getElementById('shorts-screen').style.display = 'none';
-            updateNav(0);
-        }
-
         function startVoice() {
             const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if(!SpeechRec) return alert("Desteklenmiyor");
             const rec = new SpeechRec();
             rec.lang = 'tr-TR';
             rec.onstart = () => document.getElementById('v-btn').classList.add('recording');
@@ -184,7 +182,7 @@
         }
 
         function downloadVideo() { window.open(`https://9xbuddy.com/download?url=https://www.youtube.com/watch?v=${currentVideo.id}`, '_blank'); }
-        function saveToLib() { likedVideos.push(currentVideo); localStorage.setItem('b_liked', JSON.stringify(likedVideos)); alert("Kitaplığa Eklendi!"); }
+        function saveToLib() { likedVideos.push(currentVideo); localStorage.setItem('b_liked', JSON.stringify(likedVideos)); alert("Kaydedildi!"); }
         function loadLibrary() { updateNav(2); document.getElementById('video-grid').innerHTML = `<h2 style="padding:15px;">Kitaplık</h2>`; renderGrid(likedVideos); }
         function toggleProfile() { document.getElementById('profile-modal').classList.toggle('active'); }
         function closePlayer() { document.getElementById('player').style.display = 'none'; document.getElementById('video-frame').innerHTML = ""; }
