@@ -3,23 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BUNY-Tube V65 Mega Premium</title>
+    <title>BUNY-Tube V75 Ultimate Premium</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* [1] GLOBAL MASTER STYLES */
+        /* [1] CORE THEME SETTINGS */
         :root {
-            --muhammed-red: #ff0000;
-            --muhammed-black: #000000;
-            --muhammed-dark: #080808;
-            --muhammed-card: #121212;
-            --muhammed-border: #1a1a1a;
-            --muhammed-gray: #777777;
-            --muhammed-insta: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --m-red: #ff0000;
+            --m-black: #000000;
+            --m-surface: #0a0a0a;
+            --m-card: #121212;
+            --m-border: #1f1f1f;
+            --m-gray: #888888;
+            --m-insta: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --m-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
+        /* [2] GLOBAL RESET */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -29,107 +31,104 @@
         }
 
         body {
-            background-color: var(--muhammed-black);
-            color: white;
+            background-color: var(--m-black);
+            color: #ffffff;
             overflow-x: hidden;
-            padding-bottom: 100px;
+            padding-bottom: 110px; /* Nav bar payı */
         }
 
-        /* [2] INSTAGRAM BANNER ENGINE */
-        .banner-container {
-            background: var(--muhammed-insta);
-            height: 35px;
+        /* [3] MUHAMMED ALI PREMIUM BANNER (GRADIENT) */
+        .muhammed-top-banner {
+            background: var(--m-insta);
+            height: 34px;
             display: flex;
             align-items: center;
             overflow: hidden;
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 9999;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            z-index: 99999;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        .banner-scroller {
+        .muhammed-scroller-content {
             white-space: nowrap;
             display: inline-block;
-            animation: scroll-text 22s linear infinite;
+            animation: muhammed-marquee 25s linear infinite;
             font-weight: 900;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             letter-spacing: 2px;
             text-transform: uppercase;
         }
 
-        @keyframes scroll-text {
+        @keyframes muhammed-marquee {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
 
-        /* [3] HEADER & LOGO SECTION */
+        /* [4] HEADER & LOGO UI */
         header {
-            padding-top: 60px;
+            padding-top: 65px;
             padding-left: 20px;
             padding-right: 20px;
             padding-bottom: 20px;
             background: linear-gradient(to bottom, #000 0%, transparent 100%);
         }
 
-        .top-brand-area {
+        .header-brand-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 25px;
         }
 
-        .main-logo {
-            font-size: 2rem;
+        .app-logo-main {
+            font-size: 2.1rem;
             font-weight: 900;
             letter-spacing: -1.5px;
             cursor: pointer;
+            text-shadow: 0 0 15px rgba(255,0,0,0.3);
         }
 
-        .main-logo span {
-            background-color: var(--muhammed-red);
-            padding-left: 10px;
-            padding-right: 10px;
-            padding-top: 2px;
-            padding-bottom: 2px;
-            border-radius: 8px;
+        .app-logo-main span {
+            background-color: var(--m-red);
+            padding: 2px 12px;
+            border-radius: 10px;
             margin-left: 6px;
-            box-shadow: 0 0 20px rgba(255,0,0,0.4);
+            font-style: italic;
         }
 
-        .user-icon-btn {
-            font-size: 1.8rem;
-            color: var(--muhammed-red);
+        .profile-btn-v75 {
+            font-size: 1.9rem;
+            color: var(--m-red);
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .user-icon-btn:active {
-            transform: scale(0.9);
-        }
-
-        /* [4] SEARCH & VOICE ENGINE UI */
-        .search-system-wrapper {
+        /* [5] SEARCH SYSTEM UI */
+        .search-engine-container {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
-        .search-input-field {
+        .search-input-wrapper {
             flex: 1;
-            background: var(--muhammed-card);
-            border: 1.5px solid var(--muhammed-border);
-            border-radius: 30px;
-            padding-left: 20px;
-            padding-right: 20px;
-            padding-top: 12px;
-            padding-bottom: 12px;
+            background: var(--m-card);
+            border: 1.5px solid var(--m-border);
+            border-radius: 40px;
+            padding: 14px 22px;
             display: flex;
             align-items: center;
+            transition: 0.4s;
         }
 
-        .search-input-field input {
+        .search-input-wrapper:focus-within {
+            border-color: var(--m-red);
+            box-shadow: 0 0 15px rgba(255,0,0,0.2);
+        }
+
+        .search-input-wrapper input {
             background: transparent;
             border: none;
             color: white;
@@ -139,249 +138,214 @@
             font-weight: 600;
         }
 
-        .voice-search-trigger {
-            width: 50px;
-            height: 50px;
-            background: var(--muhammed-card);
-            border: 1.5px solid var(--muhammed-border);
+        .v75-mic-btn {
+            width: 52px;
+            height: 52px;
+            background: var(--m-card);
+            border: 1.5px solid var(--m-border);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--muhammed-red);
-            font-size: 1.3rem;
+            color: var(--m-red);
+            font-size: 1.4rem;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: var(--m-shadow);
         }
 
-        .voice-active {
-            background: var(--muhammed-red);
+        .v75-mic-btn.is-listening {
+            background: var(--m-red);
             color: white;
-            animation: pulse-ring 1.2s infinite;
+            animation: pulse-animation 1s infinite;
         }
 
-        @keyframes pulse-ring {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(255,0,0,0); }
+        @keyframes pulse-animation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
             100% { transform: scale(1); }
         }
 
-        /* [5] VIDEO CONTENT GRID SYSTEM */
-        .video-grid-container {
+        /* [6] VIDEO GRID SYSTEM */
+        .v75-feed-grid {
             padding: 15px;
             display: grid;
             grid-template-columns: 1fr;
             gap: 35px;
-            animation: fade-in-up 0.6s ease-out;
+            animation: entry-anim 0.7s ease-out;
         }
 
-        @keyframes fade-in-up {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes entry-anim {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .video-card-v65 {
-            background: var(--muhammed-card);
-            border-radius: 20px;
+        .v75-card {
+            background: var(--m-card);
+            border-radius: 22px;
             overflow: hidden;
-            border: 1px solid var(--muhammed-border);
-            transition: 0.3s ease;
+            border: 1.5px solid var(--m-border);
+            transition: 0.4s;
         }
 
-        .video-card-v65 img {
+        .v75-card img {
             width: 100%;
             aspect-ratio: 16/9;
             object-fit: cover;
         }
 
-        .video-card-v65 .v-info {
-            padding: 15px;
+        .v75-card-meta {
+            padding: 18px;
         }
 
-        .video-card-v65 h3 {
-            font-size: 1rem;
+        .v75-card-meta h3 {
+            font-size: 1.05rem;
             line-height: 1.5;
             color: #ffffff;
-            height: 3em;
-            overflow: hidden;
+            font-weight: 700;
+            margin-bottom: 10px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        /* [6] MASTER VIDEO PLAYER OVERLAY */
-        #master-overlay-v65 {
+        .v75-stats-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.8rem;
+            color: var(--m-gray);
+            font-weight: 600;
+        }
+
+        .v75-channel-tag {
+            background: #252525;
+            color: #efefef;
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+        }
+
+        /* [7] MASTER PLAYER SYSTEM (NO CLOSE BUTTON - SMART BACK ONLY) */
+        #v75-player-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000;
-            z-index: 10001;
+            background: #000000;
+            z-index: 100000;
             display: none;
             flex-direction: column;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        #master-overlay-v65.mini-view {
+        #v75-player-overlay.v75-mini {
             top: auto;
-            bottom: 95px;
+            bottom: 105px;
             left: auto;
             right: 15px;
-            width: 220px;
-            height: 125px;
-            border-radius: 15px;
-            border: 2px solid var(--muhammed-red);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            width: 230px;
+            height: 130px;
+            border-radius: 18px;
+            border: 2px solid var(--m-red);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9);
             overflow: hidden;
         }
 
-        #master-overlay-v65.mini-view .player-top-controls,
-        #master-overlay-v65.mini-view .player-scroll-content {
+        #v75-player-overlay.v75-mini .v75-p-header,
+        #v75-player-overlay.v75-mini .v75-p-scroll {
             display: none;
         }
 
-        .player-top-controls {
-            padding: 15px;
-            background: #0a0a0a;
+        .v75-p-header {
+            padding: 18px;
+            background: #080808;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #222;
+            gap: 15px;
+            border-bottom: 1px solid #1a1a1a;
         }
 
-        .video-player-frame-box {
+        .v75-video-engine-box {
             width: 100%;
             aspect-ratio: 16/9;
             background: #000;
         }
 
-        .player-scroll-content {
+        .v75-p-scroll {
             flex: 1;
             overflow-y: auto;
             padding: 20px;
             background: #000;
         }
 
-        .video-action-btns {
-            display: flex;
-            justify-content: space-around;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #1a1a1a;
-        }
-
-        .v-action-btn {
-            background: #151515;
-            color: white;
-            border: 1px solid #333;
-            padding: 12px 25px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-red-mode {
-            background: var(--muhammed-red);
-            border: none;
-        }
-
-        .related-header-text {
-            color: var(--muhammed-red);
+        .v75-related-label {
+            color: var(--m-red);
             font-weight: 900;
-            margin-top: 30px;
-            margin-bottom: 15px;
+            margin-top: 25px;
+            margin-bottom: 20px;
             font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-left: 5px solid var(--muhammed-red);
+            letter-spacing: 1.5px;
+            border-left: 5px solid var(--m-red);
             padding-left: 15px;
         }
 
-        /* [7] SHORTS BLOCKER SCREEN */
-        #shorts-screen-v65 {
+        /* [8] SHORTS BLOCKER UI */
+        #v75-shorts-gate {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
             background: #000;
-            z-index: 9998;
+            z-index: 99998;
             display: none;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px;
+            padding: 45px;
         }
 
-        .blocker-box-v65 {
-            border: 2px solid var(--muhammed-red);
-            padding: 50px 25px;
-            border-radius: 40px;
-            background: linear-gradient(to bottom, #0a0a0a, #000);
-            box-shadow: 0 0 40px rgba(255,0,0,0.1);
+        .v75-gate-container {
+            border: 2px solid var(--m-red);
+            padding: 60px 30px;
+            border-radius: 45px;
+            background: linear-gradient(145deg, #0a0a0a, #000);
+            box-shadow: 0 0 60px rgba(255,0,0,0.15);
         }
 
-        /* [8] SIDE PROFILE MENU */
-        #side-menu-v65 {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 85%;
-            height: 100%;
-            background: #050505;
-            z-index: 10002;
-            transition: 0.5s cubic-bezier(0.7, 0, 0.3, 1);
-            padding: 70px 30px;
-            border-left: 1px solid #1a1a1a;
-        }
-
-        #side-menu-v65.is-active {
-            right: 0;
-        }
-
-        .profile-about-card {
-            background: #0f0f0f;
-            padding: 25px;
-            border-radius: 20px;
-            border-left: 6px solid var(--muhammed-red);
-            margin-top: 40px;
-            text-align: left;
-        }
-
-        /* [9] FOOTER NAVIGATION */
-        .bottom-nav-v65 {
+        /* [9] MASTER FOOTER NAV */
+        .v75-navbar {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(15px);
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(20px);
             display: flex;
             justify-content: space-around;
-            padding-top: 15px;
-            padding-bottom: 15px;
-            border-top: 1.5px solid var(--muhammed-border);
-            z-index: 9997;
+            padding: 20px 0;
+            border-top: 1.5px solid var(--m-border);
+            z-index: 99997;
         }
 
-        .nav-link-v65 {
+        .v75-nav-item {
             color: #444;
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             font-weight: 900;
-            cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s ease;
         }
 
-        .nav-link-v65.active {
+        .v75-nav-item.is-active {
             color: #ffffff;
-            transform: translateY(-2px);
+            transform: translateY(-4px);
         }
 
-        .nav-link-v65 i {
-            font-size: 1.6rem;
+        .v75-nav-item i {
+            font-size: 1.8rem;
             display: block;
             margin-bottom: 6px;
         }
@@ -389,229 +353,217 @@
 </head>
 <body>
 
-    <div class="banner-container" id="v65-top-banner">
-        <div class="banner-scroller">
-            INSTAGRAM: MUHAMMEDALIATL &nbsp; • &nbsp; PREMIUM NO-ADS EXPERIENCE &nbsp; • &nbsp; MUHAMMED ALİ ÖZEL SÜRÜM V65 &nbsp; • &nbsp; ODAK MODU AKTİF &nbsp; • &nbsp; NO COPYRIGHT 2024
+    <div class="muhammed-top-banner">
+        <div class="muhammed-scroller-content">
+            INSTAGRAM: MUHAMMEDALIATL &nbsp; • &nbsp; BUNY-TUBE V75 ULTIMATE &nbsp; • &nbsp; ODAK SÜRESİ KORUMA MODU AKTİF &nbsp; • &nbsp; ARKA PLAN ÇALMA DESTEĞİ &nbsp; • &nbsp; NO COPYRIGHT 2024
         </div>
     </div>
 
     <header>
-        <div class="top-brand-area">
-            <div class="main-logo" onclick="logic_v65_refreshHome()">BUNY<span>Tube</span></div>
-            <div class="user-icon-btn" onclick="logic_v65_toggleMenu()"><i class="fas fa-user-circle"></i></div>
+        <div class="header-brand-row">
+            <div class="app-logo-main" onclick="v75_core_refreshHome()">BUNY<span>Tube</span></div>
+            <i class="fas fa-user-shield profile-btn-v75" onclick="alert('Muhammed Ali Premium Aktif!')"></i>
         </div>
 
-        <div class="search-system-wrapper">
-            <div class="search-input-field">
-                <input type="text" id="v65-input-box" placeholder="Hangi videoya odaklanmak istersin?" onkeypress="if(event.key==='Enter') logic_v65_search()">
-                <i class="fas fa-search" style="color:#444" onclick="logic_v65_search()"></i>
+        <div class="search-engine-container">
+            <div class="search-input-wrapper">
+                <input type="text" id="v75-query" placeholder="Zihnini neyle besleyeceksin?" onkeypress="if(event.key==='Enter') v75_core_search()">
+                <i class="fas fa-search" style="color:#444" onclick="v70_core_search()"></i>
             </div>
-            <div class="voice-search-trigger" id="v65-mic-btn" onclick="logic_v65_voiceSearch()">
+            <div class="v75-mic-btn" id="v75-mic" onclick="v75_core_voice()">
                 <i class="fas fa-microphone"></i>
             </div>
         </div>
     </header>
 
-    <main class="video-grid-container" id="v65-main-feed"></main>
+    <main class="v75-feed-grid" id="v75-main-feed"></main>
 
-    <div id="master-overlay-v65">
-        <div class="player-top-controls" onclick="logic_v65_minimize()">
-            <div style="display:flex; align-items:center; gap:12px;">
-                <i class="fas fa-chevron-down"></i>
-                <span style="font-weight:bold; font-size:0.8rem; letter-spacing:1px; color:#aaa;">ARKA PLANDA ÇALIŞIYOR</span>
-            </div>
-            <i class="fas fa-expand" style="color:#555"></i>
+    <div id="v75-player-overlay">
+        <div class="v75-p-header" onclick="v75_core_smartBack()">
+            <i class="fas fa-chevron-down"></i>
+            <span style="font-weight:900; font-size:0.85rem; color:var(--m-gray); letter-spacing:1px;">VİDEOYU KÜÇÜLT / GERİ GİT</span>
         </div>
 
-        <div class="video-player-frame-box" id="v65-frame-container"></div>
+        <div class="v75-video-engine-box" id="v75-video-container"></div>
 
-        <div class="player-scroll-content">
-            <div class="video-action-btns">
-                <button class="v-action-btn" onclick="logic_v65_minimize()"><i class="fas fa-compress"></i> KÜÇÜLT</button>
-                <button class="v-action-btn btn-red-mode" onclick="logic_v65_closePlayer()"><i class="fas fa-power-off"></i> KAPAT</button>
-            </div>
-
-            <div class="related-header-text">SİZİN İÇİN ÖNERİLENLER</div>
-            <div id="v65-related-feed" class="video-grid-container" style="padding:0;"></div>
-        </div>
-    </div>
-
-    <div id="shorts-screen-v65">
-        <div class="blocker-box-v65">
-            <i class="fas fa-brain fa-5x" style="color:var(--muhammed-red); margin-bottom:30px;"></i>
-            <h2 style="font-weight:900; letter-spacing:3px;">ODAK KORUMA SİSTEMİ</h2>
-            <p style="margin-top:25px; line-height:1.8; color:#bbb; font-size:1.05rem;">
-                "Kısa süreli içerikler (Shorts), dopamin dengenizi bozarak odaklanma sürenizi ve iradenizi zayıflatmaktadır. 
-                Geleceğin liderlerinin zihinlerini korumak amacıyla bu özellik, <b>MUHAMMED ALİ</b> tarafından tamamen kapatılmıştır. 
-                Lütfen derin içeriklere odaklanın."
-            </p>
-            <button onclick="logic_v65_refreshHome()" style="margin-top:40px; padding:20px 60px; border-radius:50px; border:none; background:white; color:black; font-weight:900; letter-spacing:2px;">GERİ DÖN</button>
-        </div>
-    </div>
-
-    <div id="side-menu-v65">
-        <div style="text-align:center;">
-            <i class="fas fa-user-shield fa-5x" style="color:var(--muhammed-red);"></i>
-            <h2 style="margin-top:25px; font-size:1.8rem;">Muhammed Ali Premium</h2>
+        <div class="v75-p-scroll">
+            <h2 id="v75-now-playing-title" style="font-size:1.2rem; margin-bottom:15px; font-weight:800;"></h2>
             
-            <div class="profile-about-card">
-                <b style="color:white; font-size:1.1rem;">HAKKINDA:</b>
-                <p style="font-size:0.9rem; color:#888; margin-top:10px; line-height:1.6;">
-                    Bu uygulama, <b>Muhammed Ali</b> tarafından, 10.000+ kişilik topluluğuna reklamsız ve odak bozmayan bir video deneyimi sunmak için özel olarak kodlanmıştır.
-                </p>
-            </div>
-
-            <div style="margin-top:80px; border-top:1px solid #1a1a1a; padding-top:30px;">
-                <b style="font-size:1.3rem; letter-spacing:3px; color:white;">NO COPYRIGHT - 2024</b>
-                <p style="color:#444; font-weight:bold; margin-top:5px; font-size:0.8rem;">MUHAMMED ALİ MASTER EXPERIENCE V65.7</p>
-                <p style="color:#222; font-size:0.7rem;">TÜM HAKLARI MUHAMMED ALİ TOPLULUĞUNA AİTTİR.</p>
-            </div>
+            <div class="v75-related-label">SONRAKİ ÖNERİLENLER</div>
+            <div id="v75-related-feed" class="v75-feed-grid" style="padding:0; gap:25px;"></div>
         </div>
-        <button onclick="logic_v65_toggleMenu()" style="width:100%; margin-top:50px; background:none; border:1px solid #222; color:#555; padding:15px; border-radius:15px; font-weight:900;">KAPAT</button>
     </div>
 
-    <nav class="bottom-nav-v65">
-        <div class="nav-link-v65 active" id="tab-v65-0" onclick="logic_v65_refreshHome()">
+    <div id="v75-shorts-gate">
+        <div class="v75-gate-container">
+            <i class="fas fa-shield-alt fa-5x" style="color:var(--m-red); margin-bottom:30px;"></i>
+            <h2 style="font-weight:900; letter-spacing:3px; color:white;">BUNY-GUARD AKTİF</h2>
+            <p style="margin-top:25px; line-height:1.8; color:#888; font-size:1.1rem; font-weight:500;">
+                "Shorts içerikleri Muhammed Ali tarafından zihin sağlığınız ve odaklanma süreniz için bu sürümde engellenmiştir."
+            </p>
+            <button onclick="v75_core_refreshHome()" style="margin-top:45px; padding:22px 70px; border-radius:50px; border:none; background:white; color:black; font-weight:900; letter-spacing:2px; box-shadow: 0 10px 30px rgba(255,255,255,0.1);">ANA SAYFAYA DÖN</button>
+        </div>
+    </div>
+
+    <nav class="v75-navbar">
+        <div class="v75-nav-item is-active" id="tab-0" onclick="v75_core_refreshHome()">
             <i class="fas fa-home"></i>
             <span>Ana Sayfa</span>
         </div>
-        <div class="nav-link-v65" id="tab-v65-1" onclick="logic_v65_showShorts()">
+        <div class="v75-nav-item" id="tab-1" onclick="v75_core_showShorts()">
             <i class="fas fa-bolt"></i>
             <span>Shorts</span>
         </div>
-        <div class="nav-link-v65" onclick="alert('Kitaplık Çok Yakında!')">
-            <i class="fas fa-folder"></i>
+        <div class="v75-nav-item" onclick="alert('Kütüphane Yakında!')">
+            <i class="fas fa-folder-open"></i>
             <span>Kitaplık</span>
         </div>
     </nav>
 
     <script>
-        /* CONFIGURATION */
-        const V65_API_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
-        let v65_mini_mode = false;
+        /* --- GLOBAL CONFIGURATION --- */
+        const V75_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
+        let v75_is_mini = false;
 
-        /* CORE FETCH ENGINE */
-        async function logic_v65_fetch(searchQuery, targetId) {
-            const endpoint = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&type=video&maxResults=15&key=${V65_API_KEY}&t=${Date.now()}`;
+        /* --- DATA FETCH ENGINE --- */
+        async function v75_core_fetch(query, targetId) {
+            // Cache engellemek için t=timestamp ve Math.random ekliyoruz (YENİLENME GARANTİSİ)
+            const v75_url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=15&key=${V75_KEY}&t=${Date.now()}&r=${Math.random()}`;
             
             try {
-                const response = await fetch(endpoint);
+                const response = await fetch(v75_url);
                 const data = await response.json();
-                const grid = document.getElementById(targetId);
-                grid.innerHTML = "";
+                const container = document.getElementById(targetId);
                 
-                data.items.forEach(item => {
-                    const vidId = item.id.videoId;
-                    if(!vidId) return;
+                // Mevcut içeriği temizle
+                container.innerHTML = "";
+                
+                data.items.forEach(video => {
+                    const videoId = video.id.videoId;
+                    if(!videoId) return;
 
-                    grid.innerHTML += `
-                        <div class="video-card-v65" onclick="logic_v65_play('${vidId}', '${item.snippet.title.replace(/'/g, "")}')">
-                            <img src="${item.snippet.thumbnails.high.url}">
-                            <div class="v-info">
-                                <h3>${item.snippet.title}</h3>
+                    // Tarih bilgisini okunabilir yapalım
+                    const pubDate = new Date(video.snippet.publishedAt);
+                    const formattedDate = pubDate.toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+                    // Kart yapısını oluştur (Dolu dolu meta data ile)
+                    container.innerHTML += `
+                        <div class="v75-card" onclick="v75_core_play('${videoId}', '${video.snippet.title.replace(/'/g, "")}')">
+                            <img src="${video.snippet.thumbnails.high.url}">
+                            <div class="v75-card-meta">
+                                <h3>${video.snippet.title}</h3>
+                                <div class="v75-stats-row">
+                                    <span class="v75-channel-tag">${video.snippet.channelTitle}</span>
+                                    <span>•</span>
+                                    <span>${formattedDate}</span>
+                                </div>
                             </div>
                         </div>`;
                 });
-            } catch (error) {
-                console.error("API Error: ", error);
+            } catch (err) {
+                console.error("Fetch Error: ", err);
             }
         }
 
-        /* SEARCH LOGIC */
-        function logic_v65_search() {
-            const query = document.getElementById('v65-input-box').value;
-            if(query) logic_v65_fetch(query, 'v65-main-feed');
+        /* --- SEARCH LOGIC --- */
+        function v75_core_search() {
+            const q = document.getElementById('v75-query').value;
+            if(q) v75_core_fetch(q, 'v75-main-feed');
         }
 
-        /* VOICE SEARCH ENGINE */
-        function logic_v65_voiceSearch() {
-            const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if(!Recognition) {
-                alert("Sesli arama desteklenmiyor.");
+        /* --- VOICE RECOGNITION SYSTEM --- */
+        function v75_core_voice() {
+            const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if(!Speech) {
+                alert("Sesli arama cihazınızda desteklenmiyor.");
                 return;
             }
 
-            const recEngine = new Recognition();
-            recEngine.lang = 'tr-TR';
-            const micBtn = document.getElementById('v65-mic-btn');
+            const rec = new Speech();
+            rec.lang = 'tr-TR';
+            const mic = document.getElementById('v75-mic');
 
-            recEngine.onstart = () => micBtn.classList.add('voice-active');
-            recEngine.onend = () => micBtn.classList.remove('voice-active');
+            rec.onstart = () => mic.classList.add('is-listening');
+            rec.onend = () => mic.classList.remove('is-listening');
             
-            recEngine.onresult = (event) => {
-                const text = event.results[0][0].transcript;
-                document.getElementById('v65-input-box').value = text;
-                logic_v65_search();
+            rec.onresult = (e) => {
+                const transcript = e.results[0][0].transcript;
+                document.getElementById('v75-query').value = transcript;
+                v75_core_search();
             };
 
-            recEngine.start();
+            rec.start();
         }
 
-        /* HOME REFRESH */
-        function logic_v65_refreshHome() {
-            document.getElementById('shorts-screen-v65').style.display = 'none';
-            document.getElementById('v65-main-feed').style.display = 'grid';
-            document.getElementById('v65-top-banner').style.display = 'flex';
-            logic_v65_fetch('modifiye arabalar teknoloji oyun', 'v65-main-feed');
-            logic_v65_navUpdate(0);
+        /* --- HOME REFRESH LOGIC --- */
+        function v75_core_refreshHome() {
+            document.getElementById('v75-shorts-gate').style.display = 'none';
+            document.getElementById('v75-main-feed').style.display = 'grid';
+            v75_core_fetch('popüler trend teknoloji oyun modifiye', 'v75-main-feed');
+            v75_core_navUpdate(0);
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        /* PLAYER LOGIC (BG PLAY SUPPORTED) */
-        function logic_v65_play(id, title) {
-            v65_mini_mode = false;
-            document.getElementById('v65-top-banner').style.display = 'none';
-            const overlay = document.getElementById('master-overlay-v65');
-            overlay.style.display = 'flex';
-            overlay.classList.remove('mini-view');
-
-            document.getElementById('v65-frame-container').innerHTML = `
+        /* --- PLAYER ENGINE (ARKA PLAN DESTEKLİ) --- */
+        function v75_core_play(id, title) {
+            v75_is_mini = false;
+            const playerOverlay = document.getElementById('v75-player-overlay');
+            playerOverlay.style.display = 'flex';
+            playerOverlay.classList.remove('v75-mini');
+            
+            document.getElementById('v75-now-playing-title').innerText = title;
+            
+            // playsinline=1 ve enablejsapi=1 ARKA PLAN İÇİN ŞARTTIR
+            document.getElementById('v75-video-container').innerHTML = `
                 <iframe src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&enablejsapi=1&rel=0" 
                 style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
             
-            logic_v65_fetch(title, 'v65-related-feed');
-            history.pushState({view: 'playing'}, '');
+            // VİDEO ALTINI OTOMATİK DOLDURMA (RELATED)
+            v75_core_fetch(title, 'v75-related-feed');
+            
+            // Geri tuşu için history ekleyelim
+            history.pushState({page: 'playing'}, '');
         }
 
-        function logic_v65_minimize() {
-            document.getElementById('master-overlay-v65').classList.add('mini-view');
-            document.getElementById('v65-top-banner').style.display = 'flex';
-            v65_mini_mode = true;
+        /* --- AKILLI GERİ TUŞU / SMART BACK --- */
+        function v75_core_smartBack() {
+            const overlay = document.getElementById('v75-player-overlay');
+            if(!v75_is_mini) {
+                // İlk dokunuşta veya geri basışta küçültür
+                overlay.classList.add('v75-mini');
+                v75_is_mini = true;
+            } else {
+                // İkinci dokunuşta veya geri basışta tamamen kapatır
+                overlay.style.display = 'none';
+                document.getElementById('v75-video-container').innerHTML = "";
+            }
         }
 
-        function logic_v65_closePlayer() {
-            document.getElementById('master-overlay-v65').style.display = 'none';
-            document.getElementById('v65-frame-container').innerHTML = "";
-            document.getElementById('v65-top-banner').style.display = 'flex';
-        }
-
-        /* BACK BUTTON CONTROL */
+        /* ANDROID GERİ TUŞU KONTROLÜ */
         window.onpopstate = () => {
-            const overlay = document.getElementById('master-overlay-v65');
+            const overlay = document.getElementById('v75-player-overlay');
             if(overlay.style.display === 'flex') {
-                if(!v65_mini_mode) logic_v65_minimize(); else logic_v65_closePlayer();
-                history.pushState(null, '');
+                v75_core_smartBack();
+                history.pushState(null, ''); // Kullanıcıyı uygulamadan atmasın
             }
         };
 
-        /* UI HELPERS */
-        function logic_v65_showShorts() {
-            document.getElementById('v65-main-feed').style.display = 'none';
-            document.getElementById('shorts-screen-v65').style.display = 'flex';
-            logic_v65_navUpdate(1);
+        /* --- UI NAVIGATION HELPERS --- */
+        function v75_core_showShorts() {
+            document.getElementById('v75-main-feed').style.display = 'none';
+            document.getElementById('v75-shorts-gate').style.display = 'flex';
+            v75_core_navUpdate(1);
         }
 
-        function logic_v65_toggleMenu() {
-            document.getElementById('side-menu-v65').classList.toggle('is-active');
+        function v75_core_navUpdate(idx) {
+            [0,1].forEach(i => {
+                document.getElementById('tab-'+i).classList.toggle('is-active', i === idx);
+            });
         }
 
-        function logic_v65_navUpdate(idx) {
-            [0,1].forEach(i => document.getElementById('tab-v65-'+i).classList.toggle('active', i === idx));
-        }
-
-        /* BOOTSTRAP */
+        /* INITIALIZATION ON BOOT */
         window.onload = () => {
-            logic_v65_refreshHome();
+            v75_core_refreshHome();
             history.pushState(null, '');
         };
     </script>
