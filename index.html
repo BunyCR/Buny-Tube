@@ -3,58 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BUNY TUBE - SINIRSIZ</title>
+    <title>BUNY TUBE - PATRON EDITION</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --red: #ff0000; --dark: #000000; --neon: #00f2ff; --neon-glow: 0 0 15px #00f2ff; }
         * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
-        body { background: var(--dark); color: white; padding-bottom: 100px; overflow-x: hidden; }
+        body { background: var(--dark); color: white; padding-bottom: 110px; overflow-x: hidden; }
 
-        /* BAKIM EKRANI */
-        #maintenance-screen { position: fixed; inset: 0; background: #000; display: none; flex-direction: column; justify-content: center; align-items: center; z-index: 999999; text-align: center; }
+        /* BAKIM EKRANI - TAM KORUMA */
+        #maintenance-screen { 
+            position: fixed; inset: 0; background: #000; display: none; 
+            flex-direction: column; justify-content: center; align-items: center; 
+            z-index: 999999; text-align: center; padding: 20px;
+        }
         
-        /* BANNER - LOGODAN AYRI VE İNCE */
+        /* BANNER */
         #announcement-banner {
             background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            color: white; padding: 8px 0; font-size: 13px; font-weight: bold; overflow: hidden; white-space: nowrap; position: relative;
-            margin: 25px auto 15px auto; width: 92%; border-radius: 50px; z-index: 1001;
+            color: white; padding: 8px 0; font-size: 12px; font-weight: bold; overflow: hidden; white-space: nowrap;
+            margin: 15px auto; width: 92%; border-radius: 50px; position: relative;
         }
         .marquee { display: inline-block; padding-left: 100%; animation: marquee 15s linear infinite; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
         header { padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-        header h1 { font-weight: 900; font-size: 1.8rem; }
+        header h1 { font-weight: 900; font-size: 1.8rem; letter-spacing: -1px; }
         header h1 span { color: var(--red); }
 
-        .search-container { position: relative; max-width: 500px; margin: 20px auto; padding: 0 20px; }
+        .search-container { position: relative; max-width: 500px; margin: 10px auto; padding: 0 20px; }
         .search-container input { width: 100%; background: #111; border: 1px solid #333; padding: 15px 25px; border-radius: 30px; color: white; outline: none; }
         .search-container i { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); color: var(--neon); }
 
         .feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; padding: 15px; }
-        .v-card { background: #0a0a0a; border-radius: 12px; overflow: hidden; border: 1px solid #111; }
+        .v-card { background: #0a0a0a; border-radius: 15px; overflow: hidden; border: 1px solid #111; }
         .v-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+        .v-card h4 { padding: 12px; font-size: 14px; color: #eee; }
 
-        .bottom-nav { position: fixed; bottom: 30px; left: 0; width: 100%; height: 70px; background: #050505; border-top: 1px solid #111; display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
+        .bottom-nav { position: fixed; bottom: 30px; left: 0; width: 100%; height: 75px; background: rgba(5,5,5,0.95); backdrop-filter: blur(10px); border-top: 1px solid #111; display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
         .nav-item { color: #555; text-align: center; font-size: 11px; cursor: pointer; }
         .nav-item.active { color: var(--neon); }
-        
-        #admin-dashboard, #player, #admin-modal { position: fixed; inset: 0; background: #000; display: none; z-index: 20000; padding: 20px; }
-        .neon-btn { background: var(--neon); color: black; border: none; padding: 12px; border-radius: 10px; font-weight: bold; width: 100%; margin-top: 10px; }
+
+        /* MODALLAR */
+        #admin-dashboard, #player, #admin-modal { position: fixed; inset: 0; background: #000; display: none; z-index: 20000; padding: 20px; overflow-y: auto; }
+        .neon-btn { background: var(--neon); color: black; border: none; padding: 15px; border-radius: 12px; font-weight: 900; width: 100%; margin-top: 15px; cursor: pointer; }
+        input[type="password"], input[type="text"] { width: 100%; padding: 15px; background: #111; border: 1px solid #333; color: white; border-radius: 12px; margin-top: 10px; outline: none; }
     </style>
 </head>
 <body>
 
     <div id="maintenance-screen">
-        <i class="fas fa-tools" style="font-size:50px; color:red;"></i>
-        <h2 style="margin-top:20px;">SİSTEM BAKIMDA</h2>
-        <p>Muhammed Ali iyileştirme yapıyor.</p>
+        <i class="fas fa-tools" style="font-size:60px; color:var(--red);"></i>
+        <h2 style="margin-top:20px; color:var(--neon);">SİSTEM BAKIMDA</h2>
+        <p style="color:#666; margin-top:10px;">Muhammed Ali yeni özellikler ekliyor...</p>
+        
+        <div style="margin-top: 50px; opacity: 0.3;" onclick="app.openAdminModal()">
+            <i class="fas fa-key" style="font-size: 20px; color: #222;"></i>
+            <p style="font-size: 10px; color: #222;">Patron Girişi</p>
+        </div>
     </div>
 
-    <div id="announcement-banner"><div class="marquee" id="marquee-text">Kotasız ve Reklamsız Yeni Sistem Aktif!</div></div>
+    <div id="announcement-banner"><div class="marquee" id="marquee-text">Kotasız ve Reklamsız YouTube Keyfi - Patron: Muhammed Ali</div></div>
 
     <header>
-        <h1>BUNY<span>TUBE</span></h1>
-        <i class="fas fa-user-shield" onclick="app.openAdminModal()"></i>
+        <h1 onclick="location.reload()">BUNY<span>TUBE</span></h1>
+        <i class="fas fa-user-shield" style="color:#111;" onclick="app.openAdminModal()"></i>
     </header>
 
     <div class="search-container">
@@ -64,70 +76,114 @@
 
     <main id="main-feed" class="feed"></main>
 
-    <div id="admin-modal" style="display:none; justify-content:center; align-items:center; background:rgba(0,0,0,0.9);">
-        <div style="background:#111; padding:30px; border-radius:20px; border:1px solid var(--neon); text-align:center; width:80%;">
-            <h3>PATRON GİRİŞİ</h3>
-            <input type="password" id="admin-pass" style="width:100%; padding:10px; margin:20px 0; background:#000; color:white; border:1px solid #333;">
-            <button class="neon-btn" onclick="app.checkAdmin()">GİRİŞ</button>
-            <p onclick="app.closeAdminModal()" style="margin-top:15px; color:#555;">KAPAT</p>
+    <div id="admin-modal">
+        <div style="height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+            <div style="background:#0a0a0a; padding:30px; border-radius:25px; border:2px solid var(--neon); width:100%; max-width:350px; text-align:center;">
+                <h2 style="color:var(--neon); margin-bottom:20px;">YÖNETİCİ ONAYI</h2>
+                <input type="password" id="admin-pass" placeholder="PAROLA">
+                <button class="neon-btn" onclick="app.checkAdmin()">SİSTEME GİR</button>
+                <p onclick="app.closeAdminModal()" style="margin-top:20px; color:#444; cursor:pointer;">İPTAL</p>
+            </div>
         </div>
     </div>
 
     <div id="admin-dashboard">
-        <h2 style="color:var(--neon)">YÖNETİM</h2>
-        <div style="background:#111; padding:15px; border-radius:10px; margin:20px 0;">
-            <h4>Bakım Modu</h4>
-            <button onclick="app.setBakim(true)" style="background:red; color:white; padding:10px; border:none; margin-top:10px;">AÇ</button>
-            <button onclick="app.setBakim(false)" style="background:green; color:white; padding:10px; border:none; margin-left:10px;">KAPAT</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+            <h2 style="color:var(--neon)">KONTROL PANELİ</h2>
+            <i class="fas fa-times-circle" onclick="app.closeAdminPanel()" style="color:var(--red); font-size:30px;"></i>
         </div>
-        <button class="neon-btn" onclick="app.closeAdminPanel()">PANELİ KAPAT</button>
+        
+        <div style="background:#0a0a0a; padding:20px; border-radius:20px; border:1px solid #222; margin-bottom:20px;">
+            <h4 style="color:#fff; margin-bottom:15px;">Bakım Modu Ayarı</h4>
+            <div style="display:flex; gap:10px;">
+                <button onclick="app.setBakim(true)" style="flex:1; background:var(--red); color:white; border:none; padding:15px; border-radius:10px; font-weight:bold;">BAKIMI AÇ</button>
+                <button onclick="app.setBakim(false)" style="flex:1; background:#00ff00; color:black; border:none; padding:15px; border-radius:10px; font-weight:bold;">KAPAT</button>
+            </div>
+            <p style="font-size: 11px; color: #555; margin-top: 10px;">Bakım modu açıkken sadece sen gizli ikonla girebilirsin.</p>
+        </div>
+
+        <div style="background:#0a0a0a; padding:20px; border-radius:20px; border:1px solid #222;">
+            <h4 style="color:#fff; margin-bottom:10px;">Duyuru Metni</h4>
+            <input type="text" id="ann-input" placeholder="Yeni duyuruyu yaz...">
+            <button onclick="app.updateAnn()" class="neon-btn">YAYINLA</button>
+        </div>
     </div>
 
     <div id="player">
-        <i class="fas fa-times" onclick="app.closePlayer()" style="font-size:25px; margin-bottom:20px;"></i>
-        <div id="player-box" style="width:100%; aspect-ratio:16/9;"></div>
+        <div style="padding:15px;"><i class="fas fa-chevron-left" onclick="app.closePlayer()" style="font-size:25px; color:var(--neon)"></i></div>
+        <div id="player-box" style="width:100%; aspect-ratio:16/9; background:#000;"></div>
     </div>
 
     <div class="bottom-nav">
-        <div class="nav-item active" onclick="location.reload()"><i class="fas fa-home"></i><br>Ana Sayfa</div>
-        <div class="nav-item" onclick="app.openAdminModal()"><i class="fas fa-lock"></i><br>Yetkili</div>
+        <div class="nav-item active" onclick="location.reload()"><i class="fas fa-home"></i>Ana Sayfa</div>
+        <div class="nav-item" onclick="app.openAdminModal()"><i class="fas fa-lock"></i>Yönetim</div>
     </div>
 
     <script>
     const app = {
-        apiBase: 'https://pipedapi.kavin.rocks',
+        instances: ['https://pipedapi.kavin.rocks', 'https://api.piped.victr.me', 'https://piped-api.lunar.icu'],
 
         init() {
-            if(localStorage.getItem('muhammed_bakim') === 'true') document.getElementById('maintenance-screen').style.display = 'flex';
+            // Bakım kontrolü
+            if(localStorage.getItem('m_bakim') === 'true') {
+                document.getElementById('maintenance-screen').style.display = 'flex';
+            }
+            const saved = localStorage.getItem('m_not');
+            if(saved) document.getElementById('marquee-text').innerText = saved;
         },
 
         async search() {
             const q = document.getElementById('search-input').value;
+            if(!q) return;
             const feed = document.getElementById('main-feed');
-            feed.innerHTML = '<p style="color:var(--neon); text-align:center; width:100%;">Yükleniyor...</p>';
-            try {
-                const res = await fetch(`${this.apiBase}/search?q=${encodeURIComponent(q)}&filter=videos`);
-                const data = await res.json();
-                feed.innerHTML = data.content.map(v => `
-                    <div class="v-card" onclick="app.play('${v.url.split('=')[1]}')">
-                        <img src="${v.thumbnail}">
-                        <div style="padding:10px;"><h4>${v.title}</h4></div>
-                    </div>`).join('');
-            } catch (e) { feed.innerHTML = '<p>Hata oluştu, tekrar dene!</p>'; }
+            feed.innerHTML = '<p style="text-align:center; width:100%; color:var(--neon); padding:50px;">Aranıyor...</p>';
+
+            for (let api of this.instances) {
+                try {
+                    const res = await fetch(`${api}/search?q=${encodeURIComponent(q)}&filter=videos`);
+                    const data = await res.json();
+                    if(data.content) {
+                        feed.innerHTML = data.content.map(v => `
+                            <div class="v-card" onclick="app.play('${v.url.split('=')[1]}')">
+                                <img src="${v.thumbnail}">
+                                <h4>${v.title}</h4>
+                            </div>`).join('');
+                        return;
+                    }
+                } catch (e) { console.log("Hata, diğer sunucu..."); }
+            }
         },
 
         play(id) {
             document.getElementById('player').style.display = 'block';
-            document.getElementById('player-box').innerHTML = `<iframe src="https://piped.video/embed/${id}?autoplay=1" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
+            document.getElementById('player-box').innerHTML = `<iframe src="https://piped.video/embed/${id}?autoplay=1" style="width:100%; height:100%; border:none;" allow="autoplay; fullscreen"></iframe>`;
         },
 
-        setBakim(v) { localStorage.setItem('muhammed_bakim', v); location.reload(); },
-        checkAdmin() { if(document.getElementById('admin-pass').value === "Muhiy.1905") { document.getElementById('admin-dashboard').style.display = 'block'; } else { alert("Hatalı!"); } },
+        setBakim(v) { 
+            localStorage.setItem('m_bakim', v); 
+            alert(v ? "Bakım modu aktif edildi!" : "Bakım modu kapatıldı!");
+            location.reload(); 
+        },
+
+        updateAnn() { 
+            const v = document.getElementById('ann-input').value; 
+            if(v) { localStorage.setItem('m_not', v); location.reload(); } 
+        },
+
+        checkAdmin() { 
+            if(document.getElementById('admin-pass').value === "Muhiy.1905") { 
+                document.getElementById('admin-dashboard').style.display = 'block'; 
+                this.closeAdminModal();
+                document.getElementById('maintenance-screen').style.display = 'none'; // Giriş yapınca ekranı temizle
+            } else { alert("Yanlış parola patron!"); } 
+        },
+
         openAdminModal() { document.getElementById('admin-modal').style.display = 'flex'; },
         closeAdminModal() { document.getElementById('admin-modal').style.display = 'none'; },
         closeAdminPanel() { document.getElementById('admin-dashboard').style.display = 'none'; },
         closePlayer() { document.getElementById('player').style.display = 'none'; document.getElementById('player-box').innerHTML = ''; }
     };
+
     window.onload = () => app.init();
     </script>
 </body>
