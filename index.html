@@ -3,644 +3,447 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>BUNY-Tube V1000 | Omega Supreme by Muhammed Ali</title>
+    <title>BUNY-Tube V1200 | Titanium by Muhammed Ali</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@800&family=Syncopate:wght@700&display=swap" rel="stylesheet">
 
     <style>
-        /* ========================================================================= */
-        /* [CSS ARCHITECTURE MODULE 1: CORE DESIGN SYSTEM & VARIABLES]              */
-        /* ========================================================================= */
+        /* [1. MASTER CSS DESIGN SYSTEM] */
         :root {
-            --omega-red: #ff0000;
-            --omega-deep-red: #cc0000;
-            --omega-black: #000000;
-            --omega-dark-surface: #0a0a0a;
-            --omega-card-bg: #111111;
-            --omega-border-line: #1f1f1f;
-            --omega-text-primary: #ffffff;
-            --omega-text-secondary: #999999;
-            --omega-glow-effect: 0 0 50px rgba(255, 0, 0, 0.6);
-            --omega-transition-fast: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            --omega-transition-smooth: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+            --king-red: #ff0000;
+            --king-dark-red: #990000;
+            --king-black: #000000;
+            --king-surface: #080808;
+            --king-card-bg: #111111;
+            --king-border: #1f1f1f;
+            --king-text: #ffffff;
+            --king-gray: #7a7a7a;
+            --king-glow: 0 0 40px rgba(255, 0, 0, 0.4);
+            --king-anim-speed: 0.6s;
+            --king-cubic: cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* ========================================================================= */
-        /* [CSS ARCHITECTURE MODULE 2: GLOBAL RESET & BASE STYLES]                  */
-        /* Optimized for performance and cross-browser consistency.                  */
-        /* ========================================================================= */
+        /* [2. RESET & BASE FOUNDATION] */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
-            scrollbar-width: none; /* Firefox scrollbar hide */
         }
-        *::-webkit-scrollbar { display: none; } /* Webkit scrollbar hide */
 
         body {
-            background-color: var(--omega-black);
-            color: var(--omega-text-primary);
+            background-color: var(--king-black);
+            color: var(--king-text);
             overflow-x: hidden;
-            min-height: 100vh; /* Ensures full viewport height for sticky elements */
-            padding-bottom: env(safe-area-inset-bottom, 100px); /* Handles notches/dynamic island */
+            padding-bottom: env(safe-area-inset-bottom, 100px);
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
+        /* [3. ANIMATION LIBRARY] */
+        @keyframes crown_float {
+            0% { transform: scale(1) rotate(-2deg); filter: drop-shadow(0 0 5px var(--king-red)); }
+            50% { transform: scale(1.1) rotate(2deg); filter: drop-shadow(0 0 25px var(--king-red)); }
+            100% { transform: scale(1) rotate(-2deg); filter: drop-shadow(0 0 5px var(--king-red)); }
         }
 
-        button {
-            border: none;
-            background: none;
-            cursor: pointer;
-            padding: 0;
-            font-size: inherit;
-            color: inherit;
-        }
-
-        /* ========================================================================= */
-        /* [CSS ARCHITECTURE MODULE 3: KEYFRAME ANIMATION LIBRARY]                  */
-        /* Custom animations for dynamic UI feedback.                                */
-        /* ========================================================================= */
-        @keyframes kingPulse {
-            0% { transform: scale(1) rotate(-3deg); filter: drop-shadow(0 0 8px var(--omega-red)); }
-            50% { transform: scale(1.1) rotate(3deg); filter: drop-shadow(0 0 35px var(--omega-red)); }
-            100% { transform: scale(1) rotate(-3deg); filter: drop-shadow(0 0 8px var(--omega-red)); }
-        }
-
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(80px); }
+        @keyframes feed_entrance {
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes shimmer {
-            0% { background-position: -468px 0; }
-            100% { background-position: 468px 0; }
+        @keyframes lock_pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); }
+            70% { box-shadow: 0 0 0 30px rgba(255, 0, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
         }
 
-        /* Skeleton Loading Effect */
-        .skeleton {
-            animation: shimmer 1.5s infinite linear;
-            background: linear-gradient(to right, #1a1a1a 8%, #333333 18%, #1a1a1a 33%);
-            background-size: 800px 104px;
+        /* [4. BRAIN HEALTH SHIELD (SHORTS LOCK)] */
+        #titanium-lock {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.98); z-index: 1000000;
+            display: none; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; padding: 25px;
+        }
+
+        .lock-container {
+            max-width: 450px;
+            padding: 50px 30px;
+            background: var(--king-surface);
+            border: 1px solid var(--king-border);
+            border-radius: 40px;
             position: relative;
-            overflow: hidden;
-            border-radius: 8px;
         }
 
-        /* ========================================================================= */
-        /* [CSS ARCHITECTURE MODULE 4: PREMIUM HEADER SYSTEM]                       */
-        /* Dynamic and responsive header component.                                  */
-        /* ========================================================================= */
-        .v1k-header {
-            position: sticky;
-            top: 0;
+        .lock-container i {
+            font-size: 5rem; color: var(--king-red);
+            margin-bottom: 25px; animation: crown_float 2s infinite;
+        }
+
+        .lock-container h2 {
+            font-family: 'Orbitron', sans-serif; font-size: 1.8rem;
+            margin-bottom: 20px; letter-spacing: 2px;
+        }
+
+        .lock-container p {
+            color: var(--king-gray); font-size: 1rem;
+            line-height: 1.8; margin-bottom: 35px;
+        }
+
+        .lock-btn {
+            width: 100%; padding: 20px; border-radius: 20px;
+            background: var(--king-red); color: #fff;
+            font-weight: 900; font-size: 1.1rem; border: none;
+            cursor: pointer; transition: 0.3s;
+            box-shadow: var(--king-glow);
+        }
+
+        /* [5. HEADER ARCHITECTURE] */
+        .titanium-header {
+            position: sticky; top: 0; z-index: 10000;
+            background: rgba(0, 0, 0, 0.96); backdrop-filter: blur(30px);
+            padding: 15px 20px; border-bottom: 1px solid var(--king-border);
+        }
+
+        .h-row-1 {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .titanium-logo {
+            font-family: 'Orbitron', sans-serif; font-size: 1.6rem;
+            text-decoration: none; color: #fff; font-weight: 900;
+        }
+
+        .titanium-logo span {
+            background: var(--king-red); padding: 2px 8px;
+            border-radius: 6px; margin-left: 5px; box-shadow: var(--king-glow);
+        }
+
+        .king-crown-trigger {
+            font-size: 1.6rem; color: var(--king-red);
+            animation: crown_float 3s infinite; cursor: pointer;
+        }
+
+        /* [6. SEARCH SYSTEM] */
+        .h-row-2 { display: flex; gap: 10px; align-items: center; }
+        .search-field {
+            flex: 1; background: var(--king-surface);
+            border: 1px solid var(--king-border); border-radius: 40px;
+            padding: 12px 22px; display: flex; align-items: center;
+        }
+
+        .search-field input {
+            background: transparent; border: none; color: #fff;
+            width: 100%; outline: none; font-size: 1rem;
+        }
+
+        .mic-trigger {
+            width: 50px; height: 50px; background: var(--king-surface);
+            border: 1px solid var(--king-border); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--king-red); cursor: pointer;
+        }
+
+        .mic-trigger.active {
+            background: var(--king-red); color: #fff; animation: lock_pulse 1.5s infinite;
+        }
+
+        /* [7. FEED MODULE - 21:9 ULTRA CINEMATIC] */
+        .titanium-feed {
+            display: grid; grid-template-columns: 1fr;
+            gap: 10px; padding: 10px 0;
+        }
+
+        .v-card {
+            background: var(--king-black);
+            animation: feed_entrance 0.8s var(--king-cubic) forwards;
+            margin-bottom: 20px;
+        }
+
+        .v-thumb {
+            position: relative; width: 100%;
+            aspect-ratio: 21 / 9; /* MUHAMMED ALİ PRESET */
+            background: #050505; overflow: hidden;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        .v-thumb img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.8s var(--king-cubic);
+        }
+
+        .v-card:hover .v-thumb img { transform: scale(1.05); }
+
+        .v-badge {
+            position: absolute; bottom: 12px; right: 12px;
+            background: rgba(0,0,0,0.85); padding: 4px 10px;
+            border-radius: 6px; font-size: 0.75rem; font-weight: 900;
+            border: 1px solid #333;
+        }
+
+        .v-details {
+            display: flex; padding: 18px 20px; gap: 18px;
+        }
+
+        .v-channel-pfp {
+            width: 48px; height: 48px; background: #111;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; color: var(--king-red);
+            border: 2px solid #222; flex-shrink: 0;
+        }
+
+        .v-text-block h3 {
+            font-size: 1.1rem; font-weight: 600; line-height: 1.4;
+            margin-bottom: 6px; display: -webkit-box;
+            -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+
+        .v-meta {
+            font-size: 0.9rem; color: var(--king-gray);
+            font-weight: 500;
+        }
+
+        /* [8. BOTTOM NAVIGATION] */
+        .titanium-nav {
+            position: fixed; bottom: 0; width: 100%;
+            background: rgba(0,0,0,0.98); border-top: 1px solid var(--king-border);
+            display: flex; justify-content: space-around;
+            padding: 15px 0 calc(25px + env(safe-area-inset-bottom));
             z-index: 10000;
-            background: rgba(0, 0, 0, 0.98);
-            backdrop-filter: blur(35px);
-            padding: 18px 25px; /* Default padding */
-            border-bottom: 1px solid var(--omega-border-line);
-            transition: var(--omega-transition-smooth);
         }
 
-        .v1k-header.compact {
-            padding: 12px 25px; /* Compact padding on scroll */
-            background: rgba(0, 0, 0, 0.9);
-            border-color: #0f0f0f;
+        .nav-link {
+            text-align: center; color: var(--king-gray);
+            font-size: 0.75rem; font-weight: 800; text-decoration: none;
+            transition: 0.3s;
         }
 
-        .header-top-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 18px;
-        }
+        .nav-link.active { color: #fff; }
+        .nav-link i { display: block; font-size: 1.7rem; margin-bottom: 7px; }
 
-        .header-brand {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            color: var(--omega-text-primary);
-            letter-spacing: -1px;
-            cursor: pointer;
-        }
-
-        .header-brand span {
-            background: var(--omega-red);
-            padding: 3px 10px;
-            border-radius: 8px;
-            margin-left: 6px;
-            box-shadow: var(--omega-glow-effect);
-            transition: var(--omega-transition-fast);
-        }
-
-        .header-action-icons {
-            display: flex;
-            gap: 22px;
-            font-size: 1.5rem;
-            color: var(--omega-red);
-        }
-
-        .header-action-icons button {
-            transition: transform 0.2s ease-out;
-        }
-        .header-action-icons button:active { transform: scale(0.9); }
-
-        /* ========================================================================= */
-        /* [CSS ARCHITECTURE MODULE 5: ADVANCED SEARCH INTERFACE]                   */
-        /* Robust search functionality with voice command integration.               */
-        /* ========================================================================= */
-        .search-container {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .search-bar-v1k {
-            flex: 1;
-            background: var(--omega-dark-surface);
-            border: 1px solid var(--omega-border-line);
-            border-radius: 35px;
-            padding: 12px 25px;
-            display: flex;
-            align-items: center;
-            transition: var(--omega-transition-fast);
-        }
-
-        .search-bar-v1k:focus-within {
-            border-color: var(--omega-red);
-            background: #1a1a1a;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
-        }
-
-        .search-bar-v1k input {
-            background: transparent;
-            border: none;
-            color: var(--omega-text-primary);
-            width: 100%;
-            outline: none;
-            font-size: 1rem;
-            font-weight: 500;
-        }
-        .search-bar-v1k input::placeholder {
-            color: var(--omega-text-secondary);
-            opacity: 0.7;
-        }
-
-        .voice-search-btn {
-            width: 50px;
-            height: 50px;
-            background: var(--omega-dark-surface);
-            border: 1px solid var(--omega-border-line);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--omega-red);
-            cursor: pointer;
-            transition: var(--omega-transition-fast);
-        }
-
-        .voice-search-btn.active-listening {
-            background: var(--omega-red);
-            color: var(--omega-text-primary);
-            animation: kingPulse 1.2s infinite;
-        }
-
-        /* ========================================================================= */
-        /* [CSS ARCHITECTURE MODULE 6: ULTRA-CINEMATIC VIDEO FEED]                  */
-        /* Dynamic grid for video display with engaging visuals.                     */
-        /* ========================================================================= */
-        .v1k-feed-grid {
-            padding: 15px 0;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-        }
-
-        .v1k-video-card {
-            width: 100%;
-            background: var(--omega-black);
-            animation: slideInUp 0.7s ease-out forwards;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            cursor: pointer;
-        }
-        .v1k-video-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), var(--omega-glow-effect);
-        }
-
-        .v1k-thumbnail-wrapper {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 21 / 9; /* OMEGA SİNEMATİK GENİŞ ORAN */
-            background: #050505;
-            overflow: hidden;
-            border-top: 1px solid var(--omega-border-line);
-            border-bottom: 1px solid var(--omega-border-line);
-            border-radius: 4px;
-        }
-
-        .v1k-thumbnail-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 1s var(--omega-transition-smooth);
-        }
-        .v1k-video-card:hover .v1k-thumbnail-wrapper img {
-            transform: scale(1.08);
-        }
-
-        .v1k-duration-badge {
-            position: absolute;
-            bottom: 15px;
-            right: 15px;
-            background: rgba(0,0,0,0.9);
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 1px;
-            color: var(--omega-text-primary);
-        }
-
-        .v1k-video-details {
-            display: flex;
-            padding: 20px 25px;
-            gap: 18px;
-            align-items: flex-start;
-        }
-
-        .v1k-channel-avatar {
-            width: 50px;
-            height: 50px;
-            background: var(--omega-card-bg);
-            border: 2px solid var(--omega-red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--omega-red);
-            font-size: 1.6rem;
-            flex-shrink: 0;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
-        }
-
-        .v1k-text-content {
-            flex-grow: 1;
-        }
-
-        .v1k-text-content h3 {
-            font-size: 1.15rem;
-            font-weight: 600;
-            line-height: 1.5;
-            margin-bottom: 8px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            color: var(--omega-text-primary);
-        }
-
-        .v1k-meta-info {
-            font-size: 0.9rem;
-            color: var(--omega-text-secondary);
-            font-weight: 500;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px 10px;
-        }
-
-        /* ========================================================================= */
-        /* [CSS ARCHITECTURE MODULE 7: KING'S PROFILE DRAWER]                       */
-        /* Side panel for user profile and system information.                       */
-        /* ========================================================================= */
-        #v1k-profile-drawer {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 90%;
-            height: 100%;
-            background: var(--omega-dark-surface);
-            z-index: 50000;
-            transition: var(--omega-transition-smooth);
-            padding: 80px 35px;
-            border-left: 4px solid var(--omega-red);
-            box-shadow: -15px 0 40px rgba(0, 0, 0, 0.6);
-            overflow-y: auto;
-        }
-
-        #v1k-profile-drawer.is-open {
-            right: 0;
-        }
-
-        .profile-close-btn {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 2.2rem;
-            color: var(--omega-text-secondary);
-            opacity: 0.3;
-            cursor: pointer;
-            transition: var(--omega-transition-fast);
-        }
-        .profile-close-btn:hover { opacity: 0.6; }
-
-        .king-identity-block {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .king-crown-symbol {
-            font-size: 4.5rem;
-            color: var(--omega-red);
-            margin-bottom: -20px;
-            position: relative;
-            z-index: 5;
-            animation: kingPulse 3.5s infinite;
-        }
-
-        .king-avatar-display {
-            width: 150px;
-            height: 150px;
-            background: var(--omega-black);
-            border-radius: 50%;
-            margin: 0 auto;
-            border: 5px solid var(--omega-border-line);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4.5rem;
-            color: var(--omega-red);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
-        }
-
-        .king-name-title {
-            margin-top: 35px;
-            font-family: 'Syncopate', sans-serif;
-            font-size: 2.2rem;
-            letter-spacing: -1px;
-            color: var(--omega-text-primary);
-            text-transform: uppercase;
-        }
-
-        .king-role-badge {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 8px 25px;
-            background: var(--omega-red);
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 900;
-            letter-spacing: 3px;
-            box-shadow: var(--omega-glow-effect);
-            color: var(--omega-text-primary);
-            text-transform: uppercase;
-        }
-
-        .system-report-card {
-            margin-top: 60px;
-            background: var(--omega-card-bg);
-            padding: 30px;
-            border-radius: 25px;
-            border: 1px solid var(--omega-border-line);
-            text-align: left;
-            font-size: 0.95rem;
-            color: var(--omega-text-secondary);
-            line-height: 1.8;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-        }
-        .system-report-card b { color: var(--omega-text-primary); }
-
-        .profile-action-button {
-            width: 100%;
-            margin-top: 40px;
-            padding: 22px;
-            border-radius: 18px;
-            border: none;
-            background: var(--omega-red);
-            color: var(--omega-text-primary);
-            font-weight: 900;
-            font-size: 1.2rem;
-            transition: var(--omega-transition-fast);
-            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
-        }
-        .profile-action-button:hover {
-            background: var(--omega-deep-red);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(255, 0, 0, 0.6);
-        }
-
-        /* ========================================================================= */
-        /* [CSS ARCHITECTURE MODULE 8: PERSISTENT BOTTOM NAVIGATION]                */
-        /* Bottom navigation bar for core app sections.                              */
-        /* ========================================================================= */
-        .v1k-bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0,0,0,0.98);
-            border-top: 1px solid var(--omega-border-line);
-            display: flex;
-            justify-content: space-around;
-            padding: 18px 0 calc(25px + env(safe-area-inset-bottom));
-            z-index: 20000;
-        }
-
-        .nav-link-item {
-            text-align: center;
-            color: var(--omega-text-secondary);
-            font-size: 0.75rem;
-            text-decoration: none;
-            font-weight: 700;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: var(--omega-transition-fast);
-        }
-
-        .nav-link-item.is-active {
-            color: var(--omega-text-primary);
-            transform: translateY(-3px);
-        }
-        .nav-link-item.is-active i {
-            color: var(--omega-red);
-            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.4));
-        }
-
-        .nav-link-item i {
-            display: block;
-            font-size: 1.7rem;
-            margin-bottom: 8px;
-            transition: var(--omega-transition-fast);
-        }
-
-        /* ========================================================================= */
-        /* [CSS ARCHITECTURE MODULE 9: GOD PLAYER INTERFACE]                        */
-        /* Full-screen video player with controls.                                   */
-        /* ========================================================================= */
-        #v1k-player-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--omega-black);
-            z-index: 100000;
-            display: none;
+        /* [9. PLAYER OVERLAY SYSTEM] */
+        #titanium-player {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 100000; display: none;
             flex-direction: column;
         }
 
-        .player-header-bar {
-            padding: 20px 25px;
-            background: var(--omega-dark-surface);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            font-weight: 800;
-            font-size: 1rem;
-            color: var(--omega-text-secondary);
-            cursor: pointer;
+        .p-header {
+            padding: 20px; background: #050505; border-bottom: 1px solid var(--king-border);
+            display: flex; align-items: center; gap: 15px; font-weight: 900;
         }
 
-        .player-video-stage {
-            width: 100%;
-            aspect-ratio: 16 / 9; /* Standard video aspect ratio */
-            background: #000;
-            flex-shrink: 0; /* Prevents shrinking on smaller screens */
-        }
+        .p-stage { width: 100%; aspect-ratio: 16 / 9; background: #000; }
 
-        .player-content-area {
-            flex: 1; /* Takes remaining vertical space */
-            overflow-y: auto;
-            padding: 25px;
-        }
+        .p-content { flex: 1; overflow-y: auto; padding: 25px; }
 
-        .player-video-title {
-            font-size: 1.4rem;
-            margin-bottom: 25px;
-            font-weight: 700;
-            color: var(--omega-text-primary);
-            line-height: 1.4;
-        }
+        .p-title { font-size: 1.3rem; margin-bottom: 25px; font-weight: 700; color: #fff; }
 
-        .player-separator-line {
-            height: 1px;
-            background: var(--omega-border-line);
-            margin-bottom: 30px;
+        /* [10. PROFILE SYSTEM] */
+        #profile-panel {
+            position: fixed; top: 0; right: -100%; width: 85%; height: 100%;
+            background: var(--king-surface); z-index: 50000;
+            transition: var(--king-anim-speed) var(--king-cubic);
+            padding: 80px 30px; border-left: 2px solid var(--king-red);
         }
-
-        .player-suggestions-title {
-            color: var(--omega-red);
-            font-weight: 900;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
+        #profile-panel.active { right: 0; }
     </style>
 </head>
 <body>
 
-    <header class="v1k-header" id="v1k-main-header">
-        <div class="header-top-row">
-            <a href="#" class="header-brand" onclick="v1k.engine.refreshHome()">BUNY<span>Tube</span></a>
-            <div class="header-action-icons">
-                <button type="button" aria-label="Search" onclick="v1k.engine.execSearch()"><i class="fas fa-search"></i></button>
-                <button type="button" aria-label="Profile" onclick="v1k.engine.toggleProfileDrawer()"><i class="fas fa-crown"></i></button>
-            </div>
+    <div id="titanium-lock">
+        <div class="lock-container">
+            <i class="fas fa-brain"></i>
+            <h2>ERİŞİM REDDEDİLDİ</h2>
+            <p><b>Muhammed Ali:</b> Bu alan zihin sağlığın ve odağın için mühürlenmiştir kanka. Kısa videolarla vaktini öldürme!</p>
+            <button class="lock-btn" onclick="titan.ui.closeLock()">ANLAŞILDI KRAL</button>
         </div>
-        <div class="search-container">
-            <div class="search-bar-v1k">
-                <input type="text" id="v1k-search-input" placeholder="Kaosu Başlat..." onkeypress="if(event.key==='Enter') v1k.engine.execSearch()">
-                <i class="fas fa-search" style="opacity:0.2;"></i>
+    </div>
+
+    <header class="titanium-header">
+        <div class="h-row-1">
+            <a href="#" class="titanium-logo" onclick="titan.engine.home()">BUNY<span>Tube</span></a>
+            <i class="fas fa-crown king-crown-trigger" onclick="titan.ui.toggleProfile()"></i>
+        </div>
+        <div class="h-row-2">
+            <div class="search-field">
+                <input type="text" id="titan-search" placeholder="Kaosu Ara..." onkeypress="if(event.key==='Enter') titan.engine.doSearch()">
+                <i class="fas fa-search" style="opacity:0.2" onclick="titan.engine.doSearch()"></i>
             </div>
-            <button type="button" class="voice-search-btn" id="v1k-mic-button" onclick="v1k.engine.startVoiceSearch()" aria-label="Voice Search">
+            <div class="mic-trigger" id="titan-mic" onclick="titan.engine.voice()">
                 <i class="fas fa-microphone"></i>
-            </button>
+            </div>
         </div>
     </header>
 
-    <main class="v1k-feed-grid" id="v1k-feed-target"></main>
+    <main class="titanium-feed" id="titan-main-target"></main>
 
-    <div id="v1k-profile-drawer">
-        <button type="button" class="profile-close-btn" onclick="v1k.engine.toggleProfileDrawer()" aria-label="Close Profile">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="king-identity-block">
-            <i class="fas fa-crown king-crown-symbol"></i>
-            <div class="king-avatar-display"><i class="fas fa-user-shield"></i></div>
-            <h2 class="king-name-title">Muhammed Ali</h2>
-            <div class="king-role-badge">OMEGA SUPREME DEV</div>
+    <div id="profile-panel">
+        <div style="text-align: center;">
+            <i class="fas fa-crown" style="font-size: 5rem; color: var(--king-red); animation: crown_float 2s infinite;"></i>
+            <h2 style="font-family: 'Syncopate', sans-serif; margin-top: 30px; font-size: 2rem;">Muhammed Ali</h2>
+            <div style="margin-top: 15px; color: var(--king-red); font-weight: 900; letter-spacing: 3px;">TITANIUM DEVELOPER</div>
             
-            <div class="system-report-card">
-                <b>SİSTEM RAPORU V1000:</b><br>
-                - Durum: %100 Stabil & Optimize<br>
-                - Video Oranı: 21:9 Ultra Cinematic<br>
-                - Çekirdek: Muhammed Ali God-Logic<br>
-                - Arka Plan: Background Play Optimized<br>
-                - Arayüz: Dinamik ve Akıcı UX
+            <div style="margin-top: 50px; text-align: left; background: #111; padding: 25px; border-radius: 20px; font-size: 0.9rem; color: #888; line-height: 1.8;">
+                <b>SİSTEM DURUMU:</b><br>
+                - Versiyon: V1200 Titanium Arch<br>
+                - Shorts Kalkanı: Aktif (Zihin Korumalı)<br>
+                - Video Formatı: 21:9 Ultra Cinematic<br>
+                - Arka Plan Oynatma: Bridge Active
             </div>
-            <button type="button" class="profile-action-button" onclick="v1k.engine.refreshHome()">SİSTEMİ YENİLE</button>
+
+            <button class="lock-btn" style="margin-top: 40px; background: #fff; color: #000;" onclick="titan.ui.toggleProfile()">GERİ DÖN</button>
         </div>
     </div>
 
-    <div id="v1k-player-overlay">
-        <div class="player-header-bar" onclick="v1k.engine.closePlayer()" role="button" aria-label="Close Player">
-            <i class="fas fa-chevron-down"></i> OYNATILIYOR
+    <div id="titanium-player">
+        <div class="p-header" onclick="titan.ui.closePlayer()">
+            <i class="fas fa-chevron-down"></i> MUHAMMED ALİ SİSTEMİ OYNATIYOR
         </div>
-        <div class="player-video-stage" id="v1k-video-stage"></div>
-        <div class="player-content-area">
-            <h2 class="player-video-title" id="v1k-player-title"></h2>
-            <div class="player-separator-line"></div>
-            <p class="player-suggestions-title">ÖNERİLEN KAOSLAR</p>
-            <div id="v1k-player-suggestions" class="v1k-feed-grid"></div>
+        <div id="titan-video-stage" class="p-stage"></div>
+        <div class="p-content">
+            <h2 id="titan-p-title" class="p-title"></h2>
+            <div style="height:1px; background:var(--king-border); margin-bottom:25px;"></div>
+            <div id="titan-p-suggest" class="titanium-feed"></div>
         </div>
     </div>
 
-    <nav class="v1k-bottom-nav">
-        <a href="#" class="nav-link-item is-active" onclick="v1k.engine.refreshHome(); return false;">
-            <i class="fas fa-house-chimney"></i>Ana Sayfa
-        </a>
-        <a href="#" class="nav-link-item" onclick="v1k.engine.lockFeature('Shorts'); return false;">
-            <i class="fas fa-bolt-lightning"></i>Shorts
-        </a>
-        <a href="#" class="nav-link-item" onclick="v1k.engine.lockFeature('Kitaplık'); return false;">
-            <i class="fas fa-box-open"></i>Kitaplık
-        </a>
+    <nav class="titanium-nav">
+        <a href="#" class="nav-link active" onclick="titan.engine.home()"><i class="fas fa-house-chimney"></i>Ana Sayfa</a>
+        <a href="#" class="nav-link" onclick="titan.ui.openLock()"><i class="fas fa-bolt-lightning"></i>Shorts</a>
+        <a href="#" class="nav-link" onclick="titan.ui.toggleProfile()"><i class="fas fa-user-shield"></i>Kral</a>
     </nav>
 
     <script>
         /**
-         * BUNY-Tube V1000 "OMEGA SUPREME" Core JavaScript Engine
-         * Developed by Muhammed Ali for ultimate control and performance.
+         * MUHAMMED ALİ - TITANIUM ENGINE V1200
+         * Her bir satır kararlılık ve performans için optimize edildi.
          */
-        const v1k = {
-            /** [CORE CONFIGURATION] */
-            API_KEY: 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0', // YouTube Data API v3 Key
-            CHAOS_POOL: ['belgesel 2026', 'teknoloji devrimi', 'uzay gizemleri', 'siberpunk şehir 4k', 'motosiklet asmr', 'gelecek vizyonu', 'yeni keşifler bilim', 'yapay zeka gelecek'],
-            APP_NAME: "BUNY-Tube V1000",
-            LOG_LEVEL: "DEBUG", // DEBUG, INFO, WARN, ERROR
+        const titan = {
+            config: {
+                KEY: 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0',
+                POOL: ['belgesel 2026', 'teknoloji inceleme', 'uzay yolculuğu', 'motosiklet asmr', 'cyberpunk 4k world'],
+                VER: '1200'
+            },
 
-            /** [LOGGER UTILITY] */
-            logger: {
-                log: function(level, message, data = null) {
-                    if (v1k.LOG_LEVEL === "DEBUG" || (v1k.LOG_LEVEL === "INFO" && level !== "DEBUG")) {
-                        const timestamp = new Date().toISOString();
-                        const logMessage = `[${timestamp}] [${level}] ${message}`;
-                        if (data) {
-                            console.log(logMessage, data);
-                        } else {
-                            console.log(logMessage);
+            ui: {
+                openLock: () => document.getElementById('titanium-lock').style.display = 'flex',
+                closeLock: () => document.getElementById('titanium-lock').style.display = 'none',
+                toggleProfile: () => document.getElementById('profile-panel').classList.toggle('active'),
+                closePlayer: () => {
+                    document.getElementById('titanium-player').style.display = 'none';
+                    document.getElementById('titan-video-stage').innerHTML = "";
+                }
+            },
+
+            engine: {
+                home: function() {
+                    const randomQ = titan.config.POOL[Math.floor(Math.random() * titan.config.POOL.length)];
+                    this.fetchData(randomQ, 'titan-main-target');
+                    window.scrollTo(0, 0);
+                },
+
+                formatViews: (n) => n >= 1000000 ? (n/1000000).toFixed(1) + ' Mn' : n >= 1000 ? (n/1000).toFixed(0) + ' B' : n,
+
+                fetchData: async function(q, targetId) {
+                    try {
+                        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(q)}&type=video&maxResults=15&key=${titan.config.KEY}`);
+                        const data = await response.json();
+                        const container = document.getElementById(targetId);
+
+                        // EĞER API BOŞ DÖNERSE (Hata Kontrolü)
+                        if(!data.items || data.items.length === 0) {
+                            console.warn("Titan Engine: Feed empty, retrying...");
+                            this.home();
+                            return;
                         }
+
+                        container.innerHTML = "";
+                        const videoIds = data.items.map(item => item.id.videoId).join(',');
+                        
+                        // İSTATİSTİKLERİ ÇEK (İzlenme Sayısı İçin)
+                        const statsResponse = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoIds}&key=${titan.config.KEY}`);
+                        const statsData = await statsResponse.json();
+
+                        data.items.forEach((item, index) => {
+                            const vId = item.id.videoId;
+                            if(!vId) return;
+                            const vViews = statsData.items[index] ? this.formatViews(statsData.items[index].statistics.viewCount) : "Premium";
+                            const vDate = new Date(item.snippet.publishedAt).toLocaleDateString('tr-TR');
+
+                            container.innerHTML += `
+                                <div class="v-card" onclick="titan.engine.playVideo('${vId}', '${item.snippet.title.replace(/'/g, "")}')">
+                                    <div class="v-thumb">
+                                        <img src="${item.snippet.thumbnails.high.url}" loading="lazy">
+                                        <div class="v-badge">21:9 OMEGA</div>
+                                    </div>
+                                    <div class="v-details">
+                                        <div class="v-channel-pfp"><i class="fas fa-crown"></i></div>
+                                        <div class="v-text-block">
+                                            <h3>${item.snippet.title}</h3>
+                                            <div class="v-meta">${item.snippet.channelTitle} • ${vViews} izlenme • ${vDate}</div>
+                                        </div>
+                                    </div>
+                                </div>`;
+                        });
+                    } catch (error) {
+                        console.error("Titan Engine Fatal Error:", error);
                     }
                 },
-                debug: function(message, data = null) { this.log("DEBUG", message, data); },
-                info: function(message, data = null) { this.log("INFO", message, data); },
-                warn: function(message, data = null) { this.log("WARN", message, data); },
-                error: function(message, data = null) { this.
+
+                playVideo: function(id, title) {
+                    const pOverlay = document.getElementById('titanium-player');
+                    pOverlay.style.display = 'flex';
+                    document.getElementById('titan-p-title').innerText = title;
+                    document.getElementById('titan-video-stage').innerHTML = `
+                        <iframe id="titan-iframe" 
+                                src="https://www.youtube.com/embed/${id}?autoplay=1&enablejsapi=1&playsinline=1" 
+                                style="width:100%; height:100%; border:none;" 
+                                allow="autoplay; fullscreen">
+                        </iframe>`;
+                    this.fetchData(title, 'titan-p-suggest');
+                    history.pushState({player:1}, "");
+                },
+
+                doSearch: function() {
+                    const val = document.getElementById('titan-search').value;
+                    if(val) this.fetchData(val, 'titan-main-target');
+                },
+
+                voice: function() {
+                    const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    if(!Speech) return;
+                    const rec = new Speech();
+                    rec.lang = 'tr-TR';
+                    rec.onstart = () => document.getElementById('titan-mic').classList.add('active');
+                    rec.onend = () => document.getElementById('titan-mic').classList.remove('active');
+                    rec.onresult = (e) => {
+                        const result = e.results[0][0].transcript;
+                        document.getElementById('titan-search').value = result;
+                        this.doSearch();
+                    };
+                    rec.start();
+                }
+            }
+        };
+
+        /** [ARKA PLAN OYNATMA KÖPRÜSÜ] */
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                const frame = document.getElementById('titan-iframe');
+                if(frame) {
+                    frame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                }
+            }
+        });
+
+        /** [SİSTEM BAŞLATICI] */
+        window.onload = () => titan.engine.home();
+        window.onpopstate = () => titan.ui.closePlayer();
+        
+        console.log(`%c BUNY-TUBE V${titan.config.VER} TITANIUM ARCHITECTURE ONLINE `, 'background: #ff0000; color: #fff; font-weight: bold; padding: 10px;');
+    </script>
+</body>
+</html>
