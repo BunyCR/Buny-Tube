@@ -17,50 +17,23 @@
         </div>
     </header>
 
-    <div class="promo-banner">VPN AKTİF: REKLAMLAR ENGELLENDİ</div>
-
-    <div class="categories" id="category-bar">
-        <div class="cat-item active" onclick="selectCategory(this, '')">Hepsi</div>
-        <div class="cat-item" onclick="selectCategory(this, 'Oyun')">Oyun</div>
-        <div class="cat-item" onclick="selectCategory(this, 'Müzik')">Müzik</div>
-        <div class="cat-item" onclick="selectCategory(this, 'Eğlence')">Eğlence</div>
-        <div class="cat-item" onclick="selectCategory(this, 'Eğitim')">Eğitim</div>
-        <div class="cat-item" onclick="selectCategory(this, 'Clash Royale')">CR</div>
+    <div class="promo-banner">
+        <div class="scrolling-text">
+            instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            instagram: muhammedaliatl
+        </div>
     </div>
 
     <div class="search-area">
         <div class="search-wrapper">
-            <input type="text" id="search-input" placeholder="YouTube'da keşfe çık...">
-            <i class="fas fa-search" onclick="search()" style="color: #ff0000; cursor: pointer;"></i>
+            <input type="text" id="search-input" placeholder="YouTube'da keşfe çık..." oninput="getSuggestions(this.value)">
+            <i class="fas fa-search" onclick="search()" style="color: #ff0000; font-size: 1.4rem; cursor: pointer;"></i>
         </div>
+        <div id="suggestions" class="suggestions-box"></div>
     </div>
 
-    <main id="video-grid">
-        </main>
-
-    <div id="player" class="player-overlay">
-        <div class="player-header" onclick="closeVideo()">
-            <i class="fas fa-chevron-down"></i>
-            <span id="player-title">Oynatılıyor...</span>
-        </div>
-        <div id="iframe-container"></div>
-        <div class="player-details">
-            <h2 id="v-title-full">Video Başlığı</h2>
-            <p id="v-stats" style="color: #aaa; font-size: 0.8rem; margin-top: 5px;"></p>
-            <button class="download-btn" onclick="downloadVideo()">
-                <i class="fas fa-download"></i> ÜCRETSİZ İNDİR
-            </button>
-        </div>
-    </div>
-
-    <nav class="nav-bar">
-        <a href="#" class="nav-item active" onclick="loadHome()"><i class="fas fa-home"></i><span>Ana Sayfa</span></a>
-        <a href="#" class="nav-item" onclick="loadShorts()"><i class="fas fa-bolt"></i><span>Shorts</span></a>
-        <a href="#" class="nav-item"><i class="fas fa-plus-circle fa-2x"></i></a>
-        <a href="#" class="nav-item" onclick="alert('Abonelikler yakında!')"><i class="fas fa-layer-group"></i><span>Abonelik</span></a>
-        <a href="#" class="nav-item" onclick="alert('Kitaplık yakında!')"><i class="fas fa-video"></i><span>Kitaplık</span></a>
-    </nav>
-
-    <script src="script.js"></script>
-</body>
-</html>
+    <div class="categories">
+        <div class="cat-item active" onclick="loadHome()">Trendler</div>
+        <div class="cat-item" onclick="search('Cl
