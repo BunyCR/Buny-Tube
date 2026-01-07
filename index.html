@@ -3,52 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BUNY-Tube V210 Premium Elite</title>
+    <title>BUNY-Tube V170 Premium Master Edition</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* [1. CSS: GLOBAL TASARIM PARAMETRELERİ] */
+        /* [CSS BÖLÜM 1: GLOBAL RESET & TEMELLER] 
+        */
         :root {
-            --m-primary: #ff0000;
-            --m-bg: #000000;
-            --m-surface: #0a0a0a;
-            --m-card: #121212;
-            --m-border: #1f1f1f;
-            --m-text: #ffffff;
-            --m-text-dim: #888888;
-            --m-accent: #2ecc71;
-            --m-grad-gold: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            --m-shadow: 0 10px 40px rgba(0,0,0,0.9);
-            --m-trans: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --p-primary: #ff0000;
+            --p-bg: #000000;
+            --p-surface: #0f0f0f;
+            --p-card: #1a1a1a;
+            --p-border: #2a2a2a;
+            --p-text: #ffffff;
+            --p-text-dim: #888888;
+            --p-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --p-shadow: 0 12px 40px rgba(0,0,0,0.8);
+            --p-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* [2. CSS: RESET VE TYPOGRAPHY] */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            outline: none;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            background-color: var(--m-bg);
-            color: var(--m-text);
+            background-color: var(--p-bg);
+            color: var(--p-text);
             overflow-x: hidden;
             width: 100%;
             height: 100%;
-            padding-bottom: 150px;
+            padding-bottom: 110px;
         }
 
-        /* [3. CSS: PREMİUM BANNER VE ANİMASYONLAR] */
-        .elite-banner {
-            background: var(--m-grad-gold);
-            height: 38px;
+        /* [CSS BÖLÜM 2: PREMIUM ÜST BANNER] 
+        */
+        .muh-banner-wrapper {
+            background: var(--p-gradient);
+            height: 40px;
             display: flex;
             align-items: center;
+            overflow: hidden;
             position: fixed;
             top: 0;
             width: 100%;
@@ -56,205 +58,210 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
-        .elite-ticker {
+        .muh-banner-text {
             white-space: nowrap;
-            animation: elite_marquee 28s linear infinite;
+            display: inline-block;
+            animation: muh_marquee 28s linear infinite;
             font-weight: 900;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             letter-spacing: 2.5px;
             text-transform: uppercase;
         }
 
-        @keyframes elite_marquee {
+        @keyframes muh_marquee {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
 
-        /* [4. CSS: VERTICAL HEADER SİSTEMİ] */
-        header {
-            padding: 70px 20px 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-            background: linear-gradient(180deg, #111 0%, #000 100%);
+        /* [CSS BÖLÜM 3: HEADER VE LOGO] 
+        */
+        .muh-header-container {
+            padding-top: 75px;
+            padding-bottom: 25px;
+            padding-left: 20px;
+            padding-right: 20px;
+            background: linear-gradient(to bottom, #000, transparent);
         }
 
-        .header-top {
+        .muh-header-top-line {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            position: relative;
-            width: 100%;
+            margin-bottom: 30px;
         }
 
-        .muh-logo {
-            font-size: 2.8rem;
+        .muh-app-logo {
+            font-size: 2.5rem;
             font-weight: 900;
-            letter-spacing: -2.5px;
+            letter-spacing: -2.2px;
+            color: #fff;
             cursor: pointer;
             user-select: none;
         }
 
-        .muh-logo span {
-            background-color: var(--m-primary);
+        .muh-app-logo span {
+            background-color: var(--p-primary);
             color: #fff;
-            padding: 4px 14px;
+            padding: 3px 15px;
             border-radius: 14px;
             margin-left: 10px;
-            box-shadow: 0 0 30px rgba(255,0,0,0.4);
+            box-shadow: 0 0 30px rgba(255,0,0,0.3);
         }
 
-        .muh-user-link {
-            position: absolute;
-            right: 0;
-            font-size: 2.3rem;
-            color: var(--m-primary);
+        .muh-user-icon {
+            font-size: 2.2rem;
+            color: var(--p-primary);
             cursor: pointer;
-            transition: var(--m-trans);
+            transition: var(--p-transition);
         }
 
-        .muh-user-link:active { transform: scale(0.85); }
+        .muh-user-icon:active {
+            transform: scale(0.85);
+        }
 
-        /* [5. CSS: DİKEY ARAMA ÜNİTESİ] */
-        .search-stack {
+        /* [CSS BÖLÜM 4: ARAMA MOTORU TASARIMI] 
+        */
+        .muh-search-box-area {
             display: flex;
-            flex-direction: column;
+            align-items: center;
             gap: 15px;
             width: 100%;
         }
 
-        .search-field {
-            background: var(--m-card);
-            border: 2px solid var(--m-border);
-            border-radius: 20px;
-            padding: 18px 25px;
+        .muh-input-frame {
+            flex: 1;
+            background: var(--p-surface);
+            border: 2px solid var(--p-border);
+            border-radius: 60px;
+            padding: 16px 28px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            transition: var(--m-trans);
+            transition: var(--p-transition);
         }
 
-        .search-field:focus-within {
-            border-color: var(--m-primary);
-            background: #181818;
+        .muh-input-frame:focus-within {
+            border-color: var(--p-primary);
+            background: #151515;
             box-shadow: 0 0 20px rgba(255,0,0,0.15);
         }
 
-        .search-field input {
+        .muh-input-frame input {
             background: transparent;
             border: none;
             color: #fff;
-            width: 85%;
-            font-size: 1.1rem;
+            width: 100%;
+            outline: none;
+            font-size: 1.05rem;
             font-weight: 600;
         }
 
-        .mic-long-btn {
-            width: 100%;
-            padding: 18px;
-            background: var(--m-card);
-            border: 2px solid var(--m-border);
-            border-radius: 20px;
-            color: var(--m-primary);
-            font-weight: 900;
+        .muh-voice-trigger {
+            width: 58px;
+            height: 58px;
+            background: var(--p-surface);
+            border: 2px solid var(--p-border);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            font-size: 1rem;
+            color: var(--p-primary);
+            font-size: 1.6rem;
             cursor: pointer;
-            transition: var(--m-trans);
-            text-transform: uppercase;
+            transition: var(--p-transition);
         }
 
-        .mic-long-btn.active {
-            background: var(--m-primary);
+        .muh-voice-trigger.is-listening {
+            background: var(--p-primary);
             color: #fff;
-            animation: elite_pulse 1.4s infinite;
+            animation: muh_mic_pulse 1.4s infinite;
         }
 
-        @keyframes elite_pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
-            70% { transform: scale(1.03); box-shadow: 0 0 0 15px rgba(255,0,0,0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0); }
+        @keyframes muh_mic_pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); transform: scale(1); }
+            70% { box-shadow: 0 0 0 18px rgba(255,0,0,0); transform: scale(1.1); }
+            100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); transform: scale(1); }
         }
 
-        /* [6. CSS: VİDEO KARTI VE İZLENME SAYISI] */
-        .feed-container {
-            padding: 15px;
+        /* [CSS BÖLÜM 5: VİDEO AKIŞ TASARIMI] 
+        */
+        .muh-video-feed-container {
+            padding: 18px;
             display: grid;
             grid-template-columns: 1fr;
             gap: 40px;
-            animation: elite_fade_up 0.8s ease-out;
+            animation: muh_feed_up 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        @keyframes elite_fade_up {
-            from { opacity: 0; transform: translateY(30px); }
+        @keyframes muh_feed_up {
+            from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .elite-card {
-            background: var(--m-card);
-            border-radius: 30px;
+        .muh-video-item-card {
+            background: var(--p-card);
+            border-radius: 32px;
             overflow: hidden;
-            border: 1px solid var(--m-border);
-            transition: var(--m-trans);
+            border: 1.5px solid var(--p-border);
+            transition: var(--p-transition);
             position: relative;
         }
 
-        .elite-card:active { transform: scale(0.97); }
+        .muh-video-item-card:hover {
+            border-color: #444;
+        }
 
-        .thumb-wrap {
+        .muh-video-item-card:active {
+            transform: scale(0.96);
+        }
+
+        .muh-thumbnail-box {
             position: relative;
             width: 100%;
             aspect-ratio: 16/9;
+            background: #111;
         }
 
-        .thumb-wrap img {
+        .muh-thumbnail-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-bottom: 1px solid var(--p-border);
         }
 
-        .view-badge {
-            position: absolute;
-            bottom: 12px;
-            right: 12px;
-            background: rgba(0,0,0,0.85);
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            color: #fff;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .elite-card-info {
+        .muh-card-details {
             padding: 22px;
         }
 
-        .elite-card-info h3 {
+        .muh-card-details h3 {
             font-size: 1.15rem;
+            line-height: 1.6;
             font-weight: 800;
-            line-height: 1.5;
-            margin-bottom: 12px;
-            color: #f0f0f0;
+            margin-bottom: 14px;
+            color: #f5f5f5;
         }
 
-        .meta-line {
+        .muh-card-metadata {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             font-size: 0.85rem;
-            color: var(--m-text-dim);
+            color: var(--p-text-dim);
             font-weight: 700;
         }
 
-        .meta-line i { color: var(--m-primary); font-size: 0.7rem; }
+        .muh-channel-chip {
+            background: #252525;
+            color: #ddd;
+            padding: 5px 14px;
+            border-radius: 10px;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
 
-        /* [7. CSS: MASTER PLAYER ÜNİTESİ] */
-        #elite-player-layer {
+        /* [CSS BÖLÜM 6: OYNATICI VE ARKA PLAN SİSTEMİ] 
+        */
+        #muh-master-player-layer {
             position: fixed;
             top: 0;
             left: 0;
@@ -264,47 +271,63 @@
             z-index: 200000;
             display: none;
             flex-direction: column;
-            transition: var(--m-trans);
+            transition: var(--p-transition);
         }
 
-        #elite-player-layer.mini-mode {
+        #muh-master-player-layer.is-mini-mode {
             top: auto;
-            bottom: 150px;
-            left: 5%;
-            width: 90%;
-            height: 180px;
-            border-radius: 25px;
-            border: 3px solid var(--m-primary);
+            bottom: 120px;
+            left: auto;
+            right: 18px;
+            width: 270px;
+            height: 152px;
+            border-radius: 22px;
+            border: 3.5px solid var(--p-primary);
+            box-shadow: var(--p-shadow);
             overflow: hidden;
-            box-shadow: var(--m-shadow);
         }
 
-        .player-head {
+        #muh-master-player-layer.is-mini-mode .muh-p-top-bar,
+        #muh-master-player-layer.is-mini-mode .muh-p-scroll-area {
+            display: none;
+        }
+
+        .muh-p-top-bar {
             padding: 20px;
             background: #080808;
             display: flex;
             align-items: center;
             gap: 15px;
+            border-bottom: 1px solid #1a1a1a;
             color: #666;
             font-weight: 900;
             font-size: 0.85rem;
-            text-transform: uppercase;
         }
 
-        .video-stage {
+        .muh-p-video-wrapper {
             width: 100%;
             aspect-ratio: 16/9;
             background: #000;
         }
 
-        .player-scroll {
+        .muh-p-scroll-area {
             flex: 1;
             overflow-y: auto;
             padding: 25px;
+            background: #000;
         }
 
-        /* [8. CSS: OVERLAY EKRANLARI] */
-        .elite-overlay {
+        .muh-p-title {
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        /* [CSS BÖLÜM 7: KÜTÜPHANE VE SHORTS GATE] 
+        */
+        .muh-full-gate-overlay {
             position: fixed;
             top: 0;
             left: 0;
@@ -313,269 +336,464 @@
             background: #000;
             z-index: 150000;
             display: none;
-            padding: 100px 20px;
+            padding: 95px 25px;
             overflow-y: auto;
         }
 
-        .lib-elite-btn {
-            width: 100%;
-            background: #0a0a0a;
-            padding: 30px;
+        .muh-lib-entry-btn {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            background: #121212;
+            padding: 26px;
             border-radius: 28px;
             margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            border: 1.5px solid var(--m-border);
+            border: 1.5px solid #222;
             text-decoration: none;
             color: #fff;
-            transition: var(--m-trans);
+            transition: var(--p-transition);
         }
 
-        .lib-elite-btn:active { border-color: var(--m-primary); background: #111; }
-        .lib-elite-btn i { font-size: 2.8rem; color: var(--m-primary); }
-        .lib-elite-btn b { font-size: 1.3rem; font-weight: 900; }
+        .muh-lib-entry-btn:active {
+            background: #181818;
+            border-color: var(--p-primary);
+            transform: scale(0.97);
+        }
 
-        /* [9. CSS: ALT NAVİGASYON] */
-        nav {
+        .muh-lib-entry-btn i {
+            font-size: 2.1rem;
+            color: var(--p-primary);
+            width: 45px;
+            text-align: center;
+        }
+
+        .muh-lib-entry-btn b {
+            display: block;
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .muh-lib-entry-btn span {
+            font-size: 0.88rem;
+            color: #777;
+            font-weight: 600;
+        }
+
+        /* [CSS BÖLÜM 8: PROFIL & HAKKIMDA (DOKUNULMADI)] 
+        */
+        #muh-profile-drawer-box {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 90%;
+            height: 100%;
+            background: #050505;
+            z-index: 250000;
+            transition: 0.5s cubic-bezier(0.8, 0, 0.2, 1);
+            padding: 100px 35px;
+            border-left: 4px solid var(--p-primary);
+        }
+
+        #muh-profile-drawer-box.is-open {
+            right: 0;
+        }
+
+        .muh-hakkimda-inner {
+            background: #111;
+            padding: 35px;
+            border-radius: 35px;
+            border: 1px solid #252525;
+            margin-top: 40px;
+            line-height: 2.0;
+            color: #bbb;
+            box-shadow: var(--p-shadow);
+        }
+
+        .muh-hakkimda-inner b {
+            color: #fff;
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 18px;
+            font-weight: 900;
+        }
+
+        /* [CSS BÖLÜM 9: ALT NAVİGASYON] 
+        */
+        .muh-nav-dock {
             position: fixed;
             bottom: 0;
             width: 100%;
             background: rgba(0,0,0,0.98);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(25px);
             display: flex;
             justify-content: space-around;
             padding: 28px 0;
-            border-top: 1.5px solid var(--m-border);
+            border-top: 1.5px solid #222;
             z-index: 120000;
         }
 
-        .nav-link {
-            color: #333;
+        .muh-nav-link {
+            color: #444;
             text-align: center;
-            font-weight: 900;
-            font-size: 0.85rem;
-            transition: var(--m-trans);
+            font-size: 0.9rem;
+            font-weight: 800;
             cursor: pointer;
+            transition: var(--p-transition);
         }
 
-        .nav-link.active { color: #fff; transform: translateY(-8px); }
-        .nav-link i { font-size: 2.3rem; display: block; margin-bottom: 8px; }
-
-        /* [10. CSS: PROFIL DRAWER] */
-        #elite-prof {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 85%;
-            height: 100%;
-            background: #050505;
-            z-index: 250000;
-            transition: 0.6s cubic-bezier(0.8, 0, 0.2, 1);
-            padding: 100px 30px;
-            border-left: 5px solid var(--m-primary);
+        .muh-nav-link.is-active {
+            color: #fff;
+            transform: translateY(-8px);
         }
 
-        #elite-prof.active { right: 0; }
+        .muh-nav-link i {
+            font-size: 2.1rem;
+            display: block;
+            margin-bottom: 9px;
+        }
+
+        /* [CSS BÖLÜM 10: YARDIMCI SINIFLAR] 
+        */
+        .muh-btn-home {
+            margin-top: 50px;
+            width: 100%;
+            padding: 24px;
+            border-radius: 60px;
+            border: none;
+            background: #fff;
+            color: #000;
+            font-weight: 900;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+        }
+
+        .muh-shorts-lock-ui {
+            text-align: center;
+            padding-top: 20vh;
+        }
     </style>
 </head>
 <body>
 
-    <div class="elite-banner">
-        <div class="elite-ticker">BUNY-TUBE PREMİUM V210 • MUHAMMED ALİ TARAFINDAN GELİŞTİRİLDİ • İZLENME SAYILARI AKTİF • REKLAMSIZ DENEYİM • ARKA PLAN MODU</div>
+    <div class="muh-banner-wrapper" id="muh-main-banner">
+        <div class="muh-banner-text">
+            BUNY-TUBE PREMIUM V170 ULTIMATE • MUHAMMED ALİ TARAFINDAN GELİŞTİRİLDİ • REKLAMSIZ VE ODAK ODAKLI • ARKA PLAN MODU AKTİF • KİTAPLIK MODÜLLERİ CANLANDIRILDI
+        </div>
     </div>
 
-    <header id="elite-head">
-        <div class="header-top">
-            <div class="muh-logo" onclick="eng_refresh()">BUNY<span>Tube</span></div>
-            <i class="fas fa-user-shield muh-user-link" onclick="eng_prof()"></i>
+    <header class="muh-header-container" id="muh-main-header">
+        <div class="muh-header-top-line">
+            <div class="muh-app-logo" onclick="logic_core_refresh()">BUNY<span>Tube</span></div>
+            <i class="fas fa-user-shield muh-user-icon" onclick="logic_ui_profile()"></i>
         </div>
-        <div class="search-stack">
-            <div class="search-field">
-                <input type="text" id="q-input" placeholder="Ne keşfetmek istersin?" onkeypress="if(event.key==='Enter') eng_search()">
-                <i class="fas fa-search" style="color:#222; font-size:1.3rem;" onclick="eng_search()"></i>
+
+        <div class="muh-search-box-area">
+            <div class="muh-input-frame">
+                <input type="text" id="muh-search-input" placeholder="Ne izlemek istersin kanka?" onkeypress="if(event.key==='Enter') logic_core_search()">
+                <i class="fas fa-search" style="color:#444; font-size: 1.2rem;" onclick="logic_core_search()"></i>
             </div>
-            <div class="mic-long-btn" id="mic-trigger" onclick="eng_voice()">
-                <i class="fas fa-microphone"></i> SESLİ ARAMA MODUNU BAŞLAT
+            <div class="muh-voice-trigger" id="muh-voice-btn" onclick="logic_core_voice()">
+                <i class="fas fa-microphone"></i>
             </div>
         </div>
     </header>
 
-    <main class="feed-container" id="feed-main"></main>
+    <main class="muh-video-feed-container" id="muh-main-feed"></main>
 
-    <div id="elite-player-layer">
-        <div class="player-head" onclick="eng_pBack()">
-            <i class="fas fa-chevron-down"></i> VİDEOYU KÜÇÜLT / GERİ DÖN
+    <div id="muh-master-player-layer">
+        <div class="muh-p-top-bar" onclick="logic_core_playerBack()">
+            <i class="fas fa-chevron-down"></i>
+            <span>VİDEOYU KÜÇÜLT / ANA SAYFA</span>
         </div>
-        <div class="video-stage" id="player-frame-target"></div>
-        <div class="player-scroll">
-            <h2 id="p-title-target" style="font-weight:900; margin-bottom:25px; line-height:1.4;"></h2>
-            <div style="color:var(--m-primary); font-weight:900; margin-bottom:20px; text-transform:uppercase; letter-spacing:1px; border-left:4px solid red; padding-left:15px;">Keşfetmeye Devam Et</div>
-            <div id="p-related-target" class="feed-container" style="padding:0;"></div>
-        </div>
-    </div>
+        
+        <div class="muh-p-video-wrapper" id="muh-player-frame-target"></div>
 
-    <div id="elite-lib" class="elite-overlay">
-        <h1 style="text-align:center; font-size:2.8rem; font-weight:900; margin-bottom:50px;">Kitaplık</h1>
-        <a href="https://www.youtube.com/feed/history" target="_blank" class="lib-elite-btn"><i class="fas fa-history"></i><b>Geçmiş</b></a>
-        <a href="https://www.youtube.com/feed/subscriptions" target="_blank" class="lib-elite-btn"><i class="fas fa-users-crown"></i><b>Abonelikler</b></a>
-        <a href="https://www.youtube.com/playlist?list=LL" target="_blank" class="lib-elite-btn"><i class="fas fa-heart"></i><b>Beğenilenler</b></a>
-        <button style="width:100%; padding:25px; border-radius:50px; background:white; color:black; font-weight:900; border:none; margin-top:30px; font-size:1.1rem;" onclick="eng_refresh()">ANA SAYFAYA DÖN</button>
-    </div>
-
-    <div id="elite-shorts" class="elite-overlay" style="display:none; flex-direction:column; justify-content:center; align-items:center; text-align:center;">
-        <i class="fas fa-brain-circuit fa-7x" style="color:red; margin-bottom:40px;"></i>
-        <h2 style="font-size:2.2rem; font-weight:900;">ODAK MODU AKTİF</h2>
-        <p style="color:#555; margin-top:20px; line-height:1.8; padding:0 30px;">Shorts videoları Muhammed Ali tarafından engellenmiştir. Değerli vaktini uzun ve kaliteli içeriklere ayır.</p>
-        <button style="width:80%; padding:25px; border-radius:60px; background:white; color:black; font-weight:900; border:none; margin-top:40px;" onclick="eng_refresh()">ANA SAYFA</button>
-    </div>
-
-    <div id="elite-prof">
-        <i class="fas fa-times" onclick="eng_prof()" style="position:absolute; top:40px; right:40px; font-size:2.5rem; color:#222;"></i>
-        <div style="text-align:center;">
-            <i class="fas fa-user-crown fa-7x" style="color:red;"></i>
-            <h1 style="margin-top:30px; font-weight:900; font-size:2.4rem;">Muhammed Ali</h1>
-            <p style="color:red; font-weight:800; letter-spacing:5px; margin-top:10px;">PREMIUM DEVELOPER</p>
-        </div>
-        <div style="background:#0d0d0d; padding:35px; border-radius:35px; border:1px solid #222; margin-top:50px; color:#aaa; line-height:2.0; font-size:1.05rem;">
-            <b>Geliştirici Notu:</b><br>
-            Bu uygulama, dikkatinizi korumak ve reklamsız bir video deneyimi sunmak için kodlanmıştır. Her yenilemede karşınıza çıkan içerikler rastgele seçilen konulardan beslenir.
+        <div class="muh-p-scroll-area">
+            <h2 class="muh-p-title" id="muh-player-title-target"></h2>
+            
+            <div style="color:var(--p-primary); font-weight:900; letter-spacing:1.5px; margin-bottom:25px; border-left:5px solid red; padding-left:18px; text-transform:uppercase;">
+                Zihnini Besleyecek Diğerleri
+            </div>
+            
+            <div id="muh-player-related-target" class="muh-video-feed-container" style="padding:0; gap:30px;"></div>
         </div>
     </div>
 
-    <nav>
-        <div class="nav-link active" id="n0" onclick="eng_refresh()"><i class="fas fa-house-chimney"></i>Ana Sayfa</div>
-        <div class="nav-link" id="n1" onclick="eng_gate('elite-shorts', 1)"><i class="fas fa-bolt-lightning"></i>Shorts</div>
-        <div class="nav-link" id="n2" onclick="eng_gate('elite-lib', 2)"><i class="fas fa-folder-open"></i>Kitaplık</div>
+    <div id="muh-library-overlay" class="muh-full-gate-overlay">
+        <h1 style="font-size: 2.8rem; font-weight: 900; margin-bottom: 50px; letter-spacing: -1.5px;">Kitaplık</h1>
+        
+        <a href="https://www.youtube.com/feed/subscriptions" target="_blank" class="muh-lib-entry-btn">
+            <i class="fas fa-users-crown"></i>
+            <div><b>Abonelikler</b><span>Takip ettiğin kanalları gör</span></div>
+        </a>
+
+        <a href="https://www.youtube.com/playlist?list=WL" target="_blank" class="muh-lib-entry-btn">
+            <i class="fas fa-clock-rotate-left"></i>
+            <div><b>Daha Sonra İzle</b><span>Kaydettiğin özel listeler</span></div>
+        </a>
+
+        <a href="https://www.youtube.com/playlist?list=LL" target="_blank" class="muh-lib-entry-btn">
+            <i class="fas fa-heart-pulse"></i>
+            <div><b>Beğenilen Videolar</b><span>Sevdiğin tüm içerikler</span></div>
+        </a>
+
+        <a href="https://www.youtube.com/feed/history" target="_blank" class="muh-lib-entry-btn">
+            <i class="fas fa-rectangle-history"></i>
+            <div><b>İzleme Geçmişi</b><span>Neleri izlediğini hatırla</span></div>
+        </a>
+
+        <button class="muh-btn-home" onclick="logic_core_refresh()">ANA SAYFAYA DÖN</button>
+    </div>
+
+    <div id="muh-shorts-overlay" class="muh-full-gate-overlay">
+        <div class="muh-shorts-lock-ui">
+            <i class="fas fa-brain-circuit fa-8x" style="color:var(--p-primary); margin-bottom:40px; filter: drop-shadow(0 0 20px rgba(255,0,0,0.4));"></i>
+            <h1 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 20px;">ODAK MODU AKTİF</h1>
+            <p style="color:#666; font-size: 1.2rem; line-height: 1.8; padding: 0 20px;">
+                Shorts videoları dopamin sistemini bozduğu için Muhammed Ali tarafından bu sürümde kilitlenmiştir. Uzun içeriklere odaklan kanka.
+            </p>
+            <button class="muh-btn-home" style="width: 80%;" onclick="logic_core_refresh()">ANA SAYFA</button>
+        </div>
+    </div>
+
+    <div id="muh-profile-drawer-box">
+        <i class="fas fa-times" onclick="logic_ui_profile()" style="position:absolute; top:40px; right:40px; font-size:2.5rem; color:#333;"></i>
+        
+        <div style="text-align:center; margin-bottom:50px;">
+            <i class="fas fa-user-crown fa-6x" style="color:var(--p-primary); filter: drop-shadow(0 0 20px rgba(255,0,0,0.3));"></i>
+            <h1 style="margin-top:30px; font-weight:900; font-size:2.2rem;">Muhammed Ali</h1>
+            <p style="color:var(--p-primary); font-weight:800; margin-top:10px; letter-spacing:4px; text-transform:uppercase;">Premium Developer</p>
+        </div>
+
+        <div class="muh-hakkimda-inner">
+            <b>Hakkımda</b>
+            Bu uygulama, 10.000+ kişilik topluluğuma reklam kirliliği olmadan, zihin odaklarını koruyarak video izleyebilmeleri için Muhammed Ali tarafından özel olarak geliştirilmiştir. <br><br>
+            <i>"Gelecek, dikkatini yönetebilenlerin olacaktır."</i>
+        </div>
+
+        <div style="position:absolute; bottom:50px; left:0; width:100%; text-align:center; opacity:0.2;">
+            <p style="font-weight:900; letter-spacing:2px; font-size:0.8rem;">BUNY-TUBE V170.0.1 MASTER</p>
+            <p style="font-size:0.7rem; margin-top:5px;">ALL RIGHTS RESERVED 2026</p>
+        </div>
+    </div>
+
+    <nav class="muh-nav-dock">
+        <div class="muh-nav-link is-active" id="nav0" onclick="logic_core_refresh()">
+            <i class="fas fa-house-chimney"></i>
+            <span>Ana Sayfa</span>
+        </div>
+        <div class="muh-nav-link" id="nav1" onclick="logic_ui_gate('muh-shorts-overlay', 1)">
+            <i class="fas fa-bolt-lightning"></i>
+            <span>Shorts</span>
+        </div>
+        <div class="muh-nav-link" id="nav2" onclick="logic_ui_gate('muh-library-overlay', 2)">
+            <i class="fas fa-clapperboard"></i>
+            <span>Kitaplık</span>
+        </div>
     </nav>
 
     <script>
-        /* [11. JS: CORE MOTOR VE CONFIG] */
-        const KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
-        let isMini = false;
+        /* GLOBAL CONFIGURATIONS
+        */
+        const YT_API_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
+        let is_currently_mini = false;
 
-        const POOL = [
-            'belgesel türkçe', 'teknoloji haberleri', 'uzay yolculuğu', 'otomobil inceleme', 
-            'motosiklet restorasyon', 'bilimsel deneyler', 'doğa asmr', 'tarihi sırlar',
-            'gelecek dünyası', 'mega makineler', 'gastronomi', 'psikoloji belgeseli'
-        ];
-
-        /* [12. JS: İZLENME SAYISINI FORMATA SOKAN FONKSİYON] */
-        function formatViews(num) {
-            if (num >= 1000000) return (num / 1000000).toFixed(1) + ' Mn izlenme';
-            if (num >= 1000) return (num / 1000).toFixed(0) + ' B izlenme';
-            return num + ' izlenme';
-        }
-
-        /* [13. JS: VERİ ÇEKME MOTORU] */
-        async function eng_fetch(q, target) {
-            const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(q)}&type=video&videoDuration=medium&maxResults=15&key=${KEY}&t=${Date.now()}`;
+        /* CORE FETCH ENGINE 
+           SHORTS FİLTRELEME BURADA YAPILIR
+        */
+        async function logic_core_fetch(query, targetId) {
+            // videoDuration=medium (4-20dk arası videoları hedefler, Shorts'u bitirir)
+            const cacheBuster = Date.now();
+            const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&videoDuration=medium&maxResults=20&key=${YT_API_KEY}&t=${cacheBuster}`;
             
             try {
-                const res = await fetch(searchUrl);
-                const data = await res.json();
-                const container = document.getElementById(target);
-                container.innerHTML = "";
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const container = document.getElementById(targetId);
+                
+                container.innerHTML = ""; // Temizle
+                
+                if (data.items) {
+                    data.items.forEach(item => {
+                        const videoId = item.id.videoId;
+                        const title = item.snippet.title;
+                        const channel = item.snippet.channelTitle;
+                        const thumb = item.snippet.thumbnails.high.url;
+                        const date = new Date(item.snippet.publishedAt).toLocaleDateString('tr-TR');
 
-                if(data.items) {
-                    // Video detaylarını (izlenme sayısı için) ayrıca çekiyoruz
-                    const ids = data.items.map(i => i.id.videoId).join(',');
-                    const statsUrl = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${ids}&key=${KEY}`;
-                    const statsRes = await fetch(statsUrl);
-                    const statsData = await statsRes.json();
+                        // Manuel Shorts Kontrolü (Başlıkta geçiyorsa engelle)
+                        if (title.toLowerCase().includes('shorts')) return;
 
-                    data.items.forEach((item, index) => {
-                        const vid = item.id.videoId;
-                        if(!vid || item.snippet.title.toLowerCase().includes('shorts')) return;
-
-                        const views = statsData.items[index] ? formatViews(statsData.items[index].statistics.viewCount) : "";
-
-                        container.innerHTML += `
-                            <div class="elite-card" onclick="eng_play('${vid}', '${item.snippet.title.replace(/'/g, "")}')">
-                                <div class="thumb-wrap">
-                                    <img src="${item.snippet.thumbnails.high.url}" loading="lazy">
-                                    <span class="view-badge">${views}</span>
+                        // Kartı Oluştur
+                        const cardHtml = `
+                            <div class="muh-video-item-card" onclick="logic_core_play('${videoId}', '${title.replace(/'/g, "")}')">
+                                <div class="muh-thumbnail-box">
+                                    <img src="${thumb}" loading="lazy">
                                 </div>
-                                <div class="elite-card-info">
-                                    <h3>${item.snippet.title}</h3>
-                                    <div class="meta-line">
-                                        <span>${item.snippet.channelTitle}</span>
-                                        <i class="fas fa-circle"></i>
-                                        <span>${new Date(item.snippet.publishedAt).toLocaleDateString('tr-TR')}</span>
+                                <div class="muh-card-details">
+                                    <h3>${title}</h3>
+                                    <div class="muh-card-metadata">
+                                        <span class="muh-channel-chip">${channel}</span>
+                                        <span>•</span>
+                                        <span>${date}</span>
                                     </div>
                                 </div>
-                            </div>`;
+                            </div>
+                        `;
+                        container.innerHTML += cardHtml;
                     });
                 }
-            } catch (e) { console.error("HATA:", e); }
+            } catch (error) {
+                console.error("BUNY-Tube Engine Hatası:", error);
+            }
         }
 
-        /* [14. JS: OYNATICI VE UI KONTROLLERİ] */
-        function eng_play(id, title) {
-            isMini = false;
-            const p = document.getElementById('elite-player-layer');
-            p.style.display = 'flex'; p.classList.remove('mini-mode');
-            document.getElementById('p-title-target').innerText = title;
-            document.getElementById('player-frame-target').innerHTML = `
-                <iframe id="elite-yt" src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&enablejsapi=1&origin=${window.location.origin}" style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
-            eng_fetch(title, 'p-related-target');
-            history.pushState({p:1}, "");
+        /* SEARCH LOGIC 
+        */
+        function logic_core_search() {
+            const q = document.getElementById('muh-search-input').value;
+            if (q.trim() !== "") {
+                logic_core_fetch(q, 'muh-main-feed');
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            }
         }
 
-        function eng_pBack() {
-            const p = document.getElementById('elite-player-layer');
-            if(!isMini) { p.classList.add('mini-mode'); isMini = true; }
-            else { p.style.display = 'none'; document.getElementById('player-frame-target').innerHTML = ""; isMini = false; }
-        }
+        /* PLAYER LOGIC 
+        */
+        function logic_core_play(id, title) {
+            is_currently_mini = false;
+            const playerLayer = document.getElementById('muh-master-player-layer');
+            playerLayer.style.display = 'flex';
+            playerLayer.classList.remove('is-mini-mode');
 
-        function eng_refresh() {
-            document.querySelectorAll('.elite-overlay, #feed-main, #elite-head').forEach(e => e.style.display = 'none');
-            document.getElementById('feed-main').style.display = 'grid';
-            document.getElementById('elite-head').style.display = 'flex';
+            document.getElementById('muh-player-title-target').innerText = title;
             
-            // CHAOS ALGO: Rastgele konu seç
-            const q = POOL[Math.floor(Math.random() * POOL.length)];
-            eng_fetch(q, 'feed-main');
-            eng_ui(0);
-            window.scrollTo(0,0);
+            // Background Play & PiP Support
+            const iframeCode = `
+                <iframe 
+                    id="muh-yt-iframe"
+                    src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&enablejsapi=1&rel=0&modestbranding=1" 
+                    style="width:100%; height:100%; border:none;" 
+                    allow="autoplay; encrypted-media; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            `;
+            document.getElementById('muh-player-frame-target').innerHTML = iframeCode;
+
+            // Önerilenleri Yükle
+            logic_core_fetch(title, 'muh-player-related-target');
+            
+            // Geçmişe ekle (Geri tuşu kontrolü için)
+            history.pushState({page: 'player'}, "");
         }
 
-        function eng_search() {
-            const v = document.getElementById('q-input').value;
-            if(v) eng_fetch(v, 'feed-main');
+        function logic_core_playerBack() {
+            const playerLayer = document.getElementById('muh-master-player-layer');
+            if (!is_currently_mini) {
+                playerLayer.classList.add('is-mini-mode');
+                is_currently_mini = true;
+            } else {
+                playerLayer.style.display = 'none';
+                document.getElementById('muh-player-frame-target').innerHTML = "";
+                is_currently_mini = false;
+            }
         }
 
-        function eng_voice() {
-            const S = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if(!S) return;
-            const r = new S(); r.lang = 'tr-TR';
-            r.onstart = () => document.getElementById('mic-trigger').classList.add('active');
-            r.onend = () => document.getElementById('mic-trigger').classList.remove('active');
-            r.onresult = (e) => { document.getElementById('q-input').value = e.results[0][0].transcript; eng_search(); };
-            r.start();
+        /* VOICE RECOGNITION 
+        */
+        function logic_core_voice() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("Tarayıcınız sesli aramayı desteklemiyor kanka.");
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'tr-TR';
+            const btn = document.getElementById('muh-voice-btn');
+
+            recognition.onstart = () => btn.classList.add('is-listening');
+            recognition.onend = () => btn.classList.remove('is-listening');
+            
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('muh-search-input').value = transcript;
+                logic_core_search();
+            };
+
+            recognition.start();
         }
 
-        function eng_gate(id, n) {
-            document.querySelectorAll('.elite-overlay, #feed-main, #elite-head').forEach(e => e.style.display = 'none');
-            const t = document.getElementById(id);
-            t.style.display = (id === 'elite-shorts' ? 'flex' : 'block');
-            eng_ui(n);
+        /* UI NAVIGATION & GATES 
+        */
+        function logic_core_refresh() {
+            // Tüm ekranları kapat
+            document.querySelectorAll('.muh-full-gate-overlay').forEach(el => el.style.display = 'none');
+            document.getElementById('muh-main-feed').style.display = 'grid';
+            document.getElementById('muh-main-header').style.display = 'block';
+            document.getElementById('muh-main-banner').style.display = 'flex';
+
+            // Rastgele İçerik
+            const starterTopics = ['araba inceleme', 'teknoloji 2026', 'belgesel türkçe', 'uzay bilim'];
+            const randomPick = starterTopics[Math.floor(Math.random() * starterTopics.length)];
+            logic_core_fetch(randomPick, 'muh-main-feed');
+
+            logic_ui_navUpdate(0);
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        function eng_ui(n) { document.querySelectorAll('.nav-link').forEach((b, i) => b.classList.toggle('active', i === n)); }
-        function eng_prof() { document.getElementById('elite-prof').classList.toggle('active'); }
+        function logic_ui_gate(targetId, navIndex) {
+            document.querySelectorAll('.muh-full-gate-overlay').forEach(el => el.style.display = 'none');
+            document.getElementById('muh-main-feed').style.display = 'none';
+            document.getElementById('muh-main-header').style.display = 'none';
+            document.getElementById('muh-main-banner').style.display = 'none';
 
-        /* [15. JS: ARKA PLAN MOTORU VE INIT] */
+            const target = document.getElementById(targetId);
+            target.style.display = (targetId === 'muh-shorts-overlay' ? 'block' : 'block');
+            
+            logic_ui_navUpdate(navIndex);
+        }
+
+        function logic_ui_navUpdate(activeIndex) {
+            const tabs = document.querySelectorAll('.muh-nav-link');
+            tabs.forEach((tab, idx) => {
+                if (idx === activeIndex) tab.classList.add('is-active');
+                else tab.classList.remove('is-active');
+            });
+        }
+
+        function logic_ui_profile() {
+            document.getElementById('muh-profile-drawer-box').classList.toggle('is-open');
+        }
+
+        /* ARKA PLAN OYNATMA (VISIBILITY API) 
+        */
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
-                const f = document.getElementById('elite-yt');
-                if(f) f.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                const iframe = document.getElementById('muh-yt-iframe');
+                if (iframe) {
+                    // Sayfa gizlendiğinde YouTube API'sine oynat komutu gönder
+                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                }
             }
         });
 
-        window.onpopstate = () => { if(document.getElementById('elite-player-layer').style.display === 'flex') { eng_pBack(); history.pushState(null, ""); } };
-        window.onload = () => { eng_refresh(); history.pushState(null, ""); };
+        /* INITIALIZATION 
+        */
+        window.onload = () => {
+            logic_core_refresh();
+            history.pushState(null, "");
+        };
+
+        window.onpopstate = () => {
+            const player = document.getElementById('muh-master-player-layer');
+            if (player.style.display === 'flex') {
+                logic_core_playerBack();
+                history.pushState(null, "");
+            }
+        };
+
     </script>
 </body>
 </html>
