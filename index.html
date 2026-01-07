@@ -3,260 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BUNY-Tube Premium - Muhammed Ali</title>
+    <title>BUNY-Tube V65 Mega Premium</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+
     <style>
-        /* --- GENEL TASARIM VE RENK MOTORU --- */
+        /* [1] GLOBAL MASTER STYLES */
         :root {
-            --primary: #ff0000;
-            --background: #000000;
-            --surface: #0f0f0f;
-            --search-bg: #1a1a1a;
-            --text: #ffffff;
-            --text-secondary: #aaaaaa;
-            --insta-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            --transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --muhammed-red: #ff0000;
+            --muhammed-black: #000000;
+            --muhammed-dark: #080808;
+            --muhammed-card: #121212;
+            --muhammed-border: #1a1a1a;
+            --muhammed-gray: #777777;
+            --muhammed-insta: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+            font-family: 'Inter', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--background);
-            color: var(--text);
-            padding-bottom: 100px;
+            background-color: var(--muhammed-black);
+            color: white;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            padding-bottom: 100px;
         }
 
-        /* --- 1. INSTAGRAM BANNER (MUHAMMED ALİ) --- */
-        .muhammed-banner {
-            background: var(--insta-gradient);
-            height: 50px;
+        /* [2] INSTAGRAM BANNER ENGINE */
+        .banner-container {
+            background: var(--muhammed-insta);
+            height: 35px;
             display: flex;
             align-items: center;
             overflow: hidden;
-            white-space: nowrap;
-            position: relative;
+            position: fixed;
+            top: 0;
+            width: 100%;
             z-index: 9999;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
-        .muhammed-banner .marquee {
+        .banner-scroller {
+            white-space: nowrap;
             display: inline-block;
-            padding-left: 100%;
-            animation: muhammedScroll 18s linear infinite;
+            animation: scroll-text 22s linear infinite;
             font-weight: 900;
-            font-size: 1rem;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            letter-spacing: 3px;
-            color: white;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
         }
 
-        @keyframes muhammedScroll {
-            0% { transform: translateX(0); }
+        @keyframes scroll-text {
+            0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
 
-        /* --- 2. PREMIUM HEADER --- */
-        header.premium-nav {
-            padding: 22px 18px;
+        /* [3] HEADER & LOGO SECTION */
+        header {
+            padding-top: 60px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 20px;
+            background: linear-gradient(to bottom, #000 0%, transparent 100%);
+        }
+
+        .top-brand-area {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(10px);
-            z-index: 5000;
-            border-bottom: 1px solid #222;
+            margin-bottom: 25px;
         }
 
-        .premium-nav .logo-box {
-            font-size: 1.8rem;
+        .main-logo {
+            font-size: 2rem;
             font-weight: 900;
             letter-spacing: -1.5px;
             cursor: pointer;
         }
 
-        .premium-nav .logo-box span {
-            background: var(--primary);
-            padding: 2px 10px;
+        .main-logo span {
+            background-color: var(--muhammed-red);
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 2px;
+            padding-bottom: 2px;
             border-radius: 8px;
-            margin-left: 5px;
-            box-shadow: 0 0 15px rgba(255,0,0,0.4);
+            margin-left: 6px;
+            box-shadow: 0 0 20px rgba(255,0,0,0.4);
         }
 
-        .premium-nav .user-trigger {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #111;
+        .user-icon-btn {
+            font-size: 1.8rem;
+            color: var(--muhammed-red);
             cursor: pointer;
-            transition: var(--transition);
-        }
-
-        /* --- 3. ARAMA MOTORU --- */
-        .search-engine {
-            padding: 20px 15px;
-            display: flex;
-            gap: 12px;
-            background: linear-gradient(180deg, #000 0%, #080808 100%);
-        }
-
-        .search-input-group {
-            flex: 1;
-            background: var(--search-bg);
-            border: 1px solid #333;
-            border-radius: 40px;
-            display: flex;
-            align-items: center;
-            padding: 12px 22px;
             transition: 0.3s;
         }
 
-        .search-input-group:focus-within {
-            border-color: var(--primary);
-            box-shadow: 0 0 10px rgba(255,0,0,0.1);
+        .user-icon-btn:active {
+            transform: scale(0.9);
         }
 
-        .search-input-group input {
+        /* [4] SEARCH & VOICE ENGINE UI */
+        .search-system-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .search-input-field {
             flex: 1;
+            background: var(--muhammed-card);
+            border: 1.5px solid var(--muhammed-border);
+            border-radius: 30px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input-field input {
             background: transparent;
             border: none;
             color: white;
+            width: 100%;
             outline: none;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
+            font-weight: 600;
         }
 
-        .mic-trigger {
+        .voice-search-trigger {
             width: 50px;
             height: 50px;
-            background: var(--search-bg);
-            border: 1px solid #333;
+            background: var(--muhammed-card);
+            border: 1.5px solid var(--muhammed-border);
             border-radius: 50%;
-            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: var(--muhammed-red);
             font-size: 1.3rem;
             cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
-        /* --- 4. VİDEO GRID SİSTEMİ --- */
-        #main-app-grid {
-            padding: 12px;
+        .voice-active {
+            background: var(--muhammed-red);
+            color: white;
+            animation: pulse-ring 1.2s infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(255,0,0,0); }
+            100% { transform: scale(1); }
+        }
+
+        /* [5] VIDEO CONTENT GRID SYSTEM */
+        .video-grid-container {
+            padding: 15px;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 25px;
+            gap: 35px;
+            animation: fade-in-up 0.6s ease-out;
         }
 
-        .buny-card {
-            background: var(--surface);
+        @keyframes fade-in-up {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .video-card-v65 {
+            background: var(--muhammed-card);
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid #1a1a1a;
-            transition: var(--transition);
+            border: 1px solid var(--muhammed-border);
+            transition: 0.3s ease;
         }
 
-        .buny-card:active { transform: scale(0.97); }
-
-        .buny-card .thumb-area {
+        .video-card-v65 img {
             width: 100%;
             aspect-ratio: 16/9;
-            position: relative;
-        }
-
-        .buny-card .thumb-area img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
         }
 
-        .buny-card .v-content { padding: 15px; }
+        .video-card-v65 .v-info {
+            padding: 15px;
+        }
 
-        .buny-card .v-content h3 {
+        .video-card-v65 h3 {
             font-size: 1rem;
-            font-weight: 600;
-            color: #eee;
-            line-height: 1.4;
-            height: 2.8em;
+            line-height: 1.5;
+            color: #ffffff;
+            height: 3em;
             overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
         }
 
-        /* --- 5. REKLAMSIZ OYNATICI (ARKA PLAN) --- */
-        .player-modal-view {
+        /* [6] MASTER VIDEO PLAYER OVERLAY */
+        #master-overlay-v65 {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: #000;
-            z-index: 9000;
+            z-index: 10001;
             display: none;
             flex-direction: column;
         }
 
-        .player-header {
-            padding: 20px;
+        #master-overlay-v65.mini-view {
+            top: auto;
+            bottom: 95px;
+            left: auto;
+            right: 15px;
+            width: 220px;
+            height: 125px;
+            border-radius: 15px;
+            border: 2px solid var(--muhammed-red);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            overflow: hidden;
+        }
+
+        #master-overlay-v65.mini-view .player-top-controls,
+        #master-overlay-v65.mini-view .player-scroll-content {
+            display: none;
+        }
+
+        .player-top-controls {
+            padding: 15px;
             background: #0a0a0a;
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: space-between;
             border-bottom: 1px solid #222;
         }
 
-        .video-stage { width: 100%; aspect-ratio: 16/9; background: #000; }
+        .video-player-frame-box {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+        }
 
-        .player-controls {
+        .player-scroll-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #000;
+        }
+
+        .video-action-btns {
             display: flex;
             justify-content: space-around;
-            padding: 25px 15px;
-            background: #050505;
+            padding-bottom: 25px;
+            border-bottom: 1px solid #1a1a1a;
         }
 
-        .ctrl-btn {
-            padding: 14px 24px;
-            border-radius: 35px;
-            border: none;
-            font-weight: 800;
+        .v-action-btn {
+            background: #151515;
+            color: white;
+            border: 1px solid #333;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            gap: 10px;
-            cursor: pointer;
-            transition: 0.3s;
+            gap: 8px;
         }
 
-        .btn-sub { background: #fff; color: #000; }
-        .btn-sub.active { background: #222; color: #666; }
-        .btn-like { background: #1a1a1a; color: white; border: 1px solid #333; }
-        .btn-like.active { color: var(--primary); border-color: var(--primary); }
-        .btn-dl { background: var(--primary); color: white; }
+        .btn-red-mode {
+            background: var(--muhammed-red);
+            border: none;
+        }
 
-        /* --- 6. SHORTS ENGEL EKRANI --- */
-        #shorts-blocker {
+        .related-header-text {
+            color: var(--muhammed-red);
+            font-weight: 900;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-left: 5px solid var(--muhammed-red);
+            padding-left: 15px;
+        }
+
+        /* [7] SHORTS BLOCKER SCREEN */
+        #shorts-screen-v65 {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: radial-gradient(circle, #200000 0%, #000 100%);
-            z-index: 8500;
+            background: #000;
+            z-index: 9998;
             display: none;
             flex-direction: column;
             justify-content: center;
@@ -265,282 +316,304 @@
             padding: 40px;
         }
 
-        .block-card-ui {
-            border: 2px solid var(--primary);
-            padding: 45px 25px;
+        .blocker-box-v65 {
+            border: 2px solid var(--muhammed-red);
+            padding: 50px 25px;
             border-radius: 40px;
-            background: rgba(255, 0, 0, 0.05);
-            box-shadow: 0 0 50px rgba(255,0,0,0.1);
+            background: linear-gradient(to bottom, #0a0a0a, #000);
+            box-shadow: 0 0 40px rgba(255,0,0,0.1);
         }
 
-        .block-card-ui i { font-size: 5rem; color: var(--primary); margin-bottom: 25px; }
-
-        /* --- 7. PROFİL VE BENZERSİZ KAYIT --- */
-        .side-profile-ui {
+        /* [8] SIDE PROFILE MENU */
+        #side-menu-v65 {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 88%;
+            width: 85%;
             height: 100%;
-            background: #060606;
-            z-index: 9500;
-            transition: 0.5s ease;
-            padding: 60px 25px;
+            background: #050505;
+            z-index: 10002;
+            transition: 0.5s cubic-bezier(0.7, 0, 0.3, 1);
+            padding: 70px 30px;
+            border-left: 1px solid #1a1a1a;
         }
 
-        .side-profile-ui.active { right: 0; }
-
-        .profile-top { text-align: center; margin-bottom: 40px; }
-        .avatar-box {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            border: 3px solid var(--primary);
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #111;
-            font-size: 3.5rem;
+        #side-menu-v65.is-active {
+            right: 0;
         }
 
-        .buny-input {
-            width: 100%;
-            padding: 18px;
-            border-radius: 15px;
-            border: 1px solid #333;
-            background: #111;
-            color: white;
-            text-align: center;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
+        .profile-about-card {
+            background: #0f0f0f;
+            padding: 25px;
+            border-radius: 20px;
+            border-left: 6px solid var(--muhammed-red);
+            margin-top: 40px;
+            text-align: left;
         }
 
-        .buny-btn {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            padding: 18px;
-            border-radius: 15px;
-            border: none;
-            font-weight: 900;
-            font-size: 1.1rem;
-            box-shadow: 0 5px 15px rgba(255,0,0,0.2);
-        }
-
-        .copyright-tag {
-            margin-top: 80px;
-            text-align: center;
-            border-top: 1px solid #222;
-            padding-top: 35px;
-        }
-
-        .copyright-tag b { color: var(--primary); letter-spacing: 4px; font-size: 1.1rem; }
-
-        /* --- 8. NAVİGASYON --- */
-        nav.app-footer-nav {
+        /* [9] FOOTER NAVIGATION */
+        .bottom-nav-v65 {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: #000;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(15px);
             display: flex;
             justify-content: space-around;
-            padding: 18px 0;
-            border-top: 1px solid #222;
-            z-index: 7000;
+            padding-top: 15px;
+            padding-bottom: 15px;
+            border-top: 1.5px solid var(--muhammed-border);
+            z-index: 9997;
         }
 
-        .nav-link { color: #555; text-align: center; font-size: 0.8rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .nav-link.active { color: white; }
-        .nav-link i { font-size: 1.6rem; display: block; margin-bottom: 5px; }
+        .nav-link-v65 {
+            color: #444;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 900;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
+        .nav-link-v65.active {
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .nav-link-v65 i {
+            font-size: 1.6rem;
+            display: block;
+            margin-bottom: 6px;
+        }
     </style>
 </head>
 <body>
 
-    <div class="muhammed-banner">
-        <div class="marquee">instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; instagram: muhammedaliatl</div>
+    <div class="banner-container" id="v65-top-banner">
+        <div class="banner-scroller">
+            INSTAGRAM: MUHAMMEDALIATL &nbsp; • &nbsp; PREMIUM NO-ADS EXPERIENCE &nbsp; • &nbsp; MUHAMMED ALİ ÖZEL SÜRÜM V65 &nbsp; • &nbsp; ODAK MODU AKTİF &nbsp; • &nbsp; NO COPYRIGHT 2024
+        </div>
     </div>
 
-    <header class="premium-nav">
-        <div class="logo-box" onclick="api_refreshHome()">BUNY<span>Tube</span></div>
-        <div class="user-trigger" onclick="ui_toggleMenu()"><i class="fas fa-user-secret fa-2x" style="color:red"></i></div>
+    <header>
+        <div class="top-brand-area">
+            <div class="main-logo" onclick="logic_v65_refreshHome()">BUNY<span>Tube</span></div>
+            <div class="user-icon-btn" onclick="logic_v65_toggleMenu()"><i class="fas fa-user-circle"></i></div>
+        </div>
+
+        <div class="search-system-wrapper">
+            <div class="search-input-field">
+                <input type="text" id="v65-input-box" placeholder="Hangi videoya odaklanmak istersin?" onkeypress="if(event.key==='Enter') logic_v65_search()">
+                <i class="fas fa-search" style="color:#444" onclick="logic_v65_search()"></i>
+            </div>
+            <div class="voice-search-trigger" id="v65-mic-btn" onclick="logic_v65_voiceSearch()">
+                <i class="fas fa-microphone"></i>
+            </div>
+        </div>
     </header>
 
-    <div class="search-engine">
-        <div class="search-input-group">
-            <input type="text" id="app-search-q" placeholder="Video veya müzik ara..." onkeypress="if(event.key==='Enter') api_search()">
-            <i class="fas fa-search" style="color:red" onclick="api_search()"></i>
+    <main class="video-grid-container" id="v65-main-feed"></main>
+
+    <div id="master-overlay-v65">
+        <div class="player-top-controls" onclick="logic_v65_minimize()">
+            <div style="display:flex; align-items:center; gap:12px;">
+                <i class="fas fa-chevron-down"></i>
+                <span style="font-weight:bold; font-size:0.8rem; letter-spacing:1px; color:#aaa;">ARKA PLANDA ÇALIŞIYOR</span>
+            </div>
+            <i class="fas fa-expand" style="color:#555"></i>
         </div>
-        <div class="mic-trigger" onclick="api_voice()"><i class="fas fa-microphone"></i></div>
-    </div>
 
-    <main id="main-app-grid"></main>
+        <div class="video-player-frame-box" id="v65-frame-container"></div>
 
-    <div id="shorts-blocker">
-        <div class="block-card-ui">
-            <i class="fas fa-brain"></i>
-            <h2 style="color:white; margin-bottom:15px; letter-spacing:2px;">ERİŞİM KISITLANDI</h2>
-            <p>"Shorts içerikleri odak süresini azalttığı için <b>MUHAMMED ALİ</b> tarafından bu sürümde kapatılmıştır."</p>
-        </div>
-        <button onclick="api_refreshHome()" style="margin-top:50px; background:white; color:black; border:none; padding:18px 50px; border-radius:40px; font-weight:900; cursor:pointer;">ANA SAYFAYA DÖN</button>
-    </div>
+        <div class="player-scroll-content">
+            <div class="video-action-btns">
+                <button class="v-action-btn" onclick="logic_v65_minimize()"><i class="fas fa-compress"></i> KÜÇÜLT</button>
+                <button class="v-action-btn btn-red-mode" onclick="logic_v65_closePlayer()"><i class="fas fa-power-off"></i> KAPAT</button>
+            </div>
 
-    <div id="player-view" class="player-modal-view">
-        <div class="player-header" onclick="ui_closePlayer()"><i class="fas fa-chevron-down"></i> Kapat (Müzik Arka Planda Çalar)</div>
-        <div class="video-stage" id="iframe-loader"></div>
-        <div class="player-controls">
-            <button class="ctrl-btn btn-sub" id="sub-btn" onclick="api_sub()">Abone Ol</button>
-            <button class="ctrl-btn btn-like" id="like-btn" onclick="api_like()"><i class="fas fa-thumbs-up"></i> Beğen</button>
-            <button class="ctrl-btn btn-dl" onclick="api_download()">İndir</button>
+            <div class="related-header-text">SİZİN İÇİN ÖNERİLENLER</div>
+            <div id="v65-related-feed" class="video-grid-container" style="padding:0;"></div>
         </div>
     </div>
 
-    <div id="side-menu-ui" class="side-profile-ui">
-        <div class="profile-top">
-            <div class="avatar-box"><i class="fas fa-user-crown"></i></div>
-            <h2 id="ui-user-name">Misafir</h2>
-            <p id="ui-user-tag" style="color:#444; font-weight:900; margin-top:5px;"></p>
-            <input type="text" id="name-input" class="buny-input" placeholder="İsmini Yaz...">
-            <button class="buny-btn" onclick="api_register()">KAYDI TAMAMLA</button>
+    <div id="shorts-screen-v65">
+        <div class="blocker-box-v65">
+            <i class="fas fa-brain fa-5x" style="color:var(--muhammed-red); margin-bottom:30px;"></i>
+            <h2 style="font-weight:900; letter-spacing:3px;">ODAK KORUMA SİSTEMİ</h2>
+            <p style="margin-top:25px; line-height:1.8; color:#bbb; font-size:1.05rem;">
+                "Kısa süreli içerikler (Shorts), dopamin dengenizi bozarak odaklanma sürenizi ve iradenizi zayıflatmaktadır. 
+                Geleceğin liderlerinin zihinlerini korumak amacıyla bu özellik, <b>MUHAMMED ALİ</b> tarafından tamamen kapatılmıştır. 
+                Lütfen derin içeriklere odaklanın."
+            </p>
+            <button onclick="logic_v65_refreshHome()" style="margin-top:40px; padding:20px 60px; border-radius:50px; border:none; background:white; color:black; font-weight:900; letter-spacing:2px;">GERİ DÖN</button>
         </div>
-        <div class="copyright-tag">
-            <b>NO COPYRIGHT - 2024</b>
-            <p style="color:#222; font-weight:900; margin-top:10px;">MUHAMMED ALİ PREMIUM SÜRÜM</p>
-        </div>
-        <button onclick="ui_toggleMenu()" style="width:100%; margin-top:50px; background:none; border:1px solid #333; color:white; padding:18px; border-radius:15px;">PANELİ KAPAT</button>
     </div>
 
-    <nav class="app-footer-nav">
-        <div class="nav-link active" id="nav-0" onclick="api_refreshHome()"><i class="fas fa-home"></i>Ana Sayfa</div>
-        <div class="nav-link" id="nav-1" onclick="ui_showShorts()"><i class="fas fa-bolt"></i>Shorts</div>
-        <div class="nav-link" id="nav-2" onclick="ui_showLibrary()"><i class="fas fa-folder-open"></i>Kitaplık</div>
+    <div id="side-menu-v65">
+        <div style="text-align:center;">
+            <i class="fas fa-user-shield fa-5x" style="color:var(--muhammed-red);"></i>
+            <h2 style="margin-top:25px; font-size:1.8rem;">Muhammed Ali Premium</h2>
+            
+            <div class="profile-about-card">
+                <b style="color:white; font-size:1.1rem;">HAKKINDA:</b>
+                <p style="font-size:0.9rem; color:#888; margin-top:10px; line-height:1.6;">
+                    Bu uygulama, <b>Muhammed Ali</b> tarafından, 10.000+ kişilik topluluğuna reklamsız ve odak bozmayan bir video deneyimi sunmak için özel olarak kodlanmıştır.
+                </p>
+            </div>
+
+            <div style="margin-top:80px; border-top:1px solid #1a1a1a; padding-top:30px;">
+                <b style="font-size:1.3rem; letter-spacing:3px; color:white;">NO COPYRIGHT - 2024</b>
+                <p style="color:#444; font-weight:bold; margin-top:5px; font-size:0.8rem;">MUHAMMED ALİ MASTER EXPERIENCE V65.7</p>
+                <p style="color:#222; font-size:0.7rem;">TÜM HAKLARI MUHAMMED ALİ TOPLULUĞUNA AİTTİR.</p>
+            </div>
+        </div>
+        <button onclick="logic_v65_toggleMenu()" style="width:100%; margin-top:50px; background:none; border:1px solid #222; color:#555; padding:15px; border-radius:15px; font-weight:900;">KAPAT</button>
+    </div>
+
+    <nav class="bottom-nav-v65">
+        <div class="nav-link-v65 active" id="tab-v65-0" onclick="logic_v65_refreshHome()">
+            <i class="fas fa-home"></i>
+            <span>Ana Sayfa</span>
+        </div>
+        <div class="nav-link-v65" id="tab-v65-1" onclick="logic_v65_showShorts()">
+            <i class="fas fa-bolt"></i>
+            <span>Shorts</span>
+        </div>
+        <div class="nav-link-v65" onclick="alert('Kitaplık Çok Yakında!')">
+            <i class="fas fa-folder"></i>
+            <span>Kitaplık</span>
+        </div>
     </nav>
 
     <script>
-        const KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
-        let activeV = null;
-        let myLib = JSON.parse(localStorage.getItem('buny_lib_v37')) || [];
-        let subbed = false;
+        /* CONFIGURATION */
+        const V65_API_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
+        let v65_mini_mode = false;
 
-        /**
-         * ANA SAYFA MOTORU VE SHORTS FİLTRELEME
-         */
-        async function api_refreshHome() {
-            document.getElementById('shorts-blocker').style.display = 'none';
-            document.getElementById('main-app-grid').style.display = 'grid';
-            
-            const cats = ['müzik', 'teknoloji', 'oyun', 'spor', 'haber'];
-            const randomCat = cats[Math.floor(Math.random() * cats.length)];
-            
-            // Shorts'u engellemek için videoDuration=medium kullanıyoruz
-            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${randomCat}&type=video&videoDuration=medium&maxResults=25&key=${KEY}&t=${Date.now()}`;
+        /* CORE FETCH ENGINE */
+        async function logic_v65_fetch(searchQuery, targetId) {
+            const endpoint = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&type=video&maxResults=15&key=${V65_API_KEY}&t=${Date.now()}`;
             
             try {
-                const res = await fetch(url);
-                const data = await res.json();
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                const grid = document.getElementById(targetId);
+                grid.innerHTML = "";
                 
-                // Ekstra manuel filtre: Başlığında shorts geçenleri de atla
-                const filtered = data.items.filter(v => {
-                    const t = v.snippet.title.toLowerCase();
-                    return !t.includes('shorts') && !t.includes('#shorts');
+                data.items.forEach(item => {
+                    const vidId = item.id.videoId;
+                    if(!vidId) return;
+
+                    grid.innerHTML += `
+                        <div class="video-card-v65" onclick="logic_v65_play('${vidId}', '${item.snippet.title.replace(/'/g, "")}')">
+                            <img src="${item.snippet.thumbnails.high.url}">
+                            <div class="v-info">
+                                <h3>${item.snippet.title}</h3>
+                            </div>
+                        </div>`;
                 });
-                
-                api_render(filtered);
-            } catch (e) { console.error(e); }
+            } catch (error) {
+                console.error("API Error: ", error);
+            }
+        }
+
+        /* SEARCH LOGIC */
+        function logic_v65_search() {
+            const query = document.getElementById('v65-input-box').value;
+            if(query) logic_v65_fetch(query, 'v65-main-feed');
+        }
+
+        /* VOICE SEARCH ENGINE */
+        function logic_v65_voiceSearch() {
+            const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if(!Recognition) {
+                alert("Sesli arama desteklenmiyor.");
+                return;
+            }
+
+            const recEngine = new Recognition();
+            recEngine.lang = 'tr-TR';
+            const micBtn = document.getElementById('v65-mic-btn');
+
+            recEngine.onstart = () => micBtn.classList.add('voice-active');
+            recEngine.onend = () => micBtn.classList.remove('voice-active');
             
-            ui_nav(0);
+            recEngine.onresult = (event) => {
+                const text = event.results[0][0].transcript;
+                document.getElementById('v65-input-box').value = text;
+                logic_v65_search();
+            };
+
+            recEngine.start();
+        }
+
+        /* HOME REFRESH */
+        function logic_v65_refreshHome() {
+            document.getElementById('shorts-screen-v65').style.display = 'none';
+            document.getElementById('v65-main-feed').style.display = 'grid';
+            document.getElementById('v65-top-banner').style.display = 'flex';
+            logic_v65_fetch('modifiye arabalar teknoloji oyun', 'v65-main-feed');
+            logic_v65_navUpdate(0);
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        function api_render(items) {
-            const grid = document.getElementById('main-app-grid');
-            grid.innerHTML = "";
-            items.forEach(v => {
-                const id = v.id.videoId || v.id;
-                const data = JSON.stringify({id, title: v.snippet.title, thumb: v.snippet.thumbnails.high.url}).replace(/"/g, '&quot;');
-                grid.innerHTML += `
-                    <div class="buny-card" onclick='ui_openPlayer(${data})'>
-                        <div class="thumb-area"><img src="${v.snippet.thumbnails.high.url}" loading="lazy"></div>
-                        <div class="v-content"><h3>${v.snippet.title}</h3></div>
-                    </div>`;
-            });
+        /* PLAYER LOGIC (BG PLAY SUPPORTED) */
+        function logic_v65_play(id, title) {
+            v65_mini_mode = false;
+            document.getElementById('v65-top-banner').style.display = 'none';
+            const overlay = document.getElementById('master-overlay-v65');
+            overlay.style.display = 'flex';
+            overlay.classList.remove('mini-view');
+
+            document.getElementById('v65-frame-container').innerHTML = `
+                <iframe src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&enablejsapi=1&rel=0" 
+                style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
+            
+            logic_v65_fetch(title, 'v65-related-feed');
+            history.pushState({view: 'playing'}, '');
         }
 
-        /**
-         * BENZERSİZ KULLANICI SİSTEMİ
-         */
-        function api_register() {
-            const n = document.getElementById('name-input').value;
-            if(!n || n.length < 2) return;
-            let iden = localStorage.getItem('buny_iden');
-            if(!iden || !iden.startsWith(n)) {
-                iden = n + "#" + Math.floor(1000 + Math.random() * 9000);
+        function logic_v65_minimize() {
+            document.getElementById('master-overlay-v65').classList.add('mini-view');
+            document.getElementById('v65-top-banner').style.display = 'flex';
+            v65_mini_mode = true;
+        }
+
+        function logic_v65_closePlayer() {
+            document.getElementById('master-overlay-v65').style.display = 'none';
+            document.getElementById('v65-frame-container').innerHTML = "";
+            document.getElementById('v65-top-banner').style.display = 'flex';
+        }
+
+        /* BACK BUTTON CONTROL */
+        window.onpopstate = () => {
+            const overlay = document.getElementById('master-overlay-v65');
+            if(overlay.style.display === 'flex') {
+                if(!v65_mini_mode) logic_v65_minimize(); else logic_v65_closePlayer();
+                history.pushState(null, '');
             }
-            localStorage.setItem('buny_iden', iden);
-            api_loadUser();
-            alert("Kayıt Başarılı: " + iden);
+        };
+
+        /* UI HELPERS */
+        function logic_v65_showShorts() {
+            document.getElementById('v65-main-feed').style.display = 'none';
+            document.getElementById('shorts-screen-v65').style.display = 'flex';
+            logic_v65_navUpdate(1);
         }
 
-        function api_loadUser() {
-            const iden = localStorage.getItem('buny_iden') || "Misafir Kullanıcı";
-            document.getElementById('ui-user-name').innerText = iden.split('#')[0];
-            document.getElementById('ui-user-tag').innerText = iden.includes('#') ? iden : "";
+        function logic_v65_toggleMenu() {
+            document.getElementById('side-menu-v65').classList.toggle('is-active');
         }
 
-        /**
-         * KİTAPLIK VE BEĞENİ SİSTEMİ
-         */
-        function api_like() {
-            const idx = myLib.findIndex(x => x.id === activeV.id);
-            if(idx === -1) myLib.push(activeV); else myLib.splice(idx, 1);
-            localStorage.setItem('buny_lib_v37', JSON.stringify(myLib));
-            document.getElementById('like-btn').classList.toggle('active', idx === -1);
+        function logic_v65_navUpdate(idx) {
+            [0,1].forEach(i => document.getElementById('tab-v65-'+i).classList.toggle('active', i === idx));
         }
 
-        function ui_showLibrary() {
-            ui_nav(2);
-            const grid = document.getElementById('main-app-grid');
-            grid.innerHTML = `<h2 style="padding:20px; border-bottom:1px solid #222;">BEĞENİLEN VİDEOLAR</h2>`;
-            if(myLib.length === 0) {
-                grid.innerHTML += `<p style="padding:40px; color:#444; text-align:center;">Henüz video beğenmediniz.</p>`;
-            } else { api_render(myLib); }
-        }
-
-        /**
-         * DİĞER FONKSİYONLAR
-         */
-        function api_search() {
-            const q = document.getElementById('app-search-q').value;
-            if(!q) return;
-            fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&type=video&maxResults=20&key=${KEY}`)
-            .then(r => r.json()).then(d => api_render(d.items));
-        }
-
-        function api_voice() {
-            const R = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if(!R) return;
-            const rec = new R(); rec.lang = 'tr-TR';
-            rec.onresult = (e) => { document.getElementById('app-search-q').value = e.results[0][0].transcript; api_search(); };
-            rec.start();
-        }
-
-        function ui_openPlayer(v) {
-            activeV = v;
-            document.getElementById('player-view').style.display = 'flex';
-            document.getElementById('iframe-loader').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&playsinline=1" style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media"></iframe>`;
-            const isLiked = myLib.some(x => x.id === v.id);
-            document.getElementById('like-btn').classList.toggle('active', isLiked);
-        }
-
-        function ui_closePlayer() { document.getElementById('player-view').style.display = 'none'; }
-        function ui_showShorts() { document.getElementById('main-app-grid').style.display = 'none'; document.getElementById('shorts-blocker').style.display = 'flex'; ui_nav(1); }
-        function ui_toggleMenu() { document.getElementById('side-menu-ui').classList.toggle('active'); api_loadUser(); }
-        function ui_nav(i) { [0,1,2].forEach(n => document.getElementById('nav-'+n).classList.toggle('active', i === n)); }
-        function api_sub() { subbed = !subbed; const b = document.getElementById('sub-btn'); b.innerText = subbed ? "Abone Olundu" : "Abone Ol"; b.classList.toggle('active', subbed); }
-        function api_download() { window.open(`https://9xbuddy.com/download?url=https://www.youtube.com/watch?v=${activeV.id}`, '_blank'); }
-
-        window.onload = () => { api_refreshHome(); api_loadUser(); };
+        /* BOOTSTRAP */
+        window.onload = () => {
+            logic_v65_refreshHome();
+            history.pushState(null, '');
+        };
     </script>
 </body>
 </html>
