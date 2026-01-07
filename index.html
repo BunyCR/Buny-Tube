@@ -3,42 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BUNY-Tube Premium - Muhammed Ali Özel Sürüm</title>
+    <title>BUNY-Tube Premium - Muhammed Ali</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
     <style>
-        /* --- MUHAMMED ALİ ÖZEL TASARIM MOTORU --- */
+        /* --- GENEL TASARIM VE RENK MOTORU --- */
         :root {
-            --buny-red: #ff0000;
-            --buny-black: #000000;
-            --buny-dark-gray: #0a0a0a;
-            --buny-card-bg: #0f0f0f;
-            --buny-text: #ffffff;
-            --buny-text-dim: #bbbbbb;
+            --primary: #ff0000;
+            --background: #000000;
+            --surface: #0f0f0f;
+            --search-bg: #1a1a1a;
+            --text: #ffffff;
+            --text-secondary: #aaaaaa;
             --insta-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            --transition-speed: 0.4s;
+            --transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* --- TEMEL SAYFA AYARLARI --- */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            background-color: var(--buny-black);
-            color: var(--buny-text);
+            background-color: var(--background);
+            color: var(--text);
             padding-bottom: 100px;
             overflow-x: hidden;
-            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* --- 1. INSTAGRAM BANNER (MUHAMMED ALİ) --- */
-        .buny-insta-banner {
+        .muhammed-banner {
             background: var(--insta-gradient);
             height: 50px;
             display: flex;
@@ -47,175 +46,173 @@
             white-space: nowrap;
             position: relative;
             z-index: 9999;
-            border-bottom: 2px solid #222;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        .buny-insta-banner .scrolling-text {
+        .muhammed-banner .marquee {
             display: inline-block;
             padding-left: 100%;
-            animation: bunyMarquee 20s linear infinite;
+            animation: muhammedScroll 18s linear infinite;
             font-weight: 900;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-transform: uppercase;
-            letter-spacing: 5px;
+            letter-spacing: 3px;
             color: white;
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
         }
 
-        @keyframes bunyMarquee {
+        @keyframes muhammedScroll {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
 
         /* --- 2. PREMIUM HEADER --- */
-        .premium-header {
-            padding: 25px 20px;
+        header.premium-nav {
+            padding: 22px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             background: rgba(0,0,0,0.95);
-            backdrop-filter: blur(15px);
-            z-index: 9000;
-            border-bottom: 1px solid #1a1a1a;
+            backdrop-filter: blur(10px);
+            z-index: 5000;
+            border-bottom: 1px solid #222;
         }
 
-        .premium-header .logo-area {
-            font-size: 2rem;
+        .premium-nav .logo-box {
+            font-size: 1.8rem;
             font-weight: 900;
-            letter-spacing: -2px;
+            letter-spacing: -1.5px;
             cursor: pointer;
         }
 
-        .premium-header .logo-area span {
-            background-color: var(--buny-red);
-            color: white;
-            padding: 3px 12px;
-            border-radius: 10px;
-            margin-left: 8px;
-            box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+        .premium-nav .logo-box span {
+            background: var(--primary);
+            padding: 2px 10px;
+            border-radius: 8px;
+            margin-left: 5px;
+            box-shadow: 0 0 15px rgba(255,0,0,0.4);
         }
 
-        .premium-header .user-avatar-btn {
-            width: 48px;
-            height: 48px;
+        .premium-nav .user-trigger {
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
-            border: 2px solid var(--buny-red);
+            border: 2px solid var(--primary);
             display: flex;
             align-items: center;
             justify-content: center;
             background: #111;
             cursor: pointer;
-            transition: var(--transition-speed);
+            transition: var(--transition);
         }
 
         /* --- 3. ARAMA MOTORU --- */
-        .search-container {
-            padding: 25px 15px;
+        .search-engine {
+            padding: 20px 15px;
             display: flex;
-            gap: 15px;
+            gap: 12px;
             background: linear-gradient(180deg, #000 0%, #080808 100%);
         }
 
-        .search-wrapper {
+        .search-input-group {
             flex: 1;
-            background: #151515;
+            background: var(--search-bg);
             border: 1px solid #333;
             border-radius: 40px;
             display: flex;
             align-items: center;
-            padding: 15px 25px;
+            padding: 12px 22px;
             transition: 0.3s;
         }
 
-        .search-wrapper:focus-within {
-            border-color: var(--buny-red);
-            box-shadow: 0 0 15px rgba(255,0,0,0.1);
+        .search-input-group:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 10px rgba(255,0,0,0.1);
         }
 
-        .search-wrapper input {
+        .search-input-group input {
             flex: 1;
             background: transparent;
             border: none;
             color: white;
             outline: none;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
 
-        .voice-btn {
-            width: 55px;
-            height: 55px;
-            background: #151515;
+        .mic-trigger {
+            width: 50px;
+            height: 50px;
+            background: var(--search-bg);
             border: 1px solid #333;
             border-radius: 50%;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
         }
 
-        /* --- 4. ANA SAYFA VİDEO GRID --- */
-        #video-grid-container {
-            padding: 15px;
+        /* --- 4. VİDEO GRID SİSTEMİ --- */
+        #main-app-grid {
+            padding: 12px;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 30px;
+            gap: 25px;
         }
 
-        .v-card-premium {
-            background: var(--buny-card-bg);
-            border-radius: 25px;
+        .buny-card {
+            background: var(--surface);
+            border-radius: 20px;
             overflow: hidden;
             border: 1px solid #1a1a1a;
-            transition: 0.4s;
+            transition: var(--transition);
         }
 
-        .v-card-premium:active { transform: scale(0.96); }
+        .buny-card:active { transform: scale(0.97); }
 
-        .v-card-premium .thumbnail-wrapper {
+        .buny-card .thumb-area {
             width: 100%;
             aspect-ratio: 16/9;
             position: relative;
         }
 
-        .v-card-premium .thumbnail-wrapper img {
+        .buny-card .thumb-area img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .v-card-premium .v-details {
-            padding: 20px;
-        }
+        .buny-card .v-content { padding: 15px; }
 
-        .v-card-premium .v-details h3 {
-            font-size: 1.1rem;
+        .buny-card .v-content h3 {
+            font-size: 1rem;
             font-weight: 600;
-            color: #efefef;
+            color: #eee;
+            line-height: 1.4;
+            height: 2.8em;
+            overflow: hidden;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
-            overflow: hidden;
-            height: 2.8em;
         }
 
-        /* --- 5. REKLAMSIZ OYNATICI (ARKA PLAN DESTEKLİ) --- */
-        .buny-player-overlay {
+        /* --- 5. REKLAMSIZ OYNATICI (ARKA PLAN) --- */
+        .player-modal-view {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             background: #000;
-            z-index: 10000;
+            z-index: 9000;
             display: none;
             flex-direction: column;
         }
 
-        .player-top-bar {
+        .player-header {
             padding: 20px;
             background: #0a0a0a;
             display: flex;
@@ -224,45 +221,42 @@
             border-bottom: 1px solid #222;
         }
 
-        .player-iframe-container {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-        }
+        .video-stage { width: 100%; aspect-ratio: 16/9; background: #000; }
 
-        .player-actions-row {
+        .player-controls {
             display: flex;
             justify-content: space-around;
-            padding: 30px 15px;
+            padding: 25px 15px;
             background: #050505;
         }
 
-        .action-btn {
-            padding: 15px 25px;
-            border-radius: 40px;
+        .ctrl-btn {
+            padding: 14px 24px;
+            border-radius: 35px;
             border: none;
-            font-weight: 900;
+            font-weight: 800;
             display: flex;
             align-items: center;
             gap: 10px;
             cursor: pointer;
+            transition: 0.3s;
         }
 
-        .action-sub { background: #fff; color: #000; }
-        .action-sub.active { background: #333; color: #888; }
-        .action-like { background: #1a1a1a; color: white; border: 1px solid #333; }
-        .action-like.active { color: var(--buny-red); border-color: var(--buny-red); }
-        .action-down { background: var(--buny-red); color: white; }
+        .btn-sub { background: #fff; color: #000; }
+        .btn-sub.active { background: #222; color: #666; }
+        .btn-like { background: #1a1a1a; color: white; border: 1px solid #333; }
+        .btn-like.active { color: var(--primary); border-color: var(--primary); }
+        .btn-dl { background: var(--primary); color: white; }
 
         /* --- 6. SHORTS ENGEL EKRANI --- */
-        #shorts-screen-overlay {
+        #shorts-blocker {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: #000;
-            z-index: 8000;
+            background: radial-gradient(circle, #200000 0%, #000 100%);
+            z-index: 8500;
             display: none;
             flex-direction: column;
             justify-content: center;
@@ -271,80 +265,80 @@
             padding: 40px;
         }
 
-        .shorts-block-box {
-            border: 3px solid var(--buny-red);
-            padding: 50px 25px;
-            border-radius: 45px;
-            background: rgba(255, 0, 0, 0.03);
-            box-shadow: 0 0 60px rgba(255,0,0,0.15);
+        .block-card-ui {
+            border: 2px solid var(--primary);
+            padding: 45px 25px;
+            border-radius: 40px;
+            background: rgba(255, 0, 0, 0.05);
+            box-shadow: 0 0 50px rgba(255,0,0,0.1);
         }
 
-        .shorts-block-box i { font-size: 6rem; color: var(--buny-red); margin-bottom: 30px; }
-        .shorts-block-box p { font-size: 1.2rem; font-style: italic; color: #ddd; line-height: 1.8; }
+        .block-card-ui i { font-size: 5rem; color: var(--primary); margin-bottom: 25px; }
 
-        /* --- 7. PROFİL VE BENZERSİZ KİMLİK KAYDI --- */
-        .side-profile-panel {
+        /* --- 7. PROFİL VE BENZERSİZ KAYIT --- */
+        .side-profile-ui {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 85%;
+            width: 88%;
             height: 100%;
-            background: #080808;
-            z-index: 11000;
-            transition: 0.5s ease-in-out;
-            padding: 60px 30px;
+            background: #060606;
+            z-index: 9500;
+            transition: 0.5s ease;
+            padding: 60px 25px;
         }
 
-        .side-profile-panel.open { right: 0; }
+        .side-profile-ui.active { right: 0; }
 
-        .profile-header { text-align: center; margin-bottom: 40px; }
-        .avatar-circle {
-            width: 120px;
-            height: 120px;
+        .profile-top { text-align: center; margin-bottom: 40px; }
+        .avatar-box {
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            border: 4px solid var(--buny-red);
+            border: 3px solid var(--primary);
             margin: 0 auto 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: #111;
-            font-size: 4rem;
+            font-size: 3.5rem;
         }
 
         .buny-input {
             width: 100%;
-            padding: 20px;
-            border-radius: 20px;
+            padding: 18px;
+            border-radius: 15px;
             border: 1px solid #333;
             background: #111;
             color: white;
             text-align: center;
             font-size: 1.1rem;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
-        .buny-save-btn {
+        .buny-btn {
             width: 100%;
-            background: var(--buny-red);
+            background: var(--primary);
             color: white;
-            padding: 20px;
-            border-radius: 20px;
+            padding: 18px;
+            border-radius: 15px;
             border: none;
             font-weight: 900;
             font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(255,0,0,0.2);
         }
 
-        .no-copy-footer {
-            margin-top: 100px;
+        .copyright-tag {
+            margin-top: 80px;
             text-align: center;
             border-top: 1px solid #222;
-            padding-top: 30px;
+            padding-top: 35px;
         }
 
-        .no-copy-footer b { color: var(--buny-red); letter-spacing: 5px; font-size: 1.2rem; }
+        .copyright-tag b { color: var(--primary); letter-spacing: 4px; font-size: 1.1rem; }
 
-        /* --- 8. ALT NAVİGASYON --- */
-        .bottom-navbar {
+        /* --- 8. NAVİGASYON --- */
+        nav.app-footer-nav {
             position: fixed;
             bottom: 0;
             width: 100%;
@@ -352,276 +346,201 @@
             display: flex;
             justify-content: space-around;
             padding: 18px 0;
-            border-top: 1px solid #1a1a1a;
-            z-index: 7500;
+            border-top: 1px solid #222;
+            z-index: 7000;
         }
 
-        .nav-link { color: #555; text-align: center; font-size: 0.8rem; font-weight: bold; cursor: pointer; }
+        .nav-link { color: #555; text-align: center; font-size: 0.8rem; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .nav-link.active { color: white; }
-        .nav-link i { font-size: 1.8rem; display: block; margin-bottom: 5px; }
+        .nav-link i { font-size: 1.6rem; display: block; margin-bottom: 5px; }
 
     </style>
 </head>
 <body>
 
-    <div class="buny-insta-banner">
-        <div class="scrolling-text">
-            instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; instagram: muhammedaliatl
-        </div>
+    <div class="muhammed-banner">
+        <div class="marquee">instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; instagram: muhammedaliatl</div>
     </div>
 
-    <header class="premium-header">
-        <div class="logo-area" onclick="buny_refreshHome()">BUNY<span>Tube</span></div>
-        <div class="user-avatar-btn" onclick="buny_toggleMenu()">
-            <i class="fas fa-user-secret fa-2x" style="color:var(--buny-red)"></i>
-        </div>
+    <header class="premium-nav">
+        <div class="logo-box" onclick="api_refreshHome()">BUNY<span>Tube</span></div>
+        <div class="user-trigger" onclick="ui_toggleMenu()"><i class="fas fa-user-secret fa-2x" style="color:red"></i></div>
     </header>
 
-    <section class="search-container">
-        <div class="search-wrapper">
-            <input type="text" id="buny-search-input" placeholder="Video veya Müzik ara..." onkeypress="if(event.key==='Enter') buny_search()">
-            <i class="fas fa-search" style="color:red" onclick="buny_search()"></i>
+    <div class="search-engine">
+        <div class="search-input-group">
+            <input type="text" id="app-search-q" placeholder="Video veya müzik ara..." onkeypress="if(event.key==='Enter') api_search()">
+            <i class="fas fa-search" style="color:red" onclick="api_search()"></i>
         </div>
-        <div class="voice-btn" onclick="buny_voice()"><i class="fas fa-microphone"></i></div>
-    </section>
+        <div class="mic-trigger" onclick="api_voice()"><i class="fas fa-microphone"></i></div>
+    </div>
 
-    <main id="video-grid-container"></main>
+    <main id="main-app-grid"></main>
 
-    <div id="shorts-screen-overlay">
-        <div class="shorts-block-box">
+    <div id="shorts-blocker">
+        <div class="block-card-ui">
             <i class="fas fa-brain"></i>
-            <h2 style="color:white; margin-bottom:15px; letter-spacing:3px;">ERİŞİM KISITLANDI</h2>
-            <p>"Kısa içeriklerin (Shorts) odak süresini azalttığı gerekçesiyle, bu özellik <b>MUHAMMED ALİ</b> tarafından bu sürümde tamamen kapatılmıştır."</p>
+            <h2 style="color:white; margin-bottom:15px; letter-spacing:2px;">ERİŞİM KISITLANDI</h2>
+            <p>"Shorts içerikleri odak süresini azalttığı için <b>MUHAMMED ALİ</b> tarafından bu sürümde kapatılmıştır."</p>
         </div>
-        <button onclick="buny_refreshHome()" style="margin-top:60px; background:white; color:black; border:none; padding:22px 60px; border-radius:50px; font-weight:900; letter-spacing:1px; cursor:pointer;">ANA SAYFAYA DÖN</button>
+        <button onclick="api_refreshHome()" style="margin-top:50px; background:white; color:black; border:none; padding:18px 50px; border-radius:40px; font-weight:900; cursor:pointer;">ANA SAYFAYA DÖN</button>
     </div>
 
-    <div id="buny-player-view" class="buny-player-overlay">
-        <div class="player-top-bar" onclick="buny_closePlayer()">
-            <i class="fas fa-chevron-down"></i> Oynatıcıyı Küçült (Arka Plan Aktif)
-        </div>
-        <div class="player-iframe-container" id="buny-iframe-stage"></div>
-        <div class="player-actions-row">
-            <button class="action-btn action-sub" id="buny-sub-btn" onclick="buny_doSub()">Abone Ol</button>
-            <button class="action-btn action-like" id="buny-like-btn" onclick="buny_doLike()"><i class="fas fa-thumbs-up"></i> Beğen</button>
-            <button class="action-btn action-down" onclick="buny_down()">İndir</button>
+    <div id="player-view" class="player-modal-view">
+        <div class="player-header" onclick="ui_closePlayer()"><i class="fas fa-chevron-down"></i> Kapat (Müzik Arka Planda Çalar)</div>
+        <div class="video-stage" id="iframe-loader"></div>
+        <div class="player-controls">
+            <button class="ctrl-btn btn-sub" id="sub-btn" onclick="api_sub()">Abone Ol</button>
+            <button class="ctrl-btn btn-like" id="like-btn" onclick="api_like()"><i class="fas fa-thumbs-up"></i> Beğen</button>
+            <button class="ctrl-btn btn-dl" onclick="api_download()">İndir</button>
         </div>
     </div>
 
-    <div id="buny-side-panel" class="side-profile-panel">
-        <div class="profile-header">
-            <div class="avatar-circle"><i class="fas fa-user-tie"></i></div>
-            <h2 id="display-name" style="font-size:1.8rem;">Misafir</h2>
-            <p id="display-tag" style="color:#555; font-weight:900; margin-top:5px;"></p>
-            
-            <input type="text" id="name-input-field" class="buny-input" placeholder="İsim Yazarak Kayıt Ol...">
-            <button class="buny-save-btn" onclick="buny_register()">KİMLİĞİ OLUŞTUR</button>
+    <div id="side-menu-ui" class="side-profile-ui">
+        <div class="profile-top">
+            <div class="avatar-box"><i class="fas fa-user-crown"></i></div>
+            <h2 id="ui-user-name">Misafir</h2>
+            <p id="ui-user-tag" style="color:#444; font-weight:900; margin-top:5px;"></p>
+            <input type="text" id="name-input" class="buny-input" placeholder="İsmini Yaz...">
+            <button class="buny-btn" onclick="api_register()">KAYDI TAMAMLA</button>
         </div>
-
-        <div class="no-copy-footer">
+        <div class="copyright-tag">
             <b>NO COPYRIGHT - 2024</b>
-            <p style="color:#222; font-weight:900; margin-top:10px;">MUHAMMED ALİ PREMİUM SÜRÜM</p>
+            <p style="color:#222; font-weight:900; margin-top:10px;">MUHAMMED ALİ PREMIUM SÜRÜM</p>
         </div>
-
-        <button onclick="buny_toggleMenu()" style="width:100%; margin-top:50px; background:none; border:1px solid #333; color:white; padding:20px; border-radius:20px; font-weight:bold;">PANELİ KAPAT</button>
+        <button onclick="ui_toggleMenu()" style="width:100%; margin-top:50px; background:none; border:1px solid #333; color:white; padding:18px; border-radius:15px;">PANELİ KAPAT</button>
     </div>
 
-    <nav class="bottom-navbar">
-        <div class="nav-link active" id="nav-home" onclick="buny_refreshHome()"><i class="fas fa-home"></i>Ana Sayfa</div>
-        <div class="nav-link" id="nav-shorts" onclick="buny_showShorts()"><i class="fas fa-bolt"></i>Shorts</div>
-        <div class="nav-link" id="nav-lib" onclick="buny_showLibrary()"><i class="fas fa-folder-open"></i>Kitaplık</div>
+    <nav class="app-footer-nav">
+        <div class="nav-link active" id="nav-0" onclick="api_refreshHome()"><i class="fas fa-home"></i>Ana Sayfa</div>
+        <div class="nav-link" id="nav-1" onclick="ui_showShorts()"><i class="fas fa-bolt"></i>Shorts</div>
+        <div class="nav-link" id="nav-2" onclick="ui_showLibrary()"><i class="fas fa-folder-open"></i>Kitaplık</div>
     </nav>
 
     <script>
-        // -- SABİTLER --
-        const BUNY_API_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
-        let buny_current_v = null;
-        let buny_lib = JSON.parse(localStorage.getItem('buny_ultra_lib')) || [];
-        let buny_is_sub = false;
+        const KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
+        let activeV = null;
+        let myLib = JSON.parse(localStorage.getItem('buny_lib_v37')) || [];
+        let subbed = false;
 
         /**
-         * 1. ANA SAYFA YENİLEME MOTORU (GARANTİLİ TAZE VERİ)
+         * ANA SAYFA MOTORU VE SHORTS FİLTRELEME
          */
-        async function buny_refreshHome() {
-            // Görünüm resetleme
-            document.getElementById('shorts-screen-overlay').style.display = 'none';
-            document.getElementById('video-grid-container').style.display = 'grid';
-            document.getElementById('buny-search-input').value = "";
+        async function api_refreshHome() {
+            document.getElementById('shorts-blocker').style.display = 'none';
+            document.getElementById('main-app-grid').style.display = 'grid';
             
-            // Rastgele kategori ile dinamik taze içerik çekme
-            const cats = ['trend müzik', 'oyun videoları', 'teknoloji inceleme', 'popüler haber', 'komedi'];
+            const cats = ['müzik', 'teknoloji', 'oyun', 'spor', 'haber'];
             const randomCat = cats[Math.floor(Math.random() * cats.length)];
             
-            // t=Date.now() parametresi tarayıcıyı taze veri çekmeye zorlar (Cache Killer)
-            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${randomCat}&type=video&chart=mostPopular&regionCode=TR&maxResults=15&key=${BUNY_API_KEY}&t=${Date.now()}`;
+            // Shorts'u engellemek için videoDuration=medium kullanıyoruz
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${randomCat}&type=video&videoDuration=medium&maxResults=25&key=${KEY}&t=${Date.now()}`;
             
             try {
-                const response = await fetch(url);
-                const data = await response.json();
-                buny_draw(data.items);
-            } catch (err) {
-                console.error("API Error:", err);
-            }
-
-            buny_updateNavUI(0);
+                const res = await fetch(url);
+                const data = await res.json();
+                
+                // Ekstra manuel filtre: Başlığında shorts geçenleri de atla
+                const filtered = data.items.filter(v => {
+                    const t = v.snippet.title.toLowerCase();
+                    return !t.includes('shorts') && !t.includes('#shorts');
+                });
+                
+                api_render(filtered);
+            } catch (e) { console.error(e); }
+            
+            ui_nav(0);
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        /**
-         * 2. VİDEOLARI GRID'E ÇİZME
-         */
-        function buny_draw(items) {
-            const container = document.getElementById('video-grid-container');
-            container.innerHTML = "";
-            
+        function api_render(items) {
+            const grid = document.getElementById('main-app-grid');
+            grid.innerHTML = "";
             items.forEach(v => {
-                const vid = v.id.videoId || v.id;
-                const vData = JSON.stringify({id: vid, title: v.snippet.title, thumb: v.snippet.thumbnails.high.url}).replace(/"/g, '&quot;');
-                
-                container.innerHTML += `
-                    <div class="v-card-premium" onclick='buny_openPlayer(${vData})'>
-                        <div class="thumbnail-wrapper">
-                            <img src="${v.snippet.thumbnails.high.url}" loading="lazy">
-                        </div>
-                        <div class="v-details">
-                            <h3>${v.snippet.title}</h3>
-                        </div>
+                const id = v.id.videoId || v.id;
+                const data = JSON.stringify({id, title: v.snippet.title, thumb: v.snippet.thumbnails.high.url}).replace(/"/g, '&quot;');
+                grid.innerHTML += `
+                    <div class="buny-card" onclick='ui_openPlayer(${data})'>
+                        <div class="thumb-area"><img src="${v.snippet.thumbnails.high.url}" loading="lazy"></div>
+                        <div class="v-content"><h3>${v.snippet.title}</h3></div>
                     </div>`;
             });
         }
 
         /**
-         * 3. OYNATICI VE ARKA PLAN MÜZİK DESTEĞİ
+         * BENZERSİZ KULLANICI SİSTEMİ
          */
-        function buny_openPlayer(v) {
-            buny_current_v = v;
-            document.getElementById('buny-player-view').style.display = 'flex';
-            
-            // playsinline=1 arka planda çalma şansını artırır
-            document.getElementById('buny-iframe-stage').innerHTML = `
-                <iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&modestbranding=1&rel=0&playsinline=1" 
-                style="width:100%; height:100%; border:none;" 
-                allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-            
-            // Beğeni durumu kontrolü
-            const isLiked = buny_lib.some(item => item.id === v.id);
-            document.getElementById('buny-like-btn').classList.toggle('active', isLiked);
+        function api_register() {
+            const n = document.getElementById('name-input').value;
+            if(!n || n.length < 2) return;
+            let iden = localStorage.getItem('buny_iden');
+            if(!iden || !iden.startsWith(n)) {
+                iden = n + "#" + Math.floor(1000 + Math.random() * 9000);
+            }
+            localStorage.setItem('buny_iden', iden);
+            api_loadUser();
+            alert("Kayıt Başarılı: " + iden);
+        }
+
+        function api_loadUser() {
+            const iden = localStorage.getItem('buny_iden') || "Misafir Kullanıcı";
+            document.getElementById('ui-user-name').innerText = iden.split('#')[0];
+            document.getElementById('ui-user-tag').innerText = iden.includes('#') ? iden : "";
         }
 
         /**
-         * 4. KİTAPLIK VE BEĞENİ SİSTEMİ (MESAJSIZ)
+         * KİTAPLIK VE BEĞENİ SİSTEMİ
          */
-        function buny_doLike() {
-            const idx = buny_lib.findIndex(x => x.id === buny_current_v.id);
-            if(idx === -1) {
-                buny_lib.push(buny_current_v);
-            } else {
-                buny_lib.splice(idx, 1);
-            }
-            localStorage.setItem('buny_ultra_lib', JSON.stringify(buny_lib));
-            document.getElementById('buny-like-btn').classList.toggle('active', idx === -1);
+        function api_like() {
+            const idx = myLib.findIndex(x => x.id === activeV.id);
+            if(idx === -1) myLib.push(activeV); else myLib.splice(idx, 1);
+            localStorage.setItem('buny_lib_v37', JSON.stringify(myLib));
+            document.getElementById('like-btn').classList.toggle('active', idx === -1);
         }
 
-        function buny_showLibrary() {
-            buny_updateNavUI(2);
-            const container = document.getElementById('video-grid-container');
-            container.innerHTML = `<h2 style="padding:20px; border-bottom:1px solid #222;">BEĞENDİĞİM VİDEOLAR</h2>`;
-            
-            if(buny_lib.length === 0) {
-                container.innerHTML += `<p style="padding:40px; color:#444; text-align:center;">Kitaplık boş. Beğendiğin videolar burada görünür.</p>`;
-            } else {
-                buny_draw(buny_lib);
-            }
+        function ui_showLibrary() {
+            ui_nav(2);
+            const grid = document.getElementById('main-app-grid');
+            grid.innerHTML = `<h2 style="padding:20px; border-bottom:1px solid #222;">BEĞENİLEN VİDEOLAR</h2>`;
+            if(myLib.length === 0) {
+                grid.innerHTML += `<p style="padding:40px; color:#444; text-align:center;">Henüz video beğenmediniz.</p>`;
+            } else { api_render(myLib); }
         }
 
         /**
-         * 5. BENZERSİZ KİMLİK SİSTEMİ (MUHAMMED#1234)
+         * DİĞER FONKSİYONLAR
          */
-        function buny_register() {
-            const name = document.getElementById('name-input-field').value;
-            if(!name || name.length < 2) return;
-
-            let finalID = localStorage.getItem('buny_final_id');
-            // Eğer yeni bir isim yazıldıysa veya hiç kayıt yoksa yeni ID ata
-            if(!finalID || !finalID.startsWith(name)) {
-                const rID = Math.floor(1000 + Math.random() * 9000);
-                finalID = name + "#" + rID;
-            }
-
-            localStorage.setItem('buny_final_id', finalID);
-            buny_loadUser();
-            alert("Premium Kayıt Başarılı: " + finalID);
-        }
-
-        function buny_loadUser() {
-            const fullID = localStorage.getItem('buny_final_id') || "Misafir Kullanıcı";
-            document.getElementById('display-name').innerText = fullID.split('#')[0];
-            document.getElementById('display-tag').innerText = fullID.includes('#') ? fullID : "";
-        }
-
-        /**
-         * 6. ARAMA VE SESLİ KOMUT
-         */
-        async function buny_search() {
-            const q = document.getElementById('buny-search-input').value;
+        function api_search() {
+            const q = document.getElementById('app-search-q').value;
             if(!q) return;
-            const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&type=video&maxResults=20&key=${BUNY_API_KEY}`);
-            const data = await res.json();
-            buny_draw(data.items);
+            fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&type=video&maxResults=20&key=${KEY}`)
+            .then(r => r.json()).then(d => api_render(d.items));
         }
 
-        function buny_voice() {
-            const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if(!Rec) return;
-            const recognition = new Rec();
-            recognition.lang = 'tr-TR';
-            recognition.onresult = (e) => {
-                document.getElementById('buny-search-input').value = e.results[0][0].transcript;
-                buny_search();
-            };
-            recognition.start();
+        function api_voice() {
+            const R = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if(!R) return;
+            const rec = new R(); rec.lang = 'tr-TR';
+            rec.onresult = (e) => { document.getElementById('app-search-q').value = e.results[0][0].transcript; api_search(); };
+            rec.start();
         }
 
-        /**
-         * 7. YARDIMCI ARAÇLAR
-         */
-        function buny_doSub() {
-            buny_is_sub = !buny_is_sub;
-            const b = document.getElementById('buny-sub-btn');
-            b.innerText = buny_is_sub ? "Abone Olundu" : "Abone Ol";
-            b.classList.toggle('active', buny_is_sub);
+        function ui_openPlayer(v) {
+            activeV = v;
+            document.getElementById('player-view').style.display = 'flex';
+            document.getElementById('iframe-loader').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&playsinline=1" style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media"></iframe>`;
+            const isLiked = myLib.some(x => x.id === v.id);
+            document.getElementById('like-btn').classList.toggle('active', isLiked);
         }
 
-        function buny_showShorts() {
-            document.getElementById('video-grid-container').style.display = 'none';
-            document.getElementById('shorts-screen-overlay').style.display = 'flex';
-            buny_updateNavUI(1);
-        }
+        function ui_closePlayer() { document.getElementById('player-view').style.display = 'none'; }
+        function ui_showShorts() { document.getElementById('main-app-grid').style.display = 'none'; document.getElementById('shorts-blocker').style.display = 'flex'; ui_nav(1); }
+        function ui_toggleMenu() { document.getElementById('side-menu-ui').classList.toggle('active'); api_loadUser(); }
+        function ui_nav(i) { [0,1,2].forEach(n => document.getElementById('nav-'+n).classList.toggle('active', i === n)); }
+        function api_sub() { subbed = !subbed; const b = document.getElementById('sub-btn'); b.innerText = subbed ? "Abone Olundu" : "Abone Ol"; b.classList.toggle('active', subbed); }
+        function api_download() { window.open(`https://9xbuddy.com/download?url=https://www.youtube.com/watch?v=${activeV.id}`, '_blank'); }
 
-        function buny_toggleMenu() {
-            document.getElementById('buny-side-panel').classList.toggle('open');
-            buny_loadUser();
-        }
-
-        function buny_closePlayer() {
-            document.getElementById('buny-player-view').style.display = 'none';
-        }
-
-        function buny_down() {
-            window.open(`https://9xbuddy.com/download?url=https://www.youtube.com/watch?v=${buny_current_v.id}`, '_blank');
-        }
-
-        function buny_updateNavUI(idx) {
-            const links = document.querySelectorAll('.nav-link');
-            links.forEach((l, i) => l.classList.toggle('active', i === idx));
-        }
-
-        // BAŞLANGIÇ ÇALIŞTIRICISI
-        window.onload = () => {
-            buny_refreshHome();
-            buny_loadUser();
-        };
-
+        window.onload = () => { api_refreshHome(); api_loadUser(); };
     </script>
 </body>
 </html>
