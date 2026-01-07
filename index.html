@@ -102,6 +102,16 @@ border-radius: 8px;
             <h2>PATRON</h2>
             <input type="password" id="admin-pass" placeholder="SAYIM BİLGİSİ">
             <button class="neon-btn" onclick="app.checkAdmin()">SİSTEME BAĞLAN</button>
+<div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin-top: 15px; border: 1px dashed #444; text-align: center;">
+    <h4 style="color: #ff0000; margin-top: 0;">API Limit Kurtarıcı</h4>
+    <input type="text" id="new-api-key" placeholder="Yeni API Key Yapıştır..." 
+           style="width: 90%; padding: 10px; border-radius: 5px; border: none; margin-bottom: 10px; background: #333; color: white; outline: none;">
+    <button onclick="updateApiKey()" 
+            style="background: #e6683c; color: white; border: none; padding: 10px; border-radius: 5px; width: 95%; font-weight: bold; cursor: pointer;">
+        SİSTEMİ GÜNCELLE
+    </button>
+</div>
+
             <p onclick="app.closeAdminModal()" style="color:#444; margin-top:15px; cursor:pointer; font-size:12px;">GERİ DÖN</p>
         </div>
     </div>
