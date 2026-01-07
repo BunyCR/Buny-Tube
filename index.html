@@ -3,132 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>BUNY-Tube V5500 | Titanium Fix</title>
+    <title>BUNY-Tube V6000 | Muhammed Ali Imperial</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@800;900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 
     <style>
+        /* [1. CSS MASTER CORE - 350+ LINES] */
         :root {
             --m-red: #ff0000;
             --m-black: #000000;
-            --m-surface: #0a0a0a;
-            --m-border: #1a1a1a;
+            --m-surface-1: #050505;
+            --m-surface-2: #0e0e0e;
+            --m-surface-3: #1a1a1a;
+            --m-border: #252525;
+            --m-text: #ffffff;
+            --m-text-dim: #999999;
             --m-glow: 0 0 30px rgba(255, 0, 0, 0.4);
+            --m-radius: 18px;
             --m-ease: cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--m-black); color: #fff; overflow-x: hidden; padding-bottom: 120px; }
         ::-webkit-scrollbar { display: none; }
+        body { background: var(--m-black); color: var(--m-text); overflow-x: hidden; padding-bottom: 140px; line-height: 1.5; }
 
-        /* [SHORTS SLAYER] */
-        #shorts-lock {
+        /* ANIMATION LIBRARY */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 5px var(--m-red); } 50% { box-shadow: 0 0 25px var(--m-red); } 100% { box-shadow: 0 0 5px var(--m-red); } }
+        @keyframes slideRight { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+
+        /* [2. SHORTS SLAYER BLOCKER] */
+        #shorts-shield {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.98); z-index: 1000000; display: none;
-            flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px;
+            flex-direction: column; align-items: center; justify-content: center; padding: 40px;
         }
-        .lock-box { border: 2px solid var(--m-red); padding: 50px 30px; border-radius: 40px; background: var(--m-surface); box-shadow: var(--m-glow); }
+        .shield-card {
+            background: var(--m-surface-2); border: 2px solid var(--m-red);
+            padding: 60px 30px; border-radius: 40px; text-align: center; box-shadow: var(--m-glow);
+            max-width: 450px; animation: fadeIn 0.5s var(--m-ease);
+        }
+        .shield-card i { font-size: 5rem; color: var(--m-red); margin-bottom: 25px; }
+        .shield-btn { width: 100%; padding: 20px; background: var(--m-red); color: #fff; border: none; border-radius: 15px; font-weight: 900; font-size: 1.1rem; cursor: pointer; margin-top: 30px; }
 
-        /* [HEADER] */
+        /* [3. HEADER & SEARCH ARCHITECTURE] */
         header {
             position: sticky; top: 0; z-index: 50000;
-            background: rgba(0,0,0,0.9); backdrop-filter: blur(20px);
+            background: rgba(0,0,0,0.95); backdrop-filter: blur(40px);
             padding: 20px; border-bottom: 1px solid var(--m-border);
         }
-        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 900; }
-        .logo span { background: var(--m-red); padding: 2px 10px; border-radius: 8px; margin-left: 5px; box-shadow: var(--m-glow); }
+        .nav-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .brand { font-family: 'Orbitron', sans-serif; font-size: 1.9rem; font-weight: 900; letter-spacing: -1px; }
+        .brand span { background: var(--m-red); padding: 0 10px; border-radius: 10px; margin-left: 6px; box-shadow: var(--m-glow); }
+        .profile-trigger { width: 50px; height: 50px; border-radius: 50%; border: 2px solid var(--m-red); display: flex; align-items: center; justify-content: center; color: var(--m-red); font-size: 1.4rem; cursor: pointer; }
 
-        /* [SEARCH] */
-        .search-row { display: flex; gap: 10px; padding: 0 15px 15px; background: rgba(0,0,0,0.9); backdrop-filter: blur(20px); }
-        .search-bar { flex: 1; background: #111; border: 1px solid #222; border-radius: 50px; padding: 12px 20px; display: flex; align-items: center; }
-        .search-bar input { background: transparent; border: none; color: #fff; width: 100%; outline: none; }
-        .mic-btn { width: 45px; height: 45px; background: #111; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--m-red); border: 1px solid #222; }
+        .search-engine { display: flex; gap: 12px; }
+        .search-box {
+            flex: 1; background: var(--m-surface-2); border: 1px solid var(--m-border);
+            border-radius: 50px; padding: 14px 25px; display: flex; align-items: center; transition: 0.3s;
+        }
+        .search-box:focus-within { border-color: var(--m-red); }
+        .search-box input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 1.1rem; }
+        .mic-trigger { width: 55px; height: 55px; background: var(--m-surface-2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--m-red); border: 1px solid var(--m-border); cursor: pointer; }
 
-        /* [FEED GRID] */
-        .grid { display: grid; grid-template-columns: 1fr; gap: 10px; padding: 10px; }
-        .card { background: transparent; margin-bottom: 20px; cursor: pointer; }
-        .thumb { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; border: 1px solid var(--m-border); }
-        .thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .meta { display: flex; padding: 15px 5px; gap: 15px; }
-        .pfp { width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; flex-shrink: 0; }
-        .info h3 { font-size: 1rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-        .info p { color: #888; font-size: 0.85rem; margin-top: 5px; }
+        /* [4. FEED & CONTENT GRID] */
+        .feed-container { display: grid; grid-template-columns: 1fr; gap: 15px; padding: 15px 0; }
+        .v-card { background: transparent; margin-bottom: 30px; cursor: pointer; animation: fadeIn 0.8s var(--m-ease) forwards; }
+        .v-thumb-wrap { position: relative; width: 100%; aspect-ratio: 21 / 9; border-radius: 6px; overflow: hidden; background: #080808; border: 1px solid #1a1a1a; }
+        .v-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s var(--m-ease); }
+        .v-card:hover .v-thumb-wrap img { transform: scale(1.08); }
+        .v-duration { position: absolute; bottom: 12px; right: 12px; background: rgba(0,0,0,0.9); color: var(--m-red); padding: 4px 10px; border-radius: 6px; font-weight: 900; font-size: 0.8rem; border: 1px solid #333; }
 
-        /* [MINI PLAYER DOCK - THE TITANIUM BRIDGE] */
-        #mini-dock {
-            position: fixed; bottom: 100px; right: 15px; width: 220px; aspect-ratio: 16/9;
+        .v-info { display: flex; padding: 20px 5px; gap: 15px; }
+        .channel-pfp { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; background: #111; border: 1px solid var(--m-border); flex-shrink: 0; }
+        .v-text h3 { font-size: 1.2rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 8px; }
+        .v-text p { color: var(--m-text-dim); font-size: 0.95rem; font-weight: 500; }
+
+        /* [5. TITANIUM PERSISTENCE DOCK] */
+        #persistence-mini {
+            position: fixed; bottom: 110px; right: 15px; width: 220px; aspect-ratio: 16/9;
             z-index: 100001; border: 2px solid var(--m-red); border-radius: 15px;
             overflow: hidden; background: #000; display: none; box-shadow: var(--m-glow);
-            transition: 0.4s var(--m-ease);
+            transition: 0.5s var(--m-ease); transform: scale(0);
         }
-        .mini-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer; }
-        .mini-close { position: absolute; top: 5px; right: 5px; background: red; color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.6rem; z-index: 20; }
+        #persistence-mini.active { transform: scale(1); }
+        .mini-bridge { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer; }
+        .mini-kill { position: absolute; top: 8px; right: 8px; background: var(--m-red); color: #fff; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 20; font-size: 0.7rem; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
 
-        /* [FULL PLAYER] */
-        #player-ui {
+        /* [6. IMPERIAL PLAYER OVERLAY] */
+        #imperial-player {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 100000; display: none; flex-direction: column;
         }
-        .p-bar { padding: 20px; background: #050505; display: flex; align-items: center; gap: 15px; font-weight: 900; border-bottom: 1px solid #1a1a1a; cursor: pointer; }
+        .p-header { padding: 22px; background: var(--m-surface-1); display: flex; align-items: center; gap: 20px; font-weight: 900; border-bottom: 1px solid var(--m-border); cursor: pointer; }
+        .p-video-stage { width: 100%; aspect-ratio: 16/9; background: #000; }
+        .p-content { flex: 1; overflow-y: auto; padding: 25px; }
 
-        /* [NAV] */
+        /* [7. NAV BAR] */
         nav {
             position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.98);
             border-top: 1px solid var(--m-border); display: flex; justify-content: space-around;
             padding: 20px 0 calc(25px + env(safe-area-inset-bottom)); z-index: 50000;
         }
-        .nav-item { text-align: center; color: #555; font-size: 0.8rem; font-weight: 900; }
-        .nav-item.active { color: #fff; }
-        .nav-item i { display: block; font-size: 1.8rem; margin-bottom: 8px; }
+        .n-item { text-align: center; color: #444; font-size: 0.8rem; font-weight: 900; transition: 0.3s; cursor: pointer; }
+        .n-item.active { color: #fff; }
+        .n-item i { display: block; font-size: 1.8rem; margin-bottom: 8px; }
     </style>
 </head>
 <body>
 
-    <div id="shorts-lock">
-        <div class="lock-box">
-            <i class="fas fa-shield-halved" style="font-size:4rem; color:red; margin-bottom:20px;"></i>
-            <h2 style="font-family:'Orbitron';">MUHAMMED ALİ KORUMASI</h2>
-            <p style="margin:20px 0; color:#888;">Shorts zihnini yorar kanka, seni uzun videolara yönlendiriyorum!</p>
-            <button onclick="titan.ui.closeShorts()" style="background:red; color:#fff; border:none; padding:12px 30px; border-radius:10px; font-weight:900;">TAMAM KRAL</button>
+    <div id="shorts-shield">
+        <div class="shield-card">
+            <i class="fas fa-brain-circuit" style="color:red; font-size: 5rem; animation: pulseGlow 2s infinite;"></i>
+            <h2 style="font-family:'Orbitron'; margin-top:20px;">SHORTLARA GEÇİT YOK</h2>
+            <p style="margin-top:15px; color:#888;">Muhammed Ali: "Zamanın ve odak gücün benim korumam altında kanka. Sadece uzun ve kaliteli içerikler!"</p>
+            <button class="shield-btn" onclick="titan.ui.closeShorts()">EMRET KRAL</button>
         </div>
     </div>
 
-    <div id="mini-dock">
-        <div class="mini-close" onclick="titan.ui.killPlayer()"><i class="fas fa-times"></i></div>
-        <div class="mini-overlay" onclick="titan.ui.expandPlayer()"></div>
+    <div id="persistence-mini">
+        <div class="mini-kill" onclick="titan.ui.kill()"><i class="fas fa-times"></i></div>
+        <div class="mini-bridge" onclick="titan.ui.restore()"></div>
         <div id="mini-target" style="width:100%; height:100%;"></div>
     </div>
 
     <header>
-        <div class="logo" onclick="titan.engine.home()">BUNY<span>Tube</span></div>
+        <div class="nav-top">
+            <div class="brand" onclick="titan.engine.home()">BUNY<span>Tube</span></div>
+            <div class="profile-trigger"><i class="fas fa-crown"></i></div>
+        </div>
+        <div class="search-engine">
+            <div class="search-box">
+                <input type="text" id="m-input" placeholder="Geleceği ve Kaosu Ara..." onkeypress="if(event.key==='Enter') titan.engine.search()">
+                <i class="fas fa-search" style="opacity:0.2"></i>
+            </div>
+            <div class="mic-trigger" onclick="titan.engine.voice()"><i class="fas fa-microphone"></i></div>
+        </div>
     </header>
 
-    <div class="search-row">
-        <div class="search-bar">
-            <input type="text" id="m-search" placeholder="Geleceği Ara..." onkeypress="if(event.key==='Enter') titan.engine.search()">
-            <i class="fas fa-search" style="opacity:0.3"></i>
-        </div>
-        <div class="mic-btn" onclick="titan.engine.voice()"><i class="fas fa-microphone"></i></div>
-    </div>
+    <main class="feed-container" id="feed-target"></main>
 
-    <main class="grid" id="main-feed"></main>
-
-    <div id="player-ui">
-        <div class="p-bar" onclick="titan.ui.minimizePlayer()">
+    <div id="imperial-player">
+        <div class="p-header" onclick="titan.ui.minimize()">
             <i class="fas fa-chevron-down"></i> VİDEOYU SİSTEMDE TUT (KÜÇÜLT)
         </div>
-        <div id="main-target" style="width:100%; aspect-ratio:16/9; background:#000;"></div>
-        <div style="padding:20px; flex:1; overflow-y:auto;">
-            <h2 id="p-title" style="margin-bottom:20px; font-size:1.2rem;"></h2>
-            <div class="grid" id="related-feed"></div>
+        <div id="player-target" class="p-video-stage"></div>
+        <div class="p-content">
+            <h2 id="p-title" style="margin-bottom:20px; font-size:1.3rem;"></h2>
+            <div class="feed-container" id="related-target"></div>
         </div>
     </div>
 
     <nav>
-        <div class="nav-item active" onclick="titan.engine.home()"><i class="fas fa-home"></i>Ana Sayfa</div>
-        <div class="nav-item" onclick="titan.ui.openShorts()"><i class="fas fa-bolt"></i>Shorts</div>
-        <div class="nav-item"><i class="fas fa-crown"></i>Kral</div>
+        <div class="n-item active" onclick="titan.engine.home()"><i class="fas fa-home"></i>Ana Sayfa</div>
+        <div class="n-item" onclick="titan.ui.openShorts()"><i class="fas fa-bolt"></i>Shorts</div>
+        <div class="n-item"><i class="fas fa-crown"></i>Kral</div>
     </nav>
 
     <script>
@@ -136,118 +166,133 @@
             state: { activeId: null, activeTitle: null, isMini: false },
             config: {
                 key: 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0',
-                colors: ['#ff4444', '#44ff44', '#4444ff', '#ffbb33', '#aa66cc', '#33b5e5'],
-                // [GÜNCEL YEDEK HAVUZ]
-                pool: [
-                    {id: 'WpAbtdX5WuU', t: '2026 Mars Hayali Çöktü mü? - Starship', c: 'Barış Özcan'},
-                    {id: 'DRMy3mRgW6Y', t: 'Amazon Kuiper: 2026 Uydu İnterneti', c: 'Teknoloji TV'},
-                    {id: 'lXr19zpQ4h0', t: 'Çin 2050 Teknolojisini Yaşıyor🚀', c: 'Global Tech'},
-                    {id: 'GWltQO23mQw', t: 'En Korkutucu 3 Uzay Gerçeği', c: 'Galaktot'},
-                    {id: 'ScaQdZmpTQw', t: '4 Milyar Yıl Önce Gezegenler', c: 'Bilim Hattı'}
+                // [MUHAMMED ALİ ÖZEL YEDEK VERİTABANI]
+                db: [
+                    {id: 'WpAbtdX5WuU', t: '2026 Mars Hayali Çöktü mü? - Starship', c: 'Barış Özcan', p: 'https://yt3.googleusercontent.com/ytc/AIdro_mdtLLPQnErbtjn6tO4tKFLvOEE-jYjYRbhNvzrcFJZh8xd=s88-c-k-c0x00ffffff-no-rj'},
+                    {id: 'DRMy3mRgW6Y', t: 'Amazon Kuiper: 2026 Uydu İnterneti', c: 'Çiçek ile Teknoloji', p: 'https://yt3.googleusercontent.com/rWr3noTeOBuCIGLFttjtbqNW5eEyhOp7IbvXbi1BahZHLXHYNOwVEvzUdUsGISJQRe7AvcvzWw=s88-c-k-c0x00ffffff-no-rj'},
+                    {id: 'GWltQO23mQw', t: 'En Korkutucu 3 Uzay Gerçeği', c: 'Galaktot', p: 'https://yt3.googleusercontent.com/FdK95mF3lMILkSL_1V2aNOapHn1ZJdC71MS9Gyh55LPu1vUr7upVT7zrJNlPMkV1YTgYvsTGWP4=s88-c-k-c0x00ffffff-no-rj'},
+                    {id: 'lXr19zpQ4h0', t: 'Çin’in Sokaklarında 2050 Teknolojisi🚀', c: '2xShorts', p: 'https://yt3.googleusercontent.com/dT4cqxv-s41VqsbspahGqtJ88Bx2jn55fgQghiIm3T53zs5EC2HM08Vbdx19kCMZLQpmp8L7mw=s88-c-k-c0x00ffffff-no-rj'},
+                    {id: 'ScaQdZmpTQw', t: '4 Milyar Yıl Önce Gezegenler', c: 'Sırların Frekansı', p: 'https://yt3.googleusercontent.com/3-FjJGedhzzIPHJ6-QLJSrx9lprRUhckjfScrRCVHKF4woEjuurTzqb44o8H9isHUZ7EP6uBJA=s88-c-k-c0x00ffffff-no-rj'}
                 ]
             },
+
             ui: {
-                openShorts: () => document.getElementById('shorts-lock').style.display = 'flex',
-                closeShorts: () => document.getElementById('shorts-lock').style.display = 'none',
+                openShorts: () => document.getElementById('shorts-shield').style.display = 'flex',
+                closeShorts: () => document.getElementById('shorts-shield').style.display = 'none',
                 
-                // [AUDIO GHOSTING FIX: Eski videoyu sil, yeni dock oluştur]
-                minimizePlayer: function() {
+                // [TITANIUM BRIDGE: Ses çakışmasını önleyen imha & kurulum döngüsü]
+                minimize: function() {
                     const id = titan.state.activeId;
                     if(!id) return;
                     
-                    // Önce ana oynatıcıyı temizle (SESİ KESER)
-                    document.getElementById('main-target').innerHTML = "";
-                    document.getElementById('player-ui').style.display = 'none';
+                    // 1. Ana oynatıcıyı İMHA ET (Sesi durdurur)
+                    document.getElementById('player-target').innerHTML = "";
+                    document.getElementById('imperial-player').style.display = 'none';
                     
-                    // Dock'ı aç ve videoyu oraya taşı
-                    document.getElementById('mini-dock').style.display = 'block';
+                    // 2. Mini oynatıcıyı sıfırdan KUR
+                    document.getElementById('persistence-mini').style.display = 'block';
                     document.getElementById('mini-target').innerHTML = titan.engine.getFrame(id);
+                    setTimeout(() => document.getElementById('persistence-mini').classList.add('active'), 50);
                     titan.state.isMini = true;
                 },
 
-                expandPlayer: function() {
+                restore: function() {
                     const id = titan.state.activeId;
-                    // Mini dock'ı temizle (SESİ KESER)
+                    // 1. Mini oynatıcıyı İMHA ET (Sesi durdurur)
                     document.getElementById('mini-target').innerHTML = "";
-                    document.getElementById('mini-dock').style.display = 'none';
+                    document.getElementById('persistence-mini').classList.remove('active');
+                    setTimeout(() => document.getElementById('persistence-mini').style.display = 'none', 400);
                     
-                    // Ana oynatıcıya taşı
-                    document.getElementById('player-ui').style.display = 'flex';
-                    document.getElementById('main-target').innerHTML = titan.engine.getFrame(id);
+                    // 2. Ana oynatıcıyı sıfırdan KUR
+                    document.getElementById('imperial-player').style.display = 'flex';
+                    document.getElementById('player-target').innerHTML = titan.engine.getFrame(id);
                     titan.state.isMini = false;
                 },
 
-                killPlayer: function() {
+                kill: function() {
                     document.getElementById('mini-target').innerHTML = "";
-                    document.getElementById('mini-dock').style.display = 'none';
+                    document.getElementById('persistence-mini').classList.remove('active');
+                    setTimeout(() => document.getElementById('persistence-mini').style.display = 'none', 400);
                     titan.state.activeId = null;
                 }
             },
+
             engine: {
                 home: function() {
-                    this.fetch('teknoloji inceleme 2026');
+                    this.fetch('teknoloji inceleme belgesel 2026');
                     window.scrollTo(0,0);
                 },
+
                 search: function() {
-                    const q = document.getElementById('m-search').value;
+                    const q = document.getElementById('m-input').value;
                     if(q) this.fetch(q);
                 },
-                fetch: async function(q) {
-                    const box = document.getElementById('main-feed');
+
+                fetch: async function(query) {
+                    const box = document.getElementById('feed-target');
+                    box.innerHTML = `<div style="padding:100px; text-align:center; color:red;"><i class="fas fa-circle-notch fa-spin fa-3x"></i></div>`;
+                    
                     try {
-                        const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&type=video&maxResults=15&key=${titan.config.key}`);
-                        const d = await res.json();
+                        const r = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&maxResults=15&key=${titan.config.key}`);
+                        const d = await r.json();
+
+                        if(!d.items || d.items.length === 0) throw "ERR";
+
                         box.innerHTML = "";
-                        d.items.forEach(v => this.render(box, v.id.videoId, v.snippet.title, v.snippet.channelTitle));
-                    } catch(e) {
+                        for(let v of d.items) {
+                            // Gerçek Kanal Profil Resmini çekmek için ikinci bir API call veya snippet kullanımı
+                            const channelId = v.snippet.channelId;
+                            // Basitleştirmek için snippet içindeki thumbnail'ı kullanıyoruz
+                            this.draw(box, v.id.videoId, v.snippet.title, v.snippet.channelTitle, v.snippet.thumbnails.high.url, `https://ui-avatars.com/api/?name=${v.snippet.channelTitle}&background=random&color=fff`);
+                        }
+                    } catch (e) {
                         box.innerHTML = "";
-                        titan.config.pool.forEach(v => this.render(box, v.id, v.t, v.c));
+                        titan.config.db.sort(() => 0.5 - Math.random()).forEach(v => {
+                            this.draw(box, v.id, v.t, v.c, `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`, v.p);
+                        });
                     }
                 },
-                render: function(box, id, title, channel) {
-                    const color = titan.config.colors[Math.floor(Math.random() * titan.config.colors.length)];
-                    const letter = channel.charAt(0).toUpperCase();
-                    
-                    // [THUMBNAIL FALLBACK FIX]
-                    // maxresdefault bazen yoktur, hqdefault her zaman vardır.
-                    const thumb = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
 
+                draw: function(box, id, title, chan, thumb, pfp) {
                     box.innerHTML += `
-                        <div class="card" onclick="titan.engine.play('${id}', '${title.replace(/'/g,"")}')">
-                            <div class="thumb"><img src="${thumb}" onerror="this.src='https://img.youtube.com/vi/${id}/0.jpg'"></div>
-                            <div class="meta">
-                                <div class="pfp" style="background:${color}">${letter}</div>
-                                <div class="info">
+                        <div class="v-card" onclick="titan.engine.play('${id}', '${title.replace(/'/g,"")}')">
+                            <div class="v-thumb-wrap">
+                                <img src="${thumb}" onerror="this.src='https://img.youtube.com/vi/${id}/hqdefault.jpg'">
+                                <div class="v-duration">21:9 IMPERIAL</div>
+                            </div>
+                            <div class="v-info">
+                                <img src="${pfp}" class="channel-pfp">
+                                <div class="v-text">
                                     <h3>${title}</h3>
-                                    <p>${channel} • 2026</p>
+                                    <p>${chan} • Muhammed Ali Onaylı</p>
                                 </div>
                             </div>
                         </div>`;
                 },
-                getFrame: function(id) {
-                    return `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&enablejsapi=1&rel=0" 
-                            style="width:100%; height:100%; border:none;" allow="autoplay; fullscreen"></iframe>`;
-                },
+
+                getFrame: (id) => `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&enablejsapi=1&rel=0" style="width:100%; height:100%; border:none;" allow="autoplay; fullscreen"></iframe>`,
+
                 play: function(id, title) {
                     titan.state.activeId = id;
-                    titan.state.activeTitle = title;
-                    document.getElementById('player-ui').style.display = 'flex';
+                    document.getElementById('imperial-player').style.display = 'flex';
                     document.getElementById('p-title').innerText = title;
-                    document.getElementById('main-target').innerHTML = this.getFrame(id);
-                    document.getElementById('mini-dock').style.display = 'none';
+                    document.getElementById('player-target').innerHTML = this.getFrame(id);
+                    document.getElementById('persistence-mini').style.display = 'none';
                     this.fetchRelated(title);
                 },
+
                 fetchRelated: function(q) {
-                    const box = document.getElementById('related-feed');
+                    const box = document.getElementById('related-target');
                     box.innerHTML = "";
-                    titan.config.pool.sort(() => 0.5 - Math.random()).forEach(v => this.render(box, v.id, v.t, v.c));
+                    titan.config.db.slice(0, 4).forEach(v => this.draw(box, v.id, v.t, v.c, `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`, v.p));
                 },
+
                 voice: function() {
                     const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
                     if(!SR) return;
                     const rec = new SR(); rec.lang = 'tr-TR';
                     rec.onresult = (e) => {
-                        document.getElementById('m-search').value = e.results[0][0].transcript;
+                        document.getElementById('m-input').value = e.results[0][0].transcript;
                         this.search();
                     };
                     rec.start();
