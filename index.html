@@ -2,137 +2,108 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BunyTube</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root { --v-red: #ff0000; --v-black: #000; --neon: #00f2ff; }
-        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; }
-        body { background: var(--v-black); color: #fff; overflow-x: hidden; padding-bottom: 70px; }
-
+        body { background: #000; color: #fff; font-family: sans-serif; margin: 0; padding-bottom: 80px; }
+        
         /* HAREKETLİ BAKIM EKRANI */
-        #bakim-ekran { 
-            position: fixed; inset: 0; background: #000; z-index: 1000000; 
-            display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
-        }
-        .ani-text { 
-            font-size: 30px; font-weight: 900; color: var(--neon);
-            text-shadow: 0 0 20px var(--neon);
-            animation: moveText 3s ease-in-out infinite;
-        }
-        @keyframes moveText {
-            0%, 100% { transform: translateY(0) scale(1); opacity: 1; }
-            50% { transform: translateY(-20px) scale(1.1); opacity: 0.7; }
-        }
-        .patron-key { margin-top: 100px; font-size: 35px; cursor: pointer; opacity: 0.1; transition: 0.3s; }
-        .patron-key:hover { opacity: 1; color: var(--neon); }
+        #bakim { position: fixed; inset: 0; background: #000; z-index: 9999; display: none; flex-direction: column; justify-content: center; align-items: center; }
+        .ani { font-size: 30px; color: #00f2ff; text-shadow: 0 0 15px #00f2ff; animation: fly 2s infinite ease-in-out; }
+        @keyframes fly { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+        .key { margin-top: 100px; opacity: 0.1; cursor: pointer; font-size: 30px; }
 
-        /* HEADER & ARAMA */
-        header { position: sticky; top: 0; background: #0f0f0f; z-index: 1000; padding: 15px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid #222; }
-        .logo { font-size: 20px; font-weight: 900; color: #fff; flex-shrink: 0; }
-        .logo span { color: var(--v-red); }
-        .search-box { flex: 1; background: #222; border-radius: 20px; display: flex; align-items: center; padding: 5px 15px; }
-        .search-box input { flex: 1; background: none; border: none; color: white; padding: 8px; outline: none; }
-
-        /* VİDEO LİSTESİ */
-        #feed { padding: 15px; }
-        .v-card { margin-bottom: 25px; cursor: pointer; }
-        .v-thumb { width: 100%; aspect-ratio: 16/9; border-radius: 12px; overflow: hidden; background: #111; }
-        .v-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .v-title { padding: 10px 0; font-size: 16px; font-weight: 500; line-height: 1.4; }
-
-        /* PLAYER */
-        #player-overlay { position: fixed; inset: 0; background: #000; z-index: 2000000; display: none; flex-direction: column; }
-        .p-close { padding: 15px; font-size: 30px; color: var(--neon); cursor: pointer; }
+        /* ARAYÜZ */
+        header { padding: 15px; background: #111; display: flex; gap: 10px; sticky; top: 0; z-index: 100; }
+        input { flex: 1; padding: 10px; border-radius: 5px; border: none; background: #222; color: #fff; }
+        button { padding: 10px; background: #ff0000; color: #fff; border: none; border-radius: 5px; font-weight: bold; }
+        
+        #results { padding: 10px; display: grid; gap: 20px; }
+        .v-card { cursor: pointer; }
+        .v-card img { width: 100%; border-radius: 10px; aspect-ratio: 16/9; object-fit: cover; }
+        
+        #player { position: fixed; inset: 0; background: #000; display: none; z-index: 10000; }
+        .close { padding: 20px; color: #00f2ff; font-size: 20px; cursor: pointer; }
     </style>
 </head>
 <body>
 
-    <div id="bakim-ekran">
-        <div class="ani-text">BAKIM MODU AKTİF</div>
-        <p style="color: #444; margin-top: 10px;">Sistem Muhammed Ali tarafından güncelleniyor.</p>
-        <div class="patron-key" onclick="app.patronCheck()">🔑</div>
-    </div>
+<div id="bakim">
+    <div class="ani">BUNYTUBE BAKIMDA</div>
+    <div class="key" onclick="unlock()">🔑</div>
+</div>
 
-    <header>
-        <div class="logo"><span>▶</span> BunyTube</div>
-        <div class="search-box">
-            <input type="text" id="q" placeholder="Video ara..." onkeyup="if(event.key==='Enter') app.search()">
-            <i class="fas fa-search" onclick="app.search()"></i>
-        </div>
-    </header>
+<header>
+    <div style="color:red; font-weight:900; font-size:20px;">BunyTube</div>
+    <input type="text" id="q" placeholder="Video adı yaz...">
+    <button onclick="search()">ARA</button>
+</header>
 
-    <div id="feed"></div>
+<div id="results"></div>
 
-    <div id="player-overlay">
-        <div class="p-close" onclick="app.closePlayer()"><i class="fas fa-chevron-down"></i></div>
-        <div id="video-frame" style="width:100%; height:100%;"></div>
-    </div>
+<div id="player">
+    <div class="close" onclick="closePlayer()">✖ KAPAT</div>
+    <div id="video-area"></div>
+</div>
 
-    <script>
-    const app = {
-        init() {
-            if(localStorage.getItem('buny_bakim') === 'true') {
-                document.getElementById('bakim-ekran').style.display = 'flex';
-            }
-        },
+<script>
+    // Bakım kontrolü
+    if(localStorage.getItem('buny_mod') === 'true') document.getElementById('bakim').style.display = 'flex';
 
-        async search() {
-            const q = document.getElementById('q').value;
-            if(!q) return;
-            const feed = document.getElementById('feed');
-            feed.innerHTML = '<div style="text-align:center; padding:50px;">Yükleniyor...</div>';
-
-            try {
-                // Kesin sonuç veren Proxy üzerinden YouTube kazıma
-                const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://www.youtube.com/results?search_query=' + q + '&sp=EgIQAQ%253D%253D')}`);
-                const data = await res.json();
-                const html = data.contents;
-                
-                const videoIds = [...html.matchAll(/"videoId":"([^"]+)"/g)].map(m => m[1]);
-                const titles = [...html.matchAll(/"title":\{"runs":\[\{"text":"([^"]+)"/g)].map(m => m[1]);
-
-                if(videoIds.length > 0) {
-                    feed.innerHTML = '';
-                    const results = [...new Set(videoIds)].slice(0, 15);
-                    results.forEach((id, i) => {
-                        feed.innerHTML += `
-                            <div class="v-card" onclick="app.play('${id}')">
-                                <div class="v-thumb"><img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg"></div>
-                                <div class="v-title">${titles[i] || 'Video'}</div>
-                            </div>`;
-                    });
-                }
-            } catch(e) {
-                feed.innerHTML = 'Hata oluştu, tekrar dene.';
-            }
-        },
-
-        play(id) {
-            document.getElementById('player-overlay').style.display = 'flex';
-            document.getElementById('video-frame').innerHTML = `
-                <iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" 
-                style="width:100%; height:300px; border:none;" allowfullscreen></iframe>`;
-        },
-
-        closePlayer() {
-            document.getElementById('player-overlay').style.display = 'none';
-            document.getElementById('video-frame').innerHTML = '';
-        },
-
-        patronCheck() {
-            const pw = prompt("Şifre gir:");
-            if(pw === "Muhiy.1905") {
-                const isBakim = localStorage.getItem('buny_bakim') === 'true';
-                const s = confirm(isBakim ? "Bakımı kapat?" : "Bakımı aç?");
-                if(s) {
-                    localStorage.setItem('buny_bakim', !isBakim);
-                    location.reload();
-                }
-            }
+    function unlock() {
+        if(prompt("Şifre:") === "Muhiy.1905") {
+            localStorage.setItem('buny_mod', 'false');
+            location.reload();
         }
-    };
-    window.onload = () => app.init();
-    </script>
+    }
+
+    // YENİ YÖNTEM: YouTube'un açık arama motoru köprüsü (Google Script bypass)
+    async function search() {
+        const query = document.getElementById('q').value;
+        const resDiv = document.getElementById('results');
+        resDiv.innerHTML = "Aranıyor...";
+
+        try {
+            // Bu link, YouTube'un video sonuçlarını engel takılmadan JSON formatında getiren bir köprüdür
+            const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://www.youtube.com/results?search_query=' + query + '&pbj=1')}`, {
+                headers: { 'x-requested-with': 'XMLHttpRequest' }
+            });
+            const data = await res.json();
+            
+            // Veri içinden Video ID'lerini temiz bir şekilde ayıklama (Regex)
+            const ids = [...data.contents.matchAll(/"videoId":"([^"]+)"/g)].map(m => m[1]);
+            const titles = [...data.contents.matchAll(/"title":\{"runs":\[\{"text":"([^"]+)"/g)].map(m => m[1]);
+
+            if(ids.length > 0) {
+                resDiv.innerHTML = "";
+                const unique = [...new Set(ids)].slice(0, 10);
+                unique.forEach((id, i) => {
+                    resDiv.innerHTML += `
+                        <div class="v-card" onclick="play('${id}')">
+                            <img src="https://i.ytimg.com/vi/${id}/mqdefault.jpg">
+                            <div style="margin-top:8px;">${titles[i] || 'Video ' + (i+1)}</div>
+                        </div>`;
+                });
+            } else {
+                resDiv.innerHTML = "Sonuç yok. Başka bir şey dene patron.";
+            }
+        } catch (e) {
+            resDiv.innerHTML = "Bağlantı hatası!";
+        }
+    }
+
+    function play(id) {
+        document.getElementById('player').style.display = 'block';
+        // Reddedilme hatasını aşmak için YouTube-NoCookie kullanımı
+        document.getElementById('video-area').innerHTML = `
+            <iframe width="100%" height="300" src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" frameborder="0" allowfullscreen></iframe>`;
+    }
+
+    function closePlayer() {
+        document.getElementById('player').style.display = 'none';
+        document.getElementById('video-area').innerHTML = "";
+    }
+</script>
+
 </body>
 </html>
