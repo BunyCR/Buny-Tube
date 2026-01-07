@@ -2,561 +2,293 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BUNY-Tube V160 Master Premium</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>BUNY-Tube V8000 | Muhammed Ali Pro</title>
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;900&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 
     <style>
-        /* [1. GLOBAL STYLES & VARIABLES] */
+        /* [1. CSS MASTER SYSTEM - NEUMORPHIC DARK THEME] */
         :root {
-            --muh-red: #ff0000;
-            --muh-black: #000000;
-            --muh-card: #121212;
-            --muh-border: #222222;
-            --muh-text: #ffffff;
-            --muh-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --m-red: #ff0000;
+            --m-black: #000000;
+            --m-surface: #0a0a0a;
+            --m-surface-2: #141414;
+            --m-border: #222222;
+            --m-text: #ffffff;
+            --m-text-dim: #999999;
+            --m-glow: 0 0 25px rgba(255, 0, 0, 0.4);
+            --m-ease: cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--m-black); color: var(--m-text); overflow-x: hidden; padding-bottom: 120px; -webkit-font-smoothing: antialiased; }
+        ::-webkit-scrollbar { display: none; }
 
-        body {
-            background-color: var(--muh-black);
-            color: var(--muh-text);
-            overflow-x: hidden;
-            padding-bottom: 120px;
-        }
+        /* [ANIMATIONS] */
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes glowPulse { 0% { box-shadow: 0 0 5px var(--m-red); } 50% { box-shadow: 0 0 20px var(--m-red); } 100% { box-shadow: 0 0 5px var(--m-red); } }
 
-        /* [2. PREMIUM TOP BANNER] */
-        .v160-banner {
-            background: var(--muh-gradient);
-            height: 38px;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 100005;
+        /* [SHORTS LOCK] */
+        #shorts-lock {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.98); z-index: 100000; display: none;
+            flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px;
         }
+        .lock-card { border: 2px solid var(--m-red); padding: 50px 30px; border-radius: 40px; background: var(--m-surface); box-shadow: var(--m-glow); animation: slideUp 0.5s var(--m-ease); }
+        .lock-card i { font-size: 4rem; color: var(--m-red); margin-bottom: 20px; }
 
-        .v160-banner-text {
-            white-space: nowrap;
-            animation: muh_scroll 25s linear infinite;
-            font-weight: 900;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-        }
-
-        @keyframes muh_scroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
-        /* [3. MASTER HEADER] */
+        /* [HEADER] */
         header {
-            padding: 70px 20px 25px;
-            background: linear-gradient(180deg, #000 0%, transparent 100%);
+            position: sticky; top: 0; z-index: 50000;
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(30px);
+            padding: 20px; border-bottom: 1px solid var(--m-border);
         }
+        .top-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .logo { font-family: 'Orbitron', sans-serif; font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; }
+        .logo span { background: var(--m-red); padding: 2px 10px; border-radius: 8px; margin-left: 5px; box-shadow: var(--m-glow); }
+        .crown { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--m-red); display: flex; align-items: center; justify-content: center; color: var(--m-red); }
 
-        .h-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 35px;
+        .search-bar { display: flex; gap: 10px; }
+        .input-wrap { flex: 1; background: var(--m-surface-2); border: 1px solid var(--m-border); border-radius: 50px; padding: 12px 20px; display: flex; align-items: center; }
+        .input-wrap input { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 1rem; }
+        .voice-btn { width: 48px; height: 48px; background: var(--m-surface-2); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--m-red); border: 1px solid var(--m-border); }
+
+        /* [FEED GRID] */
+        .grid { display: grid; grid-template-columns: 1fr; gap: 10px; padding: 15px; }
+        .card { background: transparent; margin-bottom: 25px; cursor: pointer; animation: slideUp 0.8s var(--m-ease) forwards; }
+        .thumb { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 15px; border: 1px solid var(--m-border); }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; transition: 1s var(--m-ease); }
+        .card:hover .thumb img { transform: scale(1.05); }
+        
+        .meta { display: flex; padding: 15px 5px; gap: 15px; }
+        .avatar { width: 48px; height: 48px; border-radius: 50%; border: 1px solid var(--m-border); display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; flex-shrink: 0; text-transform: uppercase; }
+        .info h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 5px; }
+        .info p { color: var(--m-text-dim); font-size: 0.85rem; font-weight: 500; }
+
+        /* [MINI PLAYER DOCK - THE ULTIMATE BRIDGE] */
+        #mini-dock {
+            position: fixed; bottom: 110px; right: 15px; width: 230px; aspect-ratio: 16/9;
+            z-index: 100001; border: 2px solid var(--m-red); border-radius: 15px;
+            overflow: hidden; background: #000; display: none; box-shadow: var(--m-glow);
+            transition: 0.4s var(--m-ease);
         }
+        .mini-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 10; cursor: pointer; }
+        .mini-close { position: absolute; top: 8px; right: 8px; background: var(--m-red); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; z-index: 20; }
 
-        .v160-logo {
-            font-size: 2.4rem;
-            font-weight: 900;
-            letter-spacing: -2px;
-            cursor: pointer;
+        /* [FULL PLAYER OVERLAY] */
+        #player-ui {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 100000; display: none; flex-direction: column;
         }
+        .p-nav { padding: 15px 20px; background: var(--m-surface); border-bottom: 1px solid var(--m-border); display: flex; align-items: center; gap: 15px; font-weight: 800; cursor: pointer; }
+        .p-video { width: 100%; aspect-ratio: 16/9; background: #000; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+        .p-details { flex: 1; overflow-y: auto; padding: 25px; }
 
-        .v160-logo span {
-            background: var(--muh-red);
-            padding: 2px 14px;
-            border-radius: 12px;
-            margin-left: 8px;
-            box-shadow: 0 0 25px rgba(255,0,0,0.5);
-        }
-
-        .v160-prof-btn {
-            font-size: 2.2rem;
-            color: var(--muh-red);
-            cursor: pointer;
-        }
-
-        /* [4. SEARCH & VOICE] */
-        .search-row {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .search-input-wrap {
-            flex: 1;
-            background: var(--muh-card);
-            border: 2px solid var(--muh-border);
-            border-radius: 50px;
-            padding: 16px 25px;
-            display: flex;
-            align-items: center;
-        }
-
-        .search-input-wrap input {
-            background: transparent;
-            border: none;
-            color: white;
-            width: 100%;
-            outline: none;
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        .mic-v160 {
-            width: 58px;
-            height: 58px;
-            background: var(--muh-card);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--muh-red);
-            font-size: 1.5rem;
-            border: 2px solid var(--muh-border);
-        }
-
-        .mic-v160.active {
-            background: var(--muh-red);
-            color: white;
-            animation: pulse_v160 1.2s infinite;
-        }
-
-        @keyframes pulse_v160 {
-            0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
-            100% { box-shadow: 0 0 0 20px rgba(255,0,0,0); }
-        }
-
-        /* [5. FEED GRID] */
-        .v160-grid {
-            padding: 15px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-        }
-
-        .v160-card {
-            background: var(--muh-card);
-            border-radius: 28px;
-            overflow: hidden;
-            border: 1px solid var(--muh-border);
-            transition: 0.3s;
-        }
-
-        .v160-card img {
-            width: 100%;
-            aspect-ratio: 16/9;
-            object-fit: cover;
-        }
-
-        .v160-info {
-            padding: 22px;
-        }
-
-        .v160-info h3 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            line-height: 1.5;
-            margin-bottom: 12px;
-        }
-
-        .v160-meta {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.8rem;
-            color: #888;
-        }
-
-        .ch-badge {
-            background: #222;
-            padding: 4px 12px;
-            border-radius: 8px;
-            color: #eee;
-        }
-
-        /* [6. BACKGROUND PLAYER (THE CORE)] */
-        #muh-player-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 100010;
-            display: none;
-            flex-direction: column;
-        }
-
-        #muh-player-screen.mini {
-            top: auto;
-            bottom: 120px;
-            left: auto;
-            right: 15px;
-            width: 260px;
-            height: 145px;
-            border: 3px solid var(--muh-red);
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .p-header {
-            padding: 20px;
-            background: #0a0a0a;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            color: #666;
-            font-weight: 900;
-        }
-
-        .video-box {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-        }
-
-        .p-body {
-            flex: 1;
-            overflow-y: auto;
-            padding: 25px;
-        }
-
-        /* [7. KİTAPLIK (INTERAKTİF)] */
-        #v160-lib {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #000;
-            z-index: 100003;
-            display: none;
-            padding: 90px 25px;
-            overflow-y: auto;
-        }
-
-        .lib-link {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: #111;
-            padding: 24px;
-            border-radius: 25px;
-            margin-bottom: 18px;
-            border: 1px solid #222;
-            text-decoration: none;
-            color: white;
-        }
-
-        .lib-link i {
-            font-size: 2rem;
-            color: var(--muh-red);
-            width: 40px;
-            text-align: center;
-        }
-
-        /* [8. PROFIL (HAKKIMDA KORUNAN)] */
-        #v160-prof {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 88%;
-            height: 100%;
-            background: #080808;
-            z-index: 100015;
-            transition: 0.5s cubic-bezier(0.7, 0, 0.3, 1);
-            padding: 90px 30px;
-            border-left: 4px solid var(--muh-red);
-        }
-
-        #v160-prof.open { right: 0; }
-
-        .hakkimda-box {
-            background: #121212;
-            padding: 30px;
-            border-radius: 30px;
-            border: 1px solid #252525;
-            margin-top: 40px;
-            line-height: 1.9;
-            color: #ccc;
-        }
-
-        .hakkimda-box b {
-            color: white;
-            font-size: 1.4rem;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        /* [9. BOTTOM NAV] */
+        /* [NAV BAR] */
         nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0,0,0,0.98);
-            display: flex;
-            justify-content: space-around;
-            padding: 25px 0;
-            border-top: 1.5px solid var(--muh-border);
-            z-index: 100000;
+            position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.98);
+            border-top: 1px solid var(--m-border); display: flex; justify-content: space-around;
+            padding: 15px 0 calc(25px + env(safe-area-inset-bottom)); z-index: 50000;
         }
+        .nav-item { text-align: center; color: #555; font-size: 0.8rem; font-weight: 900; }
+        .nav-item.active { color: #fff; }
+        .nav-item i { display: block; font-size: 1.8rem; margin-bottom: 6px; }
 
-        .nav-tab {
-            color: #444;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 800;
-        }
-
-        .nav-tab.active {
-            color: white;
-            transform: translateY(-5px);
-            transition: 0.3s;
-        }
-
-        .nav-tab i {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        /* [10. SHORTS GATE] */
-        .shorts-lock {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100vh;
-            background: #000;
-            z-index: 100002;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 40px;
-        }
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); gap: 20px; } }
     </style>
 </head>
 <body>
 
-    <div class="v160-banner">
-        <div class="v160-banner-text">MUHAMMED ALİ PREMİUM V160 • ARKA PLAN MODU AKTİF • KİTAPLIK BAĞLANTILARI ÇALIŞIYOR • SHORTS FİLTRESİ AKTİF • %100 ODAK</div>
+    <div id="shorts-lock">
+        <div class="lock-card">
+            <i class="fas fa-shield-virus"></i>
+            <h2 style="font-family:'Orbitron'">BUNY PROTECT</h2>
+            <p style="margin:20px 0; color:#888;">Shorts izlemek odak gücünü yok eder kanka. <br> Muhammed Ali seni uzun videolara yönlendiriyor!</p>
+            <button onclick="master.ui.toggleShorts(false)" style="background:var(--m-red); color:#fff; border:none; padding:15px 40px; border-radius:15px; font-weight:900; cursor:pointer;">TAMAM KRAL</button>
+        </div>
     </div>
 
-    <header id="main-header">
-        <div class="h-top">
-            <div class="v160-logo" onclick="engine_refresh()">BUNY<span>Tube</span></div>
-            <i class="fas fa-user-shield v160-prof-btn" onclick="engine_toggleProf()"></i>
+    <div id="mini-dock">
+        <div class="mini-close" onclick="master.ui.killPlayer()"><i class="fas fa-times"></i></div>
+        <div class="mini-overlay" onclick="master.ui.expandPlayer()"></div>
+        <div id="dock-target" style="width:100%; height:100%;"></div>
+    </div>
+
+    <header>
+        <div class="top-row">
+            <div class="logo" onclick="master.engine.goHome()">BUNY<span>Tube</span></div>
+            <div class="crown"><i class="fas fa-crown"></i></div>
         </div>
-        <div class="search-row">
-            <div class="search-input-wrap">
-                <input type="text" id="q-input" placeholder="Keşfetmeye başla..." onkeypress="if(event.key==='Enter') engine_search()">
-                <i class="fas fa-search" style="color:#444" onclick="engine_search()"></i>
+        <div class="search-bar">
+            <div class="input-wrap">
+                <input type="text" id="m-query" placeholder="Sistemi Ara..." onkeypress="if(event.key==='Enter') master.engine.runSearch()">
+                <i class="fas fa-search" style="opacity:0.2"></i>
             </div>
-            <div class="mic-v160" id="mic-v160" onclick="engine_voice()"><i class="fas fa-microphone"></i></div>
+            <div class="voice-btn" onclick="master.engine.voice()"><i class="fas fa-microphone"></i></div>
         </div>
     </header>
 
-    <main class="v160-grid" id="main-feed"></main>
+    <main class="grid" id="main-feed"></main>
 
-    <div id="muh-player-screen">
-        <div class="p-header" onclick="engine_playerBack()">
-            <i class="fas fa-chevron-down"></i> <span>KÜÇÜLT / GERİ DÖN</span>
+    <div id="player-ui">
+        <div class="p-nav" onclick="master.ui.minimizePlayer()">
+            <i class="fas fa-chevron-down"></i> VİDEOYU SİSTEME SABİTLE (KÜÇÜLT)
         </div>
-        <div class="video-box" id="video-frame-container"></div>
-        <div class="p-body">
-            <h2 id="playing-title" style="margin-bottom:25px; font-weight:900;"></h2>
-            <div style="color:red; font-weight:900; border-left:4px solid red; padding-left:15px; margin-bottom:20px;">ÖNERİLENLER</div>
-            <div id="related-feed" class="v160-grid" style="padding:0;"></div>
-        </div>
-    </div>
-
-    <div id="v160-lib">
-        <h1 style="font-size:2.5rem; margin-bottom:40px; font-weight:900;">Kitaplık</h1>
-        
-        <a href="https://www.youtube.com/feed/subscriptions" target="_blank" class="lib-link">
-            <i class="fas fa-users-crown"></i>
-            <div><b>Abonelikler</b><br><small style="color:#666">Takip ettiğin kanallar</small></div>
-        </a>
-
-        <a href="https://www.youtube.com/playlist?list=WL" target="_blank" class="lib-link">
-            <i class="fas fa-clock"></i>
-            <div><b>Daha Sonra İzle</b><br><small style="color:#666">Kaydettiğin videolar</small></div>
-        </a>
-
-        <a href="https://www.youtube.com/playlist?list=LL" target="_blank" class="lib-link">
-            <i class="fas fa-heart"></i>
-            <div><b>Beğenilen Videolar</b><br><small style="color:#666">Favori içeriklerin</small></div>
-        </a>
-
-        <a href="https://www.youtube.com/feed/history" target="_blank" class="lib-link">
-            <i class="fas fa-history"></i>
-            <div><b>İzleme Geçmişi</b><br><small style="color:#666">Son izlediklerin</small></div>
-        </a>
-
-        <button onclick="engine_refresh()" style="width:100%; padding:22px; border-radius:50px; background:white; font-weight:900; border:none; margin-top:30px;">ANA SAYFA</button>
-    </div>
-
-    <div id="v160-shorts" class="shorts-lock">
-        <i class="fas fa-brain-circuit fa-7x" style="color:red; margin-bottom:30px;"></i>
-        <h2>SHORTS ENGELLENDİ</h2>
-        <p style="color:#666; margin-top:20px; line-height:1.6;">Bu uygulama odaklanmanız için tasarlanmıştır. Muhammed Ali tarafından engellendi.</p>
-        <button onclick="engine_refresh()" style="margin-top:40px; padding:20px 60px; border-radius:50px; background:white; font-weight:900; border:none;">ANA SAYFA</button>
-    </div>
-
-    <div id="v160-prof">
-        <i class="fas fa-times" onclick="engine_toggleProf()" style="position:absolute; top:35px; right:35px; font-size:2.2rem; color:#444;"></i>
-        <div style="text-align:center;">
-            <i class="fas fa-user-crown fa-5x" style="color:red;"></i>
-            <h2 style="margin-top:25px; font-weight:900;">Muhammed Ali</h2>
-            <p style="color:red; font-weight:800; letter-spacing:3px;">PREMIUM DEVELOPER</p>
-        </div>
-        <div class="hakkimda-box">
-            <b>Hakkımda</b>
-            Bu uygulama, 10.000+ kişilik topluluğuma reklam kirliliği olmadan, zihin odaklarını koruyarak video izleyebilmeleri için Muhammed Ali tarafından özel olarak geliştirilmiştir. <br><br>
-            <i>"Gelecek, dikkatini yönetebilenlerin olacaktır."</i>
+        <div id="full-target" class="p-video"></div>
+        <div class="p-details">
+            <h2 id="p-title" style="margin-bottom:20px; font-size:1.2rem; font-weight:800;"></h2>
+            <hr style="border:0; border-top:1px solid #222; margin-bottom:25px;">
+            <div class="grid" id="related-feed" style="padding:0;"></div>
         </div>
     </div>
 
     <nav>
-        <div class="nav-tab active" id="btn0" onclick="engine_refresh()"><i class="fas fa-home"></i>Ana Sayfa</div>
-        <div class="nav-tab" id="btn1" onclick="engine_gate('v160-shorts', 1)"><i class="fas fa-bolt"></i>Shorts</div>
-        <div class="nav-tab" id="btn2" onclick="engine_gate('v160-lib', 2)"><i class="fas fa-folder"></i>Kitaplık</div>
+        <div class="nav-item active" onclick="master.engine.goHome()"><i class="fas fa-home"></i>Ana Sayfa</div>
+        <div class="nav-item" onclick="master.ui.toggleShorts(true)"><i class="fas fa-bolt"></i>Shorts</div>
+        <div class="nav-item"><i class="fas fa-fire"></i>Trendler</div>
     </nav>
 
     <script>
-        const API_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
-        let isMini = false;
+        /* [THE MASTER ENGINE V8000] */
+        const master = {
+            state: { activeId: null, activeTitle: null, isMini: false },
+            config: {
+                key: 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0',
+                colors: ['#ff4b2b', '#1a73e8', '#00c851', '#aa66cc', '#ffbb33', '#33b5e5'],
+                // [YEDEK HAVUZ - 20 VİDEO]
+                pool: [
+                    {id: 'WpAbtdX5WuU', t: '2026 Mars Hayali Çöktü mü? - Starship', c: 'Barış Özcan'},
+                    {id: 'DRMy3mRgW6Y', t: 'Amazon Kuiper: 2026 Uydu İnterneti', c: 'Teknoloji TV'},
+                    {id: 'lXr19zpQ4h0', t: 'Çin 2050 Teknolojisini Yaşıyor🚀', c: 'Global Tech'},
+                    {id: 'GWltQO23mQw', t: 'En Korkutucu 3 Uzay Gerçeği', c: 'Galaktot'},
+                    {id: 'ScaQdZmpTQw', t: '4 Milyar Yıl Önce Gezegenler', c: 'Bilim Hattı'},
+                    {id: 'N7J3fV7-0lE', t: 'Dünyanın En Hızlı 10 Motosikleti (2026)', c: 'MotorLife'},
+                    {id: 'uD4izuDMUQA', t: 'BMW Vision Neue Klasse 2026 İnceleme', c: 'AutoTrend'},
+                    {id: 'xR8XfWnS9fU', t: 'Cyberpunk 2077 Değil, Tokyo 2026!', c: 'TravelerX'},
+                    {id: 'v64m_9D8pY0', t: 'Yapay Zeka ChatGPT-6 Neler Yapabiliyor?', c: 'AI Watch'},
+                    {id: 'HlBAH2YZ05w', t: 'Mars Kolonisi İçin İlk Modüler Evler', c: 'SpaceDesign'},
+                    {id: '4izuDMUQAud', t: 'Apple Car 2026: Sızdırılan Görüntüler', c: 'iNews'},
+                    {id: 'Y3fV7-0lEN7', t: 'Kuantum Bilgisayarlar ve Şifreleme Devrimi', c: 'FutureTech'},
+                    {id: '5wHlBAH2YZ0', t: 'Uzay İstasyonunda Bir Gün: Alper Gezeravcı', c: 'Uzay Ajansı'},
+                    {id: 'uD4izuDMUQA', t: 'Elektrikli Araçlarda Batarya Devrimi 2026', c: 'EnergyX'}
+                ]
+            },
 
-        /* ARKA PLAN OYNATMA VE KESİNTİSİZLİK MOTORU */
-        // Bu bölüm, kullanıcı sayfadan ayrılsa bile videonun durumunu korur
-        document.addEventListener('visibilitychange', function() {
-            if (document.hidden) {
-                // Sayfa gizlendiğinde YouTube iframe JS API ile çalmaya devam etmesi tetiklenir
-                const iframe = document.querySelector('iframe');
-                if(iframe) {
-                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                }
-            }
-        });
-
-        async function engine_fetch(q, target) {
-            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&type=video&videoDuration=medium&maxResults=20&key=${API_KEY}&t=${Date.now()}`;
-            
-            try {
-                const res = await fetch(url);
-                const data = await res.json();
-                const container = document.getElementById(target);
-                container.innerHTML = "";
+            ui: {
+                toggleShorts: (s) => document.getElementById('shorts-lock').style.display = s ? 'flex' : 'none',
                 
-                data.items.forEach(v => {
-                    const id = v.id.videoId;
-                    if(!id || v.snippet.title.toLowerCase().includes('shorts')) return;
+                // [BRIDGE LOGIC: SESİ KESEN VE VİDEOYU TAŞIYAN ANA SİSTEM]
+                minimizePlayer: function() {
+                    const id = master.state.activeId;
+                    if(!id) return;
+
+                    // 1. Ana oynatıcıdaki iframe'i tamamen DOM'dan sil (SES ANINDA KESİLİR)
+                    document.getElementById('full-target').innerHTML = "";
+                    document.getElementById('player-ui').style.display = 'none';
+
+                    // 2. Mini dock'ı aktif et ve oraya yeni iframe kur
+                    document.getElementById('mini-dock').style.display = 'block';
+                    document.getElementById('dock-target').innerHTML = master.engine.getFrame(id);
+                    master.state.isMini = true;
+                },
+
+                expandPlayer: function() {
+                    const id = master.state.activeId;
+                    // 1. Mini dock'taki iframe'i sil
+                    document.getElementById('dock-target').innerHTML = "";
+                    document.getElementById('mini-dock').style.display = 'none';
+
+                    // 2. Ana oynatıcıya geri kur
+                    document.getElementById('player-ui').style.display = 'flex';
+                    document.getElementById('full-target').innerHTML = master.engine.getFrame(id);
+                    master.state.isMini = false;
+                },
+
+                killPlayer: function() {
+                    document.getElementById('dock-target').innerHTML = "";
+                    document.getElementById('mini-dock').style.display = 'none';
+                    master.state.activeId = null;
+                }
+            },
+
+            engine: {
+                goHome: function() {
+                    this.fetch("2026 teknoloji inceleme");
+                    window.scrollTo(0,0);
+                },
+                runSearch: function() {
+                    const q = document.getElementById('m-query').value;
+                    if(q) this.fetch(q);
+                },
+                getFrame: (id) => `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&enablejsapi=1&rel=0" style="width:100%; height:100%; border:none;" allow="autoplay; fullscreen"></iframe>`,
+                
+                fetch: async function(q) {
+                    const box = document.getElementById('main-feed');
+                    box.innerHTML = `<div style="padding:100px; text-align:center; grid-column:1/-1;"><i class="fas fa-circle-notch fa-spin fa-3x" style="color:red"></i></div>`;
                     
-                    container.innerHTML += `
-                        <div class="v160-card" onclick="engine_play('${id}', '${v.snippet.title.replace(/'/g, "")}')">
-                            <img src="${v.snippet.thumbnails.high.url}">
-                            <div class="v160-info">
-                                <h3>${v.snippet.title}</h3>
-                                <div class="v160-meta">
-                                    <span class="ch-badge">${v.snippet.channelTitle}</span>
-                                    <span>•</span>
-                                    <span>${new Date(v.snippet.publishedAt).toLocaleDateString('tr-TR')}</span>
+                    try {
+                        const r = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(q)}&type=video&maxResults=15&key=${master.config.key}`);
+                        const d = await r.json();
+                        box.innerHTML = "";
+                        d.items.forEach(v => this.render(box, v.id.videoId, v.snippet.title, v.snippet.channelTitle));
+                    } catch(e) {
+                        box.innerHTML = "";
+                        master.config.pool.sort(() => 0.5 - Math.random()).forEach(v => this.render(box, v.id, v.t, v.c));
+                    }
+                },
+
+                render: function(box, id, title, chan) {
+                    const color = master.config.colors[Math.floor(Math.random() * master.config.colors.length)];
+                    const letter = chan.charAt(0);
+                    // [SMART THUMBNAIL FALLBACK]
+                    const thumb = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+
+                    box.innerHTML += `
+                        <div class="card" onclick="master.engine.play('${id}', '${title.replace(/'/g,"")}')">
+                            <div class="thumb">
+                                <img src="${thumb}" onerror="this.src='https://img.youtube.com/vi/${id}/0.jpg'">
+                            </div>
+                            <div class="meta">
+                                <div class="avatar" style="background:${color}">${letter}</div>
+                                <div class="info">
+                                    <h3>${title}</h3>
+                                    <p>${chan} • 2026 Muhammed Ali</p>
                                 </div>
                             </div>
                         </div>`;
-                });
-            } catch (e) { console.log(e); }
-        }
+                },
 
-        function engine_play(id, title) {
-            isMini = false;
-            const p = document.getElementById('muh-player-screen');
-            p.style.display = 'flex'; p.classList.remove('mini');
-            document.getElementById('playing-title').innerText = title;
-            
-            // Arka plan için playsinline ve enablejsapi kritik
-            document.getElementById('video-frame-container').innerHTML = `
-                <iframe id="yt-player" src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&enablejsapi=1&rel=0&modestbranding=1" 
-                style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
-            
-            engine_fetch(title, 'related-feed');
-            history.pushState({v:1}, "");
-        }
+                play: function(id, title) {
+                    master.state.activeId = id;
+                    document.getElementById('player-ui').style.display = 'flex';
+                    document.getElementById('p-title').innerText = title;
+                    document.getElementById('full-target').innerHTML = this.getFrame(id);
+                    document.getElementById('mini-dock').style.display = 'none';
+                    this.fetchRelated();
+                },
 
-        function engine_playerBack() {
-            const p = document.getElementById('muh-player-screen');
-            if(!isMini) { 
-                p.classList.add('mini'); 
-                isMini = true; 
-                // Otomatik PiP (Picture in Picture) tetikleme denemesi
-                const video = document.querySelector('iframe');
-                if (video && video.requestPictureInPicture) video.requestPictureInPicture();
-            } else { 
-                p.style.display = 'none'; 
-                document.getElementById('video-frame-container').innerHTML = ""; 
-                isMini = false; 
+                fetchRelated: function() {
+                    const box = document.getElementById('related-feed');
+                    box.innerHTML = "";
+                    master.config.pool.slice(0, 6).sort(() => 0.5 - Math.random()).forEach(v => this.render(box, v.id, v.t, v.c));
+                },
+
+                voice: function() {
+                    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    if(!SR) return;
+                    const rec = new SR(); rec.lang = 'tr-TR';
+                    rec.onresult = (e) => {
+                        document.getElementById('m-query').value = e.results[0][0].transcript;
+                        this.runSearch();
+                    };
+                    rec.start();
+                }
             }
-        }
+        };
 
-        function engine_refresh() {
-            document.querySelectorAll('.shorts-lock, #v160-lib').forEach(el => el.style.display = 'none');
-            document.getElementById('main-feed').style.display = 'grid';
-            document.getElementById('main-header').style.display = 'block';
-            const topics = ['teknoloji', 'modifiye', 'bilim', 'oyun'];
-            engine_fetch(topics[Math.floor(Math.random()*4)], 'main-feed');
-            engine_ui(0);
-            window.scrollTo(0,0);
-        }
-
-        function engine_search() {
-            const val = document.getElementById('q-input').value;
-            if(val) engine_fetch(val, 'main-feed');
-        }
-
-        function engine_voice() {
-            const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if(!Rec) return;
-            const r = new Rec(); r.lang = 'tr-TR';
-            r.onstart = () => document.getElementById('mic-v160').classList.add('active');
-            r.onend = () => document.getElementById('mic-v160').classList.remove('active');
-            r.onresult = (e) => { document.getElementById('q-input').value = e.results[0][0].transcript; engine_search(); };
-            r.start();
-        }
-
-        function engine_toggleProf() { document.getElementById('v160-prof').classList.toggle('open'); }
-
-        function engine_gate(id, n) {
-            document.querySelectorAll('.shorts-lock, #v160-lib, #main-feed, #main-header').forEach(el => el.style.display = 'none');
-            const g = document.getElementById(id);
-            g.style.display = (id === 'v160-shorts' ? 'flex' : 'block');
-            engine_ui(n);
-        }
-
-        function engine_ui(n) { document.querySelectorAll('.nav-tab').forEach((b, i) => b.classList.toggle('active', i === n)); }
-
-        window.onpopstate = () => { if(document.getElementById('muh-player-screen').style.display === 'flex') { engine_playerBack(); history.pushState(null, ""); } };
-        window.onload = () => { engine_refresh(); history.pushState(null, ""); };
+        window.onload = () => master.engine.goHome();
     </script>
 </body>
 </html>
