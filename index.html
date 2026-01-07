@@ -3,483 +3,492 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>BUNY-Tube V500 King Edition</title>
+    <title>BUNY-Tube V400 Premium</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
     <style>
-        /* [1. DESIGN SYSTEM & VARIABLES] */
+        /* [CORE SETTINGS] */
         :root {
-            --king-red: #ff0000;
-            --deep-black: #000000;
-            --soft-black: #0f0f0f;
-            --card-bg: #121212;
-            --gray-text: #aaaaaa;
-            --white-text: #ffffff;
-            --shadow-red: 0 0 20px rgba(255, 0, 0, 0.3);
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --yt-red: #ff0000;
+            --yt-black: #0f0f0f;
+            --yt-white: #ffffff;
+            --yt-gray: #aaaaaa;
+            --yt-border: #272727;
+            --safe-top: env(safe-area-inset-top);
         }
 
-        /* [2. GLOBAL RESET] */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Roboto', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            scrollbar-width: none;
+            -webkit-tap-highlight-color: transparent;
         }
-        *::-webkit-scrollbar { display: none; }
 
         body {
-            background-color: var(--deep-black);
-            color: var(--white-text);
-            padding-bottom: 100px;
+            background-color: #000;
+            color: var(--yt-white);
             overflow-x: hidden;
+            padding-bottom: 90px;
         }
 
-        /* [3. PREMIUM HEADER ARCHITECTURE] */
+        /* [PREMIUM TICKER] */
+        .v400-top-bar {
+            background: linear-gradient(90deg, #ff0000, #b30000);
+            height: 28px;
+            display: flex;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100000;
+        }
+
+        .ticker-text {
+            white-space: nowrap;
+            animation: slide 20s linear infinite;
+            font-weight: 900;
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* [COMPACT HEADER SYSTEM] */
         header {
             position: sticky;
-            top: 0;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
-            z-index: 1000;
+            top: 28px;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(10px);
             padding: 12px 16px;
-            border-bottom: 1px solid #1a1a1a;
+            z-index: 99999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border-bottom: 1px solid var(--yt-border);
         }
 
-        .header-top {
+        .header-main-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px;
         }
 
-        .brand-logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
-            color: var(--white-text);
+        .v400-logo {
+            font-size: 1.5rem;
+            font-weight: 900;
             letter-spacing: -1px;
-            cursor: pointer;
+            display: flex;
+            align-items: center;
         }
 
-        .brand-logo span {
-            background: var(--king-red);
-            padding: 2px 8px;
+        .v400-logo span {
+            background: var(--yt-red);
+            color: white;
+            padding: 1px 6px;
             border-radius: 6px;
-            margin-left: 5px;
-            box-shadow: var(--shadow-red);
+            margin-left: 4px;
+            font-size: 1.1rem;
         }
 
-        .user-trigger {
-            font-size: 1.4rem;
-            color: var(--king-red);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .user-trigger:active { transform: scale(0.9); }
-
-        /* [4. SLIM SEARCH ENGINE] */
-        .search-engine {
+        .v400-user-actions {
             display: flex;
-            gap: 10px;
+            gap: 18px;
+            font-size: 1.3rem;
+        }
+
+        /* [SEARCH BOX - ULTRA SLIM] */
+        .search-area {
+            display: flex;
+            gap: 8px;
             align-items: center;
         }
 
-        .search-input-wrapper {
+        .v400-search-bar {
             flex: 1;
-            background: var(--soft-black);
-            border: 1px solid #252525;
-            border-radius: 25px;
-            padding: 8px 18px;
+            background: #121212;
+            border: 1px solid var(--yt-border);
+            border-radius: 20px;
+            padding: 8px 16px;
             display: flex;
             align-items: center;
-            transition: var(--transition);
         }
 
-        .search-input-wrapper:focus-within {
-            border-color: var(--king-red);
-            background: #151515;
-        }
-
-        .search-input-wrapper input {
+        .v400-search-bar input {
             background: transparent;
             border: none;
             color: white;
+            font-size: 0.9rem;
             width: 100%;
             outline: none;
-            font-size: 0.9rem;
         }
 
-        .voice-trigger-btn {
-            width: 40px;
-            height: 40px;
-            background: var(--soft-black);
-            border: 1px solid #252525;
+        .voice-btn {
+            width: 38px;
+            height: 38px;
+            background: #181818;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--king-red);
-            cursor: pointer;
+            color: var(--yt-red);
         }
 
-        .voice-trigger-btn.recording {
-            background: var(--king-red);
+        .voice-btn.active {
+            background: var(--yt-red);
             color: white;
-            animation: pulse 1.2s infinite;
+            animation: breathe 1s infinite;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(255,0,0,0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0); }
+        @keyframes breathe {
+            50% { opacity: 0.5; }
         }
 
-        /* [5. CINEMATIC VIDEO FEED] */
-        .video-feed-grid {
+        /* [VIDEO GRID] */
+        .v400-feed {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 1px;
             padding-top: 10px;
         }
 
-        .video-card {
+        .v400-video-card {
             width: 100%;
-            background: var(--deep-black);
-            margin-bottom: 20px;
-            transition: var(--transition);
+            background: #000;
+            margin-bottom: 10px;
         }
 
-        .video-thumbnail {
+        .thumbnail-box {
             position: relative;
             width: 100%;
-            aspect-ratio: 21 / 9; /* Ultra-Wide Cinematic */
-            background: #111;
-            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: #1a1a1a;
         }
 
-        .video-thumbnail img {
+        .thumbnail-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
-        .v-badge {
+        .video-duration {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
+            bottom: 8px;
+            right: 8px;
             background: rgba(0,0,0,0.8);
-            padding: 3px 7px;
+            padding: 2px 6px;
             border-radius: 4px;
             font-size: 0.7rem;
             font-weight: 700;
         }
 
-        .video-details {
-            padding: 12px 16px;
+        .video-info-box {
+            padding: 12px;
             display: flex;
-            gap: 15px;
+            gap: 12px;
         }
 
-        .channel-pfp {
+        .channel-avatar {
             width: 40px;
             height: 40px;
-            background: #1a1a1a;
+            background: #222;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--king-red);
             flex-shrink: 0;
-            border: 1px solid #333;
+            color: var(--yt-red);
+            font-weight: 900;
         }
 
-        .video-info-text h3 {
-            font-size: 1rem;
+        .text-data h3 {
+            font-size: 0.95rem;
             font-weight: 500;
             line-height: 1.3;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
 
-        .video-meta {
-            font-size: 0.8rem;
-            color: var(--gray-text);
-            display: flex;
-            align-items: center;
-            gap: 5px;
+        .meta-data {
+            font-size: 0.75rem;
+            color: var(--yt-gray);
         }
 
-        /* [6. NAVIGATION DOCK] */
-        .bottom-nav {
+        /* [NAV DOCK] */
+        nav {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: rgba(0,0,0,0.98);
-            border-top: 1px solid #1a1a1a;
+            background: #000;
+            border-top: 1px solid var(--yt-border);
             display: flex;
             justify-content: space-around;
-            padding: 12px 0 30px;
-            z-index: 2000;
+            padding: 10px 0 25px;
+            z-index: 100001;
         }
 
-        .nav-item {
-            color: var(--gray-text);
+        .nav-link {
             text-align: center;
+            color: var(--yt-gray);
             font-size: 0.65rem;
             text-decoration: none;
-            transition: var(--transition);
+            flex: 1;
         }
 
-        .nav-item.active { color: white; }
-        .nav-item i { display: block; font-size: 1.5rem; margin-bottom: 5px; }
-
-        /* [7. KING PROFILE DRAWER] */
-        #profile-drawer {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 85%;
-            height: 100%;
-            background: #050505;
-            z-index: 5000;
-            transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-            padding: 60px 25px;
-            border-left: 3px solid var(--king-red);
+        .nav-link.active {
+            color: white;
         }
 
-        #profile-drawer.active { right: 0; }
-
-        .king-identity {
-            text-align: center;
-            margin-bottom: 40px;
+        .nav-link i {
+            display: block;
+            font-size: 1.4rem;
+            margin-bottom: 4px;
         }
 
-        .crown-wrapper {
-            position: relative;
-            display: inline-block;
-        }
-
-        .king-crown {
-            color: var(--king-red);
-            font-size: 3rem;
-            position: absolute;
-            top: -35px;
-            left: 50%;
-            transform: translateX(-50%);
-            filter: drop-shadow(0 0 10px var(--king-red));
-        }
-
-        .king-avatar {
-            width: 100px;
-            height: 100px;
-            background: #111;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #222;
-            font-size: 3rem;
-            color: var(--king-red);
-        }
-
-        /* [8. GOD PLAYER INTERFACE] */
-        #god-player {
+        /* [GOD PLAYER] */
+        #v400-player {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--deep-black);
-            z-index: 10000;
+            background: #000;
+            z-index: 200000;
             display: none;
             flex-direction: column;
         }
 
-        .player-header {
-            padding: 15px;
+        #v400-player.mini {
+            top: auto;
+            bottom: 90px;
+            height: 60px;
+            background: #111;
+            flex-direction: row;
+            border-top: 2px solid var(--yt-red);
+        }
+
+        /* [OVERLAYS] */
+        .v400-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            z-index: 150000;
+            display: none;
+            padding-top: 80px;
+        }
+
+        .lib-card {
+            padding: 20px;
+            border-bottom: 1px solid var(--yt-border);
             display: flex;
             align-items: center;
-            gap: 20px;
-            background: #080808;
+            gap: 15px;
+            color: white;
+            text-decoration: none;
         }
+
+        /* [PROF DRAWER] */
+        #v400-prof {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            height: 100%;
+            background: #0a0a0a;
+            z-index: 300000;
+            transition: 0.3s;
+            padding: 60px 25px;
+            border-left: 1px solid var(--yt-red);
+        }
+        #v400-prof.active { right: 0; }
     </style>
 </head>
 <body>
 
+    <div class="v400-top-bar">
+        <div class="ticker-text">MUHAMMED ALİ PREMIUM V400 • HER YENİLEMEDE FARKLI KAOS • REKLAMSIZ İZLEME AKTİF • ARKA PLAN MODU AÇIK • MUHAMMED ALİ V400</div>
+    </div>
+
     <header>
-        <div class="header-top">
-            <div class="brand-logo" onclick="king_init()">BUNY<span>Tube</span></div>
-            <div class="user-trigger" onclick="king_toggle_profile()">
-                <i class="fas fa-crown"></i>
+        <div class="header-main-row">
+            <div class="v400-logo" onclick="eng_refresh()">BUNY<span>Tube</span></div>
+            <div class="v400-user-actions">
+                <i class="fas fa-bell"></i>
+                <i class="fas fa-user-circle" onclick="eng_prof()"></i>
             </div>
         </div>
-        <div class="search-engine">
-            <div class="search-input-wrapper">
-                <input type="text" id="query-input" placeholder="Kaosu keşfet..." onkeypress="if(event.key==='Enter') king_search()">
-                <i class="fas fa-search" style="opacity:0.4" onclick="king_search()"></i>
+        <div class="search-area">
+            <div class="v400-search-bar">
+                <input type="text" id="v400-q" placeholder="Keşfet..." onkeypress="if(event.key==='Enter') eng_search()">
+                <i class="fas fa-search" style="opacity:0.3" onclick="eng_search()"></i>
             </div>
-            <div class="voice-trigger-btn" id="mic-btn" onclick="king_voice()">
+            <div class="voice-btn" id="voice-trigger" onclick="eng_voice()">
                 <i class="fas fa-microphone"></i>
             </div>
         </div>
     </header>
 
-    <main class="video-feed-grid" id="main-feed-target"></main>
+    <main class="v400-feed" id="v400-main-feed"></main>
 
-    <div id="profile-drawer">
-        <i class="fas fa-times" onclick="king_toggle_profile()" style="float:right; font-size:2rem; color:#222;"></i>
-        <div class="king-identity">
-            <div class="crown-wrapper">
-                <i class="fas fa-crown king-crown"></i>
-                <div class="king-avatar"><i class="fas fa-user-shield"></i></div>
-            </div>
-            <h1 style="margin-top:20px; font-size:2rem; font-weight:900;">Muhammed Ali</h1>
-            <p style="color:var(--king-red); font-weight:900; letter-spacing:4px; margin-top:10px;">PREMIUM DEVELOPER</p>
-        </div>
-        <div style="margin-top:50px; background:#111; padding:20px; border-radius:15px; border:1px solid #222; font-size:0.9rem; color:#666; line-height:1.7;">
-            <b>Sistem Raporu:</b> V500 King Edition aktif. Video oranları 21:9 olarak optimize edildi. Arka planda oynatma motoru hazır. Reklamlar Muhammed Ali tarafından engellendi.
-        </div>
-        <button onclick="king_init()" style="width:100%; padding:15px; margin-top:30px; border-radius:10px; background:white; color:black; font-weight:900; border:none;">ANA SAYFAYA DÖN</button>
-    </div>
-
-    <div id="god-player">
-        <div class="player-header" onclick="king_close_player()">
-            <i class="fas fa-chevron-down"></i>
-            <span style="font-weight:900; font-size:0.8rem;">OYNATILIYOR</span>
-        </div>
-        <div id="video-stage" style="width:100%; aspect-ratio:16/9;"></div>
-        <div style="padding:20px; flex:1; overflow-y:auto;">
-            <h2 id="p-video-title" style="font-size:1.2rem; margin-bottom:15px;"></h2>
-            <div style="height:1px; background:#222; margin-bottom:20px;"></div>
-            <p style="color:var(--king-red); font-weight:900; font-size:0.8rem; margin-bottom:15px;">BUNU DA SEVEBİLİRSİN</p>
-            <div id="p-suggestions" class="video-feed-grid"></div>
+    <div id="v400-player">
+        <div id="v400-video-wrapper" style="width:100%; aspect-ratio:16/9; background:#000;"></div>
+        <div style="padding:15px; flex:1; overflow-y:auto;">
+            <h3 id="now-playing-title" style="font-size:1.1rem; margin-bottom:10px;"></h3>
+            <p style="color:var(--yt-red); font-weight:900; font-size:0.7rem; margin-bottom:20px;">ÖNERİLEN İÇERİKLER</p>
+            <div id="related-feed" class="v400-feed"></div>
+            <button style="width:100%; padding:15px; background:#111; color:white; border:1px solid #333; margin-top:20px; border-radius:10px;" onclick="eng_close_p()">KAPAT / GERİ DÖN</button>
         </div>
     </div>
 
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active" onclick="king_init()"><i class="fas fa-house"></i>Ana Sayfa</a>
-        <a href="#" class="nav-item" onclick="king_gate()"><i class="fas fa-bolt"></i>Shorts</a>
-        <a href="#" class="nav-item" onclick="king_gate()"><i class="fas fa-layer-group"></i>Kitaplık</a>
+    <div id="v400-lib" class="v400-overlay">
+        <h2 style="padding:20px; font-weight:900;">Kütüphane</h2>
+        <a href="https://www.youtube.com/feed/history" target="_blank" class="lib-card"><i class="fas fa-history"></i> Geçmiş</a>
+        <a href="https://www.youtube.com/feed/subscriptions" target="_blank" class="lib-card"><i class="fas fa-users"></i> Abonelikler</a>
+        <a href="https://www.youtube.com/playlist?list=LL" target="_blank" class="lib-card"><i class="fas fa-thumbs-up"></i> Beğenilen Videolar</a>
+        <div style="padding:20px;"><button class="voice-btn" style="width:100%; border-radius:10px;" onclick="eng_refresh()">ANA SAYFA</button></div>
+    </div>
+
+    <div id="v400-shorts" class="v400-overlay" style="display:none; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:40px;">
+        <i class="fas fa-brain fa-5x" style="color:red; margin-bottom:30px;"></i>
+        <h2>ODAK MODU AKTİF</h2>
+        <p style="color:#666; margin-top:15px;">Shorts videoları Muhammed Ali tarafından zihin sağlığın için engellendi. Uzun videolara yönel kanka.</p>
+        <button style="margin-top:40px; padding:15px 40px; border-radius:30px; border:none; background:white; font-weight:900;" onclick="eng_refresh()">ANA SAYFA</button>
+    </div>
+
+    <div id="v400-prof">
+        <i class="fas fa-times" onclick="eng_prof()" style="font-size:2rem; float:right;"></i>
+        <div style="margin-top:60px; text-align:center;">
+            <div class="channel-avatar" style="width:100px; height:100px; margin:0 auto; font-size:3rem;">M</div>
+            <h1 style="margin-top:20px;">Muhammed Ali</h1>
+            <p style="color:red; font-weight:900; letter-spacing:4px;">V400 ELITE DEV</p>
+        </div>
+        <div style="margin-top:50px; background:#111; padding:20px; border-radius:15px; color:#555; font-size:0.9rem; line-height:1.6;">
+            <b>Geliştirici Notu:</b> Bu yazılım reklamsız ve kesintisiz video deneyimi için Muhammed Ali tarafından 2026 standartlarında optimize edilmiştir.
+        </div>
+    </div>
+
+    <nav>
+        <a href="#" class="nav-link active" onclick="eng_refresh()"><i class="fas fa-home"></i>Ana Sayfa</a>
+        <a href="#" class="nav-link" onclick="eng_gate('v400-shorts')"><i class="fas fa-bolt"></i>Shorts</a>
+        <a href="#" class="nav-link" onclick="eng_gate('v400-lib')"><i class="fas fa-folder"></i>Kitaplık</a>
     </nav>
 
     <script>
-        /* [CORE ENGINE CONFIG] */
-        const GOD_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
-        const CHAOS_POOL = ['belgesel 2026', 'teknoloji devrimi', 'uzay yolculuğu 4k', 'motosiklet asmr', 'gelecek vizyonu'];
-
-        /* [STAT FORMATTERS] */
-        function formatStats(num) {
-            if(!num) return "0";
-            if(num >= 1000000) return (num/1000000).toFixed(1) + ' Mn';
-            if(num >= 1000) return (num/1000).toFixed(0) + ' B';
-            return num;
+        const KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
+        const POOL = ['belgesel türkçe', 'teknoloji 2026', 'uzay gizemleri', 'otomobil restorasyon', 'bilim deneyleri', 'gastronomi', 'motosiklet inceleme', 'cyberpunk asmr'];
+        
+        function format_v(n) {
+            if(!n) return "0";
+            if(n>=1000000) return (n/1000000).toFixed(1) + ' Mn';
+            if(n>=1000) return (n/1000).toFixed(0) + ' B';
+            return n;
         }
 
-        /* [API DATA ENGINE] */
-        async function king_fetch_data(q, target) {
-            const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(q)}&type=video&maxResults=12&key=${GOD_KEY}`;
-            
+        async function eng_fetch(q, target) {
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(q)}&type=video&maxResults=12&key=${KEY}&t=${Date.now()}`;
             try {
-                const response = await fetch(searchUrl);
-                const data = await response.json();
+                const res = await fetch(url);
+                const data = await res.json();
                 const container = document.getElementById(target);
                 container.innerHTML = "";
 
                 if(data.items) {
-                    const videoIds = data.items.map(i => i.id.videoId).join(',');
-                    const statsRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoIds}&key=${GOD_KEY}`);
-                    const statsData = await statsRes.json();
+                    const ids = data.items.map(i => i.id.videoId).join(',');
+                    const sRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${ids}&key=${KEY}`);
+                    const sData = await sRes.json();
 
-                    data.items.forEach((item, index) => {
-                        const vidId = item.id.videoId;
-                        if(!vidId) return;
-                        const views = statsData.items[index] ? formatStats(statsData.items[index].statistics.viewCount) : "Bilinmiyor";
+                    data.items.forEach((item, i) => {
+                        const vid = item.id.videoId;
+                        if(!vid || item.snippet.title.toLowerCase().includes('shorts')) return;
+                        const v_count = sData.items[i] ? format_v(sData.items[i].statistics.viewCount) : "Premium";
                         const date = new Date(item.snippet.publishedAt).toLocaleDateString('tr-TR');
 
                         container.innerHTML += `
-                            <div class="video-card" onclick="king_open_player('${vidId}', '${item.snippet.title.replace(/'/g, "")}')">
-                                <div class="video-thumbnail">
+                            <div class="v400-video-card" onclick="eng_play('${vid}', '${item.snippet.title.replace(/'/g, "")}')">
+                                <div class="thumbnail-box">
                                     <img src="${item.snippet.thumbnails.high.url}" loading="lazy">
-                                    <div class="v-badge">HD</div>
+                                    <div class="video-duration">HD</div>
                                 </div>
-                                <div class="video-details">
-                                    <div class="channel-pfp"><i class="fas fa-crown"></i></div>
-                                    <div class="video-info-text">
+                                <div class="video-info-box">
+                                    <div class="channel-avatar">B</div>
+                                    <div class="text-data">
                                         <h3>${item.snippet.title}</h3>
-                                        <div class="video-meta">${item.snippet.channelTitle} • ${views} izlenme • ${date}</div>
+                                        <div class="meta-data">${item.snippet.channelTitle} • ${v_count} izlenme • ${date}</div>
                                     </div>
                                 </div>
                             </div>`;
                     });
                 }
-            } catch (err) { console.error("ENGINE ERROR:", err); }
+            } catch (e) { console.error(e); }
         }
 
-        /* [UI CONTROLLERS] */
-        function king_open_player(id, title) {
-            const player = document.getElementById('god-player');
-            player.style.display = 'flex';
-            document.getElementById('p-video-title').innerText = title;
-            document.getElementById('video-stage').innerHTML = `
-                <iframe src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
-            king_fetch_data(title, 'p-suggestions');
+        function eng_play(id, title) {
+            const p = document.getElementById('v400-player');
+            p.style.display = 'flex';
+            document.getElementById('now-playing-title').innerText = title;
+            document.getElementById('v400-video-wrapper').innerHTML = `
+                <iframe id="v400-yt" src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&enablejsapi=1&origin=${window.location.origin}" style="width:100%; height:100%; border:none;" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+            eng_fetch(title, 'related-feed');
             history.pushState({p:1}, "");
         }
 
-        function king_close_player() {
-            document.getElementById('god-player').style.display = 'none';
-            document.getElementById('video-stage').innerHTML = "";
+        function eng_close_p() {
+            document.getElementById('v400-player').style.display = 'none';
+            document.getElementById('v400-video-wrapper').innerHTML = "";
         }
 
-        function king_toggle_profile() {
-            document.getElementById('profile-drawer').classList.toggle('active');
-        }
-
-        function king_init() {
-            const randomQuery = CHAOS_POOL[Math.floor(Math.random() * CHAOS_POOL.length)];
-            king_fetch_data(randomQuery, 'main-feed-target');
-            document.getElementById('profile-drawer').classList.remove('active');
+        function eng_refresh() {
+            document.querySelectorAll('.v400-overlay, #v400-main-feed, header').forEach(el => el.style.display = 'none');
+            document.getElementById('v400-main-feed').style.display = 'flex';
+            document.querySelector('header').style.display = 'flex';
+            eng_fetch(POOL[Math.floor(Math.random()*POOL.length)], 'v400-main-feed');
             window.scrollTo(0,0);
         }
 
-        function king_search() {
-            const val = document.getElementById('query-input').value;
-            if(val) king_fetch_data(val, 'main-feed-target');
+        function eng_search() {
+            const val = document.getElementById('v400-q').value;
+            if(val) eng_fetch(val, 'v400-main-feed');
         }
 
-        function king_voice() {
-            const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if(!Speech) return;
-            const rec = new Speech();
-            rec.lang = 'tr-TR';
-            rec.onstart = () => document.getElementById('mic-btn').classList.add('recording');
-            rec.onend = () => document.getElementById('mic-btn').classList.remove('recording');
-            rec.onresult = (e) => {
-                document.getElementById('query-input').value = e.results[0][0].transcript;
-                king_search();
-            };
-            rec.start();
+        function eng_voice() {
+            const S = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if(!S) return;
+            const r = new S(); r.lang = 'tr-TR';
+            r.onstart = () => document.getElementById('voice-trigger').classList.add('active');
+            r.onend = () => document.getElementById('voice-trigger').classList.remove('active');
+            r.onresult = (e) => { document.getElementById('v400-q').value = e.results[0][0].transcript; eng_search(); };
+            r.start();
         }
 
-        function king_gate() { alert("Muhammed Ali: Bu alan zihin sağlığın için şimdilik kapalı kanka!"); }
+        function eng_gate(id) {
+            document.querySelectorAll('.v400-overlay, #v400-main-feed, header').forEach(el => el.style.display = 'none');
+            const target = document.getElementById(id);
+            target.style.display = (id === 'v400-shorts' ? 'flex' : 'block');
+        }
 
-        /* [BACKGROUND ENGINE] */
+        function eng_prof() { document.getElementById('v400-prof').classList.toggle('active'); }
+
+        window.onload = () => { eng_refresh(); history.pushState(null, ""); };
+        window.onpopstate = () => { if(document.getElementById('v400-player').style.display === 'flex') { eng_close_p(); history.pushState(null, ""); } };
+
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
-                const frame = document.querySelector('iframe');
-                if(frame) frame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+                const f = document.getElementById('v400-yt');
+                if(f) f.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
             }
         });
-
-        window.onload = king_init;
     </script>
 </body>
 </html>
