@@ -3,238 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BUNY TUBE - MUHAMMED ALI EDITION</title>
+    <title>BUNY TUBE - SINIRSIZ EDITION</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root { --red: #ff0000; --dark: #000000; --neon: #00f2ff; --neon-glow: 0 0 15px #00f2ff; }
         * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Roboto, sans-serif; }
         body { background: var(--dark); color: white; padding-bottom: 80px; overflow-x: hidden; }
 
-        /* DUYURU BANNER */
+        /* BAKIM MODU EKRANI */
+        #maintenance-screen { 
+            position: fixed; inset: 0; background: #000; display: none; 
+            flex-direction: column; justify-content: center; align-items: center; 
+            z-index: 999999; text-align: center; 
+        }
+        #maintenance-screen i { font-size: 60px; color: var(--red); margin-bottom: 20px; }
+
+        /* BANNER */
         #announcement-banner {
             background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            color: white; padding: 6px 0; font-size: 13px; font-weight: bold; overflow: hidden; white-space: nowrap; position: sticky; top: 0; z-index: 1001;
-margin-top: 50px;
-width: 92%;
-margin-left: auto;
-margin-right: auto;
-border-radius: 8px;
+            color: white; padding: 6px 0; font-size: 13px; font-weight: bold; 
+            overflow: hidden; white-space: nowrap; position: relative; z-index: 1001;
+            margin: 20px auto 10px auto; width: 92%; border-radius: 8px;
         }
         .marquee { display: inline-block; padding-left: 100%; animation: marquee 15s linear infinite; }
         @keyframes marquee { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* HEADER */
+        /* HEADER & SEARCH */
         header { padding: 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #111; }
-        header h1 { font-weight: 900; letter-spacing: -1.5px; font-size: 1.8rem; }
+        header h1 { font-weight: 900; font-size: 1.8rem; cursor: pointer; }
         header h1 span { color: var(--red); }
-        .about-trigger { font-size: 1.5rem; color: #555; cursor: pointer; transition: 0.3s; }
-        .about-trigger:hover { color: var(--neon); text-shadow: var(--neon-glow); }
-
-        /* SEARCH HERO */
         .search-hero { padding: 40px 20px; text-align: center; }
         .search-container { position: relative; max-width: 500px; margin: 0 auto; }
-        .search-container input { width: 100%; background: #111; border: 1px solid #333; padding: 15px 50px 15px 25px; border-radius: 30px; color: white; outline: none; font-size: 16px; transition: 0.3s; }
-        .search-container input:focus { border-color: var(--neon); box-shadow: var(--neon-glow); }
+        .search-container input { width: 100%; background: #111; border: 1px solid #333; padding: 15px 50px 15px 25px; border-radius: 30px; color: white; outline: none; }
         .search-container i { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); color: var(--neon); cursor: pointer; }
 
-        /* EMPTY STATE */
-        #empty-msg { padding: 50px 20px; text-align: center; color: #444; }
-        #empty-msg i { font-size: 60px; margin-bottom: 15px; display: block; }
-
-        /* NEON LOGIN MODAL */
-        #admin-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 20000; }
-        .neon-box { 
-            background: #050505; padding: 40px; border-radius: 20px; border: 2px solid var(--neon); 
-            box-shadow: var(--neon-glow), inset 0 0-10px #00f2ff33; text-align: center; width: 85%; max-width: 350px;
-        }
-        .neon-box h2 { color: var(--neon); text-shadow: var(--neon-glow); margin-bottom: 25px; letter-spacing: 2px; }
-        .neon-box input { width: 100%; padding: 12px; background: #000; border: 1px solid #333; color: white; border-radius: 10px; margin-bottom: 20px; text-align: center; font-size: 18px; outline: none; }
-        .neon-btn { background: var(--neon); color: black; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: 900; cursor: pointer; box-shadow: var(--neon-glow); }
-
-        /* HAKKIMDA MODAL */
-        #about-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 40000; }
-        .about-card { background: #050505; border: 1px solid #222; padding: 30px; border-radius: 20px; text-align: center; width: 85%; max-width: 400px; box-shadow: 0 0 20px rgba(0,242,255,0.1); }
-        .about-card h2 { color: var(--neon); margin-bottom: 15px; font-size: 1.5rem; }
-        .about-card p { font-size: 14px; line-height: 1.6; color: #ccc; margin-bottom: 20px; }
-        .copyright-text { font-size: 11px; color: #555; border-top: 1px solid #111; padding-top: 15px; }
-
-        /* ADMIN DASHBOARD */
-        #admin-dashboard { position: fixed; inset: 0; background: #000; z-index: 21000; display: none; padding: 25px; overflow-y: auto; }
-        .panel-card { background: #0a0a0a; border: 1px solid #1a1a1a; padding: 20px; border-radius: 15px; margin-bottom: 20px; }
-        .stat-badge { display: inline-block; background: #111; border: 1px solid var(--neon); color: var(--neon); padding: 5px 12px; border-radius: 20px; font-size: 12px; margin-top: 10px; margin-right: 5px; }
-
-        /* FEED & BOTTOM NAV */
+        /* FEED */
         .feed { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px; padding: 15px; }
-        .v-card { background: #0a0a0a; border-radius: 12px; overflow: hidden; cursor: pointer; }
+        .v-card { background: #0a0a0a; border-radius: 12px; overflow: hidden; cursor: pointer; border: 1px solid #111; }
         .v-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
-        .bottom-nav { position: fixed; bottom: 20px; left: 2.5%; width: 100%; height: 100px; background: #050505; border-top: 1px solid #111; display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
+
+        /* NAV & MODALS */
+        .bottom-nav { position: fixed; bottom: 35px; left: 0; width: 100%; height: 70px; background: #050505; border-top: 1px solid #111; display: flex; justify-content: space-around; align-items: center; z-index: 1000; }
         .nav-item { color: #555; text-align: center; font-size: 10px; cursor: pointer; }
         .nav-item.active { color: var(--neon); }
         .nav-item i { font-size: 22px; display: block; margin-bottom: 4px; }
-        #player { position: fixed; inset: 0; background: #000; z-index: 30000; display: none; }
+
+        #admin-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: none; align-items: center; justify-content: center; z-index: 40000; }
+        .neon-box { background: #050505; padding: 30px; border-radius: 20px; border: 2px solid var(--neon); width: 85%; max-width: 350px; text-align: center; }
+        .neon-btn { background: var(--neon); color: black; border: none; padding: 12px; width: 100%; border-radius: 10px; font-weight: 900; cursor: pointer; margin-top: 10px; }
+
+        #admin-dashboard { position: fixed; inset: 0; background: #000; z-index: 50000; display: none; padding: 25px; overflow-y: auto; }
+        #player { position: fixed; inset: 0; background: #000; z-index: 60000; display: none; }
     </style>
 </head>
 <body>
 
-    <div id="announcement-banner"><div class="marquee" id="marquee-text">Sistem Aktif: uygulama hakkındaki yorum ve görüşleriniz bu uygulamayı daha üst seviyeye taşımak için çok önemli.</div></div>
+    <div id="maintenance-screen">
+        <i class="fas fa-tools"></i>
+        <h2 style="color:var(--neon)">SİSTEM BAKIMDA</h2>
+        <p style="padding:20px; color:#888;">Muhammed Ali şu an uygulamayı uçuşa hazırlıyor. <br> Az sonra buradayız patron!</p>
+    </div>
+
+    <div id="announcement-banner"><div class="marquee" id="marquee-text">Muhammed Ali Sunar: Kotasız, Reklamsız, Özgür YouTube!</div></div>
 
     <header>
         <h1 onclick="location.reload()">BUNY<span>TUBE</span></h1>
-        <i class="fas fa-info-circle about-trigger" onclick="app.showAbout()"></i>
+        <i class="fas fa-lock" style="color:#333" onclick="app.openAdminModal()"></i>
     </header>
 
     <div class="search-hero">
         <div class="search-container">
-            <input type="text" id="search-input" placeholder="Hangi videoyu arıyorsun?" onkeyup="if(event.key === 'Enter') app.search()">
+            <input type="text" id="search-input" placeholder="Video ara (Sınırsız Sunucu)" onkeyup="if(event.key === 'Enter') app.search()">
             <i class="fas fa-search" onclick="app.search()"></i>
         </div>
     </div>
 
-    <div id="empty-msg">
-        <i class="fas fa-video-slash"></i>
-        <p>Ana sayfada video bulunmamaktadır. <br> Arama motorumuz Muhammed Ali tarafından optimize edildi.</p>
-    </div>
-
-    <main id="main-feed" class="feed" style="display:none;"></main>
+    <main id="main-feed" class="feed"></main>
 
     <div id="admin-modal">
         <div class="neon-box">
-            <h2>PATRON</h2>
-            <input type="password" id="admin-pass" placeholder="SAYIM BİLGİSİ">
+            <h2 style="color:var(--neon)">PATRON GİRİŞİ</h2>
+            <input type="password" id="admin-pass" placeholder="ŞİFRE" style="width:100%; padding:10px; margin-top:20px; background:#000; border:1px solid #333; color:white; border-radius:10px; text-align:center;">
             <button class="neon-btn" onclick="app.checkAdmin()">SİSTEME BAĞLAN</button>
-<div style="background: #1a1a1a; padding: 15px; border-radius: 10px; margin-top: 15px; border: 1px dashed #444; text-align: center;">
-    <h4 style="color: #ff0000; margin-top: 0;">API Limit Kurtarıcı</h4>
-    <input type="text" id="new-api-key" placeholder="Yeni API Key Yapıştır..." 
-           style="width: 90%; padding: 10px; border-radius: 5px; border: none; margin-bottom: 10px; background: #333; color: white; outline: none;">
-    <button onclick="updateApiKey()" 
-            style="background: #e6683c; color: white; border: none; padding: 10px; border-radius: 5px; width: 95%; font-weight: bold; cursor: pointer;">
-        SİSTEMİ GÜNCELLE
-    </button>
-</div>
-<p onclick="app.closeAdminModal()" style="color:#444; margin-top:15px; cursor:pointer; font-size:12px;">GERİ DÖN</p>
-        </div>
-    </div>
-
-    <div id="about-modal">
-        <div class="about-card">
-            <i class="fas fa-shield-alt" style="font-size: 40px; color: var(--neon); margin-bottom: 15px;"></i>
-            <h2>BUNY TUBE</h2>
-            <p>Bu platform, reklamların ve kısıtlamaların olmadığı özgür bir video deneyimi için <b>Muhammed Ali</b> tarafından özel olarak kodlanmıştır.</p>
-            <div class="copyright-text">
-                <p>© 2026 Muhammed Ali - Tüm Hakları Saklıdır.<br>
-                <i>No Copyright - No Ads - Only Freedom</i></p>
-            </div>
-            <button class="neon-btn" onclick="app.closeAbout()" style="margin-top: 20px;">ANLADIM</button>
+            <p onclick="app.closeAdminModal()" style="color:#444; margin-top:20px; cursor:pointer;">VAZGEÇ</p>
         </div>
     </div>
 
     <div id="admin-dashboard">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
             <h2 style="color:var(--neon)">MUHAMMED ALI PANEL</h2>
-            <i class="fas fa-times" onclick="app.closeAdminPanel()" style="color:red; font-size:20px;"></i>
+            <i class="fas fa-times" onclick="app.closeAdminPanel()" style="color:red; font-size:25px;"></i>
         </div>
 
-        <div class="panel-card">
-            <h4>Duyuruyu Güncelle</h4>
+        <div style="background:#111; padding:20px; border-radius:15px; margin-bottom:20px; border:1px solid #222;">
+            <h4 style="margin-bottom:15px;">Uygulama Durumu (Bakım Modu)</h4>
+            <button onclick="app.setBakim(true)" style="background:red; color:white; border:none; padding:12px 20px; border-radius:8px; font-weight:bold;">BAKIMI AÇ</button>
+            <button onclick="app.setBakim(false)" style="background:green; color:white; border:none; padding:12px 20px; border-radius:8px; font-weight:bold; margin-left:10px;">BAKIMI KAPAT</button>
+        </div>
+
+        <div style="background:#111; padding:20px; border-radius:15px; border:1px solid #222;">
+            <h4>Duyuruyu Değiştir</h4>
             <input type="text" id="ann-input" style="width:100%; padding:12px; background:#000; border:1px solid #333; color:white; margin:15px 0; border-radius:8px;">
-            <button onclick="app.updateAnn()" class="neon-btn" style="height:40px;">YAYINLA</button>
+            <button onclick="app.updateAnn()" class="neon-btn">YAYINLA</button>
         </div>
+    </div>
 
-        <div class="panel-card">
-            <h4>Veri Merkezi</h4>
-            <div class="stat-badge">API: Aktif</div>
-            <div class="stat-badge">Kullanıcı: 1.100+</div>
-            <div class="stat-badge" id="view-count-badge">İzlenme: 0</div>
-        </div>
-
-        <div class="panel-card">
-            <h4>Gelen Bildirimler</h4>
-            <div id="rating-list" style="font-size:13px; color:#888;">Patron, henüz yeni bir yorum yok.</div>
-        </div>
+    <div id="player">
+        <div style="padding:20px;"><i class="fas fa-chevron-down" onclick="app.closePlayer()" style="font-size:30px"></i></div>
+        <div id="player-box" style="width:100%; aspect-ratio:16/9;"></div>
     </div>
 
     <div class="bottom-nav">
         <div class="nav-item active" onclick="location.reload()"><i class="fas fa-home"></i>Ana Sayfa</div>
-        <div class="nav-item" onclick="app.showSubs()"><i class="fas fa-heart"></i>Aboneler</div>
-        <div class="nav-item" onclick="app.openAdminModal()"><i class="fas fa-lock"></i>Yetkili</div>
-    </div>
-
-    <div id="player">
-        <div style="padding:15px;"><i class="fas fa-chevron-down" onclick="app.closePlayer()" style="font-size:25px"></i></div>
-        <div id="player-box" style="width:100%; aspect-ratio:16/9;"></div>
+        <div class="nav-item" onclick="app.openAdminModal()"><i class="fas fa-user-shield"></i>Yönetim</div>
     </div>
 
     <script>
     const app = {
-        KEY: 'AIzaSyAJmuNSyU1AOn0z_jKZIpJNz-nUAZkt388',
-        subs: JSON.parse(localStorage.getItem('b_subs')) || [],
-        views: parseInt(localStorage.getItem('b_views')) || 0,
+        // ARTIK API KEY YOK! Sınırsız Piped sunucusu devrede.
+        apiBase: 'https://pipedapi.kavin.rocks',
 
         init() {
+            // Bakım Modu Kontrolü
+            if(localStorage.getItem('muhammed_bakim') === 'true') {
+                document.getElementById('maintenance-screen').style.display = 'flex';
+            }
+            // Duyuru Kontrolü
             const saved = localStorage.getItem('buny_note');
             if(saved) document.getElementById('marquee-text').innerText = saved;
-            document.getElementById('view-count-badge').innerText = "İzlenme: " + this.views;
         },
 
         async search() {
             const q = document.getElementById('search-input').value;
             if(!q) return;
-            document.getElementById('empty-msg').style.display = 'none';
             const feed = document.getElementById('main-feed');
-            feed.style.display = 'grid';
-            feed.innerHTML = '<p style="grid-column:1/-1; text-align:center; padding:50px; color:var(--neon);">Aranıyor...</p>';
+            feed.innerHTML = '<p style="text-align:center; width:100%; color:var(--neon); padding:50px;">Sınırsız sunucuya bağlanılıyor...</p>';
 
             try {
-                const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${encodeURIComponent(q)}&type=video&key=${this.KEY}`);
+                const res = await fetch(`${this.apiBase}/search?q=${encodeURIComponent(q)}&filter=videos`);
                 const data = await res.json();
-                feed.innerHTML = data.items.map(v => `
-                    <div class="v-card" onclick="app.play('${v.id.videoId}')">
-                        <img src="${v.snippet.thumbnails.high.url}">
-                        <div style="padding:12px;"><h4>${v.snippet.title}</h4><small style="color:#666">${v.snippet.channelTitle}</small></div>
+                
+                feed.innerHTML = data.content.map(v => `
+                    <div class="v-card" onclick="app.play('${v.url.split('=')[1]}')">
+                        <img src="${v.thumbnail}">
+                        <div style="padding:12px;">
+                            <h4 style="font-size:14px; margin-bottom:5px;">${v.title}</h4>
+                            <small style="color:#666">${v.uploaderName} • ${v.viewCount} izlenme</small>
+                        </div>
                     </div>`).join('');
-            } catch (e) { feed.innerHTML = '<p>Limit Doldu.</p>'; }
+            } catch (e) {
+                feed.innerHTML = '<p style="text-align:center; color:red; padding:50px;">Sistem yoğun, tekrar dene patron!</p>';
+            }
         },
 
         play(id) {
-            this.views++;
-            localStorage.setItem('b_views', this.views);
             document.getElementById('player').style.display = 'block';
-            document.getElementById('player-box').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
+            // Reklamsız Player
+            document.getElementById('player-box').innerHTML = `
+                <iframe src="https://piped.video/embed/${id}?autoplay=1" 
+                style="width:100%; height:100%; border:none;" 
+                allow="autoplay; fullscreen"></iframe>`;
         },
 
-        showAbout() { document.getElementById('about-modal').style.display = 'flex'; },
-        closeAbout() { document.getElementById('about-modal').style.display = 'none'; },
-        openAdminModal() { document.getElementById('admin-modal').style.display = 'flex'; },
-        closeAdminModal() { document.getElementById('admin-modal').style.display = 'none'; },
-        
+        setBakim(durum) {
+            localStorage.setItem('muhammed_bakim', durum);
+            alert(durum ? "BAKIM MODU AÇILDI!" : "SİSTEM AÇILDI!");
+            location.reload();
+        },
+
         checkAdmin() {
             if(document.getElementById('admin-pass').value === "Muhiy.1905") {
                 this.closeAdminModal();
                 document.getElementById('admin-dashboard').style.display = 'block';
-                const r = JSON.parse(localStorage.getItem('all_ratings')) || [];
-                document.getElementById('rating-list').innerHTML = r.map(x => `<div>⭐ ${x.stars} - ${x.comment}</div>`).join('');
-            } else { alert("Patron değilsin!"); }
+            } else { alert("Şifre Yanlış!"); }
         },
 
         updateAnn() {
             const val = document.getElementById('ann-input').value;
-            if(val) { localStorage.setItem('buny_note', val); document.getElementById('marquee-text').innerText = val; alert("Güncellendi!"); }
+            if(val) {
+                localStorage.setItem('buny_note', val);
+                document.getElementById('marquee-text').innerText = val;
+                alert("Duyuru güncellendi!");
+            }
         },
 
-        closePlayer() { document.getElementById('player').style.display = 'none'; document.getElementById('player-box').innerHTML = ''; },
-        closeAdminPanel() { document.getElementById('admin-dashboard').style.display = 'none'; }
+        openAdminModal() { document.getElementById('admin-modal').style.display = 'flex'; },
+        closeAdminModal() { document.getElementById('admin-modal').style.display = 'none'; },
+        closeAdminPanel() { document.getElementById('admin-dashboard').style.display = 'none'; },
+        closePlayer() { document.getElementById('player').style.display = 'none'; document.getElementById('player-box').innerHTML = ''; }
     };
+
     window.onload = () => app.init();
-    function updateApiKey() {
-    const key = document.getElementById('new-api-key').value;
-    if(key.length > 10) {
-        localStorage.setItem('youtube_api_key', key);
-        alert("Sistem Güncellendi! limitler sıfırlandı. Uygulamayı kapatıp açabilirsin.");
-        location.reload(); 
-    } else {
-        alert("Lütfen geçerli bir API Key gir patron!");
-    }
-}
-</script>
+    </script>
 </body>
 </html>
