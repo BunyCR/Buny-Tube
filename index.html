@@ -6,262 +6,207 @@
 <title>BunyTube</title>
 
 <style>
-:root{
-  --bg:#000;
-  --red:#ff0033;
-  --blue:#00f2ff;
-  --txt:#fff;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#0d0d0d;
+  color:white;
+  font-family:Arial,sans-serif;
+  overflow:hidden;
 }
-
-*{box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
-body{margin:0;background:var(--bg);color:var(--txt);overflow-x:hidden}
-
-/* NEON */
-.neon{ text-shadow:0 0 8px var(--blue),0 0 16px var(--blue) }
 
 /* HEADER */
 header{
+  height:60px;
+  background:#111;
   display:flex;
   align-items:center;
-  gap:10px;
-  padding:10px;
-  border-bottom:1px solid #111;
+  padding:0 10px;
+  border-bottom:1px solid #222;
 }
-.logo{color:var(--red);font-size:22px;font-weight:bold}
+.logo{
+  color:#ff2b2b;
+  font-size:22px;
+  font-weight:bold;
+}
 .search{
   flex:1;
+  margin-left:10px;
 }
 .search input{
   width:100%;
-  padding:10px;
-  background:#050505;
-  border:1px solid var(--blue);
-  color:#fff;
-  box-shadow:0 0 10px var(--blue);
-}
-.profile{
-  width:36px;height:36px;border-radius:50%;
-  background:var(--blue);color:#000;
-  display:flex;align-items:center;justify-content:center;
-  font-weight:bold;cursor:pointer;
-}
-
-/* ANNOUNCEMENT */
-#announcement{
-  display:none;
   padding:8px;
-  background:#050505;
-  border-bottom:1px solid var(--red);
-  text-align:center;
-}
-
-/* GRID */
-#videos{
-  padding:10px;
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-  gap:10px;
-}
-.card{
-  background:#050505;
-  border:1px solid #111;
-  padding:8px;
-  cursor:pointer;
-}
-.card:hover{border-color:var(--blue)}
-.card img{width:100%}
-.card h4{font-size:13px}
-
-/* PLAYER */
-#player{
-  position:fixed;
-  inset:0;
   background:#000;
-  display:none;
-  flex-direction:column;
-}
-#player iframe{flex:1;width:100%;border:none}
-#back{
-  padding:10px;
-  background:#000;
-  color:var(--red);
-  border:none;
-  text-align:left;
+  border:1px solid #333;
+  color:white;
 }
 
-/* MINI PLAYER */
-#mini{
-  position:fixed;
-  bottom:0;right:0;
-  width:160px;height:90px;
-  display:none;
-  border:2px solid var(--blue);
+/* SAYFALAR */
+.page{
+  height:calc(100vh - 120px);
+  overflow:auto;
+  padding:12px;
+}
+.video-card{
+  background:#111;
+  padding:15px;
+  margin-bottom:10px;
+  border-radius:8px;
 }
 
-/* LOGIN */
-#login{
-  position:fixed;inset:0;
-  background:rgba(0,0,0,.9);
-  display:none;align-items:center;justify-content:center;
+/* SHORTS */
+#shorts{
+  padding:0;
+  overflow:hidden;
 }
-.login-box{
-  background:#050505;
-  padding:20px;
-  border:1px solid var(--blue);
+.shorts-container{
+  height:100%;
+  position:relative;
 }
-.login-box input{
+.short{
+  height:100%;
   width:100%;
-  padding:10px;
-  margin-top:10px;
-  background:#000;
-  border:1px solid var(--blue);
-  color:#fff;
-}
-
-/* MAINTENANCE */
-#maintenance{
-  position:fixed;
-  inset:0;
-  background:#000;
-  display:none;
+  position:absolute;
+  top:0;
+  left:0;
+  display:flex;
   align-items:center;
   justify-content:center;
-  flex-direction:column;
-  z-index:9999;
+  font-size:30px;
+  transition:transform 0.3s ease;
 }
 
-#maintenance.active{
+/* ALT MENÜ */
+.bottom-nav{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:60px;
+  background:#111;
   display:flex;
+  justify-content:space-around;
+  align-items:center;
+  border-top:1px solid #222;
+}
+.bottom-nav button{
+  background:none;
+  border:none;
+  color:white;
+  font-size:12px;
 }
 
-#maintenance h1{
-  color:#00f2ff;
-  font-size:32px;
-  text-shadow:0 0 10px #00f2ff,0 0 25px #00f2ff;
-  animation:float 2s ease-in-out infinite;
+/* BAKIM */
+#maintenance{
+  display:none;
+  height:100vh;
+  background:#0d0d0d;
+  color:white;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
 }
-
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-20px)}
-}
-
 </style>
 </head>
+
 <body>
 
+<!-- BAKIM EKRANI -->
 <div id="maintenance">
-  <h1 class="neon">BUNYTUBE BAKIMDA</h1>
+  <h1>BunyTube Bakımda</h1>
+  <p id="maintenanceText"></p>
 </div>
-
-<div id="announcement" class="neon"></div>
 
 <header>
-  <div class="logo neon">BunyTube</div>
+  <div class="logo">BunyTube</div>
   <div class="search">
-    <input id="q" placeholder="Ara...">
+    <input placeholder="Video ara">
   </div>
-  <div class="profile" id="profile">?</div>
 </header>
 
-<div id="videos"></div>
-
-<div id="player">
-  <button id="back">← Geri</button>
-  <iframe id="frame" allowfullscreen></iframe>
+<!-- ANA SAYFA -->
+<div id="home" class="page">
+  <h3>Trendler</h3>
+  <div class="video-card">Video 1</div>
+  <div class="video-card">Video 2</div>
+  <div class="video-card">Video 3</div>
 </div>
 
-<iframe id="mini"></iframe>
-
-<div id="login">
-  <div class="login-box">
-    <h3 class="neon">Giriş</h3>
-    <input id="name" placeholder="İsmin">
-    <button onclick="login()">Tamam</button>
+<!-- SHORTS -->
+<div id="shorts" class="page" style="display:none">
+  <div class="shorts-container" id="shortsContainer">
+    <div class="short" style="background:#111">Short 1</div>
+    <div class="short" style="background:#222">Short 2</div>
+    <div class="short" style="background:#333">Short 3</div>
   </div>
+</div>
+
+<!-- ADMIN -->
+<div id="admin" class="page" style="display:none">
+  <h3>Admin Panel</h3>
+  <input placeholder="Video başlığı"><br><br>
+  <input placeholder="Video linki"><br><br>
+  <button>Yükle</button>
+</div>
+
+<!-- ALT MENÜ -->
+<div class="bottom-nav">
+  <button onclick="showPage('home')">🏠<br>Ana</button>
+  <button onclick="showPage('shorts')">▶️<br>Shorts</button>
+  <button onclick="openAdmin()">⚙️<br>Admin</button>
 </div>
 
 <script>
-/* CONFIG */
+/* CONFIG.JSON OKUMA */
 fetch("config.json")
 .then(r=>r.json())
 .then(cfg=>{
   if(cfg.maintenance){
-    maintenance.style.display="flex"
+    document.getElementById("maintenanceText").innerText = cfg.maintenanceText;
+    document.body.innerHTML = document.getElementById("maintenance").outerHTML;
   }
-  if(cfg.announcement){
-    announcement.style.display="block"
-    announcement.textContent=cfg.announcement
-  }
-})
+});
 
-/* LOGIN */
-profile.onclick=()=>login.style.display="flex"
-function login(){
-  if(!name.value)return
-  profile.textContent=name.value[0].toUpperCase()
-  login.style.display="none"
+/* SAYFA GEÇİŞ */
+function showPage(id){
+  home.style.display="none";
+  shorts.style.display="none";
+  admin.style.display="none";
+  document.getElementById(id).style.display="block";
 }
 
-/* SEARCH (INVIDIOUS) */
-const instances=[
- "https://yewtu.be",
- "https://vid.puffyan.us",
- "https://invidious.fdn.fr"
-]
-
-q.addEventListener("keydown",e=>{
-  if(e.key==="Enter") search(q.value)
-})
-
-function search(term){
-  videos.innerHTML=""
-  tryFetch(0,term)
+/* ADMIN */
+function openAdmin(){
+  let p = prompt("Admin şifresi");
+  if(p==="1234") showPage("admin");
+  else alert("Yetkisiz");
 }
 
-function tryFetch(i,term){
-  if(!instances[i]) return
-  fetch(`${instances[i]}/api/v1/search?q=${encodeURIComponent(term)}&type=video`)
-  .then(r=>r.json())
-  .then(d=>{
-    d.slice(0,12).forEach(v=>{
-      const c=document.createElement("div")
-      c.className="card"
-      c.innerHTML=`
-        <img src="${v.videoThumbnails[2].url}">
-        <h4>${v.title}</h4>
-        <small>${v.viewCount} görüntülenme</small>
-      `
-      c.onclick=()=>play(v.videoId)
-      videos.appendChild(c)
-    })
-  })
-  .catch(()=>tryFetch(i+1,term))
-}
+/* SHORTS KAYDIRMA */
+let current = 0;
+const shortEls = document.querySelectorAll(".short");
+let startY = 0;
 
-/* PLAYER */
-function play(id){
-  frame.src = `https://www.youtube-nocookie.com/embed/${id}`
-  player.style.display = "flex"
-  mini.style.display = "none"
+function updateShorts(){
+  shortEls.forEach((s,i)=>{
+    s.style.transform = `translateY(${(i-current)*100}%)`;
+  });
 }
+updateShorts();
 
-back.onclick = () => {
-  player.style.display = "none"
-  mini.src = frame.src
-  mini.style.display = "block"
-}
-
-mini.onclick = () => {
-  frame.src = mini.src
-  mini.style.display = "none"
-  player.style.display = "flex"
-}
-
-/* BAKIM DURUMU */
-if(localStorage.getItem("buny_bakim") === "true"){
-  document.getElementById("maintenance").classList.add("active")
-}
+const container = document.getElementById("shortsContainer");
+container.addEventListener("touchstart",e=>{
+  startY = e.touches[0].clientY;
+});
+container.addEventListener("touchend",e=>{
+  let endY = e.changedTouches[0].clientY;
+  if(startY - endY > 50 && current < shortEls.length-1) current++;
+  if(endY - startY > 50 && current > 0) current--;
+  updateShorts();
+});
 </script>
 
 </body>
