@@ -3,535 +3,644 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>BUNY-Tube V700 | King Edition</title>
+    <title>BUNY-Tube V1000 | Omega Supreme by Muhammed Ali</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@800&family=Syncopate:wght@700&display=swap" rel="stylesheet">
 
     <style>
-        /* [SECTION 1: ADVANCED CSS VARIABLES] */
+        /* ========================================================================= */
+        /* [CSS ARCHITECTURE MODULE 1: CORE DESIGN SYSTEM & VARIABLES]              */
+        /* ========================================================================= */
         :root {
-            --m-red: #ff0000;
-            --m-dark-red: #990000;
-            --m-black: #000000;
-            --m-soft-black: #080808;
-            --m-gray: #121212;
-            --m-border: #1f1f1f;
-            --m-text: #ffffff;
-            --m-sub-text: #999999;
-            --m-glow: 0 0 25px rgba(255, 0, 0, 0.4);
-            --m-trans: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --omega-red: #ff0000;
+            --omega-deep-red: #cc0000;
+            --omega-black: #000000;
+            --omega-dark-surface: #0a0a0a;
+            --omega-card-bg: #111111;
+            --omega-border-line: #1f1f1f;
+            --omega-text-primary: #ffffff;
+            --omega-text-secondary: #999999;
+            --omega-glow-effect: 0 0 50px rgba(255, 0, 0, 0.6);
+            --omega-transition-fast: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --omega-transition-smooth: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        /* [SECTION 2: GLOBAL RESET & SCROLLBAR] */
+        /* ========================================================================= */
+        /* [CSS ARCHITECTURE MODULE 2: GLOBAL RESET & BASE STYLES]                  */
+        /* Optimized for performance and cross-browser consistency.                  */
+        /* ========================================================================= */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
-            scrollbar-width: none;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+            scrollbar-width: none; /* Firefox scrollbar hide */
         }
-
-        *::-webkit-scrollbar { display: none; }
+        *::-webkit-scrollbar { display: none; } /* Webkit scrollbar hide */
 
         body {
-            background-color: var(--m-black);
-            color: var(--m-text);
+            background-color: var(--omega-black);
+            color: var(--omega-text-primary);
             overflow-x: hidden;
-            padding-bottom: 100px;
+            min-height: 100vh; /* Ensures full viewport height for sticky elements */
+            padding-bottom: env(safe-area-inset-bottom, 100px); /* Handles notches/dynamic island */
         }
 
-        /* [SECTION 3: PREMIUM ANIMATIONS] */
-        @keyframes crown_pulse {
-            0% { transform: scale(1) rotate(-5deg); filter: drop-shadow(0 0 5px var(--m-red)); }
-            50% { transform: scale(1.1) rotate(5deg); filter: drop-shadow(0 0 20px var(--m-red)); }
-            100% { transform: scale(1) rotate(-5deg); filter: drop-shadow(0 0 5px var(--m-red)); }
+        a {
+            text-decoration: none;
+            color: inherit;
         }
 
-        @keyframes feed_entry {
-            from { opacity: 0; transform: translateY(50px); }
+        button {
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            font-size: inherit;
+            color: inherit;
+        }
+
+        /* ========================================================================= */
+        /* [CSS ARCHITECTURE MODULE 3: KEYFRAME ANIMATION LIBRARY]                  */
+        /* Custom animations for dynamic UI feedback.                                */
+        /* ========================================================================= */
+        @keyframes kingPulse {
+            0% { transform: scale(1) rotate(-3deg); filter: drop-shadow(0 0 8px var(--omega-red)); }
+            50% { transform: scale(1.1) rotate(3deg); filter: drop-shadow(0 0 35px var(--omega-red)); }
+            100% { transform: scale(1) rotate(-3deg); filter: drop-shadow(0 0 8px var(--omega-red)); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(80px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes scanline {
-            0% { transform: translateY(-100%); }
-            100% { transform: translateY(100%); }
+        @keyframes shimmer {
+            0% { background-position: -468px 0; }
+            100% { background-position: 468px 0; }
         }
 
-        /* [SECTION 4: COMPACT HEADER SYSTEM] */
-        .v7-header {
+        /* Skeleton Loading Effect */
+        .skeleton {
+            animation: shimmer 1.5s infinite linear;
+            background: linear-gradient(to right, #1a1a1a 8%, #333333 18%, #1a1a1a 33%);
+            background-size: 800px 104px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        /* ========================================================================= */
+        /* [CSS ARCHITECTURE MODULE 4: PREMIUM HEADER SYSTEM]                       */
+        /* Dynamic and responsive header component.                                  */
+        /* ========================================================================= */
+        .v1k-header {
             position: sticky;
             top: 0;
             z-index: 10000;
-            background: rgba(0, 0, 0, 0.96);
-            backdrop-filter: blur(25px);
-            padding: 14px 18px;
-            border-bottom: 1px solid var(--m-border);
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(35px);
+            padding: 18px 25px; /* Default padding */
+            border-bottom: 1px solid var(--omega-border-line);
+            transition: var(--omega-transition-smooth);
+        }
+
+        .v1k-header.compact {
+            padding: 12px 25px; /* Compact padding on scroll */
+            background: rgba(0, 0, 0, 0.9);
+            border-color: #0f0f0f;
         }
 
         .header-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
 
         .header-brand {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
-            color: var(--m-text);
-            text-decoration: none;
+            font-size: 1.8rem;
+            color: var(--omega-text-primary);
             letter-spacing: -1px;
+            cursor: pointer;
         }
 
         .header-brand span {
-            background: var(--m-red);
-            padding: 1px 7px;
-            border-radius: 5px;
-            margin-left: 4px;
-            box-shadow: var(--m-glow);
+            background: var(--omega-red);
+            padding: 3px 10px;
+            border-radius: 8px;
+            margin-left: 6px;
+            box-shadow: var(--omega-glow-effect);
+            transition: var(--omega-transition-fast);
         }
 
-        .header-actions {
+        .header-action-icons {
             display: flex;
-            gap: 20px;
-            font-size: 1.3rem;
-            color: var(--m-red);
+            gap: 22px;
+            font-size: 1.5rem;
+            color: var(--omega-red);
         }
 
-        /* [SECTION 5: SEARCH UI ENGINE] */
+        .header-action-icons button {
+            transition: transform 0.2s ease-out;
+        }
+        .header-action-icons button:active { transform: scale(0.9); }
+
+        /* ========================================================================= */
+        /* [CSS ARCHITECTURE MODULE 5: ADVANCED SEARCH INTERFACE]                   */
+        /* Robust search functionality with voice command integration.               */
+        /* ========================================================================= */
         .search-container {
             display: flex;
-            gap: 12px;
+            gap: 15px;
             align-items: center;
         }
 
-        .search-bar-v7 {
+        .search-bar-v1k {
             flex: 1;
-            background: var(--m-soft-black);
-            border: 1px solid var(--m-border);
-            border-radius: 30px;
-            padding: 10px 20px;
+            background: var(--omega-dark-surface);
+            border: 1px solid var(--omega-border-line);
+            border-radius: 35px;
+            padding: 12px 25px;
             display: flex;
             align-items: center;
-            transition: var(--m-trans);
+            transition: var(--omega-transition-fast);
         }
 
-        .search-bar-v7:focus-within {
-            border-color: var(--m-red);
-            background: #111;
+        .search-bar-v1k:focus-within {
+            border-color: var(--omega-red);
+            background: #1a1a1a;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
         }
 
-        .search-bar-v7 input {
+        .search-bar-v1k input {
             background: transparent;
             border: none;
-            color: white;
+            color: var(--omega-text-primary);
             width: 100%;
             outline: none;
-            font-size: 0.9rem;
+            font-size: 1rem;
             font-weight: 500;
         }
+        .search-bar-v1k input::placeholder {
+            color: var(--omega-text-secondary);
+            opacity: 0.7;
+        }
 
-        .v7-mic-btn {
-            width: 42px;
-            height: 42px;
-            background: var(--m-soft-black);
-            border: 1px solid var(--m-border);
+        .voice-search-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--omega-dark-surface);
+            border: 1px solid var(--omega-border-line);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--m-red);
+            color: var(--omega-red);
             cursor: pointer;
-            transition: 0.3s;
+            transition: var(--omega-transition-fast);
         }
 
-        .v7-mic-btn.active_rec {
-            background: var(--m-red);
-            color: white;
-            box-shadow: 0 0 20px var(--m-red);
+        .voice-search-btn.active-listening {
+            background: var(--omega-red);
+            color: var(--omega-text-primary);
+            animation: kingPulse 1.2s infinite;
         }
 
-        /* [SECTION 6: ULTRA-WIDE VIDEO GRID] */
-        .v7-feed-grid {
-            padding: 10px 0;
+        /* ========================================================================= */
+        /* [CSS ARCHITECTURE MODULE 6: ULTRA-CINEMATIC VIDEO FEED]                  */
+        /* Dynamic grid for video display with engaging visuals.                     */
+        /* ========================================================================= */
+        .v1k-feed-grid {
+            padding: 15px 0;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 25px;
         }
 
-        .v7-card {
+        .v1k-video-card {
             width: 100%;
-            background: var(--m-black);
-            animation: feed_entry 0.7s ease-out forwards;
+            background: var(--omega-black);
+            animation: slideInUp 0.7s ease-out forwards;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            cursor: pointer;
+        }
+        .v1k-video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), var(--omega-glow-effect);
         }
 
-        .v7-thumbnail-box {
+        .v1k-thumbnail-wrapper {
             position: relative;
             width: 100%;
-            aspect-ratio: 21 / 9; /* Geniş ve Basık Sinematik */
-            background: #0a0a0a;
+            aspect-ratio: 21 / 9; /* OMEGA SİNEMATİK GENİŞ ORAN */
+            background: #050505;
             overflow: hidden;
-            border-top: 1px solid var(--m-border);
-            border-bottom: 1px solid var(--m-border);
+            border-top: 1px solid var(--omega-border-line);
+            border-bottom: 1px solid var(--omega-border-line);
+            border-radius: 4px;
         }
 
-        .v7-thumbnail-box img {
+        .v1k-thumbnail-wrapper img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s;
+            transition: transform 1s var(--omega-transition-smooth);
+        }
+        .v1k-video-card:hover .v1k-thumbnail-wrapper img {
+            transform: scale(1.08);
         }
 
-        .v7-duration {
+        .v1k-duration-badge {
             position: absolute;
-            bottom: 12px;
-            right: 12px;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 0.7rem;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.9);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
             font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--omega-text-primary);
         }
 
-        .v7-info-area {
+        .v1k-video-details {
             display: flex;
-            padding: 16px;
-            gap: 16px;
+            padding: 20px 25px;
+            gap: 18px;
+            align-items: flex-start;
         }
 
-        .v7-avatar {
-            width: 44px;
-            height: 44px;
-            background: var(--m-soft-black);
-            border: 1px solid var(--m-border);
+        .v1k-channel-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--omega-card-bg);
+            border: 2px solid var(--omega-red);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--m-red);
-            font-size: 1.3rem;
+            color: var(--omega-red);
+            font-size: 1.6rem;
             flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
         }
 
-        .v7-text-content h3 {
-            font-size: 1rem;
+        .v1k-text-content {
+            flex-grow: 1;
+        }
+
+        .v1k-text-content h3 {
+            font-size: 1.15rem;
             font-weight: 600;
-            line-height: 1.4;
-            margin-bottom: 5px;
+            line-height: 1.5;
+            margin-bottom: 8px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            color: var(--omega-text-primary);
         }
 
-        .v7-meta {
-            font-size: 0.8rem;
-            color: var(--m-sub-text);
+        .v1k-meta-info {
+            font-size: 0.9rem;
+            color: var(--omega-text-secondary);
             font-weight: 500;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px 10px;
         }
 
-        /* [SECTION 7: KING'S PROFILE DRAWER] */
-        #v7-profile-drawer {
+        /* ========================================================================= */
+        /* [CSS ARCHITECTURE MODULE 7: KING'S PROFILE DRAWER]                       */
+        /* Side panel for user profile and system information.                       */
+        /* ========================================================================= */
+        #v1k-profile-drawer {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 88%;
+            width: 90%;
             height: 100%;
-            background: var(--m-soft-black);
+            background: var(--omega-dark-surface);
             z-index: 50000;
-            transition: 0.7s cubic-bezier(0.86, 0, 0.07, 1);
-            padding: 80px 30px;
-            border-left: 3px solid var(--m-red);
+            transition: var(--omega-transition-smooth);
+            padding: 80px 35px;
+            border-left: 4px solid var(--omega-red);
+            box-shadow: -15px 0 40px rgba(0, 0, 0, 0.6);
+            overflow-y: auto;
         }
 
-        #v7-profile-drawer.open { right: 0; }
+        #v1k-profile-drawer.is-open {
+            right: 0;
+        }
 
-        .king-identity-card {
+        .profile-close-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-size: 2.2rem;
+            color: var(--omega-text-secondary);
+            opacity: 0.3;
+            cursor: pointer;
+            transition: var(--omega-transition-fast);
+        }
+        .profile-close-btn:hover { opacity: 0.6; }
+
+        .king-identity-block {
             text-align: center;
+            margin-bottom: 50px;
         }
 
-        .king-crown {
-            font-size: 3.5rem;
-            color: var(--m-red);
-            margin-bottom: -15px;
+        .king-crown-symbol {
+            font-size: 4.5rem;
+            color: var(--omega-red);
+            margin-bottom: -20px;
             position: relative;
             z-index: 5;
-            animation: crown_pulse 2.5s infinite;
+            animation: kingPulse 3.5s infinite;
         }
 
-        .king-pfp {
-            width: 120px;
-            height: 120px;
-            background: #111;
+        .king-avatar-display {
+            width: 150px;
+            height: 150px;
+            background: var(--omega-black);
             border-radius: 50%;
             margin: 0 auto;
-            border: 4px solid var(--m-border);
+            border: 5px solid var(--omega-border-line);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.5rem;
-            color: var(--m-red);
+            font-size: 4.5rem;
+            color: var(--omega-red);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
         }
 
-        .king-name {
-            margin-top: 25px;
+        .king-name-title {
+            margin-top: 35px;
             font-family: 'Syncopate', sans-serif;
-            font-size: 1.6rem;
+            font-size: 2.2rem;
+            letter-spacing: -1px;
+            color: var(--omega-text-primary);
             text-transform: uppercase;
         }
 
-        .king-badge {
+        .king-role-badge {
             display: inline-block;
-            margin-top: 15px;
-            padding: 6px 20px;
-            background: var(--m-red);
-            border-radius: 25px;
-            font-size: 0.65rem;
+            margin-top: 20px;
+            padding: 8px 25px;
+            background: var(--omega-red);
+            border-radius: 30px;
+            font-size: 0.8rem;
             font-weight: 900;
             letter-spacing: 3px;
-            box-shadow: var(--m-glow);
+            box-shadow: var(--omega-glow-effect);
+            color: var(--omega-text-primary);
+            text-transform: uppercase;
         }
 
-        /* [SECTION 8: BOTTOM NAV DOCK] */
-        .v7-nav-dock {
+        .system-report-card {
+            margin-top: 60px;
+            background: var(--omega-card-bg);
+            padding: 30px;
+            border-radius: 25px;
+            border: 1px solid var(--omega-border-line);
+            text-align: left;
+            font-size: 0.95rem;
+            color: var(--omega-text-secondary);
+            line-height: 1.8;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+        .system-report-card b { color: var(--omega-text-primary); }
+
+        .profile-action-button {
+            width: 100%;
+            margin-top: 40px;
+            padding: 22px;
+            border-radius: 18px;
+            border: none;
+            background: var(--omega-red);
+            color: var(--omega-text-primary);
+            font-weight: 900;
+            font-size: 1.2rem;
+            transition: var(--omega-transition-fast);
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+        }
+        .profile-action-button:hover {
+            background: var(--omega-deep-red);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 0, 0, 0.6);
+        }
+
+        /* ========================================================================= */
+        /* [CSS ARCHITECTURE MODULE 8: PERSISTENT BOTTOM NAVIGATION]                */
+        /* Bottom navigation bar for core app sections.                              */
+        /* ========================================================================= */
+        .v1k-bottom-nav {
             position: fixed;
             bottom: 0;
             width: 100%;
             background: rgba(0,0,0,0.98);
-            border-top: 1px solid var(--m-border);
+            border-top: 1px solid var(--omega-border-line);
             display: flex;
             justify-content: space-around;
-            padding: 12px 0 calc(18px + env(safe-area-inset-bottom));
-            z-index: 10000;
+            padding: 18px 0 calc(25px + env(safe-area-inset-bottom));
+            z-index: 20000;
         }
 
-        .v7-nav-item {
+        .nav-link-item {
             text-align: center;
-            color: var(--m-sub-text);
-            font-size: 0.65rem;
+            color: var(--omega-text-secondary);
+            font-size: 0.75rem;
             text-decoration: none;
             font-weight: 700;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: var(--omega-transition-fast);
         }
 
-        .v7-nav-item.active { color: white; }
-        .v7-nav-item i { display: block; font-size: 1.6rem; margin-bottom: 6px; }
+        .nav-link-item.is-active {
+            color: var(--omega-text-primary);
+            transform: translateY(-3px);
+        }
+        .nav-link-item.is-active i {
+            color: var(--omega-red);
+            filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.4));
+        }
 
-        /* [SECTION 9: GOD PLAYER SYSTEM] */
-        #v7-god-player {
+        .nav-link-item i {
+            display: block;
+            font-size: 1.7rem;
+            margin-bottom: 8px;
+            transition: var(--omega-transition-fast);
+        }
+
+        /* ========================================================================= */
+        /* [CSS ARCHITECTURE MODULE 9: GOD PLAYER INTERFACE]                        */
+        /* Full-screen video player with controls.                                   */
+        /* ========================================================================= */
+        #v1k-player-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000;
+            background: var(--omega-black);
             z-index: 100000;
             display: none;
             flex-direction: column;
         }
 
-        .god-player-header {
-            padding: 15px 20px;
+        .player-header-bar {
+            padding: 20px 25px;
+            background: var(--omega-dark-surface);
             display: flex;
             align-items: center;
             gap: 20px;
-            background: #050505;
+            font-weight: 800;
+            font-size: 1rem;
+            color: var(--omega-text-secondary);
+            cursor: pointer;
+        }
+
+        .player-video-stage {
+            width: 100%;
+            aspect-ratio: 16 / 9; /* Standard video aspect ratio */
+            background: #000;
+            flex-shrink: 0; /* Prevents shrinking on smaller screens */
+        }
+
+        .player-content-area {
+            flex: 1; /* Takes remaining vertical space */
+            overflow-y: auto;
+            padding: 25px;
+        }
+
+        .player-video-title {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            color: var(--omega-text-primary);
+            line-height: 1.4;
+        }
+
+        .player-separator-line {
+            height: 1px;
+            background: var(--omega-border-line);
+            margin-bottom: 30px;
+        }
+
+        .player-suggestions-title {
+            color: var(--omega-red);
             font-weight: 900;
-            font-size: 0.8rem;
-            color: var(--m-sub-text);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
 
-    <header class="v7-header">
+    <header class="v1k-header" id="v1k-main-header">
         <div class="header-top-row">
-            <a href="#" class="header-brand" onclick="v7.refresh()">BUNY<span>Tube</span></a>
-            <div class="header-actions">
-                <i class="fas fa-search-plus" onclick="v7.refresh()"></i>
-                <i class="fas fa-crown" onclick="v7.toggleProfile()"></i>
+            <a href="#" class="header-brand" onclick="v1k.engine.refreshHome()">BUNY<span>Tube</span></a>
+            <div class="header-action-icons">
+                <button type="button" aria-label="Search" onclick="v1k.engine.execSearch()"><i class="fas fa-search"></i></button>
+                <button type="button" aria-label="Profile" onclick="v1k.engine.toggleProfileDrawer()"><i class="fas fa-crown"></i></button>
             </div>
         </div>
         <div class="search-container">
-            <div class="search-bar-v7">
-                <input type="text" id="v7-input" placeholder="Kaosu Başlat..." onkeypress="if(event.key==='Enter') v7.runSearch()">
-                <i class="fas fa-search" style="opacity:0.2" onclick="v7.runSearch()"></i>
+            <div class="search-bar-v1k">
+                <input type="text" id="v1k-search-input" placeholder="Kaosu Başlat..." onkeypress="if(event.key==='Enter') v1k.engine.execSearch()">
+                <i class="fas fa-search" style="opacity:0.2;"></i>
             </div>
-            <div class="v7-mic-btn" id="v7-mic" onclick="v7.voiceEngine()">
+            <button type="button" class="voice-search-btn" id="v1k-mic-button" onclick="v1k.engine.startVoiceSearch()" aria-label="Voice Search">
                 <i class="fas fa-microphone"></i>
-            </div>
+            </button>
         </div>
     </header>
 
-    <main class="v7-feed-grid" id="v7-feed-target"></main>
+    <main class="v1k-feed-grid" id="v1k-feed-target"></main>
 
-    <div id="v7-profile-drawer">
-        <i class="fas fa-chevron-right" onclick="v7.toggleProfile()" style="font-size: 1.5rem; color: #333;"></i>
-        <div class="king-identity-card">
-            <i class="fas fa-crown king-crown"></i>
-            <div class="king-pfp"><i class="fas fa-user-shield"></i></div>
-            <h2 class="king-name">Muhammed Ali</h2>
-            <div class="king-badge">PREMIUM KING DEVELOPER</div>
+    <div id="v1k-profile-drawer">
+        <button type="button" class="profile-close-btn" onclick="v1k.engine.toggleProfileDrawer()" aria-label="Close Profile">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="king-identity-block">
+            <i class="fas fa-crown king-crown-symbol"></i>
+            <div class="king-avatar-display"><i class="fas fa-user-shield"></i></div>
+            <h2 class="king-name-title">Muhammed Ali</h2>
+            <div class="king-role-badge">OMEGA SUPREME DEV</div>
             
-            <div style="margin-top:40px; text-align:left; background:#111; padding:25px; border-radius:20px; border:1px solid #222;">
-                <p style="color:#666; font-size:0.85rem; line-height:1.7;">
-                    <b>SİSTEM RAPORU V700:</b><br>
-                    - Video Oranı: 21:9 Ultra-Wide<br>
-                    - Çekirdek: Muhammed Ali God-Logic<br>
-                    - Status: Reklamsız & Sınırsız<br>
-                    - Kod Mimarisi: 1000+ Satır Standartları
-                </p>
+            <div class="system-report-card">
+                <b>SİSTEM RAPORU V1000:</b><br>
+                - Durum: %100 Stabil & Optimize<br>
+                - Video Oranı: 21:9 Ultra Cinematic<br>
+                - Çekirdek: Muhammed Ali God-Logic<br>
+                - Arka Plan: Background Play Optimized<br>
+                - Arayüz: Dinamik ve Akıcı UX
             </div>
-            <button style="width:100%; margin-top:30px; padding:20px; border-radius:15px; border:none; background:white; color:black; font-weight:900; font-size:1.1rem;" onclick="v7.refresh()">SİSTEMİ YENİLE</button>
+            <button type="button" class="profile-action-button" onclick="v1k.engine.refreshHome()">SİSTEMİ YENİLE</button>
         </div>
     </div>
 
-    <div id="v7-god-player">
-        <div class="god-player-header" onclick="v7.terminatePlayer()">
-            <i class="fas fa-chevron-down"></i> SİSTEM OYNATIYOR
+    <div id="v1k-player-overlay">
+        <div class="player-header-bar" onclick="v1k.engine.closePlayer()" role="button" aria-label="Close Player">
+            <i class="fas fa-chevron-down"></i> OYNATILIYOR
         </div>
-        <div id="v7-video-canvas" style="width:100%; aspect-ratio:16/9; background:#000;"></div>
-        <div style="flex:1; overflow-y:auto; padding:25px;">
-            <h2 id="v7-player-title" style="font-size:1.3rem; margin-bottom:20px; font-weight:700;"></h2>
-            <div style="height:1px; background:#1a1a1a; margin-bottom:25px;"></div>
-            <p style="color:var(--m-red); font-weight:900; font-size:0.75rem; letter-spacing:2px; margin-bottom:20px;">ÖNERİLEN KAOSLAR</p>
-            <div id="v7-player-suggest" class="v7-feed-grid"></div>
+        <div class="player-video-stage" id="v1k-video-stage"></div>
+        <div class="player-content-area">
+            <h2 class="player-video-title" id="v1k-player-title"></h2>
+            <div class="player-separator-line"></div>
+            <p class="player-suggestions-title">ÖNERİLEN KAOSLAR</p>
+            <div id="v1k-player-suggestions" class="v1k-feed-grid"></div>
         </div>
     </div>
 
-    <nav class="v7-nav-dock">
-        <a href="#" class="v7-nav-item active" onclick="v7.refresh()"><i class="fas fa-house-chimney"></i>Ana Sayfa</a>
-        <a href="#" class="v7-nav-item" onclick="v7.lockGate()"><i class="fas fa-bolt-lightning"></i>Shorts</a>
-        <a href="#" class="v7-nav-item" onclick="v7.lockGate()"><i class="fas fa-boxes-stacked"></i>Kitaplık</a>
+    <nav class="v1k-bottom-nav">
+        <a href="#" class="nav-link-item is-active" onclick="v1k.engine.refreshHome(); return false;">
+            <i class="fas fa-house-chimney"></i>Ana Sayfa
+        </a>
+        <a href="#" class="nav-link-item" onclick="v1k.engine.lockFeature('Shorts'); return false;">
+            <i class="fas fa-bolt-lightning"></i>Shorts
+        </a>
+        <a href="#" class="nav-link-item" onclick="v1k.engine.lockFeature('Kitaplık'); return false;">
+            <i class="fas fa-box-open"></i>Kitaplık
+        </a>
     </nav>
 
     <script>
         /**
-         * BUNY-TUBE V700 CORE ENGINE
-         * High-Level Data Management & UI Controller
+         * BUNY-Tube V1000 "OMEGA SUPREME" Core JavaScript Engine
+         * Developed by Muhammed Ali for ultimate control and performance.
          */
-        const v7 = {
-            API_KEY: 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0',
-            CHAOS_MODES: ['belgesel 2026', 'teknoloji devrimi', 'uzay yolculuğu', 'motosiklet inceleme', 'cyberpunk asmr', 'gelecek vizyonu'],
-            
-            init: function() {
-                console.log("God Architect Engine: Initializing System...");
-                this.refresh();
-                this.attachListeners();
-            },
+        const v1k = {
+            /** [CORE CONFIGURATION] */
+            API_KEY: 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0', // YouTube Data API v3 Key
+            CHAOS_POOL: ['belgesel 2026', 'teknoloji devrimi', 'uzay gizemleri', 'siberpunk şehir 4k', 'motosiklet asmr', 'gelecek vizyonu', 'yeni keşifler bilim', 'yapay zeka gelecek'],
+            APP_NAME: "BUNY-Tube V1000",
+            LOG_LEVEL: "DEBUG", // DEBUG, INFO, WARN, ERROR
 
-            formatStats: function(n) {
-                if(!n) return "0";
-                if(n >= 1000000) return (n/1000000).toFixed(1) + ' Mn';
-                if(n >= 1000) return (n/1000).toFixed(0) + ' B';
-                return n;
-            },
-
-            fetchData: async function(q, target) {
-                const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(q)}&type=video&maxResults=15&key=${this.API_KEY}`;
-                
-                try {
-                    const res = await fetch(searchUrl);
-                    const data = await res.json();
-                    const container = document.getElementById(target);
-                    container.innerHTML = "";
-
-                    if(data.items) {
-                        const ids = data.items.map(i => i.id.videoId).join(',');
-                        const sRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${ids}&key=${this.API_KEY}`);
-                        const sData = await sRes.json();
-
-                        data.items.forEach((item, i) => {
-                            const vid = item.id.videoId;
-                            if(!vid) return;
-                            const vCount = sData.items[i] ? this.formatStats(sData.items[i].statistics.viewCount) : "Premium";
-                            const vDate = new Date(item.snippet.publishedAt).toLocaleDateString('tr-TR');
-
-                            container.innerHTML += `
-                                <div class="v7-card" onclick="v7.launchPlayer('${vid}', '${item.snippet.title.replace(/'/g, "")}')">
-                                    <div class="v7-thumbnail-box">
-                                        <img src="${item.snippet.thumbnails.high.url}" loading="lazy">
-                                        <div class="v7-duration">21:9 ULTRA</div>
-                                    </div>
-                                    <div class="v7-info-area">
-                                        <div class="v7-avatar"><i class="fas fa-crown"></i></div>
-                                        <div class="v7-text-content">
-                                            <h3>${item.snippet.title}</h3>
-                                            <div class="v7-meta">${item.snippet.channelTitle} • ${vCount} izlenme • ${vDate}</div>
-                                        </div>
-                                    </div>
-                                </div>`;
-                        });
+            /** [LOGGER UTILITY] */
+            logger: {
+                log: function(level, message, data = null) {
+                    if (v1k.LOG_LEVEL === "DEBUG" || (v1k.LOG_LEVEL === "INFO" && level !== "DEBUG")) {
+                        const timestamp = new Date().toISOString();
+                        const logMessage = `[${timestamp}] [${level}] ${message}`;
+                        if (data) {
+                            console.log(logMessage, data);
+                        } else {
+                            console.log(logMessage);
+                        }
                     }
-                } catch (err) {
-                    console.error("ENGINE_FATAL_ERROR:", err);
-                }
-            },
-
-            launchPlayer: function(id, title) {
-                const p = document.getElementById('v7-god-player');
-                p.style.display = 'flex';
-                document.getElementById('v7-player-title').innerText = title;
-                document.getElementById('v7-video-canvas').innerHTML = `
-                    <iframe src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1" style="width:100%; height:100%; border:none;" allow="autoplay" allowfullscreen></iframe>`;
-                this.fetchData(title, 'v7-player-suggest');
-                history.pushState({player:1}, "");
-            },
-
-            terminatePlayer: function() {
-                document.getElementById('v7-god-player').style.display = 'none';
-                document.getElementById('v7-video-canvas').innerHTML = "";
-            },
-
-            runSearch: function() {
-                const val = document.getElementById('v7-input').value;
-                if(val) this.fetchData(val, 'v7-feed-target');
-            },
-
-            voiceEngine: function() {
-                const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-                if(!SR) return;
-                const rec = new SR();
-                rec.lang = 'tr-TR';
-                rec.onstart = () => document.getElementById('v7-mic').classList.add('active_rec');
-                rec.onend = () => document.getElementById('v7-mic').classList.remove('active_rec');
-                rec.onresult = (e) => {
-                    document.getElementById('v7-input').value = e.results[0][0].transcript;
-                    this.runSearch();
-                };
-                rec.start();
-            },
-
-            toggleProfile: function() { 
-                document.getElementById('v7-profile-drawer').classList.toggle('open'); 
-            },
-
-            refresh: function() { 
-                this.fetchData(this.CHAOS_MODES[Math.floor(Math.random()*this.CHAOS_MODES.length)], 'v7-feed-target'); 
-                document.getElementById('v7-profile-drawer').classList.remove('open');
-                window.scrollTo(0,0);
-            },
-
-            lockGate: function() { 
-                alert("MUHAMMED ALİ: Zihin sağlığın için bu bölge mühürlendi!"); 
-            },
-
-            attachListeners: function() {
-                window.onpopstate = () => { if(document.getElementById('v7-god-player').style.display === 'flex') this.terminatePlayer(); };
-                
-                // Arka planda oynatma motoru (Mobile Background Play Fix)
-                document.addEventListener('visibilitychange', () => {
-                    if (document.hidden) {
-                        const frame = document.querySelector('iframe');
-                        if(frame) frame.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                    }
-                });
-            }
-        };
-
-        // LAUNCHING SYSTEM
-        window.onload = () => v7.init();
-    </script>
-</body>
-</html>
+                },
+                debug: function(message, data = null) { this.log("DEBUG", message, data); },
+                info: function(message, data = null) { this.log("INFO", message, data); },
+                warn: function(message, data = null) { this.log("WARN", message, data); },
+                error: function(message, data = null) { this.
