@@ -3,193 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BUNY-Tube Premium</title>
+    <title>BUNY-Tube Ultra Premium</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        :root { --red: #ff0000; --bg: #0f0f0f; --card: #1e1e1e; }
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+        :root { --red: #ff0000; --bg: #050505; --card: #121212; --accent: #1e1e1e; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg); color: white; padding-bottom: 80px; overflow-x: hidden; }
 
-        /* Üst Menü ve Kayan Yazı */
-        .header { position: sticky; top: 0; background: rgba(15,15,15,0.9); backdrop-filter: blur(10px); padding: 15px; display: flex; justify-content: space-between; align-items: center; z-index: 1000; }
-        .logo { font-size: 1.5rem; font-weight: 900; }
-        .logo span { background: var(--red); padding: 2px 6px; border-radius: 6px; margin-left: 5px; }
-        .promo-banner { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); margin: 10px; border-radius: 12px; overflow: hidden; white-space: nowrap; padding: 12px 0; }
-        .scrolling-text { display: inline-block; padding-left: 100%; font-weight: bold; animation: marquee 12s linear infinite; }
+        /* Kayan Banner Premium */
+        .promo-banner { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); overflow: hidden; white-space: nowrap; padding: 12px 0; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .scrolling-text { display: inline-block; padding-left: 100%; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; animation: marquee 15s linear infinite; }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
 
-        /* Arama Alanı */
-        .search-area { padding: 10px 15px; position: relative; }
-        .search-wrapper { background: #1a1a1a; display: flex; align-items: center; padding: 12px 20px; border-radius: 40px; border: 3px solid var(--red); }
-        input { flex: 1; background: transparent; border: none; color: white; font-size: 1.1rem; outline: none; }
+        /* Arama Motoru - Sesli Arama Destekli */
+        .header { padding: 15px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: rgba(5,5,5,0.95); z-index: 1000; backdrop-filter: blur(10px); }
+        .logo { font-size: 1.6rem; font-weight: 900; }
+        .logo span { background: var(--red); padding: 2px 8px; border-radius: 6px; }
+
+        .search-container { padding: 0 15px 15px 15px; display: flex; gap: 10px; }
+        .search-wrapper { flex: 1; background: var(--accent); display: flex; align-items: center; padding: 12px 20px; border-radius: 30px; border: 2px solid #333; transition: 0.3s; }
+        .search-wrapper:focus-within { border-color: var(--red); box-shadow: 0 0 10px rgba(255,0,0,0.3); }
+        input { flex: 1; background: transparent; border: none; color: white; font-size: 1rem; outline: none; }
+        .voice-btn { background: var(--accent); border: none; color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; cursor: pointer; }
 
         /* Video Kartları */
-        #video-grid { padding: 10px; }
-        .video-card { margin-bottom: 20px; cursor: pointer; border-radius: 12px; overflow: hidden; background: var(--card); }
+        #video-grid { padding: 10px; display: grid; gap: 20px; }
+        .video-card { background: var(--card); border-radius: 15px; overflow: hidden; transition: transform 0.2s; }
+        .video-card:active { transform: scale(0.98); }
         .video-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
         .video-info { padding: 12px; }
-        .video-info h3 { font-size: 0.9rem; line-height: 1.3; margin-bottom: 5px; height: 2.6em; overflow: hidden; }
+        .video-info h3 { font-size: 0.95rem; line-height: 1.3; margin-bottom: 5px; height: 2.6em; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
+        .video-info p { color: #aaa; font-size: 0.8rem; }
 
-        /* Oynatıcı Panel */
-        .player-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; flex-direction: column; z-index: 3000; }
+        /* Gelişmiş Oynatıcı Paneli */
+        .player-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: none; flex-direction: column; z-index: 3000; overflow-y: auto; transition: 0.5s; }
+        .player-header { padding: 15px; display: flex; align-items: center; gap: 15px; background: #111; position: sticky; top: 0; z-index: 10; }
         iframe { width: 100%; aspect-ratio: 16/9; border: none; }
         
-        /* Abone Olma Alanı */
-        .channel-row { display: flex; align-items: center; justify-content: space-between; padding: 15px; border-bottom: 1px solid #222; }
-        .sub-btn { background: white; color: black; border: none; padding: 8px 18px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; }
-        .sub-btn.active { background: #333; color: #aaa; }
+        .action-bar { display: flex; justify-content: space-around; padding: 15px; background: #0a0a0a; border-bottom: 1px solid #222; }
+        .action-btn { background: #1a1a1a; border: none; color: white; padding: 10px 15px; border-radius: 20px; display: flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: bold; }
+        .action-btn.active { color: var(--red); border: 1px solid var(--red); }
 
-        /* Küçük Aksiyon Butonları */
-        .action-bar { display: flex; justify-content: space-around; padding: 15px 5px; }
-        .action-btn { background: #222; border: none; color: white; display: flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; }
-        .action-btn.active { color: var(--red); }
-        
+        /* Kitaplık & Abonelik */
+        .lib-card { background: var(--card); margin-bottom: 10px; border-radius: 12px; padding: 15px; }
+        .chip { display: inline-block; background: #333; padding: 8px 16px; border-radius: 20px; margin: 5px; font-size: 0.85rem; }
+
         /* Alt Navigasyon */
-        .nav-bar { position: fixed; bottom: 0; width: 100%; background: #0f0f0f; display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 1000; }
-        .nav-item { color: #888; text-align: center; text-decoration: none; font-size: 0.7rem; cursor: pointer; }
-        .nav-item i { font-size: 1.4rem; margin-bottom: 4px; display: block; }
-        .nav-item.active { color: white; }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: rgba(8,8,8,0.98); display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #222; z-index: 1000; }
+        .nav-item { color: #888; text-align: center; text-decoration: none; font-size: 0.75rem; transition: 0.3s; }
+        .nav-item i { font-size: 1.5rem; margin-bottom: 4px; display: block; }
+        .nav-item.active { color: white; transform: translateY(-3px); }
     </style>
 </head>
 <body>
-
-    <header class="header">
-        <div class="logo">BUNY<span>Tube</span></div>
-        <i class="fas fa-bell"></i>
-    </header>
 
     <div class="promo-banner">
         <div class="scrolling-text">instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp; instagram: muhammedaliatl &nbsp;&nbsp;&nbsp;&nbsp; instagram: muhammedaliatl</div>
     </div>
 
-    <div class="search-area">
-        <div class="search-wrapper">
-            <input type="text" id="search-input" placeholder="YouTube'da keşfe çık...">
-            <i class="fas fa-search" onclick="search()" style="color:red"></i>
+    <header class="header">
+        <div class="logo" onclick="loadHome()">BUNY<span>Tube</span></div>
+        <div id="status-icons">
+            <i class="fas fa-bell" style="margin-right: 15px;"></i>
+            <i class="fas fa-user-circle" style="font-size: 1.5rem;"></i>
         </div>
+    </header>
+
+    <div class="search-container">
+        <div class="search-wrapper">
+            <input type="text" id="search-input" placeholder="Neyi izlemek istersin?" onkeypress="if(event.key==='Enter') search()">
+            <i class="fas fa-search" onclick="search()" style="color:#aaa"></i>
+        </div>
+        <button class="voice-btn" onclick="startVoiceSearch()"><i class="fas fa-microphone"></i></button>
     </div>
 
     <main id="video-grid"></main>
 
     <div id="player" class="player-overlay">
-        <div style="padding:15px; background: #111;" onclick="closeVideo()"><i class="fas fa-chevron-down"></i> Kapat</div>
+        <div class="player-header" onclick="closeVideo()">
+            <i class="fas fa-chevron-down"></i>
+            <span id="p-title" style="font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Oynatılıyor...</span>
+        </div>
         <div id="video-frame"></div>
-        
-        <div class="channel-row">
-            <div>
-                <b id="channel-name" style="font-size: 1rem;">Kanal Adı</b>
-            </div>
-            <button class="sub-btn" id="sub-btn" onclick="toggleSub()">Abone Ol</button>
-        </div>
-
         <div class="action-bar">
-            <button class="action-btn" id="like-btn" onclick="toggleLike()">
-                <i class="far fa-thumbs-up"></i> Beğen
-            </button>
-            <button class="action-btn" id="save-btn" onclick="toggleSave()">
-                <i class="far fa-bookmark"></i> Kaydet
-            </button>
-            <button class="action-btn" onclick="download()" style="background: var(--red);">
-                <i class="fas fa-download"></i> İndir
-            </button>
+            <button class="action-btn" id="like-btn" onclick="toggleLike()"><i class="fas fa-heart"></i> Beğen</button>
+            <button class="action-btn" id="sub-btn" onclick="toggleSub()" style="background:white; color:black;">Abone Ol</button>
+            <button class="action-btn" onclick="download()" style="background:var(--red); color:white;"><i class="fas fa-download"></i> İndir</button>
         </div>
+        <div id="next-grid" style="padding:10px;"></div>
     </div>
 
     <nav class="nav-bar">
-        <a class="nav-item active" onclick="loadHome()"><i class="fas fa-home"></i>Ana Sayfa</a>
+        <a class="nav-item active" onclick="loadHome()"><i class="fas fa-house"></i>Ana Sayfa</a>
         <a class="nav-item" onclick="search('shorts')"><i class="fas fa-bolt"></i>Shorts</a>
-        <a class="nav-item"><i class="fas fa-plus-circle fa-2x"></i></a>
-        <a class="nav-item" onclick="loadLibrary()"><i class="fas fa-video"></i>Kitaplık</a>
+        <a class="nav-item" onclick="loadLibrary()"><i class="fas fa-folder-open"></i>Kitaplık</a>
     </nav>
 
     <script>
         const API_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
         let currentVideo = null;
-        let savedVideos = JSON.parse(localStorage.getItem('buny_saved')) || [];
-        let likedVideos = JSON.parse(localStorage.getItem('buny_liked')) || [];
-        let subbedChannels = JSON.parse(localStorage.getItem('buny_subs')) || [];
+        let db = { liked: JSON.parse(localStorage.getItem('b_liked')) || [], subs: JSON.parse(localStorage.getItem('b_subs')) || [] };
 
-        async function loadHome() { render(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&chart=mostPopular&regionCode=TR&maxResults=15&key=${API_KEY}`); }
-        async function search(q) { 
-            let query = q || document.getElementById('search-input').value;
-            render(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=15&key=${API_KEY}`, true); 
+        function save() { localStorage.setItem('b_liked', JSON.stringify(db.liked)); localStorage.setItem('b_subs', JSON.stringify(db.subs)); }
+
+        async function loadHome() {
+            const q = ["Trend", "Clash Royale", "Müzik", "MrBeast"][Math.floor(Math.random()*4)];
+            render(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${q}&type=video&maxResults=12&key=${API_KEY}`);
+            setActive(0);
         }
 
-        async function render(url, isSearch = false, customItems = null) {
+        async function search(q) {
+            let query = q || document.getElementById('search-input').value;
+            render(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=15&key=${API_KEY}`);
+        }
+
+        async function render(url, customItems = null) {
             const grid = document.getElementById('video-grid');
-            grid.innerHTML = "<p style='text-align:center;'>Yükleniyor...</p>";
+            grid.innerHTML = "<div style='text-align:center; padding:50px;'><i class='fas fa-circle-notch fa-spin fa-2x'></i></div>";
             try {
                 let items = customItems;
-                if(!items) {
-                    const res = await fetch(url);
-                    const data = await res.json();
-                    items = data.items;
-                    if(isSearch) {
-                        const ids = items.map(i => i.id.videoId).join(',');
-                        const dRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${ids}&key=${API_KEY}`);
-                        const dData = await dRes.json(); items = dData.items;
-                    }
-                }
+                if(!items) { const res = await fetch(url); const data = await res.json(); items = data.items; }
                 grid.innerHTML = "";
                 items.forEach(i => {
                     const id = i.id.videoId || i.id;
                     const v = i.snippet;
-                    const s = i.statistics;
-                    const videoData = JSON.stringify({id, title: v.title, channel: v.channelTitle, thumb: v.thumbnails.high.url, views: s?s.viewCount:0}).replace(/"/g, '&quot;');
-                    grid.innerHTML += `<div class="video-card" onclick='openPlayer(${videoData})'><img src="${v.thumbnails.high.url}"><div class="video-info"><h3>${v.title}</h3><p>${v.channelTitle} • ${fViews(s?s.viewCount:0)} izlenme</p></div></div>`;
+                    const vData = JSON.stringify({id, title: v.title, channel: v.channelTitle, thumb: v.thumbnails.high.url}).replace(/"/g, '&quot;');
+                    grid.innerHTML += `<div class="video-card" onclick='openPlayer(${vData})'><img src="${v.thumbnails.high.url}"><div class="video-info"><h3>${v.title}</h3><p>${v.channelTitle}</p></div></div>`;
                 });
-            } catch(e) { grid.innerHTML = "<p>Hata!</p>"; }
+            } catch(e) { grid.innerHTML = "Hata oluştu kanka!"; }
         }
 
-        function openPlayer(data) {
-            currentVideo = data;
+        function openPlayer(v) {
+            currentVideo = v;
             document.getElementById('player').style.display = 'flex';
-            document.getElementById('video-frame').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${data.id}?autoplay=1" allow="autoplay" allowfullscreen></iframe>`;
-            document.getElementById('channel-name').innerText = data.channel;
+            document.getElementById('p-title').innerText = v.title;
+            document.getElementById('video-frame').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${v.id}?autoplay=1&enablejsapi=1" allow="autoplay; picture-in-picture" allowfullscreen></iframe>`;
             updateUI();
+            // Sıradaki videoları getir
+            render(`https://www.googleapis.com/youtube/v3/search?part=snippet&q=${v.channel}&type=video&maxResults=6&key=${API_KEY}`, null, 'next-grid');
         }
 
-        function toggleSub() {
-            const index = subbedChannels.indexOf(currentVideo.channel);
-            if(index === -1) subbedChannels.push(currentVideo.channel);
-            else subbedChannels.splice(index, 1);
-            localStorage.setItem('buny_subs', JSON.stringify(subbedChannels));
-            updateUI();
+        function startVoiceSearch() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = 'tr-TR';
+            recognition.onstart = () => { document.getElementById('search-input').placeholder = "Dinleniyor..."; };
+            recognition.onresult = (e) => { const text = e.results[0][0].transcript; document.getElementById('search-input').value = text; search(text); };
+            recognition.start();
         }
 
         function toggleLike() {
-            const idx = likedVideos.findIndex(v => v.id === currentVideo.id);
-            if(idx === -1) likedVideos.push(currentVideo); else likedVideos.splice(idx,1);
-            localStorage.setItem('buny_liked', JSON.stringify(likedVideos)); updateUI();
+            const idx = db.liked.findIndex(v => v.id === currentVideo.id);
+            if(idx === -1) db.liked.push(currentVideo); else db.liked.splice(idx,1);
+            save(); updateUI();
         }
 
-        function toggleSave() {
-            const idx = savedVideos.findIndex(v => v.id === currentVideo.id);
-            if(idx === -1) savedVideos.push(currentVideo); else savedVideos.splice(idx,1);
-            localStorage.setItem('buny_saved', JSON.stringify(savedVideos)); updateUI();
+        function toggleSub() {
+            const idx = db.subs.indexOf(currentVideo.channel);
+            if(idx === -1) db.subs.push(currentVideo.channel); else db.subs.splice(idx,1);
+            save(); updateUI();
         }
 
         function updateUI() {
-            const isSubbed = subbedChannels.includes(currentVideo.channel);
-            const subBtn = document.getElementById('sub-btn');
-            subBtn.innerText = isSubbed ? "Abone Olundu" : "Abone Ol";
-            subBtn.className = isSubbed ? "sub-btn active" : "sub-btn";
-
-            const isLiked = likedVideos.some(v => v.id === currentVideo.id);
-            document.getElementById('like-btn').className = isLiked ? 'action-btn active' : 'action-btn';
-            
-            const isSaved = savedVideos.some(v => v.id === currentVideo.id);
-            document.getElementById('save-btn').className = isSaved ? 'action-btn active' : 'action-btn';
+            const isLiked = db.liked.some(v => v.id === currentVideo.id);
+            const isSubbed = db.subs.includes(currentVideo.channel);
+            document.getElementById('like-btn').classList.toggle('active', isLiked);
+            document.getElementById('sub-btn').innerText = isSubbed ? 'Abone Olundu' : 'Abone Ol';
+            document.getElementById('sub-btn').style.background = isSubbed ? '#222' : 'white';
+            document.getElementById('sub-btn').style.color = isSubbed ? '#888' : 'black';
         }
 
         function loadLibrary() {
-            const libItems = savedVideos.map(v => ({ id: v.id, snippet: { title: v.title, channelTitle: v.channel, thumbnails: { high: { url: v.thumb } } }, statistics: { viewCount: v.views } }));
-            render(null, false, libItems);
+            setActive(2);
+            const grid = document.getElementById('video-grid');
+            grid.innerHTML = `<div class="lib-card"><h3>Aboneliklerin</h3>${db.subs.map(s => `<span class="chip" onclick="search('${s}')">${s}</span>`).join('')}</div>
+                              <div class="lib-card"><h3>Beğenilen Videolar</h3><div id="l-vids"></div></div>`;
+            if(db.liked.length) {
+                db.liked.forEach(v => {
+                    const vData = JSON.stringify(v).replace(/"/g, '&quot;');
+                    document.getElementById('l-vids').innerHTML += `<div class="video-card" style="margin-top:10px;" onclick='openPlayer(${vData})'><img src="${v.thumb}"><div class="video-info"><h3>${v.title}</h3></div></div>`;
+                });
+            }
         }
 
-        function fViews(n) { if(n >= 1000000) return (n/1000000).toFixed(1)+'M'; if(n >= 1000) return (n/1000).toFixed(1)+'B'; return n; }
+        function setActive(idx) { document.querySelectorAll('.nav-item').forEach((n,i) => n.classList.toggle('active', i===idx)); }
         function closeVideo() { document.getElementById('player').style.display = 'none'; document.getElementById('video-frame').innerHTML = ""; }
         function download() { window.open(`https://www.ssyoutube.com/watch?v=${currentVideo.id}`, '_blank'); }
+
         window.onload = loadHome;
     </script>
 </body>
