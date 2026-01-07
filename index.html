@@ -2,10 +2,12 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BUNY-Tube Prestige</title>
+    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Orbitron:wght@900&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,32 +15,43 @@
     <div id="neural-shield">
         <div class="shield-card">
             <i class="fas fa-brain brain-icon"></i>
-            <h2 style="font-family:'Orbitron'; margin-bottom:20px;">ERİŞİM ENGELLENDİ</h2>
-            <p>Muhammed Ali: "Zihnini korumak için burayı mühürledim. Kaliteli uzun videolarla beynini besle!"</p>
-            <button onclick="sys.ui.closeShield()" style="margin-top:20px; width:100%; padding:15px; background:red; color:#fff; border:none; border-radius:10px; font-weight:900;">TAMAM KRAL</button>
+            <h2 style="font-family:'Orbitron';">ERİŞİM ENGELLENDİ</h2>
+            <p style="margin: 25px 0; line-height:1.6; color:#888;">
+                Muhammed Ali: "Kanka, kısa videolar odaklanma yeteneğini yok eder. Geleceğin için uzun ve kaliteli içeriklere yönel!"
+            </p>
+            <button onclick="sys.ui.closeShield()" style="width:100%; padding:20px; background:red; color:white; border:none; border-radius:15px; font-weight:900; font-size:1.1rem; cursor:pointer;">EMRET KRAL</button>
         </div>
     </div>
 
     <header>
-        <div class="brand">BUNY<span>Tube</span></div>
-        <div class="search-wrapper">
-            <div class="search-input"><input type="text" id="master-query" placeholder="Ara..."></div>
-            <div onclick="sys.engine.voice()" style="color:red; margin-left:10px;"><i class="fas fa-microphone fa-lg"></i></div>
+        <div class="logo" onclick="location.reload()">BUNY<span>Tube</span> <i class="fas fa-crown" style="color:gold; font-size:1.2rem;"></i></div>
+        <div class="search-bar">
+            <div class="search-input-wrap">
+                <input type="text" id="search-input" placeholder="Kaosu ve Geleceği Ara..." onkeypress="if(event.key==='Enter') sys.engine.search()">
+            </div>
+            <div onclick="sys.engine.search()" style="width:50px; height:50px; border-radius:50%; background:#181818; display:flex; align-items:center; justify-content:center; color:red; cursor:pointer; border:1px solid #272727;">
+                <i class="fas fa-search"></i>
+            </div>
         </div>
     </header>
 
-    <main class="grid" id="feed-box"></main>
+    <main class="feed" id="main-feed"></main>
 
-    <div id="player-overlay">
-        <div class="p-nav" onclick="sys.ui.minimize()"><i class="fas fa-chevron-down"></i> KAPAT VE SİSTEME DÖN</div>
-        <div id="video-target" style="width:100%; aspect-ratio:16/9;"></div>
-        <div style="padding:20px;"><h2 id="v-title"></h2></div>
+    <div id="player-ui">
+        <div class="player-back" onclick="sys.ui.closePlayer()">
+            <i class="fas fa-chevron-down"></i> VİDEOYU KAPAT VE SİSTEME DÖN
+        </div>
+        <div id="video-frame" style="width:100%; aspect-ratio:16/9; background:#000;"></div>
+        <div style="padding:25px; overflow-y:auto;">
+            <h2 id="p-title" style="font-size:1.2rem; margin-bottom:10px;"></h2>
+            <p style="color:red; font-weight:bold;">Muhammed Ali Prestige Player v1.0</p>
+        </div>
     </div>
 
-    <nav style="position:fixed; bottom:0; width:100%; background:#000; display:flex; justify-content:space-around; padding:20px; border-top:1px solid #222;">
-        <div onclick="location.reload()"><i class="fas fa-home"></i></div>
-        <div onclick="sys.ui.openShield()" style="color:#444;"><i class="fas fa-bolt"></i></div>
-        <div style="color:#444;"><i class="fas fa-user"></i></div>
+    <nav>
+        <div class="nav-item active" onclick="location.reload()"><i class="fas fa-home"></i>Ana Sayfa</div>
+        <div class="nav-item" onclick="sys.ui.openShield()"><i class="fas fa-bolt"></i>Shorts</div>
+        <div class="nav-item"><i class="fas fa-fire"></i>Trendler</div>
     </nav>
 
     <script src="script.js"></script>
