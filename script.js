@@ -1,57 +1,62 @@
 const app = {
-    apiKey: 'AIzaSyCr91qNZO-jHaJil5uWLN4W6oO2LbtTWeE',
-    
+    settings: {
+        apiKey: 'AIzaSyCr91qNZO-jHaJil5uWLN4W6oO2LbtTWeE',
+        logoName: 'BUNY',
+        adminPass: '1234'
+    },
+
     init() {
-        this.fetchData('yeni çıkan teknolojik ürünler 2026');
-        this.bindEvents();
+        console.log("Sistem Başlatıldı...");
+        const saved = localStorage.getItem('bunyConfig');
+        if(saved) this.settings = JSON.parse(saved);
+        
+        document.getElementById('display-logo').innerText = this.settings.logoName;
+        this.fetchVideos("2026 teknoloji");
     },
 
-    bindEvents() {
-        document.getElementById('search-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') this.fetchData(e.target.value);
-        });
-    },
-
-    async fetchData(query) {
-        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&q=${encodeURIComponent(query)}&type=video&key=${this.apiKey}`;
-        try {
-            const response = await fetch(url);
-            const data = await response.json();
-            this.renderVideos(data.items);
-        } catch (error) {
-            console.error('API Hatası:', error);
+    // ŞİFRE SORGUSU VE PANEL AÇMA
+    openAdmin() {
+        console.log("Admin açma isteği geldi");
+        const pass = prompt("Şifreyi Girin:");
+        if(pass === this.settings.adminPass) {
+            document.getElementById('admin-panel').style.display = 'flex';
+        } else {
+            alert("Şifre Yanlış!");
         }
     },
 
-    renderVideos(videos) {
-        const container = document.getElementById('video-container');
-        container.innerHTML = videos.map(v => `
-            <div class="video-item" onclick="app.playVideo('${v.id.videoId}', '${v.snippet.title.replace(/'/g, "")}')">
-                <div class="thumb-container">
-                    <img src="${v.snippet.thumbnails.high.url}">
-                </div>
-                <div style="padding: 10px 0;">
-                    <h3 style="font-size: 14px; margin-bottom: 5px;">${v.snippet.title}</h3>
-                    <p style="font-size: 12px; color: #aaa;">${v.snippet.channelTitle}</p>
-                </div>
-            </div>
-        `).join('');
+    closeAdmin() {
+        document.getElementById('admin-panel').style.display = 'none';
     },
 
-    playVideo(id, title) {
-        const overlay = document.getElementById('video-overlay');
-        overlay.style.display = 'flex';
-        document.getElementById('player-box').innerHTML = `
-            <iframe src="https://www.youtube.com/embed/${id}?autoplay=1" 
-                    style="width:100%; height:100%; border:none;" 
-                    allow="autoplay; fullscreen"></iframe>
-        `;
+    saveSettings() {
+        this.settings.logoName = document.getElementById('edit-logo').value || this.settings.logoName;
+        this.settings.adminPass = document.getElementById('edit-pass').value || this.settings.adminPass;
+        this.settings.apiKey = document.getElementById('edit-key').value || this.settings.apiKey;
+
+        localStorage.setItem('bunyConfig', JSON.stringify(this.settings));
+        alert("Kaydedildi! Sayfa yenileniyor...");
+        location.reload();
     },
 
-    closeVideo() {
-        document.getElementById('video-overlay').style.display = 'none';
-        document.getElementById('player-box').innerHTML = ''; // Sesi kesmek için önemli
+    async fetchVideos(q) {
+        const feed = document.getElementById('main-feed');
+        try {
+            const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${q}&type=video&key=${this.settings.apiKey}`);
+            const data = await res.json();
+            feed.innerHTML = "";
+            data.items.forEach(v => {
+                const item = document.createElement('div');
+                item.className = 'v-card';
+                item.onclick = () => alert("Video Oynatıcı Hazırlanıyor: " + v.id.videoId);
+                item.innerHTML = `<img src="${v.snippet.thumbnails.high.url}"> <p style="padding:10px">${v.snippet.title}</p>`;
+                feed.appendChild(item);
+            });
+        } catch(e) {
+            feed.innerHTML = "API Hatası! Ayarlardan Key'i kontrol et.";
+        }
     }
 };
 
+// Uygulamayı başlat
 window.onload = () => app.init();
