@@ -120,20 +120,32 @@ header{
 
 /* MAINTENANCE */
 #maintenance{
-  position:fixed;inset:0;
+  position:fixed;
+  inset:0;
   background:#000;
   display:none;
   align-items:center;
   justify-content:center;
   flex-direction:column;
+  z-index:9999;
 }
+
+#maintenance.active{
+  display:flex;
+}
+
 #maintenance h1{
+  color:#00f2ff;
+  font-size:32px;
+  text-shadow:0 0 10px #00f2ff,0 0 25px #00f2ff;
   animation:float 2s ease-in-out infinite;
 }
+
 @keyframes float{
   0%,100%{transform:translateY(0)}
   50%{transform:translateY(-20px)}
 }
+
 </style>
 </head>
 <body>
@@ -229,20 +241,28 @@ function tryFetch(i,term){
 
 /* PLAYER */
 function play(id){
-  frame.src=`https://www.youtube-nocookie.com/embed/${id}`
-  player.style.display="flex"
-  mini.style.display="none"
+  frame.src = `https://www.youtube-nocookie.com/embed/${id}`
+  player.style.display = "flex"
+  mini.style.display = "none"
 }
-back.onclick=()=>{
-  player.style.display="none"
-  mini.src=frame.src
-  mini.style.display="block"
+
+back.onclick = () => {
+  player.style.display = "none"
+  mini.src = frame.src
+  mini.style.display = "block"
 }
-mini.onclick=()=>{
-  frame.src=mini.src
-  mini.style.display="none"
-  player.style.display="flex"
+
+mini.onclick = () => {
+  frame.src = mini.src
+  mini.style.display = "none"
+  player.style.display = "flex"
+}
+
+/* BAKIM DURUMU */
+if(localStorage.getItem("buny_bakim") === "true"){
+  document.getElementById("maintenance").classList.add("active")
 }
 </script>
+
 </body>
 </html>
