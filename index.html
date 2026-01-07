@@ -2,798 +2,849 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BUNY-Tube V170 Premium Master Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>BUNY-Tube V300 God Mode</title>
     
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* [CSS BÖLÜM 1: GLOBAL RESET & TEMELLER] 
-        */
+        /* [SECTION 1: CSS VARIABLES & DESIGN SYSTEM] */
         :root {
-            --p-primary: #ff0000;
-            --p-bg: #000000;
-            --p-surface: #0f0f0f;
-            --p-card: #1a1a1a;
-            --p-border: #2a2a2a;
-            --p-text: #ffffff;
-            --p-text-dim: #888888;
-            --p-gradient: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-            --p-shadow: 0 12px 40px rgba(0,0,0,0.8);
-            --p-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --god-red: #ff0000;
+            --god-black: #000000;
+            --god-deep: #050505;
+            --god-card: #0f0f0f;
+            --god-border: #1a1a1a;
+            --god-text-pure: #ffffff;
+            --god-text-gray: #909090;
+            --god-text-dim: #606060;
+            --god-gold-gradient: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            --god-red-glow: 0 0 25px rgba(255, 0, 0, 0.4);
+            --god-shadow: 0 15px 50px rgba(0,0,0,0.8);
+            --god-easing: cubic-bezier(0.23, 1, 0.32, 1);
+            --god-speed: 0.5s;
         }
 
+        /* [SECTION 2: GLOBAL RESET & OPTIMIZATION] */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        *::-webkit-scrollbar {
+            display: none; /* Chrome/Safari */
+        }
+
+        html, body {
+            background-color: var(--god-black);
+            color: var(--god-text-pure);
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--p-bg);
-            color: var(--p-text);
-            overflow-x: hidden;
-            width: 100%;
-            height: 100%;
-            padding-bottom: 110px;
+            padding-bottom: 160px; /* Enhanced Bottom Space */
         }
 
-        /* [CSS BÖLÜM 2: PREMIUM ÜST BANNER] 
-        */
-        .muh-banner-wrapper {
-            background: var(--p-gradient);
-            height: 40px;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
+        /* [SECTION 3: PREMIUM TOP NAVIGATION (MARQUEE)] */
+        .premium-ticker-container {
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 100000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            height: 42px;
+            background: var(--god-gold-gradient);
+            z-index: 1000000;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
         }
 
-        .muh-banner-text {
+        .ticker-wrap {
+            display: flex;
             white-space: nowrap;
-            display: inline-block;
-            animation: muh_marquee 28s linear infinite;
+            animation: god_ticker_move 30s linear infinite;
+        }
+
+        .ticker-item {
             font-weight: 900;
-            font-size: 0.8rem;
-            letter-spacing: 2.5px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: white;
             text-transform: uppercase;
+            padding: 0 40px;
         }
 
-        @keyframes muh_marquee {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
+        @keyframes god_ticker_move {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
-        /* [CSS BÖLÜM 3: HEADER VE LOGO] 
-        */
-        .muh-header-container {
-            padding-top: 75px;
-            padding-bottom: 25px;
-            padding-left: 20px;
-            padding-right: 20px;
-            background: linear-gradient(to bottom, #000, transparent);
-        }
-
-        .muh-header-top-line {
+        /* [SECTION 4: VERTICAL MASTER HEADER ARCHITECTURE] */
+        .master-header {
+            padding: 80px 24px 30px 24px;
+            background: linear-gradient(180deg, rgba(15,15,15,1) 0%, rgba(0,0,0,1) 100%);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
+            flex-direction: column;
+            gap: 32px;
+            position: relative;
         }
 
-        .muh-app-logo {
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: -2.2px;
-            color: #fff;
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .muh-app-logo span {
-            background-color: var(--p-primary);
-            color: #fff;
-            padding: 3px 15px;
-            border-radius: 14px;
-            margin-left: 10px;
-            box-shadow: 0 0 30px rgba(255,0,0,0.3);
-        }
-
-        .muh-user-icon {
-            font-size: 2.2rem;
-            color: var(--p-primary);
-            cursor: pointer;
-            transition: var(--p-transition);
-        }
-
-        .muh-user-icon:active {
-            transform: scale(0.85);
-        }
-
-        /* [CSS BÖLÜM 4: ARAMA MOTORU TASARIMI] 
-        */
-        .muh-search-box-area {
+        .header-branding {
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 15px;
+            position: relative;
             width: 100%;
         }
 
-        .muh-input-frame {
-            flex: 1;
-            background: var(--p-surface);
-            border: 2px solid var(--p-border);
-            border-radius: 60px;
-            padding: 16px 28px;
+        .god-logo {
+            font-size: 3.2rem;
+            font-weight: 900;
+            letter-spacing: -3px;
+            cursor: pointer;
+            transition: var(--god-speed) var(--god-easing);
             display: flex;
             align-items: center;
-            transition: var(--p-transition);
         }
 
-        .muh-input-frame:focus-within {
-            border-color: var(--p-primary);
+        .god-logo span {
+            background: var(--god-red);
+            padding: 4px 18px;
+            border-radius: 16px;
+            margin-left: 12px;
+            box-shadow: var(--god-red-glow);
+            font-size: 2.4rem;
+        }
+
+        .god-logo:active {
+            transform: scale(0.9);
+        }
+
+        .user-action-btn {
+            position: absolute;
+            right: 0;
+            font-size: 2.6rem;
+            color: var(--god-red);
+            cursor: pointer;
+            text-shadow: 0 0 15px rgba(255,0,0,0.3);
+            transition: var(--god-speed);
+        }
+
+        /* [SECTION 5: SEARCH & VOICE STACK] */
+        .search-engine-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            width: 100%;
+        }
+
+        .input-god-wrapper {
+            background: var(--god-card);
+            border: 2px solid var(--god-border);
+            border-radius: 24px;
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .input-god-wrapper:focus-within {
+            border-color: var(--god-red);
             background: #151515;
-            box-shadow: 0 0 20px rgba(255,0,0,0.15);
+            box-shadow: 0 0 30px rgba(255,0,0,0.1);
         }
 
-        .muh-input-frame input {
+        .input-god-wrapper input {
             background: transparent;
             border: none;
-            color: #fff;
-            width: 100%;
+            color: var(--god-text-pure);
+            width: 88%;
+            font-size: 1.15rem;
+            font-weight: 700;
             outline: none;
-            font-size: 1.05rem;
-            font-weight: 600;
         }
 
-        .muh-voice-trigger {
-            width: 58px;
-            height: 58px;
-            background: var(--p-surface);
-            border: 2px solid var(--p-border);
+        .input-god-wrapper i {
+            font-size: 1.4rem;
+            color: var(--god-text-dim);
+            cursor: pointer;
+        }
+
+        .god-mic-trigger {
+            width: 100%;
+            padding: 22px;
+            background: var(--god-card);
+            border: 2px solid var(--god-border);
+            border-radius: 24px;
+            color: var(--god-red);
+            font-weight: 900;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: var(--god-speed);
+        }
+
+        .god-mic-trigger.active {
+            background: var(--god-red);
+            color: white;
+            animation: mic_breathing 1.5s infinite;
+        }
+
+        @keyframes mic_breathing {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0.6); }
+            70% { transform: scale(1.02); box-shadow: 0 0 0 20px rgba(255,0,0,0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0); }
+        }
+
+        /* [SECTION 6: THE FEED - ELITE GRID SYSTEM] */
+        .god-feed-grid {
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 45px;
+            min-height: 100vh;
+        }
+
+        .god-card {
+            background: var(--god-card);
+            border-radius: 35px;
+            overflow: hidden;
+            border: 1px solid var(--god-border);
+            transition: transform 0.4s var(--god-easing);
+            position: relative;
+        }
+
+        .god-card:active {
+            transform: scale(0.96) translateY(5px);
+        }
+
+        .god-card-thumb {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .god-card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.8s;
+        }
+
+        .god-duration-badge {
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            background: rgba(0,0,0,0.85);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: white;
+            backdrop-filter: blur(4px);
+        }
+
+        .god-stats-overlay {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255,0,0,0.9);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 900;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .god-card-content {
+            padding: 24px;
+        }
+
+        .god-card-content h3 {
+            font-size: 1.25rem;
+            font-weight: 850;
+            line-height: 1.5;
+            color: var(--god-text-pure);
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .god-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .god-channel-pfp {
+            width: 44px;
+            height: 44px;
+            background: #222;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--p-primary);
-            font-size: 1.6rem;
-            cursor: pointer;
-            transition: var(--p-transition);
+            color: var(--god-red);
+            font-size: 1.2rem;
+            border: 1px solid var(--god-border);
         }
 
-        .muh-voice-trigger.is-listening {
-            background: var(--p-primary);
-            color: #fff;
-            animation: muh_mic_pulse 1.4s infinite;
+        .god-meta-text {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
 
-        @keyframes muh_mic_pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.7); transform: scale(1); }
-            70% { box-shadow: 0 0 0 18px rgba(255,0,0,0); transform: scale(1.1); }
-            100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); transform: scale(1); }
-        }
-
-        /* [CSS BÖLÜM 5: VİDEO AKIŞ TASARIMI] 
-        */
-        .muh-video-feed-container {
-            padding: 18px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            animation: muh_feed_up 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        @keyframes muh_feed_up {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .muh-video-item-card {
-            background: var(--p-card);
-            border-radius: 32px;
-            overflow: hidden;
-            border: 1.5px solid var(--p-border);
-            transition: var(--p-transition);
-            position: relative;
-        }
-
-        .muh-video-item-card:hover {
-            border-color: #444;
-        }
-
-        .muh-video-item-card:active {
-            transform: scale(0.96);
-        }
-
-        .muh-thumbnail-box {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #111;
-        }
-
-        .muh-thumbnail-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-bottom: 1px solid var(--p-border);
-        }
-
-        .muh-card-details {
-            padding: 22px;
-        }
-
-        .muh-card-details h3 {
-            font-size: 1.15rem;
-            line-height: 1.6;
-            font-weight: 800;
-            margin-bottom: 14px;
-            color: #f5f5f5;
-        }
-
-        .muh-card-metadata {
+        .god-channel-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--god-text-gray);
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 5px;
+        }
+
+        .god-channel-name i {
+            color: #3ea6ff;
+            font-size: 0.8rem;
+        }
+
+        .god-views-date {
             font-size: 0.85rem;
-            color: var(--p-text-dim);
-            font-weight: 700;
+            color: var(--god-text-dim);
+            font-weight: 600;
         }
 
-        .muh-channel-chip {
-            background: #252525;
-            color: #ddd;
-            padding: 5px 14px;
-            border-radius: 10px;
-            font-size: 0.78rem;
-            text-transform: uppercase;
-            letter-spacing: 0.6px;
-        }
-
-        /* [CSS BÖLÜM 6: OYNATICI VE ARKA PLAN SİSTEMİ] 
-        */
-        #muh-master-player-layer {
+        /* [SECTION 7: GOD PLAYER SYSTEM - THE ENGINE] */
+        #god-player-portal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000;
-            z-index: 200000;
+            background: var(--god-black);
+            z-index: 2000000;
             display: none;
             flex-direction: column;
-            transition: var(--p-transition);
+            animation: portal_open 0.6s var(--god-easing);
         }
 
-        #muh-master-player-layer.is-mini-mode {
+        @keyframes portal_open {
+            from { transform: translateY(100%) scale(0.9); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        #god-player-portal.minimized {
             top: auto;
-            bottom: 120px;
-            left: auto;
-            right: 18px;
-            width: 270px;
-            height: 152px;
-            border-radius: 22px;
-            border: 3.5px solid var(--p-primary);
-            box-shadow: var(--p-shadow);
+            bottom: 160px;
+            left: 5%;
+            width: 90%;
+            height: 120px;
+            border-radius: 25px;
+            border: 3px solid var(--god-red);
+            flex-direction: row;
             overflow: hidden;
+            box-shadow: var(--god-shadow);
         }
 
-        #muh-master-player-layer.is-mini-mode .muh-p-top-bar,
-        #muh-master-player-layer.is-mini-mode .muh-p-scroll-area {
-            display: none;
-        }
-
-        .muh-p-top-bar {
-            padding: 20px;
+        .portal-header {
+            padding: 20px 25px;
             background: #080808;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 15px;
-            border-bottom: 1px solid #1a1a1a;
-            color: #666;
+            color: var(--god-text-dim);
             font-weight: 900;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
         }
 
-        .muh-p-video-wrapper {
+        .video-core-container {
             width: 100%;
             aspect-ratio: 16/9;
-            background: #000;
+            background: black;
         }
 
-        .muh-p-scroll-area {
+        .portal-scroll-area {
             flex: 1;
             overflow-y: auto;
-            padding: 25px;
-            background: #000;
+            padding: 30px 20px;
         }
 
-        .muh-p-title {
-            font-size: 1.4rem;
-            font-weight: 900;
-            margin-bottom: 30px;
-            line-height: 1.4;
-            color: #fff;
-        }
-
-        /* [CSS BÖLÜM 7: KÜTÜPHANE VE SHORTS GATE] 
-        */
-        .muh-full-gate-overlay {
+        /* [SECTION 8: DİKEY KİTAPLIK - GOD MODE] */
+        .god-overlay-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
-            background: #000;
-            z-index: 150000;
+            background: var(--god-black);
+            z-index: 1500000;
             display: none;
-            padding: 95px 25px;
+            padding: 100px 24px;
             overflow-y: auto;
         }
 
-        .muh-lib-entry-btn {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            background: #121212;
-            padding: 26px;
-            border-radius: 28px;
-            margin-bottom: 20px;
-            border: 1.5px solid #222;
-            text-decoration: none;
-            color: #fff;
-            transition: var(--p-transition);
-        }
-
-        .muh-lib-entry-btn:active {
-            background: #181818;
-            border-color: var(--p-primary);
-            transform: scale(0.97);
-        }
-
-        .muh-lib-entry-btn i {
-            font-size: 2.1rem;
-            color: var(--p-primary);
-            width: 45px;
+        .god-lib-title {
+            font-size: 3rem;
+            font-weight: 900;
             text-align: center;
+            margin-bottom: 60px;
+            background: var(--god-gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .muh-lib-entry-btn b {
-            display: block;
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
-
-        .muh-lib-entry-btn span {
-            font-size: 0.88rem;
-            color: #777;
-            font-weight: 600;
-        }
-
-        /* [CSS BÖLÜM 8: PROFIL & HAKKIMDA (DOKUNULMADI)] 
-        */
-        #muh-profile-drawer-box {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 90%;
-            height: 100%;
-            background: #050505;
-            z-index: 250000;
-            transition: 0.5s cubic-bezier(0.8, 0, 0.2, 1);
-            padding: 100px 35px;
-            border-left: 4px solid var(--p-primary);
-        }
-
-        #muh-profile-drawer-box.is-open {
-            right: 0;
-        }
-
-        .muh-hakkimda-inner {
-            background: #111;
+        .god-lib-row {
+            width: 100%;
+            background: var(--god-card);
             padding: 35px;
-            border-radius: 35px;
-            border: 1px solid #252525;
-            margin-top: 40px;
-            line-height: 2.0;
-            color: #bbb;
-            box-shadow: var(--p-shadow);
+            border-radius: 30px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+            border: 2px solid var(--god-border);
+            text-decoration: none;
+            color: white;
+            transition: var(--god-speed);
         }
 
-        .muh-hakkimda-inner b {
-            color: #fff;
-            font-size: 1.5rem;
-            display: block;
-            margin-bottom: 18px;
+        .god-lib-row i {
+            font-size: 3.2rem;
+            color: var(--god-red);
+        }
+
+        .god-lib-row b {
+            font-size: 1.4rem;
             font-weight: 900;
         }
 
-        /* [CSS BÖLÜM 9: ALT NAVİGASYON] 
-        */
-        .muh-nav-dock {
+        .god-lib-row:active {
+            border-color: var(--god-red);
+            background: #111;
+            transform: scale(0.95);
+        }
+
+        /* [SECTION 9: BOTTOM NAVIGATION DOCK] */
+        .god-nav-dock {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: rgba(0,0,0,0.98);
+            background: rgba(0,0,0,0.97);
             backdrop-filter: blur(25px);
             display: flex;
             justify-content: space-around;
-            padding: 28px 0;
-            border-top: 1.5px solid #222;
-            z-index: 120000;
+            padding: 30px 0 45px 0; /* Extra space for iPhone home bar */
+            border-top: 1.5px solid var(--god-border);
+            z-index: 1200000;
         }
 
-        .muh-nav-link {
-            color: #444;
+        .dock-item {
+            color: #353535;
             text-align: center;
-            font-size: 0.9rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: var(--p-transition);
-        }
-
-        .muh-nav-link.is-active {
-            color: #fff;
-            transform: translateY(-8px);
-        }
-
-        .muh-nav-link i {
-            font-size: 2.1rem;
-            display: block;
-            margin-bottom: 9px;
-        }
-
-        /* [CSS BÖLÜM 10: YARDIMCI SINIFLAR] 
-        */
-        .muh-btn-home {
-            margin-top: 50px;
-            width: 100%;
-            padding: 24px;
-            border-radius: 60px;
-            border: none;
-            background: #fff;
-            color: #000;
             font-weight: 900;
-            font-size: 1.1rem;
-            box-shadow: 0 10px 30px rgba(255,255,255,0.1);
+            font-size: 0.85rem;
+            transition: var(--god-speed) var(--god-easing);
+            cursor: pointer;
+            position: relative;
         }
 
-        .muh-shorts-lock-ui {
+        .dock-item.active {
+            color: var(--god-text-pure);
+            transform: translateY(-12px);
+        }
+
+        .dock-item i {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .dock-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--god-red);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--god-red);
+        }
+
+        /* [SECTION 10: PROFILE DRAWER - ADVANCED] */
+        #god-prof-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 88%;
+            height: 100%;
+            background: var(--god-deep);
+            z-index: 3000000;
+            transition: 0.7s cubic-bezier(0.85, 0, 0.15, 1);
+            padding: 100px 35px;
+            border-left: 6px solid var(--god-red);
+        }
+
+        #god-prof-drawer.active {
+            right: 0;
+        }
+
+        .prof-header {
             text-align: center;
-            padding-top: 20vh;
+            margin-bottom: 50px;
+        }
+
+        .prof-avatar {
+            width: 120px;
+            height: 120px;
+            background: #111;
+            border-radius: 40px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--god-red);
+            border: 2px solid var(--god-border);
+            box-shadow: var(--god-red-glow);
+        }
+
+        .prof-bio {
+            background: #0d0d0d;
+            padding: 30px;
+            border-radius: 30px;
+            border: 1px solid #222;
+            color: #888;
+            line-height: 2;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* [SECTION 11: SHORTS BLOCKER SCREEN] */
+        .shorts-block-portal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: black;
+            z-index: 1600000;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .big-btn {
+            width: 100%;
+            padding: 25px;
+            border-radius: 60px;
+            background: white;
+            color: black;
+            font-weight: 900;
+            border: none;
+            font-size: 1.1rem;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.2);
         }
     </style>
 </head>
 <body>
 
-    <div class="muh-banner-wrapper" id="muh-main-banner">
-        <div class="muh-banner-text">
-            BUNY-TUBE PREMIUM V170 ULTIMATE • MUHAMMED ALİ TARAFINDAN GELİŞTİRİLDİ • REKLAMSIZ VE ODAK ODAKLI • ARKA PLAN MODU AKTİF • KİTAPLIK MODÜLLERİ CANLANDIRILDI
+    <div class="premium-ticker-container">
+        <div class="ticker-wrap">
+            <div class="ticker-item">BUNY-TUBE V300 GOD MODE ENABLED</div>
+            <div class="ticker-item">MUHAMMED ALİ PREMIUM DEVELOPER</div>
+            <div class="ticker-item">BACKGROUND PLAY ACTIVE</div>
+            <div class="ticker-item">ZERO ADS DISCOVERY</div>
+            <div class="ticker-item">BUNY-TUBE V300 GOD MODE ENABLED</div>
+            <div class="ticker-item">MUHAMMED ALİ PREMIUM DEVELOPER</div>
         </div>
     </div>
 
-    <header class="muh-header-container" id="muh-main-header">
-        <div class="muh-header-top-line">
-            <div class="muh-app-logo" onclick="logic_core_refresh()">BUNY<span>Tube</span></div>
-            <i class="fas fa-user-shield muh-user-icon" onclick="logic_ui_profile()"></i>
+    <header class="master-header" id="god-header">
+        <div class="header-branding">
+            <div class="god-logo" onclick="god_refresh()">BUNY<span>Tube</span></div>
+            <i class="fas fa-fingerprint user-action-btn" onclick="god_toggle_prof()"></i>
         </div>
 
-        <div class="muh-search-box-area">
-            <div class="muh-input-frame">
-                <input type="text" id="muh-search-input" placeholder="Ne izlemek istersin kanka?" onkeypress="if(event.key==='Enter') logic_core_search()">
-                <i class="fas fa-search" style="color:#444; font-size: 1.2rem;" onclick="logic_core_search()"></i>
+        <div class="search-engine-stack">
+            <div class="input-god-wrapper">
+                <input type="text" id="god-search-input" placeholder="Kaosu keşfet..." onkeypress="if(event.key==='Enter') god_search_trigger()">
+                <i class="fas fa-search" onclick="god_search_trigger()"></i>
             </div>
-            <div class="muh-voice-trigger" id="muh-voice-btn" onclick="logic_core_voice()">
-                <i class="fas fa-microphone"></i>
+            <div class="god-mic-trigger" id="god-mic" onclick="god_voice_engine()">
+                <i class="fas fa-microphone-lines"></i> SESLİ KOMUT VER
             </div>
         </div>
     </header>
 
-    <main class="muh-video-feed-container" id="muh-main-feed"></main>
+    <main class="god-feed-grid" id="god-main-feed"></main>
 
-    <div id="muh-master-player-layer">
-        <div class="muh-p-top-bar" onclick="logic_core_playerBack()">
-            <i class="fas fa-chevron-down"></i>
-            <span>VİDEOYU KÜÇÜLT / ANA SAYFA</span>
+    <div id="god-player-portal">
+        <div class="portal-header" onclick="god_player_control()">
+            <span><i class="fas fa-chevron-down"></i> SÜRÜKLE VEYA KÜÇÜLT</span>
+            <span id="player-status">OYNATILIYOR</span>
         </div>
-        
-        <div class="muh-p-video-wrapper" id="muh-player-frame-target"></div>
-
-        <div class="muh-p-scroll-area">
-            <h2 class="muh-p-title" id="muh-player-title-target"></h2>
-            
-            <div style="color:var(--p-primary); font-weight:900; letter-spacing:1.5px; margin-bottom:25px; border-left:5px solid red; padding-left:18px; text-transform:uppercase;">
-                Zihnini Besleyecek Diğerleri
-            </div>
-            
-            <div id="muh-player-related-target" class="muh-video-feed-container" style="padding:0; gap:30px;"></div>
+        <div class="video-core-container" id="god-video-target"></div>
+        <div class="portal-scroll-area">
+            <h2 id="god-now-playing-title" style="font-weight:900; font-size:1.5rem; margin-bottom:30px;"></h2>
+            <div style="height:2px; background:#1a1a1a; margin-bottom:30px;"></div>
+            <div style="font-weight:900; color:var(--god-red); margin-bottom:20px; letter-spacing:2px;">ÖNERİLEN KAOS</div>
+            <div id="god-related-feed" class="god-feed-grid" style="padding:0;"></div>
         </div>
     </div>
 
-    <div id="muh-library-overlay" class="muh-full-gate-overlay">
-        <h1 style="font-size: 2.8rem; font-weight: 900; margin-bottom: 50px; letter-spacing: -1.5px;">Kitaplık</h1>
+    <div id="god-library-overlay" class="god-overlay-screen">
+        <h1 class="god-lib-title">Kütüphane</h1>
         
-        <a href="https://www.youtube.com/feed/subscriptions" target="_blank" class="muh-lib-entry-btn">
-            <i class="fas fa-users-crown"></i>
-            <div><b>Abonelikler</b><span>Takip ettiğin kanalları gör</span></div>
-        </a>
-
-        <a href="https://www.youtube.com/playlist?list=WL" target="_blank" class="muh-lib-entry-btn">
+        <a href="https://www.youtube.com/feed/history" target="_blank" class="god-lib-row">
             <i class="fas fa-clock-rotate-left"></i>
-            <div><b>Daha Sonra İzle</b><span>Kaydettiğin özel listeler</span></div>
+            <b>İzleme Geçmişi</b>
+            <span style="color:#555; font-weight:700;">Az önce ne izledin?</span>
         </a>
 
-        <a href="https://www.youtube.com/playlist?list=LL" target="_blank" class="muh-lib-entry-btn">
-            <i class="fas fa-heart-pulse"></i>
-            <div><b>Beğenilen Videolar</b><span>Sevdiğin tüm içerikler</span></div>
+        <a href="https://www.youtube.com/feed/subscriptions" target="_blank" class="god-lib-row">
+            <i class="fas fa-tower-broadcast"></i>
+            <b>Abonelikler</b>
+            <span style="color:#555; font-weight:700;">Senin kanalların</span>
         </a>
 
-        <a href="https://www.youtube.com/feed/history" target="_blank" class="muh-lib-entry-btn">
-            <i class="fas fa-rectangle-history"></i>
-            <div><b>İzleme Geçmişi</b><span>Neleri izlediğini hatırla</span></div>
+        <a href="https://www.youtube.com/playlist?list=LL" target="_blank" class="god-lib-row">
+            <i class="fas fa-bolt"></i>
+            <b>Beğenilenler</b>
+            <span style="color:#555; font-weight:700;">Favori kaosu gör</span>
         </a>
 
-        <button class="muh-btn-home" onclick="logic_core_refresh()">ANA SAYFAYA DÖN</button>
+        <button class="big-btn" onclick="god_refresh()">ANA SAYFAYA DÖN</button>
     </div>
 
-    <div id="muh-shorts-overlay" class="muh-full-gate-overlay">
-        <div class="muh-shorts-lock-ui">
-            <i class="fas fa-brain-circuit fa-8x" style="color:var(--p-primary); margin-bottom:40px; filter: drop-shadow(0 0 20px rgba(255,0,0,0.4));"></i>
-            <h1 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 20px;">ODAK MODU AKTİF</h1>
-            <p style="color:#666; font-size: 1.2rem; line-height: 1.8; padding: 0 20px;">
-                Shorts videoları dopamin sistemini bozduğu için Muhammed Ali tarafından bu sürümde kilitlenmiştir. Uzun içeriklere odaklan kanka.
-            </p>
-            <button class="muh-btn-home" style="width: 80%;" onclick="logic_core_refresh()">ANA SAYFA</button>
-        </div>
+    <div id="god-shorts-portal" class="shorts-block-portal">
+        <i class="fas fa-biohazard fa-7x" style="color:var(--god-red); margin-bottom:40px;"></i>
+        <h2 style="font-size:2.5rem; font-weight:900;">SHORT_YASAK</h2>
+        <p style="color:#444; margin-top:20px; font-weight:700; line-height:1.8;">
+            Muhammed Ali: "Zihnini 15 saniyelik çöplerle zehirleme. Derin içeriklere odaklan."
+        </p>
+        <button class="big-btn" onclick="god_refresh()">ANA SAYFA</button>
     </div>
 
-    <div id="muh-profile-drawer-box">
-        <i class="fas fa-times" onclick="logic_ui_profile()" style="position:absolute; top:40px; right:40px; font-size:2.5rem; color:#333;"></i>
-        
-        <div style="text-align:center; margin-bottom:50px;">
-            <i class="fas fa-user-crown fa-6x" style="color:var(--p-primary); filter: drop-shadow(0 0 20px rgba(255,0,0,0.3));"></i>
-            <h1 style="margin-top:30px; font-weight:900; font-size:2.2rem;">Muhammed Ali</h1>
-            <p style="color:var(--p-primary); font-weight:800; margin-top:10px; letter-spacing:4px; text-transform:uppercase;">Premium Developer</p>
+    <div id="god-prof-drawer">
+        <i class="fas fa-xmark" onclick="god_toggle_prof()" style="position:absolute; top:45px; right:45px; font-size:3rem; color:#222;"></i>
+        <div class="prof-header">
+            <div class="prof-avatar"><i class="fas fa-shield-halved"></i></div>
+            <h1 style="font-size:2.5rem; font-weight:900;">Muhammed Ali</h1>
+            <p style="color:var(--god-red); font-weight:900; letter-spacing:6px; margin-top:10px;">ULTIMATE DEV</p>
         </div>
-
-        <div class="muh-hakkimda-inner">
-            <b>Hakkımda</b>
-            Bu uygulama, 10.000+ kişilik topluluğuma reklam kirliliği olmadan, zihin odaklarını koruyarak video izleyebilmeleri için Muhammed Ali tarafından özel olarak geliştirilmiştir. <br><br>
-            <i>"Gelecek, dikkatini yönetebilenlerin olacaktır."</i>
-        </div>
-
-        <div style="position:absolute; bottom:50px; left:0; width:100%; text-align:center; opacity:0.2;">
-            <p style="font-weight:900; letter-spacing:2px; font-size:0.8rem;">BUNY-TUBE V170.0.1 MASTER</p>
-            <p style="font-size:0.7rem; margin-top:5px;">ALL RIGHTS RESERVED 2026</p>
+        <div class="prof-bio">
+            <b>Sistem Bilgisi:</b><br>
+            BUNY-TUBE V300, 2026 stabil mimarisi üzerine kurulmuştur. Reklam filtreleme, arka plan oynatma ve keşif algoritması Muhammed Ali tarafından optimize edilmiştir.
         </div>
     </div>
 
-    <nav class="muh-nav-dock">
-        <div class="muh-nav-link is-active" id="nav0" onclick="logic_core_refresh()">
-            <i class="fas fa-house-chimney"></i>
-            <span>Ana Sayfa</span>
+    <nav class="god-nav-dock">
+        <div class="dock-item active" id="dock-home" onclick="god_refresh()">
+            <i class="fas fa-house-chimney-window"></i>Ana Sayfa
         </div>
-        <div class="muh-nav-link" id="nav1" onclick="logic_ui_gate('muh-shorts-overlay', 1)">
-            <i class="fas fa-bolt-lightning"></i>
-            <span>Shorts</span>
+        <div class="dock-item" id="dock-shorts" onclick="god_gate_control('god-shorts-portal', 1)">
+            <i class="fas fa-radiation"></i>Shorts
         </div>
-        <div class="muh-nav-link" id="nav2" onclick="logic_ui_gate('muh-library-overlay', 2)">
-            <i class="fas fa-clapperboard"></i>
-            <span>Kitaplık</span>
+        <div class="dock-item" id="dock-lib" onclick="god_gate_control('god-library-overlay', 2)">
+            <i class="fas fa-boxes-stacked"></i>Kitaplık
         </div>
     </nav>
 
     <script>
-        /* GLOBAL CONFIGURATIONS
-        */
-        const YT_API_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
-        let is_currently_mini = false;
+        /* [JS-1: CONFIGURATION & KEYS] */
+        const GOD_API_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
+        let is_player_minimized = false;
+        
+        /* [JS-2: CHAOS POOL - MASSIVE DATASET] */
+        const CHAOS_KEYWORDS = [
+            'belgesel 2026 4k', 'uzay teknolojileri', 'motosiklet modifiye asmr', 'gelecek mimarisi',
+            'cyberpunk city asmr', 'yapay zeka haberleri', 'mega yapılar belgeseli', 'gastronomi yolculuğu',
+            'otomobil restorasyon', 'tarihi gizemler', 'extreme doğa sporları', 'bilimsel paradokslar',
+            'kodlama projeleri', 'dijital sanat tasarımı', 'okyanus derinlikleri', 'antik savaş taktikleri'
+        ];
 
-        /* CORE FETCH ENGINE 
-           SHORTS FİLTRELEME BURADA YAPILIR
-        */
-        async function logic_core_fetch(query, targetId) {
-            // videoDuration=medium (4-20dk arası videoları hedefler, Shorts'u bitirir)
-            const cacheBuster = Date.now();
-            const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&videoDuration=medium&maxResults=20&key=${YT_API_KEY}&t=${cacheBuster}`;
+        /* [JS-3: NUMBER FORMATTER (FOR VIEWS)] */
+        function format_god_views(num) {
+            if(!num) return "0 izlenme";
+            const n = parseInt(num);
+            if (n >= 1000000) return (n / 1000000).toFixed(1) + ' Mn izlenme';
+            if (n >= 1000) return (n / 1000).toFixed(0) + ' B izlenme';
+            return n + ' izlenme';
+        }
+
+        /* [JS-4: DATE FORMATTER] */
+        function format_god_date(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        /* [JS-5: THE DATA FETCH ENGINE] */
+        async function god_fetch_engine(query, target_id) {
+            const search_endpoint = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(query)}&type=video&videoDuration=medium&maxResults=15&key=${GOD_API_KEY}&t=${Date.now()}`;
             
             try {
-                const response = await fetch(apiUrl);
-                const data = await response.json();
-                const container = document.getElementById(targetId);
-                
-                container.innerHTML = ""; // Temizle
-                
-                if (data.items) {
-                    data.items.forEach(item => {
-                        const videoId = item.id.videoId;
-                        const title = item.snippet.title;
-                        const channel = item.snippet.channelTitle;
-                        const thumb = item.snippet.thumbnails.high.url;
-                        const date = new Date(item.snippet.publishedAt).toLocaleDateString('tr-TR');
+                const response = await fetch(search_endpoint);
+                const search_results = await response.json();
+                const container = document.getElementById(target_id);
+                container.innerHTML = "";
 
-                        // Manuel Shorts Kontrolü (Başlıkta geçiyorsa engelle)
-                        if (title.toLowerCase().includes('shorts')) return;
+                if(search_results.items && search_results.items.length > 0) {
+                    // Collect IDs for Statistics
+                    const video_ids = search_results.items.map(item => item.id.videoId).join(',');
+                    const stats_endpoint = `https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails&id=${video_ids}&key=${GOD_API_KEY}`;
+                    
+                    const stats_response = await fetch(stats_endpoint);
+                    const stats_data = await stats_response.json();
 
-                        // Kartı Oluştur
-                        const cardHtml = `
-                            <div class="muh-video-item-card" onclick="logic_core_play('${videoId}', '${title.replace(/'/g, "")}')">
-                                <div class="muh-thumbnail-box">
-                                    <img src="${thumb}" loading="lazy">
+                    search_results.items.forEach((video, idx) => {
+                        const vid_id = video.id.videoId;
+                        const title = video.snippet.title.replace(/'/g, "");
+                        const stats = stats_data.items[idx] ? stats_data.items[idx].statistics : null;
+                        
+                        const view_count = stats ? format_god_views(stats.viewCount) : "Premium İzleme";
+                        const pub_date = format_god_date(video.snippet.publishedAt);
+
+                        container.innerHTML += `
+                            <div class="god-card" onclick="god_open_portal('${vid_id}', '${title}')">
+                                <div class="god-card-thumb">
+                                    <img src="${video.snippet.thumbnails.high.url}" alt="BUNY-Tube Premium">
+                                    <div class="god-stats-overlay"><i class="fas fa-fire"></i> ${view_count}</div>
                                 </div>
-                                <div class="muh-card-details">
-                                    <h3>${title}</h3>
-                                    <div class="muh-card-metadata">
-                                        <span class="muh-channel-chip">${channel}</span>
-                                        <span>•</span>
-                                        <span>${date}</span>
+                                <div class="god-card-content">
+                                    <h3>${video.snippet.title}</h3>
+                                    <div class="god-card-meta">
+                                        <div class="god-channel-pfp"><i class="fas fa-crown"></i></div>
+                                        <div class="god-meta-text">
+                                            <div class="god-channel-name">${video.snippet.channelTitle} <i class="fas fa-check-circle"></i></div>
+                                            <div class="god-views-date">${pub_date}</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         `;
-                        container.innerHTML += cardHtml;
                     });
                 }
             } catch (error) {
-                console.error("BUNY-Tube Engine Hatası:", error);
+                console.error("CRITICAL ENGINE ERROR:", error);
             }
         }
 
-        /* SEARCH LOGIC 
-        */
-        function logic_core_search() {
-            const q = document.getElementById('muh-search-input').value;
-            if (q.trim() !== "") {
-                logic_core_fetch(q, 'muh-main-feed');
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            }
-        }
-
-        /* PLAYER LOGIC 
-        */
-        function logic_core_play(id, title) {
-            is_currently_mini = false;
-            const playerLayer = document.getElementById('muh-master-player-layer');
-            playerLayer.style.display = 'flex';
-            playerLayer.classList.remove('is-mini-mode');
-
-            document.getElementById('muh-player-title-target').innerText = title;
+        /* [JS-6: THE PLAYER PORTAL CONTROLLER] */
+        function god_open_portal(id, title) {
+            is_player_minimized = false;
+            const portal = document.getElementById('god-player-portal');
+            portal.style.display = 'flex';
+            portal.classList.remove('minimized');
             
-            // Background Play & PiP Support
-            const iframeCode = `
-                <iframe 
-                    id="muh-yt-iframe"
-                    src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&enablejsapi=1&rel=0&modestbranding=1" 
+            document.getElementById('god-now-playing-title').innerText = title;
+            document.getElementById('god-video-target').innerHTML = `
+                <iframe id="god-iframe" 
+                    src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&enablejsapi=1&origin=${window.location.origin}&modestbranding=1&rel=0" 
                     style="width:100%; height:100%; border:none;" 
                     allow="autoplay; encrypted-media; picture-in-picture" 
                     allowfullscreen>
                 </iframe>
             `;
-            document.getElementById('muh-player-frame-target').innerHTML = iframeCode;
 
-            // Önerilenleri Yükle
-            logic_core_fetch(title, 'muh-player-related-target');
-            
-            // Geçmişe ekle (Geri tuşu kontrolü için)
-            history.pushState({page: 'player'}, "");
+            god_fetch_engine(title, 'god-related-feed');
+            history.pushState({view: 'player'}, "");
         }
 
-        function logic_core_playerBack() {
-            const playerLayer = document.getElementById('muh-master-player-layer');
-            if (!is_currently_mini) {
-                playerLayer.classList.add('is-mini-mode');
-                is_currently_mini = true;
+        function god_player_control() {
+            const portal = document.getElementById('god-player-portal');
+            if(!is_player_minimized) {
+                portal.classList.add('minimized');
+                is_player_minimized = true;
             } else {
-                playerLayer.style.display = 'none';
-                document.getElementById('muh-player-frame-target').innerHTML = "";
-                is_currently_mini = false;
+                portal.style.display = 'none';
+                document.getElementById('god-video-target').innerHTML = "";
+                is_player_minimized = false;
             }
         }
 
-        /* VOICE RECOGNITION 
-        */
-        function logic_core_voice() {
-            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!SpeechRecognition) {
-                alert("Tarayıcınız sesli aramayı desteklemiyor kanka.");
-                return;
-            }
+        /* [JS-7: UI GATE & NAVIGATION] */
+        function god_refresh() {
+            // Reset screens
+            document.querySelectorAll('.god-overlay-screen, .shorts-block-portal, #god-main-feed, #god-header').forEach(el => el.style.display = 'none');
+            document.getElementById('god-main-feed').style.display = 'grid';
+            document.getElementById('god-header').style.display = 'flex';
 
-            const recognition = new SpeechRecognition();
-            recognition.lang = 'tr-TR';
-            const btn = document.getElementById('muh-voice-btn');
+            // Chaos Algorithm Trigger
+            const random_query = CHAOS_KEYWORDS[Math.floor(Math.random() * CHAOS_KEYWORDS.length)];
+            god_fetch_engine(random_query, 'god-main-feed');
 
-            recognition.onstart = () => btn.classList.add('is-listening');
-            recognition.onend = () => btn.classList.remove('is-listening');
+            // Nav UI
+            god_ui_dock_update(0);
+            window.scrollTo(0,0);
+        }
+
+        function god_search_trigger() {
+            const query = document.getElementById('god-search-input').value;
+            if(query) god_fetch_engine(query, 'god-main-feed');
+        }
+
+        function god_voice_engine() {
+            const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if(!Recognition) { alert("Tarayıcı desteği yok kanka."); return; }
             
-            recognition.onresult = (event) => {
-                const transcript = event.results[0][0].transcript;
-                document.getElementById('muh-search-input').value = transcript;
-                logic_core_search();
+            const rec = new Recognition();
+            rec.lang = 'tr-TR';
+            rec.onstart = () => document.getElementById('god-mic').classList.add('active');
+            rec.onend = () => document.getElementById('god-mic').classList.remove('active');
+            rec.onresult = (event) => {
+                const text = event.results[0][0].transcript;
+                document.getElementById('god-search-input').value = text;
+                god_search_trigger();
             };
-
-            recognition.start();
+            rec.start();
         }
 
-        /* UI NAVIGATION & GATES 
-        */
-        function logic_core_refresh() {
-            // Tüm ekranları kapat
-            document.querySelectorAll('.muh-full-gate-overlay').forEach(el => el.style.display = 'none');
-            document.getElementById('muh-main-feed').style.display = 'grid';
-            document.getElementById('muh-main-header').style.display = 'block';
-            document.getElementById('muh-main-banner').style.display = 'flex';
-
-            // Rastgele İçerik
-            const starterTopics = ['araba inceleme', 'teknoloji 2026', 'belgesel türkçe', 'uzay bilim'];
-            const randomPick = starterTopics[Math.floor(Math.random() * starterTopics.length)];
-            logic_core_fetch(randomPick, 'muh-main-feed');
-
-            logic_ui_navUpdate(0);
-            window.scrollTo({top: 0, behavior: 'smooth'});
+        function god_gate_control(id, index) {
+            document.querySelectorAll('.god-overlay-screen, .shorts-block-portal, #god-main-feed, #god-header').forEach(el => el.style.display = 'none');
+            const target = document.getElementById(id);
+            target.style.display = (id === 'god-shorts-portal' ? 'flex' : 'block');
+            god_ui_dock_update(index);
         }
 
-        function logic_ui_gate(targetId, navIndex) {
-            document.querySelectorAll('.muh-full-gate-overlay').forEach(el => el.style.display = 'none');
-            document.getElementById('muh-main-feed').style.display = 'none';
-            document.getElementById('muh-main-header').style.display = 'none';
-            document.getElementById('muh-main-banner').style.display = 'none';
-
-            const target = document.getElementById(targetId);
-            target.style.display = (targetId === 'muh-shorts-overlay' ? 'block' : 'block');
-            
-            logic_ui_navUpdate(navIndex);
-        }
-
-        function logic_ui_navUpdate(activeIndex) {
-            const tabs = document.querySelectorAll('.muh-nav-link');
-            tabs.forEach((tab, idx) => {
-                if (idx === activeIndex) tab.classList.add('is-active');
-                else tab.classList.remove('is-active');
+        function god_ui_dock_update(index) {
+            document.querySelectorAll('.dock-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
             });
         }
 
-        function logic_ui_profile() {
-            document.getElementById('muh-profile-drawer-box').classList.toggle('is-open');
+        function god_toggle_prof() {
+            document.getElementById('god-prof-drawer').classList.toggle('active');
         }
 
-        /* ARKA PLAN OYNATMA (VISIBILITY API) 
-        */
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                const iframe = document.getElementById('muh-yt-iframe');
-                if (iframe) {
-                    // Sayfa gizlendiğinde YouTube API'sine oynat komutu gönder
-                    iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-                }
-            }
-        });
-
-        /* INITIALIZATION 
-        */
-        window.onload = () => {
-            logic_core_refresh();
-            history.pushState(null, "");
-        };
-
-        window.onpopstate = () => {
-            const player = document.getElementById('muh-master-player-layer');
-            if (player.style.display === 'flex') {
-                logic_core_playerBack();
-                history.pushState(null, "");
-            }
-        };
-
-    </script>
-</body>
-</html>
+        /*
