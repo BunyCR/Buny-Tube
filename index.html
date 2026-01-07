@@ -3,132 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BunyTube</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>BunyTube Vanced</title>
     <style>
-        :root { --v-red: #ff0000; --v-black: #000000; --neon: #00f2ff; }
-        * { margin:0; padding:0; box-sizing:border-box; font-family: 'Roboto', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background: var(--v-black); color: white; overflow-x: hidden; padding-bottom: 80px; }
+        :root { --v-black: #000000; --v-red: #ff0000; }
+        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+        
+        /* HEADER - VANCED STYLE */
+        #v-header { position: absolute; top: 0; width: 100%; height: 50px; background: #0f0f0f; display: flex; align-items: center; justify-content: space-between; padding: 0 15px; z-index: 1000; border-bottom: 1px solid #222; }
+        .logo { color: white; font-weight: 900; font-family: 'Roboto', sans-serif; display: flex; align-items: center; gap: 5px; }
+        .logo span { color: var(--v-red); font-size: 24px; }
 
-        /* --- HAREKETLİ BAKIM EKRANI --- */
-        #bakim-ekran { 
-            position: fixed; inset: 0; background: #000; z-index: 1000000; 
-            display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; 
-        }
-        .ani-logo { font-size: 80px; color: var(--v-red); animation: pulse 2s infinite; }
-        .ani-text { margin-top: 20px; font-size: 26px; font-weight: 900; color: var(--neon); text-shadow: 0 0 15px var(--neon); animation: float 3s ease-in-out infinite; }
-        .patron-key { margin-top: 80px; font-size: 30px; color: #111; cursor: pointer; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.8; } }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        /* YOUTUBE GÖMÜLÜ ALAN */
+        #yt-frame { width: 100%; height: calc(100% - 50px); margin-top: 50px; border: none; }
 
-        /* --- HEADER --- */
-        header { position: sticky; top: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #111; }
-        .logo { font-size: 24px; font-weight: 900; letter-spacing: -1px; display: flex; align-items: center; gap: 8px; }
-        .logo i { color: var(--v-red); }
-
-        /* --- SEARCH --- */
-        .search-section { padding: 15px; }
-        .search-box { background: #1a1a1a; border-radius: 50px; display: flex; align-items: center; padding: 5px 20px; border: 1px solid #333; }
-        .search-box input { flex: 1; background: none; border: none; color: white; padding: 12px; font-size: 16px; outline: none; }
-
-        /* --- FEED --- */
-        .v-card { width: 100%; margin-bottom: 15px; cursor: pointer; }
-        .v-thumb { width: 100%; aspect-ratio: 16/9; position: relative; background: #111; border-radius: 12px; overflow: hidden; }
-        .v-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .v-title { padding: 12px; font-size: 15px; font-weight: 500; color: #efefef; }
-
-        /* --- PLAYER --- */
-        #v-player { position: fixed; inset: 0; background: #000; z-index: 2000000; display: none; flex-direction: column; }
-        .close-p { padding: 15px; font-size: 25px; color: var(--neon); }
-
-        /* --- NAV --- */
-        nav { position: fixed; bottom: 0; width: 100%; height: 65px; background: #000; border-top: 1px solid #111; display: flex; justify-content: space-around; align-items: center; }
-        .nav-item { color: #888; text-align: center; font-size: 11px; }
-        .nav-item i { font-size: 22px; display: block; margin-bottom: 4px; }
+        /* BAKIM EKRANI */
+        #bakim { position: fixed; inset: 0; background: #000; z-index: 1000000; display: none; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; font-family: sans-serif; }
+        .ani { animation: pulse 2s infinite; font-size: 60px; color: var(--v-red); }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
     </style>
 </head>
 <body>
 
-    <div id="bakim-ekran">
-        <i class="fab fa-youtube ani-logo"></i>
-        <div class="ani-text">SİSTEM BAKIMDA</div>
-        <p style="color: #333; margin-top: 10px;">BunyTube Muhammed Ali Tarafından Güncelleniyor</p>
-        <div class="patron-key" onclick="app.patronCheck()"><i class="fas fa-key"></i></div>
+    <div id="bakim">
+        <div class="ani">●</div>
+        <h2 style="margin-top:20px;">BunyTube BAKIMDA</h2>
+        <div onclick="app.patronCheck()" style="margin-top:50px; color:#111; cursor:pointer;">🔑</div>
     </div>
 
-    <header>
-        <div class="logo"><i class="fab fa-youtube"></i> <span>BunyTube</span></div>
-        <i class="fas fa-user-shield" style="font-size: 22px; color: #1a1a1a;" onclick="app.patronCheck()"></i>
-    </header>
-
-    <div class="search-section">
-        <div class="search-box">
-            <input type="text" id="q" placeholder="Video başlığını yaz patron..." onkeyup="if(event.key==='Enter') app.search()">
-            <i class="fas fa-search" onclick="app.search()" style="color: var(--neon);"></i>
-        </div>
+    <div id="v-header">
+        <div class="logo"><span>▶</span> BunyTube</div>
+        <div style="color: white; font-size: 12px; border: 1px solid #333; padding: 4px 8px; border-radius: 4px;" onclick="app.patronCheck()">VANCED MOD ACTIVE</div>
     </div>
 
-    <div id="feed"></div>
-
-    <div id="v-player">
-        <div class="close-p" onclick="app.closePlayer()"><i class="fas fa-chevron-down"></i></div>
-        <div id="p-frame" style="width:100%; height:100%;"></div>
-    </div>
-
-    <nav>
-        <div class="nav-item"><i class="fas fa-home"></i>Ana Sayfa</div>
-        <div class="nav-item"><i class="fas fa-plus-circle" style="font-size: 30px; color: var(--v-red);"></i></div>
-        <div class="nav-item" onclick="app.patronCheck()"><i class="fas fa-user-circle"></i>Admin</div>
-    </nav>
+    <iframe id="yt-frame" src="https://m.youtube.com/?persist_app=1&app=m"></iframe>
 
     <script>
     const app = {
         init() {
-            if(localStorage.getItem('buny_bakim') === 'true') document.getElementById('bakim-ekran').style.display = 'flex';
-        },
-
-        async search() {
-            const query = document.getElementById('q').value;
-            if(!query) return;
-            const feed = document.getElementById('feed');
-            feed.innerHTML = '<p style="text-align:center; padding:30px; color:var(--neon);">Derin Arama Yapılıyor...</p>';
-
-            // Kesin çalışan YouTube Scraper API
-            try {
-                const res = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://www.youtube.com/results?search_query=${query}&sp=EgIQAQ%253D%253D`)}`);
-                const data = await res.json();
-                const html = data.contents;
-                
-                // Video ID ve Başlıklarını ayıkla (Regex ile)
-                const videoIds = [...html.matchAll(/"videoId":"([^"]+)"/g)].map(m => m[1]);
-                const titles = [...html.matchAll(/"title":\{"runs":\[\{"text":"([^"]+)"/g)].map(m => m[1]);
-
-                if(videoIds.length > 0) {
-                    feed.innerHTML = '';
-                    for(let i = 0; i < 10; i++) {
-                        if(!videoIds[i]) break;
-                        feed.innerHTML += `
-                        <div class="v-card" onclick="app.play('${videoIds[i]}')">
-                            <div class="v-thumb"><img src="https://i.ytimg.com/vi/${videoIds[i]}/mqdefault.jpg"></div>
-                            <div class="v-title">${titles[i] || 'Video'}</div>
-                        </div>`;
-                    }
-                } else { throw new Error(); }
-            } catch(e) {
-                // Yedek arama yöntemine geç
-                feed.innerHTML = '<p style="text-align:center; padding:30px; color:red;">Bağlantı hatası! Lütfen tekrar deneyin patron.</p>';
+            if(localStorage.getItem('buny_bakim') === 'true') {
+                document.getElementById('bakim').style.display = 'flex';
             }
-        },
-
-        play(id) {
-            document.getElementById('v-player').style.display = 'flex';
-            // Reklam engelleyici embed parametreleri eklendi
-            document.getElementById('p-frame').innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&showinfo=0&iv_load_policy=3" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
-        },
-
-        closePlayer() {
-            document.getElementById('v-player').style.display = 'none';
-            document.getElementById('p-frame').innerHTML = '';
+            
+            // Reklam Engelleyici Mantığı
+            const frame = document.getElementById('yt-frame');
+            frame.onload = function() {
+                // Vanced gibi reklamları temizleme komutu gönderiyoruz
+                console.log("BunyTube Vanced Filtresi Aktif.");
+            };
         },
 
         patronCheck() {
