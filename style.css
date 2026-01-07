@@ -1,30 +1,33 @@
-/* [ MINI-PLAYER & SUGGESTIONS ] */
-#player { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+:root { --red: #ff0000; --black: #000; }
+* { margin:0; padding:0; box-sizing:border-box; font-family: 'Inter', sans-serif; }
+body { background: var(--black); color: #fff; padding-bottom: 20px; overflow-x: hidden; }
 
-/* Mini Player Modu */
-.mini-mode {
-    width: 160px !important;
-    height: 90px !important;
-    top: auto !important;
-    left: auto !important;
-    bottom: 80px !important;
-    right: 15px !important;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px var(--red);
-    overflow: hidden;
-    z-index: 999999 !important;
-}
+/* GLOW BACKGROUND */
+.glow-bg { position:fixed; top:50%; left:50%; width:300px; height:300px; background:var(--red); filter:blur(150px); border-radius:50%; transform:translate(-50%,-50%); z-index:-1; opacity:0.3; }
 
-.mini-mode .player-controls { display: none; } /* Küçükken kontrolleri gizle */
+header { padding:20px; display:flex; justify-content:space-between; align-items:center; }
+#announcement-bar { background:var(--red); padding:10px; text-align:center; display:none; font-weight:bold; font-size:0.8rem; }
 
-#suggestion-list {
-    padding: 15px;
-    background: #000;
-    display: none; /* Sadece video açıkken görünecek */
-}
+.search-container { padding:15px; display:flex; align-items:center; background:#111; margin:10px; border-radius:15px; }
+#search-input { background:none; border:none; color:white; flex:1; outline:none; }
 
-.suggest-card {
-    display: flex; gap: 10px; margin-bottom: 15px; cursor: pointer;
-}
-.suggest-card img { width: 120px; aspect-ratio: 16/9; border-radius: 8px; object-fit: cover; }
-.suggest-card p { font-size: 0.8rem; font-weight: bold; line-height: 1.2; }
+#category-bar { display:flex; gap:10px; overflow-x:auto; padding:10px 15px; }
+#category-bar button { background:#1a1a1a; border:1px solid #333; color:white; padding:8px 15px; border-radius:20px; white-space:nowrap; }
+
+.feed { display:grid; gap:20px; padding:15px; }
+.v-card { background:#0a0a0a; border-radius:15px; overflow:hidden; border:1px solid #1a1a1a; }
+.v-card img { width:100%; aspect-ratio:16/9; object-fit:cover; }
+
+/* PLAYER & MINI PLAYER */
+#player { position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:100000; display:none; overflow-y:auto; transition: 0.3s; }
+.mini-mode { width:160px !important; height:90px !important; top:auto !important; left:auto !important; bottom:20px !important; right:15px !important; border-radius:12px; box-shadow:0 0 20px var(--red); }
+.mini-mode .player-nav, .mini-mode #suggestion-list { display:none; }
+#player-box { width:100%; aspect-ratio:16/9; }
+
+/* ADMIN */
+#admin-panel { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:200000; display:none; padding:20px; overflow-y:auto; }
+.admin-card { background:#111; padding:20px; border-radius:15px; margin:15px 0; border:1px solid #222; }
+.adm-in { width:100%; padding:12px; margin:10px 0; background:#000; border:1px solid #333; color:white; border-radius:8px; }
+.save-btn { width:100%; padding:15px; background:var(--red); color:white; border:none; border-radius:10px; font-weight:bold; }
+.admin-stats { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.s-card { background:#111; padding:15px; border-radius:10px; text-align:center; }
