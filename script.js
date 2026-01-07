@@ -1,62 +1,55 @@
 const app = {
-    settings: {
-        apiKey: 'AIzaSyCr91qNZO-jHaJil5uWLN4W6oO2LbtTWeE',
-        logoName: 'BUNY',
-        adminPass: '1234'
-    },
+    // ... (Eski settings ve init kodları aynı kalacak) ...
+    currentVideoId: null,
 
-    init() {
-        console.log("Sistem Başlatıldı...");
-        const saved = localStorage.getItem('bunyConfig');
-        if(saved) this.settings = JSON.parse(saved);
+    async play(id, title) {
+        this.currentVideoId = id;
+        const player = document.getElementById('player');
+        const playerBox = document.getElementById('player-box');
+        const suggestions = document.getElementById('suggestion-list');
+
+        player.classList.remove('mini-mode'); // Eğer mini moddaysa büyüt
+        player.style.display = 'block';
         
-        document.getElementById('display-logo').innerText = this.settings.logoName;
-        this.fetchVideos("2026 teknoloji");
+        playerBox.innerHTML = `<iframe id="yt-iframe" src="https://www.youtube.com/embed/${id}?autoplay=1" style="width:100%; height:100%; border:none;" allow="autoplay; fullscreen"></iframe>`;
+        
+        // Önerileri Getir
+        this.fetchSuggestions(title || "popüler teknoloji");
+        suggestions.style.display = 'block';
     },
 
-    // ŞİFRE SORGUSU VE PANEL AÇMA
-    openAdmin() {
-        console.log("Admin açma isteği geldi");
-        const pass = prompt("Şifreyi Girin:");
-        if(pass === this.settings.adminPass) {
-            document.getElementById('admin-panel').style.display = 'flex';
-        } else {
-            alert("Şifre Yanlış!");
-        }
+    // VİDEOYU KÜÇÜLT (Mini Player)
+    minimize() {
+        const player = document.getElementById('player');
+        player.classList.add('mini-mode');
+        // İsterse kullanıcı mini playera tıklayıp tekrar büyütebilir
+        player.onclick = () => {
+            if(player.classList.contains('mini-mode')) {
+                player.classList.remove('mini-mode');
+                player.onclick = null;
+            }
+        };
     },
 
-    closeAdmin() {
-        document.getElementById('admin-panel').style.display = 'none';
-    },
-
-    saveSettings() {
-        this.settings.logoName = document.getElementById('edit-logo').value || this.settings.logoName;
-        this.settings.adminPass = document.getElementById('edit-pass').value || this.settings.adminPass;
-        this.settings.apiKey = document.getElementById('edit-key').value || this.settings.apiKey;
-
-        localStorage.setItem('bunyConfig', JSON.stringify(this.settings));
-        alert("Kaydedildi! Sayfa yenileniyor...");
-        location.reload();
-    },
-
-    async fetchVideos(q) {
-        const feed = document.getElementById('main-feed');
+    async fetchSuggestions(query) {
+        const suggestDiv = document.getElementById('suggestion-list');
         try {
-            const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&q=${q}&type=video&key=${this.settings.apiKey}`);
+            const res = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=${encodeURIComponent(query)}&type=video&key=${this.settings.apiKey}`);
             const data = await res.json();
-            feed.innerHTML = "";
-            data.items.forEach(v => {
-                const item = document.createElement('div');
-                item.className = 'v-card';
-                item.onclick = () => alert("Video Oynatıcı Hazırlanıyor: " + v.id.videoId);
-                item.innerHTML = `<img src="${v.snippet.thumbnails.high.url}"> <p style="padding:10px">${v.snippet.title}</p>`;
-                feed.appendChild(item);
-            });
-        } catch(e) {
-            feed.innerHTML = "API Hatası! Ayarlardan Key'i kontrol et.";
-        }
+            
+            suggestDiv.innerHTML = '<h3 style="color:var(--red); margin-bottom:15px; font-size:0.9rem;">SIRADAKİ VİDEOLAR</h3>' + 
+                data.items.map(v => `
+                <div class="suggest-card" onclick="app.play('${v.id.videoId}', '${v.snippet.title}')">
+                    <img src="${v.snippet.thumbnails.medium.url}">
+                    <p>${v.snippet.title}</p>
+                </div>
+            `).join('');
+        } catch(e) { console.log("Öneriler yüklenemedi."); }
+    },
+
+    closePlayer() {
+        document.getElementById('player').style.display = 'none';
+        document.getElementById('player-box').innerHTML = '';
+        document.getElementById('suggestion-list').style.display = 'none';
     }
 };
-
-// Uygulamayı başlat
-window.onload = () => app.init();
