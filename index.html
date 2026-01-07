@@ -8,95 +8,54 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="main-banner"></div>
-    <div class="glow-bg"></div>
-
-    <div id="announcement-bar">
-        <span id="ann-content"></span>
+    <div id="access-denied-screen">
+        <div class="brain-content">
+            <img src="https://i.pinimg.com/originals/f3/7b/d2/f37bd29f6358e72c86b72d25091c68f1.gif">
+            <h2>ERİŞİM ENGELLENDİ</h2>
+            <p>Shorts yetkisi bulunamadı. Kurtulmak için logoya tıkla.</p>
+        </div>
     </div>
 
     <header>
-        <h1 id="display-logo">BunyTube</h1>
+        <h1 id="display-logo" onclick="app.unlockSystem()">BUNY</h1>
         <div class="header-icons">
-            <i class="fas fa-heart" onclick="app.showFavorites()"></i>
-            <i class="fas fa-crown admin-trigger" onclick="app.openLogin()"></i>
+            <i class="fas fa-bolt" onclick="app.blockShorts()"></i>
+            <i class="fas fa-heart" onclick="app.showFavs()"></i>
+            <i class="fas fa-crown" onclick="app.openLogin()"></i>
         </div>
     </header>
 
     <div class="search-section">
         <div class="search-box">
-            <input type="text" id="search-input" placeholder="Kozmik arama yap...">
-            <i class="fas fa-microphone" id="voice-btn" onclick="app.startVoiceSearch()"></i>
+            <input type="text" id="search-input" placeholder="Video veya kanal ara..." onkeyup="if(event.key === 'Enter') app.fetchVideos(this.value)">
+            <i class="fas fa-microphone" onclick="app.startVoiceSearch()"></i>
         </div>
     </div>
 
     <nav id="category-bar"></nav>
-
     <main id="main-feed" class="feed"></main>
-
-    <section class="contact-area">
-        <div class="contact-card">
-            <h3>Bize Mesaj Gönder</h3>
-            <input type="text" id="msg-name" placeholder="Adınız">
-            <textarea id="msg-body" placeholder="Mesajınız..."></textarea>
-            <button onclick="app.sendMsg()">GÖNDER</button>
-        </div>
-    </section>
 
     <div id="player">
         <div class="player-nav">
             <i class="fas fa-chevron-down" onclick="app.minimize()"></i>
-            <span id="playing-title">Oynatılıyor...</span>
+            <span id="playing-title">Yükleniyor...</span>
             <i class="fas fa-times" onclick="app.closePlayer()"></i>
         </div>
         <div id="player-box"></div>
+        <div class="player-info-bar">
+            <span id="video-view-count"><i class="fas fa-eye"></i> 0 İzlenme</span>
+            <button onclick="app.toggleFav()"><i class="fas fa-heart"></i> Favori</button>
+        </div>
         <div id="suggestion-list"></div>
     </div>
 
     <div id="login-modal" class="modal-overlay">
         <div class="login-box">
-            <h2>ADMIN PANELİ</h2>
-            <p>YETKİLİ ŞİFRESİ:</p>
-            <input type="password" id="admin-pass-input" placeholder="••••">
-            <div class="login-btns">
-                <button onclick="app.closeLogin()" class="btn-cancel">İptal</button>
-                <button onclick="app.checkLogin()" class="btn-confirm">Tamam</button>
-            </div>
+            <h3>YETKİLİ GİRİŞİ</h3>
+            <input type="password" id="admin-pass-input" placeholder="Şifre">
+            <button onclick="app.checkLogin()">GİRİŞ YAP</button>
+            <button onclick="app.closeLogin()" style="background:#222; margin-top:5px;">İPTAL</button>
         </div>
-    </div>
-
-    <div id="admin-panel" class="admin-ui">
-        <div class="admin-header">
-            <h2>SİSTEM KONTROL</h2>
-            <i class="fas fa-times" onclick="app.closeAdmin()"></i>
-        </div>
-        
-        <div class="admin-stats">
-            <div class="stat-item"><i class="fas fa-eye"></i> <span id="stat-views">0</span><p>İZLENME</p></div>
-            <div class="stat-item"><i class="fas fa-envelope"></i> <span id="stat-coms">0</span><p>MESAJ</p></div>
-        </div>
-
-        <div class="admin-scroll">
-            <div class="admin-card">
-                <h3>GENEL AYARLAR</h3>
-                <input type="text" id="edit-logo" placeholder="Logo İsmi">
-                <input type="password" id="edit-pass" placeholder="Yeni Panel Şifresi">
-                <input type="color" id="edit-color">
-            </div>
-
-            <div class="admin-card">
-                <h3>DUYURU YÖNETİMİ</h3>
-                <input type="text" id="edit-ann-msg" placeholder="Duyuru Metni">
-                <input type="text" id="edit-ann-link" placeholder="Duyuru Linki (İndirme)">
-                <label class="switch-lab"><input type="checkbox" id="edit-ann-status"> Duyuru Aktif</label>
-            </div>
-
-            <div class="admin-card">
-                <h3>GELEN MESAJLAR</h3>
-                <div id="admin-comments-list"></div>
-            </div>
-        </div>
-        <button class="save-master" onclick="app.saveSettings()">AYARLARI KAYDET</button>
     </div>
 
     <script src="script.js"></script>
