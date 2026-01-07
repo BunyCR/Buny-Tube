@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BUNY-Tube V90 Mega Premium</title>
+    <title>BUNY-Tube V130 Master Premium</title>
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
-        /* [1] GLOBAL DEĞİŞKENLER VE TEMELLER */
+        /* [1] GLOBAL CSS DEĞİŞKENLERİ */
         :root {
-            --muhammed-primary: #ff0000;
-            --muhammed-bg: #000000;
-            --muhammed-surface: #0f0f0f;
-            --muhammed-card-bg: #161616;
-            --muhammed-border: #222222;
-            --muhammed-text: #ffffff;
-            --muhammed-gray: #aaaaaa;
-            --muhammed-insta: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --p-red: #ff0000;
+            --p-black: #000000;
+            --p-surface: #0a0a0a;
+            --p-card: #141414;
+            --p-border: #252525;
+            --p-text-main: #ffffff;
+            --p-text-dim: #999999;
+            --p-insta: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            --p-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        /* [2] RESET VE GENEL TASARIM */
+        /* [2] ANA YAPI AYARLARI */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -31,17 +32,17 @@
         }
 
         body {
-            background-color: var(--muhammed-bg);
-            color: var(--muhammed-text);
+            background-color: var(--p-black);
+            color: var(--p-text-main);
             overflow-x: hidden;
             width: 100%;
             height: 100%;
-            padding-bottom: 120px; /* Navigasyon payı */
+            padding-bottom: 115px;
         }
 
-        /* [3] ÜST BANNER (INSTAGRAM GRADIENT) */
-        .premium-top-banner {
-            background: var(--muhammed-insta);
+        /* [3] ÜST KAYAR BANNER */
+        .master-banner-v130 {
+            background: var(--p-insta);
             height: 36px;
             display: flex;
             align-items: center;
@@ -49,52 +50,51 @@
             position: fixed;
             top: 0;
             width: 100%;
-            z-index: 99999;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            z-index: 100000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        .premium-banner-scroller {
+        .master-banner-content {
             white-space: nowrap;
             display: inline-block;
-            animation: muhammed_marquee 22s linear infinite;
+            animation: muhammed_scroll 20s linear infinite;
             font-weight: 900;
             font-size: 0.75rem;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             text-transform: uppercase;
         }
 
-        @keyframes muhammed_marquee {
+        @keyframes muhammed_scroll {
             0% { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
 
-        /* [4] HEADER VE LOGO */
+        /* [4] HEADER VE LOGO TASARIMI */
         header {
             padding-top: 65px;
             padding-bottom: 25px;
-            padding-left: 20px;
-            padding-right: 20px;
+            padding-left: 22px;
+            padding-right: 22px;
             background: linear-gradient(to bottom, #000 0%, transparent 100%);
         }
 
-        .header-main-row {
+        .header-top-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
         }
 
-        .logo-v90 {
-            font-size: 2.2rem;
+        .main-logo-v130 {
+            font-size: 2.3rem;
             font-weight: 900;
-            letter-spacing: -1.5px;
-            cursor: pointer;
+            letter-spacing: -1.8px;
             color: white;
-            text-decoration: none;
+            cursor: pointer;
         }
 
-        .logo-v90 span {
-            background-color: var(--muhammed-primary);
+        .main-logo-v130 span {
+            background-color: var(--p-red);
             color: white;
             padding: 2px 14px;
             border-radius: 12px;
@@ -102,268 +102,260 @@
             box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
         }
 
-        .profile-trigger {
-            font-size: 2rem;
-            color: var(--muhammed-primary);
+        .user-profile-trigger {
+            font-size: 2.1rem;
+            color: var(--p-red);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: transform 0.2s ease;
         }
 
-        .profile-trigger:active {
-            transform: scale(0.85);
+        .user-profile-trigger:active {
+            transform: scale(0.8);
         }
 
-        /* [5] ARAMA VE SES MOTORU TASARIMI */
-        .search-engine-wrapper {
+        /* [5] ARAMA VE SES MOTORU */
+        .search-container-v130 {
             display: flex;
             align-items: center;
             gap: 15px;
             width: 100%;
         }
 
-        .search-input-field {
+        .search-bar-v130 {
             flex: 1;
-            background: var(--muhammed-card-bg);
-            border: 1.5px solid var(--muhammed-border);
-            border-radius: 40px;
+            background: var(--p-card);
+            border: 1.8px solid var(--p-border);
+            border-radius: 50px;
             padding: 15px 25px;
             display: flex;
             align-items: center;
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: 0.3s;
         }
 
-        .search-input-field:focus-within {
-            border-color: var(--muhammed-primary);
+        .search-bar-v130:focus-within {
+            border-color: var(--p-red);
             background: #1a1a1a;
         }
 
-        .search-input-field input {
+        .search-bar-v130 input {
             background: transparent;
             border: none;
             color: white;
             width: 100%;
             outline: none;
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        .voice-btn-v90 {
+        .voice-action-btn {
             width: 55px;
             height: 55px;
-            background: var(--muhammed-card-bg);
-            border: 1.5px solid var(--muhammed-border);
+            background: var(--p-card);
+            border: 1.8px solid var(--p-border);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--muhammed-primary);
-            font-size: 1.4rem;
+            color: var(--p-red);
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: 0.3s;
         }
 
-        .voice-btn-v90.listening {
-            background: var(--muhammed-primary);
+        .voice-action-btn.active-mic {
+            background: var(--p-red);
             color: white;
-            animation: mic_pulse 1.2s infinite ease-in-out;
+            animation: pulse_v130 1.2s infinite;
         }
 
-        @keyframes mic_pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
-            70% { transform: scale(1.15); box-shadow: 0 0 0 15px rgba(255, 0, 0, 0); }
+        @keyframes pulse_v130 {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,0,0,0.6); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 15px rgba(255,0,0,0); }
             100% { transform: scale(1); }
         }
 
-        /* [6] VİDEO KARTLARI (ANA SAYFA) */
-        .video-grid-v90 {
+        /* [6] VİDEO AKIŞ ALANI (FEED) */
+        .video-feed-grid {
             padding: 15px;
             display: grid;
             grid-template-columns: 1fr;
             gap: 35px;
-            animation: v90_fade_up 0.8s ease-out forwards;
+            animation: slideUpV130 0.7s ease-out;
         }
 
-        @keyframes v90_fade_up {
-            from { opacity: 0; transform: translateY(30px); }
+        @keyframes slideUpV130 {
+            from { opacity: 0; transform: translateY(40px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .card-v90 {
-            background: var(--muhammed-card-bg);
-            border-radius: 24px;
+        .video-card-v130 {
+            background: var(--p-card);
+            border-radius: 25px;
             overflow: hidden;
-            border: 1px solid var(--muhammed-border);
-            transition: transform 0.3s ease;
+            border: 1px solid var(--p-border);
+            transition: 0.3s ease;
         }
 
-        .card-v90:active {
-            transform: scale(0.98);
+        .video-card-v130:active {
+            transform: scale(0.97);
         }
 
-        .card-v90 .thumbnail-box {
-            position: relative;
+        .video-card-v130 img {
             width: 100%;
             aspect-ratio: 16/9;
-            overflow: hidden;
-        }
-
-        .card-v90 img {
-            width: 100%;
-            height: 100%;
             object-fit: cover;
+            border-bottom: 1px solid var(--p-border);
         }
 
-        .card-info-v90 {
-            padding: 18px;
+        .card-details-v130 {
+            padding: 20px;
         }
 
-        .card-info-v90 h3 {
+        .card-details-v130 h3 {
             font-size: 1.1rem;
             line-height: 1.5;
-            color: #ffffff;
             font-weight: 700;
             margin-bottom: 12px;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            color: #f0f0f0;
         }
 
-        .card-meta-v90 {
+        .card-stats-v130 {
             display: flex;
             align-items: center;
             gap: 12px;
             font-size: 0.85rem;
-            color: var(--muhammed-gray);
+            color: var(--p-text-dim);
             font-weight: 600;
         }
 
-        .card-tag-v90 {
-            background: #252525;
-            color: #ddd;
-            padding: 3px 12px;
+        .channel-badge-v130 {
+            background: #222;
+            color: #eee;
+            padding: 4px 12px;
             border-radius: 8px;
             font-size: 0.75rem;
             text-transform: uppercase;
         }
 
-        /* [7] PROFIL PANELİ (HAKKINDA) */
-        #profile-panel-v90 {
+        /* [7] PROFIL VE "HAKKIMDA" PANELİ */
+        #profile-drawer-v130 {
             position: fixed;
             top: 0;
             right: -100%;
-            width: 85%;
+            width: 88%;
             height: 100%;
             background: #080808;
             z-index: 100001;
             transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-            padding: 80px 30px;
-            border-left: 2px solid var(--muhammed-primary);
+            padding: 85px 30px;
+            border-left: 3px solid var(--p-red);
         }
 
-        #profile-panel-v90.open {
+        #profile-drawer-v130.active {
             right: 0;
         }
 
-        .profile-about-box {
+        .profile-header-v130 {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .profile-header-v130 i {
+            color: var(--p-red);
+            filter: drop-shadow(0 0 15px rgba(255,0,0,0.4));
+        }
+
+        .hakkimda-content-box {
             background: #121212;
-            padding: 25px;
+            padding: 30px;
             border-radius: 25px;
-            border: 1px solid #222;
+            border: 1px solid #252525;
             margin-top: 30px;
-            line-height: 1.8;
+            line-height: 1.9;
             color: #cccccc;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: var(--p-shadow);
         }
 
-        .profile-about-box h2 {
+        .hakkimda-content-box b {
             color: white;
+            font-size: 1.3rem;
+            display: block;
             margin-bottom: 15px;
-            font-size: 1.4rem;
-            font-weight: 900;
         }
 
-        .close-panel-btn {
-            position: absolute;
-            top: 30px;
-            right: 30px;
-            font-size: 2rem;
-            color: #444;
-        }
-
-        /* [8] MASTER PLAYER ENGINE (TAM EKRAN + MINI) */
-        #master-player-overlay {
+        /* [8] MASTER OYNATICI (PLAYER) */
+        #master-player-v130 {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: #000000;
-            z-index: 100000;
+            background: #000;
+            z-index: 100002;
             display: none;
             flex-direction: column;
         }
 
-        #master-player-overlay.mini-mode {
+        #master-player-v130.mini-view {
             top: auto;
-            bottom: 110px;
+            bottom: 115px;
             left: auto;
             right: 15px;
-            width: 240px;
-            height: 135px;
+            width: 250px;
+            height: 140px;
             border-radius: 20px;
-            border: 2px solid var(--muhammed-primary);
-            box-shadow: 0 30px 60px rgba(0,0,0,1);
+            border: 2.5px solid var(--p-red);
+            box-shadow: var(--p-shadow);
             overflow: hidden;
         }
 
-        #master-player-overlay.mini-mode .player-header-v90,
-        #master-player-overlay.mini-mode .player-scrollable-content {
+        #master-player-v130.mini-view .p-top-bar,
+        #master-player-v130.mini-view .p-content-area {
             display: none;
         }
 
-        .player-header-v90 {
-            padding: 18px;
+        .p-top-bar {
+            padding: 20px;
             background: #0a0a0a;
             display: flex;
             align-items: center;
             gap: 15px;
             border-bottom: 1px solid #1a1a1a;
+            color: #666;
+            font-weight: 800;
         }
 
-        .player-iframe-container {
+        .p-video-wrapper {
             width: 100%;
             aspect-ratio: 16/9;
             background: #000;
         }
 
-        .player-scrollable-content {
+        .p-content-area {
             flex: 1;
             overflow-y: auto;
             padding: 25px;
             background: #000;
         }
 
-        .related-videos-title {
-            color: var(--muhammed-primary);
+        .related-title-v130 {
+            color: var(--p-red);
             font-weight: 900;
-            font-size: 1.2rem;
-            margin-top: 20px;
+            font-size: 1.1rem;
+            margin-top: 25px;
             margin-bottom: 25px;
-            border-left: 6px solid var(--muhammed-primary);
+            border-left: 5px solid var(--p-red);
             padding-left: 15px;
-            text-transform: uppercase;
         }
 
-        /* [9] SHORTS VE KITAPLIK GATES */
-        .v90-gate-screen {
+        /* [9] KİTAPLIK VE SHORTS GATELERİ */
+        .full-screen-gate-v130 {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100vh;
             background: #000;
-            z-index: 99998;
+            z-index: 99999;
             display: none;
             flex-direction: column;
             justify-content: center;
@@ -372,357 +364,316 @@
             padding: 40px;
         }
 
-        .gate-button {
-            margin-top: 40px;
-            padding: 20px 60px;
-            border-radius: 50px;
+        .library-card-row {
+            width: 100%;
+            background: #111;
+            padding: 22px;
+            border-radius: 22px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border: 1px solid #222;
+        }
+
+        .gate-return-btn {
+            margin-top: 45px;
+            padding: 20px 65px;
+            border-radius: 55px;
             border: none;
             background: white;
             color: black;
             font-weight: 900;
             font-size: 1rem;
-            letter-spacing: 1px;
         }
 
-        /* [10] FOOTER NAVIGASYON */
-        .v90-footer-nav {
+        /* [10] ALT NAVİGASYON */
+        .bottom-nav-v130 {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: rgba(0,0,0,0.98);
-            backdrop-filter: blur(25px);
+            background: rgba(0,0,0,0.97);
+            backdrop-filter: blur(20px);
             display: flex;
             justify-content: space-around;
-            padding: 20px 0;
-            border-top: 1.5px solid var(--muhammed-border);
-            z-index: 99997;
+            padding: 22px 0;
+            border-top: 1.5px solid var(--p-border);
+            z-index: 99990;
         }
 
-        .v90-nav-item {
+        .nav-button-v130 {
             color: #444;
             text-align: center;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 800;
             cursor: pointer;
             transition: 0.3s;
         }
 
-        .v90-nav-item.active {
+        .nav-button-v130.active {
             color: #ffffff;
             transform: translateY(-5px);
         }
 
-        .v90-nav-item i {
-            font-size: 1.8rem;
+        .nav-button-v130 i {
+            font-size: 1.9rem;
             display: block;
-            margin-bottom: 6px;
+            margin-bottom: 7px;
         }
     </style>
 </head>
 <body>
 
-    <div class="premium-top-banner" id="v90-top-banner">
-        <div class="premium-banner-scroller">
-            INSTAGRAM: MUHAMMEDALIATL &nbsp; • &nbsp; BUNY-TUBE V90 MEGA PREMIUM &nbsp; • &nbsp; ODAK SÜRESİ KORUMA AKTİF &nbsp; • &nbsp; YAYIN SÜRÜMÜ &nbsp; • &nbsp; NO COPYRIGHT 2024
+    <div class="master-banner-v130" id="muh-banner">
+        <div class="master-banner-content">
+            MUHAMMED ALİ SUNAR: BUNY-TUBE V130 MASTER PREMIUM • ARKA PLAN OYNATMA MODU AKTİF • SHORTS VİDEOLARI ENGELLENDİ • REKLAMSIZ DENEYİM
         </div>
     </div>
 
-    <header id="v90-main-header">
-        <div class="header-main-row">
-            <div class="logo-v90" onclick="v90_logic_refreshHome()">BUNY<span>Tube</span></div>
-            <i class="fas fa-user-shield profile-trigger" onclick="v90_logic_toggleProfile()"></i>
+    <header id="muh-header">
+        <div class="header-top-row">
+            <div class="main-logo-v130" onclick="logic_refreshHome()">BUNY<span>Tube</span></div>
+            <i class="fas fa-user-shield user-profile-trigger" onclick="logic_toggleProfile()"></i>
         </div>
 
-        <div class="search-engine-wrapper">
-            <div class="search-input-field">
-                <input type="text" id="v90-search-query" placeholder="Zihnini neyle besleyeceksin?" onkeypress="if(event.key==='Enter') v90_logic_runSearch()">
-                <i class="fas fa-search" style="color:#555" onclick="v90_logic_runSearch()"></i>
+        <div class="search-container-v130">
+            <div class="search-bar-v130">
+                <input type="text" id="v130-search-input" placeholder="Zihnini neyle besleyeceksin?" onkeypress="if(event.key==='Enter') logic_runSearch()">
+                <i class="fas fa-search" style="color:#555" onclick="logic_runSearch()"></i>
             </div>
-            <div class="voice-btn-v90" id="v90-mic-btn" onclick="v90_logic_voiceSearch()">
+            <div class="voice-action-btn" id="v130-mic-trigger" onclick="logic_voiceSearch()">
                 <i class="fas fa-microphone"></i>
             </div>
         </div>
     </header>
 
-    <main class="video-grid-v90" id="v90-main-feed-container"></main>
+    <main class="video-feed-grid" id="muh-main-feed"></main>
 
-    <div id="master-player-overlay">
-        <div class="player-header-v90" onclick="v90_logic_smartBack()">
+    <div id="master-player-v130">
+        <div class="p-top-bar" onclick="logic_smartBack()">
             <i class="fas fa-chevron-down"></i>
-            <span style="font-weight:900; font-size:0.85rem; color:var(--muhammed-gray); letter-spacing:1px;">VİDEOYU KÜÇÜLTMEK İÇİN TIKLAYIN</span>
+            <span>VİDEOYU KÜÇÜLT / GERİ DÖN</span>
         </div>
 
-        <div class="player-iframe-container" id="v90-iframe-holder"></div>
+        <div class="p-video-wrapper" id="v130-video-holder"></div>
 
-        <div class="player-scrollable-content">
-            <h2 id="v90-playing-title-display" style="font-size:1.3rem; margin-bottom:20px; font-weight:800; line-height:1.4;"></h2>
+        <div class="p-content-area">
+            <h2 id="v130-playing-title" style="font-size:1.3rem; margin-bottom:20px; font-weight:800; line-height:1.4;"></h2>
             
-            <div class="related-videos-title">SONRAKİ ÖNERİLENLER</div>
-            <div id="v90-related-feed-container" class="video-grid-v90" style="padding:0; gap:25px;"></div>
+            <div class="related-title-v130">SİZİN İÇİN SIRADAKİLER</div>
+            <div id="v130-related-feed" class="video-feed-grid" style="padding:0; gap:25px;"></div>
         </div>
     </div>
 
-    <div id="profile-panel-v90">
-        <i class="fas fa-times close-panel-btn" onclick="v90_logic_toggleProfile()"></i>
+    <div id="profile-drawer-v130">
+        <i class="fas fa-times" onclick="logic_toggleProfile()" style="position:absolute; top:35px; right:35px; font-size:2.2rem; color:#444;"></i>
         
-        <div style="text-align:center;">
-            <i class="fas fa-crown fa-5x" style="color:var(--muhammed-primary); filter:drop-shadow(0 0 15px rgba(255,0,0,0.5));"></i>
-            <h1 style="margin-top:20px; font-weight:900;">Muhammed Ali</h1>
-            <p style="color:var(--muhammed-primary); font-weight:800; margin-top:5px; letter-spacing:2px;">PREMIUM ÜYE</p>
+        <div class="profile-header-v130">
+            <i class="fas fa-user-crown fa-5x"></i>
+            <h1 style="margin-top:25px; font-weight:900; font-size:2rem;">Muhammed Ali</h1>
+            <p style="color:var(--p-red); font-weight:800; margin-top:8px; letter-spacing:3px;">PREMIUM DEVELOPER</p>
         </div>
 
-        <div class="profile-about-box">
-            <h2>Hakkında</h2>
-            <p>
-                Bu uygulama, 10.000+ kişilik topluluğuma reklam kirliliği olmadan, zihin odaklarını koruyarak video izleyebilmeleri için <b>Muhammed Ali</b> tarafından özel olarak geliştirilmiştir.
-            </p>
-            <p style="margin-top:15px; font-style:italic; border-top:1px solid #222; padding-top:15px;">
-                "Gelecek, dikkatini yönetebilenlerin olacaktır. Zihnini koru, odağını kaybetme."
-            </p>
+        <div class="hakkimda-content-box">
+            <b>Hakkımda</b>
+            Bu uygulama, 10.000+ kişilik topluluğuma reklam kirliliği olmadan, zihin odaklarını koruyarak video izleyebilmeleri için Muhammed Ali tarafından özel olarak geliştirilmiştir. <br><br>
+            <i>"Gelecek, dikkatini yönetebilenlerin olacaktır."</i>
         </div>
 
-        <div style="margin-top:60px; text-align:center; opacity:0.2;">
-            <p style="font-weight:900; font-size:0.8rem; letter-spacing:3px;">BUNY-TUBE ULTIMATE V90.7</p>
-            <p style="font-size:0.7rem; margin-top:5px;">MUHAMMED ALI TOPLULUĞU ÖZEL SÜRÜMÜ</p>
+        <div style="margin-top:70px; text-align:center; opacity:0.3; font-weight:900;">
+            <p style="font-size:0.8rem; letter-spacing:2px;">BUNY-TUBE V130.4 FINAL</p>
+            <p style="font-size:0.7rem; margin-top:5px;">ALL RIGHTS RESERVED 2024</p>
         </div>
     </div>
 
-    <div id="v90-shorts-gate" class="v90-gate-screen">
-        <i class="fas fa-lock-open fa-5x" style="color:var(--muhammed-primary); margin-bottom:30px;"></i>
-        <h2 style="font-weight:900; font-size:1.8rem;">ODAK MODU AKTİF</h2>
-        <p style="color:#777; margin-top:20px; font-size:1.1rem; line-height:1.6;">Shorts içerikleri Muhammed Ali tarafından zihin sağlığınız için bu sürümde kilitlenmiştir.</p>
-        <button class="gate-button" onclick="v90_logic_refreshHome()">ANA SAYFAYA DÖN</button>
+    <div id="muh-shorts-gate" class="full-screen-gate-v130">
+        <i class="fas fa-brain fa-6x" style="color:var(--p-red); margin-bottom:30px;"></i>
+        <h2 style="font-weight:900; font-size:2rem;">ODAK MODU AKTİF</h2>
+        <p style="color:#777; margin-top:20px; font-size:1.1rem; line-height:1.7;">Shorts, dopamin sisteminizi bozduğu için bu sürümde kilitlenmiştir. Uzun videolara odaklanın.</p>
+        <button class="gate-return-btn" onclick="logic_refreshHome()">ANA SAYFA</button>
     </div>
 
-    <div id="v90-library-gate" class="v90-gate-screen">
-        <i class="fas fa-folder-open fa-5x" style="color:var(--muhammed-primary); margin-bottom:30px;"></i>
-        <h2 style="font-weight:900; font-size:1.8rem;">KİTAPLIĞINIZ</h2>
-        <p style="color:#777; margin-top:20px; font-size:1.1rem;">Kaydedilen videolarınız çok yakında burada olacak.</p>
-        <button class="gate-button" onclick="v90_logic_refreshHome()">ANA SAYFAYA DÖN</button>
+    <div id="muh-library-gate" class="full-screen-gate-v130">
+        <h1 style="color:white; font-size:2.5rem; margin-bottom:40px; font-weight:900;">Kitaplık</h1>
+        <div class="library-card-row"><i class="fas fa-history fa-2x" style="color:red"></i> <b>İzleme Geçmişi</b></div>
+        <div class="library-card-row"><i class="fas fa-heart fa-2x" style="color:red"></i> <b>Beğenilenler</b></div>
+        <div class="library-card-row"><i class="fas fa-clock fa-2x" style="color:red"></i> <b>Daha Sonra İzle</b></div>
+        <button class="gate-return-btn" onclick="logic_refreshHome()">GERİ DÖN</button>
     </div>
 
-    <nav class="v90-footer-nav">
-        <div class="v90-nav-item active" id="v90-tab-0" onclick="v90_logic_refreshHome()">
+    <nav class="bottom-nav-v130">
+        <div class="nav-button-v130 active" id="btn-0" onclick="logic_refreshHome()">
             <i class="fas fa-home"></i>
             <span>Ana Sayfa</span>
         </div>
-        <div class="v90-nav-item" id="v90-tab-1" onclick="v90_logic_showGate('v90-shorts-gate', 1)">
+        <div class="nav-button-v130" id="btn-1" onclick="logic_showGate('muh-shorts-gate', 1)">
             <i class="fas fa-bolt"></i>
             <span>Shorts</span>
         </div>
-        <div class="v90-nav-item" id="v90-tab-2" onclick="v90_logic_showGate('v90-library-gate', 2)">
+        <div class="nav-button-v130" id="btn-2" onclick="logic_showGate('muh-library-gate', 2)">
             <i class="fas fa-folder"></i>
             <span>Kitaplık</span>
         </div>
     </nav>
 
     <script>
-        /* --- [CONFIG] --- */
-        const V90_API_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
-        let v90_is_mini_mode = false;
+        /* --- [MASTER CONFIG] --- */
+        const MUH_API_KEY = 'AIzaSyBfXaM09l-IBo2KoDSz02f-4XXD2NoAco0';
+        let muh_is_mini = false;
 
-        /* --- [CORE FETCH MOTORU] --- */
-        async function v90_logic_fetchData(searchQuery, targetElementId) {
-            // Kesin yenilenme için Cache Killer (t=timestamp) ekliyoruz
-            const v90_timestamp = Date.now();
-            const v90_randomizer = Math.random();
-            const v90_request_url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${searchQuery}&type=video&maxResults=15&key=${V90_API_KEY}&t=${v90_timestamp}&r=${v90_randomizer}`;
+        /* --- [FETCH ENGINE WITH SHORTS FILTER] --- */
+        async function logic_fetch(query, targetId) {
+            // SHORTS ENGELLEYİCİ PARAMETRELER: videoDuration medium/long (4dk+ videolar)
+            const randomSeed = Math.floor(Math.random() * 10);
+            const timestamp = Date.now();
+            const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&videoDuration=medium&maxResults=20&key=${MUH_API_KEY}&t=${timestamp}&r=${randomSeed}`;
             
             try {
-                const response = await fetch(v90_request_url);
+                const response = await fetch(url);
                 const data = await response.json();
-                const container = document.getElementById(targetElementId);
-                
-                // Konteyneri boşalt
+                const container = document.getElementById(targetId);
                 container.innerHTML = "";
                 
-                // Verileri döngüye al ve kartları oluştur
                 if (data.items) {
-                    data.items.forEach(videoItem => {
-                        const videoId = videoItem.id.videoId;
-                        if (!videoId) return;
+                    data.items.forEach(item => {
+                        const vidId = item.id.videoId;
+                        const title = item.snippet.title;
+                        const desc = item.snippet.description;
 
-                        // Tarih formatlama işlemi
-                        const publishedAt = new Date(videoItem.snippet.publishedAt);
-                        const displayDate = publishedAt.toLocaleDateString('tr-TR', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric'
-                        });
+                        /* KRİTİK SHORTS FİLTRESİ (BAŞLIK VE AÇIKLAMA TARAMASI) */
+                        if (title.toLowerCase().includes('shorts') || desc.toLowerCase().includes('#shorts')) {
+                            return; // Bu videoyu atla
+                        }
 
-                        // HTML Kart Yapısı (Uzun Versiyon)
-                        const videoCardHTML = `
-                            <div class="card-v90" onclick="v90_logic_startPlayback('${videoId}', '${videoItem.snippet.title.replace(/'/g, "")}')">
-                                <div class="thumbnail-box">
-                                    <img src="${videoItem.snippet.thumbnails.high.url}" alt="Thumbnail">
-                                </div>
-                                <div class="card-info-v90">
-                                    <h3>${videoItem.snippet.title}</h3>
-                                    <div class="card-meta-v90">
-                                        <span class="card-tag-v90">${videoItem.snippet.channelTitle}</span>
+                        const dateStr = new Date(item.snippet.publishedAt).toLocaleDateString('tr-TR');
+                        
+                        // HTML Render
+                        container.innerHTML += `
+                            <div class="video-card-v130" onclick="logic_playVideo('${vidId}', '${title.replace(/'/g, "")}')">
+                                <img src="${item.snippet.thumbnails.high.url}">
+                                <div class="card-details-v130">
+                                    <h3>${title}</h3>
+                                    <div class="card-stats-v130">
+                                        <span class="channel-badge-v130">${item.snippet.channelTitle}</span>
                                         <span>•</span>
-                                        <span>${displayDate}</span>
+                                        <span>${dateStr}</span>
                                     </div>
                                 </div>
                             </div>
                         `;
-                        container.innerHTML += videoCardHTML;
                     });
                 }
-            } catch (error) {
-                console.error("Master Fetch Engine Hatası: ", error);
+            } catch (err) { console.error("Fetch Hatası:", err); }
+        }
+
+        /* --- [SEARCH ACTIONS] --- */
+        function logic_runSearch() {
+            const q = document.getElementById('v130-search-input').value;
+            if (q.trim() !== "") {
+                logic_fetch(q, 'muh-main-feed');
             }
         }
 
-        /* --- [ARAMA FONKSİYONLARI] --- */
-        function v90_logic_runSearch() {
-            const queryValue = document.getElementById('v90-search-query').value;
-            if (queryValue.trim() !== "") {
-                v90_logic_fetchData(queryValue, 'v90-main-feed-container');
-            }
-        }
-
-        /* --- [SESLİ ARAMA MOTORU] --- */
-        function v90_logic_voiceSearch() {
+        /* --- [VOICE ENGINE] --- */
+        function logic_voiceSearch() {
             const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-            if (!Recognition) {
-                alert("Sesli arama bu cihazda desteklenmiyor.");
-                return;
-            }
-
-            const recognizerInstance = new Recognition();
-            recognizerInstance.lang = 'tr-TR';
-            const micBtn = document.getElementById('v90-mic-btn');
-
-            recognizerInstance.onstart = function() {
-                micBtn.classList.add('listening');
+            if (!Recognition) return;
+            const rec = new Recognition();
+            rec.lang = 'tr-TR';
+            const mic = document.getElementById('v130-mic-trigger');
+            
+            rec.onstart = () => mic.classList.add('active-mic');
+            rec.onend = () => mic.classList.remove('active-mic');
+            rec.onresult = (e) => {
+                document.getElementById('v130-search-input').value = e.results[0][0].transcript;
+                logic_runSearch();
             };
-
-            recognizerInstance.onend = function() {
-                micBtn.classList.remove('listening');
-            };
-
-            recognizerInstance.onresult = function(event) {
-                const voiceResult = event.results[0][0].transcript;
-                document.getElementById('v90-search-query').value = voiceResult;
-                v90_logic_runSearch();
-            };
-
-            recognizerInstance.start();
+            rec.start();
         }
 
-        /* --- [ANA SAYFA YENİLEME MOTORU] --- */
-        function v90_logic_refreshHome() {
-            // Tüm gate ekranlarını kapat
-            document.getElementById('v90-shorts-gate').style.display = 'none';
-            document.getElementById('v90-library-gate').style.display = 'none';
+        /* --- [REFRESH ENGINE] --- */
+        function logic_refreshHome() {
+            // Reset Screens
+            document.querySelectorAll('.full-screen-gate-v130').forEach(g => g.style.display = 'none');
+            document.getElementById('muh-main-feed').style.display = 'grid';
+            document.getElementById('muh-header').style.display = 'block';
+            document.getElementById('muh-banner').style.display = 'flex';
             
-            // Ana akışı ve header'ı aktif et
-            document.getElementById('v90-main-feed-container').style.display = 'grid';
-            document.getElementById('v90-main-header').style.display = 'block';
-            document.getElementById('v90-top-banner').style.display = 'flex';
+            // Random Topics
+            const topics = ['araba modifiye', 'teknoloji inceleme', 'belgesel 2024', 'yeni oyunlar'];
+            const r = topics[Math.floor(Math.random() * topics.length)];
+            logic_fetch(r, 'muh-main-feed');
             
-            // Veriyi tazele (Cache Killer ile)
-            v90_logic_fetchData('modifiye arabalar teknoloji oyun trend belgesel', 'v90-main-feed-container');
-            
-            // Navigasyon güncelle
-            v90_logic_updateNavUI(0);
-            
-            // Sayfayı yukarı kaydır
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            logic_updateUI(0);
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        /* --- [OYNATICI MOTORU (ARKA PLAN DESTEKLİ)] --- */
-        function v90_logic_startPlayback(id, title) {
-            v90_is_mini_mode = false;
-            const overlay = document.getElementById('master-player-overlay');
+        /* --- [PLAYER CONTROLLER] --- */
+        function logic_playVideo(id, title) {
+            muh_is_mini = false;
+            const p = document.getElementById('master-player-v130');
+            p.style.display = 'flex';
+            p.classList.remove('mini-view');
             
-            // Overlay'i görünür yap
-            overlay.style.display = 'flex';
-            overlay.classList.remove('mini-mode');
-            
-            // Başlığı yazdır
-            document.getElementById('v90-playing-title-display').innerText = title;
-            
-            // Iframe'i yükle (Arka plan parametreleri ile)
-            document.getElementById('v90-iframe-holder').innerHTML = `
-                <iframe src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&enablejsapi=1&rel=0&modestbranding=1" 
+            document.getElementById('v130-playing-title').innerText = title;
+            // Background Play Parameters: playsinline=1 & enablejsapi=1
+            document.getElementById('v130-video-holder').innerHTML = `
+                <iframe src="https://www.youtube.com/embed/${id}?autoplay=1&playsinline=1&enablejsapi=1&rel=0" 
                 style="width:100%; height:100%; border:none;" 
-                allow="autoplay; encrypted-media" 
-                allowfullscreen></iframe>
+                allow="autoplay; encrypted-media"></iframe>
             `;
             
-            // Banner'ı gizle
-            document.getElementById('v90-top-banner').style.display = 'none';
-            
-            // Video altını doldur (Related Videos)
-            v90_logic_fetchData(title, 'v90-related-feed-container');
-            
-            // History state ekle (Geri tuşu için)
-            history.pushState({ view: 'player_active' }, '');
+            document.getElementById('muh-banner').style.display = 'none';
+            logic_fetch(title, 'v130-related-feed');
+            history.pushState({view: 'player'}, "");
         }
 
-        /* --- [AKILLI GERİ TUŞU VE MİNİ PLAYER] --- */
-        function v90_logic_smartBack() {
-            const playerOverlay = document.getElementById('master-player-overlay');
-            
-            if (!v90_is_mini_mode) {
-                // Eğer tam ekransa mini moda al
-                playerOverlay.classList.add('mini-mode');
-                document.getElementById('v90-top-banner').style.display = 'flex';
-                v90_is_mini_mode = true;
+        function logic_smartBack() {
+            const p = document.getElementById('master-player-v130');
+            if (!muh_is_mini) {
+                p.classList.add('mini-view');
+                document.getElementById('muh-banner').style.display = 'flex';
+                muh_is_mini = true;
             } else {
-                // Eğer mini moddaysa tamamen kapat
-                playerOverlay.style.display = 'none';
-                document.getElementById('v90-iframe-holder').innerHTML = "";
-                v90_is_mini_mode = false;
+                p.style.display = 'none';
+                document.getElementById('v130-video-holder').innerHTML = "";
+                muh_is_mini = false;
             }
         }
 
-        /* ANDROID GERİ TUŞU YAKALAYICI */
-        window.onpopstate = function() {
-            const playerOverlay = document.getElementById('master-player-overlay');
-            if (playerOverlay.style.display === 'flex') {
-                v90_logic_smartBack();
-                history.pushState(null, ''); // Kullanıcıyı uygulamada tut
+        /* --- [UI HELPERS] --- */
+        function logic_toggleProfile() {
+            document.getElementById('profile-drawer-v130').classList.toggle('active');
+        }
+
+        function logic_showGate(gateId, idx) {
+            document.querySelectorAll('.full-screen-gate-v130').forEach(g => g.style.display = 'none');
+            document.getElementById('muh-main-feed').style.display = 'none';
+            document.getElementById('muh-header').style.display = 'none';
+            document.getElementById('muh-banner').style.display = 'none';
+            
+            const gate = document.getElementById(gateId);
+            gate.style.display = (gateId === 'muh-shorts-gate' ? 'flex' : 'block');
+            
+            logic_updateUI(idx);
+        }
+
+        function logic_updateUI(n) {
+            document.querySelectorAll('.nav-button-v130').forEach((b, i) => b.classList.toggle('active', i === n));
+        }
+
+        /* BACK BUTTON LOGIC */
+        window.onpopstate = () => {
+            if (document.getElementById('master-player-v130').style.display === 'flex') {
+                logic_smartBack();
+                history.pushState(null, "");
             }
         };
 
-        /* --- [PROFİL VE GATES YÖNETİMİ] --- */
-        function v90_logic_toggleProfile() {
-            document.getElementById('profile-panel-v90').classList.toggle('open');
-        }
-
-        function v90_logic_showGate(gateId, navIndex) {
-            // Ana akışı kapat
-            document.getElementById('v90-main-feed-container').style.display = 'none';
-            document.getElementById('v90-main-header').style.display = 'none';
-            document.getElementById('v90-top-banner').style.display = 'none';
-            
-            // Tüm gateleri kapat ve isteneni aç
-            document.getElementById('v90-shorts-gate').style.display = 'none';
-            document.getElementById('v90-library-gate').style.display = 'none';
-            document.getElementById(gateId).style.display = 'flex';
-            
-            // Navigasyonu güncelle
-            v90_logic_updateNavUI(navIndex);
-        }
-
-        function v90_logic_updateNavUI(index) {
-            const navItems = document.querySelectorAll('.v90-nav-item');
-            navItems.forEach((item, i) => {
-                if (i === index) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
-        }
-
-        /* --- [BAŞLANGIÇ TETİKLEYİCİ] --- */
-        window.onload = function() {
-            v90_logic_refreshHome();
-            history.pushState(null, '');
+        /* INITIAL LOAD */
+        window.onload = () => {
+            logic_refreshHome();
+            history.pushState(null, "");
         };
     </script>
 </body>
