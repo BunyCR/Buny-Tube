@@ -235,6 +235,43 @@ border-radius: 8px;
         alert("Lütfen geçerli bir API Key gir patron!");
     }
 }
+<script>
+    fetch('config.json')
+        .then(response => response.json())
+        .then(data => {
+            if (data.bakimModu === true) {
+                document.body.innerHTML = `
+                    <style>
+                        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+                        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.02); opacity: 0.9; } }
+                        .bakim-bg {
+                            height: 100vh; display: flex; flex-direction: column; 
+                            justify-content: center; align-items: center; 
+                            background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+                            color: white; font-family: 'Segoe UI', sans-serif; text-align: center; padding: 20px;
+                        }
+                        .gear { font-size: 70px; animation: spin 4s linear infinite; display: inline-block; margin-bottom: 20px; }
+                        .bakim-title { font-size: 2.2rem; color: #38bdf8; margin: 0; font-weight: 800; letter-spacing: 1px; }
+                        .bakim-desc { font-size: 1rem; color: #94a3b8; margin: 15px 0; max-width: 350px; line-height: 1.5; }
+                        .status-badge { 
+                            background: rgba(56, 189, 248, 0.1); color: #38bdf8; 
+                            padding: 8px 20px; border-radius: 50px; font-weight: 600; 
+                            border: 1px solid rgba(56, 189, 248, 0.2); 
+                            display: inline-block; animation: pulse 2s infinite; 
+                        }
+                        .footer-tag { margin-top: 50px; font-size: 0.7rem; color: #334155; text-transform: uppercase; letter-spacing: 3px; }
+                    </style>
+                    <div class="bakim-bg">
+                        <span class="gear">⚙️</span>
+                        <h1 class="bakim-title">SİSTEM BAKIMDA</h1>
+                        <p class="bakim-desc">${data.bakimMesaji}</p>
+                        <div class="status-badge">${data.durumBilgisi}</div>
+                        <div class="footer-tag">Project by <b>${data.admin}</b></div>
+                    </div>
+                `;
+            }
+        })
+        .catch(err => console.error("Config hatası:", err));
 </script>
 </body>
 </html>
