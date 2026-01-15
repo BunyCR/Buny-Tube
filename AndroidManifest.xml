@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    package="furkan.modder.com"
+    platformBuildVersionCode="35"
+    platformBuildVersionName="15"
+    android:installLocation="auto"
+    android:compileSdkVersion="35"
+    android:compileSdkVersionCodename="15"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Uygulamaya ağ yuvaları oluşturma ve özel ağ protokolleri kullanma izni verir. Tarayıcı ve diğer uygulamalar İnternet'e veri gönderilmesi için araç sağlarlar, bu nedenle bu izin, İnternet'e veri göndermek için gerekli değildir. -->
+    <uses-permission
+        android:name="android.permission.INTERNET" />
+    <!-- Uygulamaya, telefonun uykuya geçmesini önleme izni verir. -->
+    <uses-permission
+        android:name="android.permission.WAKE_LOCK" />
+    <!-- Uygulamaya, hangi ağların bulunduğu ve hangilerinin bağlı olduğu gibi ağ bağlantılarıyla ilgili bilgileri görüntüleme izni verir. -->
+    <uses-permission
+        android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- Uygulamanın paylaşılan depolama alanınıza içerik yazmasına izin verir. -->
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Bu uygulama, uygulamaların üzerinde veya ekranın diğer kısımlarında görünebilir. Bu durum, normal uygulama kullanımını etkileyebilir ve diğer uygulamaların görünümünü değiştirebilir. -->
+    <uses-permission
+        android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <!-- Uygulamanın ön plan hizmetlerinden faydalanmasına izin verir. -->
+    <uses-permission
+        android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- Uygulamanın bildirimleri göstermesine izin verir -->
+    <uses-permission
+        android:name="android.permission.POST_NOTIFICATIONS" />
+    <queries>
+        <intent>
+            <action
+                android:name="android.intent.action.VIEW" />
+            <data
+                android:scheme="http" />
+        </intent>
+    </queries>
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <!-- Uygulamaya, kendisini sistem açılışı bittikten hemen sonra başlatma izni verir. Bu izin, telefonun başlatılması için daha uzun bir süre geçmesine ve uygulamanın her zaman çalışarak telefonu yavaşlatmasına neden olur. -->
+    <uses-permission
+        android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <permission
+        android:name="org.schabi.newpipe.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSIONyk"
+        android:protectionLevel="signature" />
+    <uses-permission
+        android:name="org.schabi.newpipe.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSIONyk" />
+    <application
+        android:theme="@style/OpeningTheme"
+        android:label="@string/app_name"
+        android:icon="@mipmap/moddericon"
+        android:name="com.stub.StubApp"
+        android:allowBackup="true"
+        android:logo="@mipmap/ic_launcher"
+        android:banner="@mipmap/newpipe_tv_banner"
+        android:extractNativeLibs="true"
+        android:usesCleartextTraffic="true"
+        android:resizeableActivity="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+        android:localeConfig="@xml/_generated_res_locale_config">
+        <activity
+            android:label="@string/app_name"
+            android:name="org.schabi.newpipe.MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MAIN" />
+                <category
+                    android:name="android.intent.category.LAUNCHER" />
+                <category
+                    android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <receiver
+            android:name="androidx.media.session.MediaButtonReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"
+            android:enabled="false"
+            android:exported="false">
+            <meta-data
+                android:name="autoStoreLocales"
+                android:value="true" />
+        </service>
+        <service
+            android:name="org.schabi.newpipe.player.PlayerService"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.MEDIA_BUTTON" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.media.browse.MediaBrowserService" />
+            </intent-filter>
+        </service>
+        <activity
+            android:label="@string/title_activity_play_queue"
+            android:name="org.schabi.newpipe.player.PlayQueueActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <activity
+            android:label="@string/settings"
+            android:name="org.schabi.newpipe.settings.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:label="@string/title_activity_about"
+            android:name="org.schabi.newpipe.about.AboutActivity"
+            android:exported="false" />
+        <service
+            android:name="org.schabi.newpipe.local.subscription.services.SubscriptionsImportService" />
+        <service
+            android:name="org.schabi.newpipe.local.subscription.services.SubscriptionsExportService" />
+        <service
+            android:name="org.schabi.newpipe.local.feed.service.FeedLoadService" />
+        <activity
+            android:theme="@android:style/Theme.NoDisplay"
+            android:name="org.schabi.newpipe.PanicResponderActivity"
+            android:exported="true"
+            android:launchMode="singleInstance"
+            android:noHistory="true">
+            <intent-filter>
+                <action
+                    android:name="info.guardianproject.panic.action.TRIGGER" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:theme="@android:style/Theme.NoDisplay"
+            android:label="@string/general_error"
+            android:name="org.schabi.newpipe.ExitActivity"
+            android:exported="false" />
+        <activity
+            android:name="org.schabi.newpipe.error.ErrorActivity"
+            android:exported="false" />
+        <activity
+            android:label="@string/app_name"
+            android:name="org.schabi.newpipe.download.DownloadActivity"
+            android:exported="false"
+            android:launchMode="singleTask" />
+        <service
+            android:name="us.shandian.giga.service.DownloadManagerService" />
+        <activity
+            android:theme="@style/FilePickerThemeDark"
+            android:label="@string/app_name"
+            android:name="org.schabi.newpipe.util.FilePickerActivityHelper"
+            android:exported="true">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.GET_CONTENT" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:label="@string/recaptcha"
+            android:name="org.schabi.newpipe.error.ReCaptchaActivity"
+            android:exported="false" />
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:authorities="furkan.modder.com.provider"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/nnf_provider_paths" />
+        </provider>
+        <activity
+            android:theme="@style/RouterActivityThemeDark"
+            android:label="@string/preferred_open_action_share_menu_title"
+            android:name="org.schabi.newpipe.RouterActivity"
+            android:exported="true"
+            android:taskAffinity=""
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http" />
+                <data
+                    android:scheme="https" />
+                <data
+                    android:host="youtube.com" />
+                <data
+                    android:host="m.youtube.com" />
+                <data
+                    android:host="www.youtube.com" />
+                <data
+                    android:host="music.youtube.com" />
+                <data
+                    android:pathPrefix="/v/" />
+                <data
+                    android:pathPrefix="/embed/" />
+                <data
+                    android:pathPrefix="/watch" />
+                <data
+                    android:pathPrefix="/attribution_link" />
+                <data
+                    android:pathPrefix="/shorts/" />
+                <data
+                    android:pathPrefix="/live/" />
+                <data
+                    android:pathPrefix="/channel/" />
+                <data
+                    android:pathPrefix="/user/" />
+                <data
+                    android:pathPrefix="/c/" />
+                <data
+                    android:pathPrefix="/@" />
+                <data
+                    android:pathPrefix="/playlist" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http" />
+                <data
+                    android:scheme="https" />
+                <data
+                    android:host="youtu.be" />
+                <data
+                    android:pathPrefix="/" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http" />
+                <data
+                    android:scheme="https" />
+                <data
+                    android:host="www.youtube-nocookie.com" />
+                <data
+                    android:pathPrefix="/embed/" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="vnd.youtube" />
+                <data
+                    android:scheme="vnd.youtube.launch" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http" />
+                <data
+                    android:scheme="https" />
+                <data
+                    android:host="hooktube.com" />
+                <data
+                    android:host="*.hooktube.com" />
+                <data
+                    android:pathPrefix="/v/" />
+                <data
+                    android:pathPrefix="/embed/" />
+                <data
+                    android:pathPrefix="/watch" />
+                <data
+                    android:pathPrefix="/channel/" />
+                <data
+                    android:pathPrefix="/user/" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http" />
+                <data
+                    android:scheme="https" />
+                <data
+                    android:host="tubus.eduvid.org" />
+                <data
+                    android:host="invidio.us" />
+                <data
+                    android:host="dev.invidio.us" />
+                <data
+                    android:host="www.invidio.us" />
+                <data
+                    android:host="redirect.invidious.io" />
+                <data
+                    android:host="invidious.snopyta.org" />
+                <data
+                    android:host="yewtu.be" />
+                <data
+                    android:host="tube.connect.cafe" />
+                <data
+                    android:host="invidious.kavin.rocks" />
+                <data
+                    android:host="invidious-us.kavin.rocks" />
+                <data
+                    android:host="piped.kavin.rocks" />
+                <data
+                    android:host="invidious.site" />
+                <data
+                    android:host="vid.mint.lgbt" />
+                <data
+                    android:host="invidiou.site" />
+                <data
+                    android:host="invidious.fdn.fr" />
+                <data
+                    android:host="invidious.048596.xyz" />
+                <data
+                    android:host="invidious.zee.li" />
+                <data
+                    android:host="vid.puffyan.us" />
+                <data
+                    android:host="ytprivate.com" />
+                <data
+                    android:host="invidious.namazso.eu" />
+                <data
+                    android:host="invidious.silkky.cloud" />
+                <data
+                    android:host="invidious.exonip.de" />
+                <data
+                    android:host="inv.riverside.rocks" />
+                <data
+                    android:host="invidious.blamefran.net" />
+                <data
+                    android:host="invidious.moomoo.me" />
+                <data
+                    android:host="ytb.trom.tf" />
+                <data
+                    android:host="yt.cyberhost.uk" />
+                <data
+                    android:host="y.com.cm" />
+                <data
+                    android:pathPrefix="/" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http" />
+                <data
+                    android:scheme="https" />
+                <data
+                    android:host="y2u.be" />
+                <data
+                    android:pathPrefix="/" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http" />
+                <data
+                    android:scheme="https" />
+                <data
+                    android:host="soundcloud.com" />
+                <data
+                    android:host="m.soundcloud.com" />
+                <data
+                    android:host="www.soundcloud.com" />
+                <data
+                    android:pathPrefix="/" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.SEND" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http" />
+                <data
+                    android:scheme="https" />
+                <data
+                    android:host="media.ccc.de" />
+                <data
+                    android:pathPrefix="/v/" />
+                <data
+                    android:pathPrefix="/c/" />
+                <data
+                    android:pathPrefix="/b/" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http" />
+                <data
+                    android:scheme="https" />
+                <data
+                    android:host="eduvid.org" />
+                <data
+                    android:host="framatube.org" />
+                <data
+                    android:host="media.assassinate-you.net" />
+                <data
+                    android:host="media.fsfe.org" />
+                <data
+                    android:host="peertube.co.uk" />
+                <data
+                    android:host="peertube.cpy.re" />
+                <data
+                    android:host="peertube.fr" />
+                <data
+                    android:host="peertube.mastodon.host" />
+                <data
+                    android:host="peertube.stream" />
+                <data
+                    android:host="skeptikon.fr" />
+                <data
+                    android:host="tilvids.com" />
+                <data
+                    android:host="video.lqdn.fr" />
+                <data
+                    android:host="video.ploud.fr" />
+                <data
+                    android:host="subscribeto.me" />
+                <data
+                    android:pathPrefix="/videos/" />
+                <data
+                    android:pathPrefix="/w/" />
+                <data
+                    android:pathPrefix="/w/p/" />
+                <data
+                    android:pathPrefix="/accounts/" />
+                <data
+                    android:pathPrefix="/a/" />
+                <data
+                    android:pathPrefix="/video-channels/" />
+                <data
+                    android:pathPrefix="/c/" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http" />
+                <data
+                    android:scheme="https" />
+                <data
+                    android:host="*.bandcamp.com" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.VIEW" />
+                <action
+                    android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH" />
+                <action
+                    android:name="android.nfc.action.NDEF_DISCOVERED" />
+                <category
+                    android:name="android.intent.category.DEFAULT" />
+                <category
+                    android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:scheme="http" />
+                <data
+                    android:scheme="https" />
+                <data
+                    android:sspPattern="bandcamp.com/?show=*" />
+            </intent-filter>
+        </activity>
+        <service
+            android:name="org.schabi.newpipe.RouterActivity$FetcherService"
+            android:exported="false" />
+        <meta-data
+            android:name="android.webkit.WebView.MetricsOptOut"
+            android:value="true" />
+        <meta-data
+            android:name="com.samsung.android.keepalive.density"
+            android:value="true" />
+        <meta-data
+            android:name="com.samsung.android.multidisplay.keep_process_alive"
+            android:value="true" />
+        <meta-data
+            android:name="com.google.android.gms.car.application"
+            android:resource="@xml/automotive_app_desc" />
+        <meta-data
+            android:name="com.google.android.gms.car.notification.SmallIcon"
+            android:resource="@mipmap/ic_launcher" />
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:exported="false"
+            android:authorities="furkan.modder.com.androidx-startup">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+                android:value="androidx.startup" />
+            <meta-data
+                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+                android:value="androidx.startup" />
+        </provider>
+        <service
+            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+            android:enabled="@bool/enable_system_alarm_service_default"
+            android:exported="false"
+            android:directBootAware="false" />
+        <service
+            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:enabled="@bool/enable_system_job_service_default"
+            android:exported="true"
+            android:directBootAware="false" />
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            android:enabled="@bool/enable_system_foreground_service_default"
+            android:exported="false"
+            android:directBootAware="false" />
+        <receiver
+            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+            android:enabled="true"
+            android:exported="false"
+            android:directBootAware="false" />
+        <receiver
+            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+            android:enabled="false"
+            android:exported="false"
+            android:directBootAware="false">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action
+                    android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+            android:enabled="false"
+            android:exported="false"
+            android:directBootAware="false">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.BATTERY_OKAY" />
+                <action
+                    android:name="android.intent.action.BATTERY_LOW" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+            android:enabled="false"
+            android:exported="false"
+            android:directBootAware="false">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+                <action
+                    android:name="android.intent.action.DEVICE_STORAGE_OK" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+            android:enabled="false"
+            android:exported="false"
+            android:directBootAware="false">
+            <intent-filter>
+                <action
+                    android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+            android:enabled="false"
+            android:exported="false"
+            android:directBootAware="false">
+            <intent-filter>
+                <action
+                    android:name="android.intent.action.BOOT_COMPLETED" />
+                <action
+                    android:name="android.intent.action.TIME_SET" />
+                <action
+                    android:name="android.intent.action.TIMEZONE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+            android:enabled="@bool/enable_system_alarm_service_default"
+            android:exported="false"
+            android:directBootAware="false">
+            <intent-filter>
+                <action
+                    android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+            android:permission="android.permission.DUMP"
+            android:enabled="true"
+            android:exported="true"
+            android:directBootAware="false">
+            <intent-filter>
+                <action
+                    android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+            </intent-filter>
+        </receiver>
+        <uses-library
+            android:name="androidx.window.extensions"
+            android:required="false" />
+        <uses-library
+            android:name="androidx.window.sidecar"
+            android:required="false" />
+        <service
+            android:name="androidx.room.MultiInstanceInvalidationService"
+            android:exported="false"
+            android:directBootAware="true" />
+        <service
+            android:name="org.acra.sender.LegacySenderService"
+            android:enabled="@bool/acra_enable_legacy_service"
+            android:exported="false"
+            android:process=":acra" />
+        <service
+            android:name="org.acra.sender.JobSenderService"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:enabled="@bool/acra_enable_job_service"
+            android:exported="false"
+            android:process=":acra" />
+        <provider
+            android:name="org.acra.attachment.AcraContentProvider"
+            android:exported="false"
+            android:process=":acra"
+            android:authorities="furkan.modder.com.acra"
+            android:grantUriPermissions="true" />
+        <provider
+            android:name="com.squareup.picasso.PicassoProvider"
+            android:exported="false"
+            android:authorities="furkan.modder.com.com.squareup.picasso" />
+        <receiver
+            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+            android:permission="android.permission.DUMP"
+            android:enabled="true"
+            android:exported="true"
+            android:directBootAware="false">
+            <intent-filter>
+                <action
+                    android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="androidx.profileinstaller.action.SKIP_FILE" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+            </intent-filter>
+            <intent-filter>
+                <action
+                    android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+            </intent-filter>
+        </receiver>
+        <activity
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:name="com.jakewharton.processphoenix.ProcessPhoenix"
+            android:exported="false"
+            android:process=":phoenix" />
+    </application>
+</manifest>
